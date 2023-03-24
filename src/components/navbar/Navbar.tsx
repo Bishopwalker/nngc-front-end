@@ -66,7 +66,7 @@ const Navbar = () => {
         </MenuBox>
 
         <SearchBox>
-          <InputBase placeholder="AI Search ..." sx={{ color: "white" }} />
+          <InputBase placeholder=" Search ..." sx={{ color: "white" }} />
           <MenuIcon
             sx={{
               color: "white",
