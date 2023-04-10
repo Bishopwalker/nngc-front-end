@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Avatar, Card, Modal, TextField, Button, CardHeader, Divider, IconButton, Typography } from "@mui/material";
 import { Edit } from "@mui/icons-material";
-
-const UserProfileSection = ({ userInfo }) => {
+import { UserProfile_Interface} from "./interface";
+const UserProfileSection = ({ userInfo }:  UserProfile_Interface) => {
   const [edit, setEdit] = useState(false);
   const [name, setName] = useState(userInfo.fullName);
   const [email, setEmail] = useState(userInfo.email);
@@ -16,15 +16,15 @@ const UserProfileSection = ({ userInfo }) => {
 	setEdit(false);
   };
 
-  const handleNameChange = (event) => {
+  const handleNameChange =  (event: { target: { value: any; }; }) => {
 	setName(event.target.value);
   }
 
-  const handleEmailChange = (event) => {
+  const handleEmailChange =  (event: { target: { value: any; }; }) => {
 	setEmail(event.target.value);
   }
 
-  const handlePhoneChange = (event) => {
+  const handlePhoneChange =  (event: { target: { value: any; }; }) => {
 	setPhone(event.target.value);
   }
 

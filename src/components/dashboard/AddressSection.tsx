@@ -1,23 +1,19 @@
 import React, { useState } from "react";
 import { Card, Modal, TextField, Button, CardHeader, Divider, IconButton, Typography } from "@mui/material";
 import { Edit } from "@mui/icons-material";
+import {useAppSelector} from "../../redux/hooks";
 
-type Props = {
-    userInfo: {
-        addressLine1: string;
-        addressLine2: string;
-        city: string;
-        state: string;
-        zipCode: string;
-    }
-}
-const AddressSection = ({ userInfo }:Props) => {
+
+
+const AddressSection = ( ) => {
+
+const userInfo=useAppSelector((state)=>state.userInfo)
   const [location, setLocation] = useState(false);
-  const [addressLineOne, setAddressLineOne] = useState(userInfo.addressLine1);
-  const [addressLineTwo, setAddressLineTwo] = useState(userInfo.addressLine2);
-  const [city, setCity] = useState(userInfo.city);
-  const [state, setState] = useState(userInfo.state);
-  const [zip, setZip] = useState(userInfo.zipCode);
+  const [addressLineOne, setAddressLineOne] = useState(userInfo.address.line1);
+  const [addressLineTwo, setAddressLineTwo] = useState(userInfo.address.line2);
+  const [city, setCity] = useState(userInfo.address.city);
+  const [state, setState] = useState(userInfo.address.state);
+  const [zip, setZip] = useState(userInfo.address.zipCode);
 
   const handleLocationClick = () => {
 	setLocation(true);
@@ -84,7 +80,7 @@ const AddressSection = ({ userInfo }:Props) => {
           color: "black",
         }}
       >
-        {userInfo.addressLine1}
+        {userInfo.address.line1}
       </Typography>
       <Typography
         variant="h6"
@@ -97,7 +93,7 @@ const AddressSection = ({ userInfo }:Props) => {
           color: "black",
         }}
       >
-        {userInfo.addressLine2}
+        {userInfo.address.line2}
       </Typography>
 
       <Typography
@@ -111,7 +107,7 @@ const AddressSection = ({ userInfo }:Props) => {
           color: "black",
         }}
       >
-        {userInfo.city} {userInfo.state} {userInfo.zipCode}
+        {userInfo.address.city} {userInfo.address.state} {userInfo.address.zipCode}
       </Typography>
       <Modal
         open={location}

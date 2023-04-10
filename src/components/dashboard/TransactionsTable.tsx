@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TablePagination } from '@mui/material';
+import {transactions} from "./transactions";
 
-const TransactionsTable = ({ transactions }) => {
+type Transaction = {
+ page: number;
+    rowsPerPage: number;
+}
+const TransactionsTable = ({}:Transaction) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(3);
 
-  const handleChangePage = (event, newPage) => {
+  const handleChangePage = (event: any, newPage: React.SetStateAction<number>) => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event) => {
+  const handleChangeRowsPerPage = (event: { target: { value: string; }; }) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };

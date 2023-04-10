@@ -1,17 +1,3 @@
-export const userInfo = {
-  id: 12,
-  fullName: "Alex Hales",
-  email: "alex@gmail.com",
-  phoneNumber: "480-760-6318",
-  password: "******",
-  enabled: true,
-  addressLine1: "1600 Pennsylvania Ave NW",
-  addressLine2: "Washington, DC 20500",
-  city: "Tulsa",
-  state: "Oklahoma",
-  zipCode: "74105",
-  stripeCustomerId: "cus_4QFOF3xrvBT2nU",
-  isLoggedIn: true,
-  loginAttemptCount: 3,
-  geoLocation: "48.858372, 2.294481",
-};
+import {useAppSelector} from "../../redux/hooks";
+
+export const userInfo = useAppSelector((state) => state.userInfo);
