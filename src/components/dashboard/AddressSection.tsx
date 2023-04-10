@@ -2,7 +2,16 @@ import React, { useState } from "react";
 import { Card, Modal, TextField, Button, CardHeader, Divider, IconButton, Typography } from "@mui/material";
 import { Edit } from "@mui/icons-material";
 
-const AddressSection = ({ userInfo }) => {
+type Props = {
+    userInfo: {
+        addressLine1: string;
+        addressLine2: string;
+        city: string;
+        state: string;
+        zipCode: string;
+    }
+}
+const AddressSection = ({ userInfo }:Props) => {
   const [location, setLocation] = useState(false);
   const [addressLineOne, setAddressLineOne] = useState(userInfo.addressLine1);
   const [addressLineTwo, setAddressLineTwo] = useState(userInfo.addressLine2);
@@ -18,23 +27,23 @@ const AddressSection = ({ userInfo }) => {
 	setLocation(false);
   };
 
-  const handleAddressLineOneChange = (event) => {
+  const handleAddressLineOneChange =  (event: { target: { value: any; }; }) => {
 	setAddressLineOne(event.target.value);
   }
 
-  const handleAddressLineTwoChange = (event) => {
+  const handleAddressLineTwoChange =  (event: { target: { value: any; }; }) => {
 	setAddressLineTwo(event.target.value);
   }
 
-  const handleCityChange = (event) => {
+  const handleCityChange =  (event: { target: { value: any; }; }) => {
 	setCity(event.target.value);
   }
 
-  const handleStateChange = (event) => {
+  const handleStateChange =  (event: { target: { value: any; }; }) => {
 	setState(event.target.value);
   }
 
-  const handleZipChange = (event) => {
+  const handleZipChange = (event: { target: { value: any; }; }) => {
 	setZip(event.target.value);
   }
 
