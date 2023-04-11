@@ -58,7 +58,7 @@ const LoginSection = ({ userInfo }) => {
           color: "black",
         }}
       >
-        Geolocation: {userInfo.geoLocation}
+
       </Typography>
     </Card>
   );

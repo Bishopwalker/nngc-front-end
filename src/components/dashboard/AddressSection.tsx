@@ -2,261 +2,144 @@ import React, { useState } from "react";
 import { Card, Modal, TextField, Button, CardHeader, Divider, IconButton, Typography } from "@mui/material";
 import { Edit } from "@mui/icons-material";
 import {useAppSelector} from "../../redux/hooks";
+import AddressForm from "./AddressForm";
+import axios from "axios";
 
 
 
-const AddressSection = ( ) => {
+const AddressSection = () => {
+    const userInfo = useAppSelector((state) => state.userInfo);
 
-const userInfo=useAppSelector((state)=>state.userInfo)
-  const [location, setLocation] = useState(false);
-  const [addressLineOne, setAddressLineOne] = useState(userInfo.address.line1);
-  const [addressLineTwo, setAddressLineTwo] = useState(userInfo.address.line2);
-  const [city, setCity] = useState(userInfo.address.city);
-  const [state, setState] = useState(userInfo.address.state);
-  const [zip, setZip] = useState(userInfo.address.zipCode);
+const [geocodeData, setGeocodeData] = useState({})
+    const fetchGeoLocationData = async ( ) => {
+        const result = await axios.get(`http://localhost:5000/nngc/geocoding/${userInfo.id}`)
+        setGeocodeData(result.data)
+        console.log(result.data)
+    }
+React.useEffect(()=>{
+    fetchGeoLocationData().then(r => console.log(r));
+},[ ])
+    const [location, setLocation] = useState(false);
+const [address, setAddress] = useState({
+        line1: userInfo.address.line1,
+        line2: userInfo.address.line2,
+        city: userInfo.address.city,
+        state: userInfo.address.state,
+        postal_code: userInfo.address.zipCode,
+} as any);
 
-  const handleLocationClick = () => {
-	setLocation(true);
-  };
+    const handleLocationClick = () => {
+        setLocation(true);
+    };
 
-  const handleLocationClose = () => {
-	setLocation(false);
-  };
+    const handleLocationClose = () => {
+        setLocation(false);
 
-  const handleAddressLineOneChange =  (event: { target: { value: any; }; }) => {
-	setAddressLineOne(event.target.value);
-  }
+    };
 
-  const handleAddressLineTwoChange =  (event: { target: { value: any; }; }) => {
-	setAddressLineTwo(event.target.value);
-  }
+    return (
+        <>
+            <Card sx={{ mb: 2 }}>
+                <CardHeader
+                    title={"Location Details"}
+                    sx={{
+                        textAlign: "center",
+                        backgroundColor: "#2C3E50",
+                        color: "#fff",
+                        fontWeight: "bold",
+                        letterSpacing: "1px",
+                        textTransform: "uppercase",
+                        borderBottom: "1px solid #ddd",
+                    }}
+                    action={
+                        <IconButton aria-label="edit" onClick={handleLocationClick}>
+                            <Edit sx={{ color: "#26C9FF" }} />
+                        </IconButton>
+                    }
+                />
+                <Divider />
+                <Typography
+                    variant="h6"
+                    sx={{
+                        pt: 2,
+                        pb: 1,
+                        textAlign: "center",
+                        fontWeight: "normal",
+                        fontSize: 24,
+                        color: "black",
+                    }}
+                >
+                    {userInfo.address.line1}
+                </Typography>
+                <Typography
+                    variant="h6"
+                    sx={{
+                        pt: 1,
+                        pb: 2,
+                        textAlign: "center",
+                        fontWeight: "normal",
+                        fontSize: 24,
+                        color: "black",
+                    }}
+                >
+                    {userInfo.address.line2}
+                </Typography>
 
-  const handleCityChange =  (event: { target: { value: any; }; }) => {
-	setCity(event.target.value);
-  }
+                <Typography
+                    variant="h6"
+                    sx={{
+                        pt: 1,
+                        pb: 2,
+                        textAlign: "center",
+                        fontWeight: "normal",
+                        fontSize: 24,
+                        color: "black",
+                    }}
+                >
+                    {userInfo.address.city} {userInfo.address.state}{" "}
+                    {userInfo.address.zipCode}
+                </Typography>
+                <Typography
+                    variant="h6"
+                    sx={{
+                        pt: 1,
+                        pb: 2,
+                        textAlign: "center",
+                        fontWeight: "normal",
+                        fontSize: 24,
+                        color: "black",
+                    }}>Geolocation: {userInfo.geoLocation}</Typography>
 
-  const handleStateChange =  (event: { target: { value: any; }; }) => {
-	setState(event.target.value);
-  }
-
-  const handleZipChange = (event: { target: { value: any; }; }) => {
-	setZip(event.target.value);
-  }
-
-  const handleLocationSubmit = () => {
-	console.log("edit submit clicked!");
-	console.log(addressLineOne, addressLineTwo, city, state, zip);
-	handleLocationClose();
-  }
-
-  return (
-    <Card sx={{ mb: 2 }}>
-      <CardHeader
-        title={"Location Details"}
-        sx={{
-          textAlign: "center",
-          backgroundColor: "#2C3E50",
-          color: "#fff",
-          fontWeight: "bold",
-          letterSpacing: "1px",
-          textTransform: "uppercase",
-          borderBottom: "1px solid #ddd",
-        }}
-        action={
-          <IconButton aria-label="edit" onClick={handleLocationClick}>
-            <Edit sx={{ color: "#26C9FF" }} />
-          </IconButton>
-        }
-      />
-      <Divider />
-      <Typography
-        variant="h6"
-        sx={{
-          pt: 2,
-          pb: 1,
-          textAlign: "center",
-          fontWeight: "normal",
-          fontSize: 24,
-          color: "black",
-        }}
-      >
-        {userInfo.address.line1}
-      </Typography>
-      <Typography
-        variant="h6"
-        sx={{
-          pt: 1,
-          pb: 2,
-          textAlign: "center",
-          fontWeight: "normal",
-          fontSize: 24,
-          color: "black",
-        }}
-      >
-        {userInfo.address.line2}
-      </Typography>
-
-      <Typography
-        variant="h6"
-        sx={{
-          pt: 1,
-          pb: 2,
-          textAlign: "center",
-          fontWeight: "normal",
-          fontSize: 24,
-          color: "black",
-        }}
-      >
-        {userInfo.address.city} {userInfo.address.state} {userInfo.address.zipCode}
-      </Typography>
-      <Modal
-        open={location}
-        onClose={handleLocationClose}
-        aria-labelledby="modal-title"
-        aria-describedby="modal-description"
-      >
-        <Card
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: "80%",
-            maxWidth: 400,
-            bgcolor: "#F0F2F5",
-            p: 2,
-            borderRadius: "8px",
-          }}
-        >
-          <CardHeader
-            title="Update Address Details"
-            sx={{ bgcolor: "#2C3E50", color: "#fff", textAlign: "center" }}
-          />
-          <Divider />
-          <TextField
-            sx={{
-              mt: 2,
-              "& .MuiOutlinedInput-root": {
-                "& fieldset": {
-                  borderColor: "#2C3E50",
-                },
-                "&:hover fieldset": {
-                  borderColor: "#2C3E50",
-                },
-                "&.Mui-focused fieldset": {
-                  borderColor: "#2C3E50",
-                },
-              },
-            }}
-            label="Address Line 1"
-            type="text"
-            value={addressLineOne}
-            onChange={handleAddressLineOneChange}
-            fullWidth
-          />
-          <TextField
-            sx={{
-              mt: 2,
-              "& .MuiOutlinedInput-root": {
-                "& fieldset": {
-                  borderColor: "#2C3E50",
-                },
-                "&:hover fieldset": {
-                  borderColor: "#2C3E50",
-                },
-                "&.Mui-focused fieldset": {
-                  borderColor: "#2C3E50",
-                },
-              },
-            }}
-            label="Address Line 2"
-            type="text"
-            value={addressLineTwo}
-            onChange={handleAddressLineTwoChange}
-            fullWidth
-          />
-          <TextField
-            sx={{
-              mt: 2,
-              "& .MuiOutlinedInput-root": {
-                "& fieldset": {
-                  borderColor: "#2C3E50",
-                },
-                "&:hover fieldset": {
-                  borderColor: "#2C3E50",
-                },
-                "&.Mui-focused fieldset": {
-                  borderColor: "#2C3E50",
-                },
-              },
-            }}
-            label="City"
-            type="text"
-            value={city}
-            onChange={handleCityChange}
-            fullWidth
-          />
-          <TextField
-            sx={{
-              mt: 2,
-              "& .MuiOutlinedInput-root": {
-                "& fieldset": {
-                  borderColor: "#2C3E50",
-                },
-                "&:hover fieldset": {
-                  borderColor: "#2C3E50",
-                },
-                "&.Mui-focused fieldset": {
-                  borderColor: "#2C3E50",
-                },
-              },
-            }}
-            label="State"
-            type="text"
-            value={state}
-            onChange={handleStateChange}
-            fullWidth
-          />
-          <TextField
-            sx={{
-              mt: 2,
-              "& .MuiOutlinedInput-root": {
-                "& fieldset": {
-                  borderColor: "#2C3E50",
-                },
-                "&:hover fieldset": {
-                  borderColor: "#2C3E50",
-                },
-                "&.Mui-focused fieldset": {
-                  borderColor: "#2C3E50",
-                },
-              },
-            }}
-            label="Zip"
-            type="text"
-            value={zip}
-            onChange={handleZipChange}
-            fullWidth
-          />
-          <Button
-            sx={{
-              mt: 2,
-              bgcolor: "#2C3E50",
-              color: "#fff",
-              "&:hover": {
-                backgroundColor: "#455A64",
-              },
-            }}
-            variant="contained"
-            onClick={handleLocationSubmit}
-          >
-            Submit
-          </Button>
-        </Card>
-      </Modal>
-    </Card>
-  );
+            </Card>
+            <Modal
+                open={location}
+                onClose={handleLocationClose}
+                aria-labelledby="modal-title"
+                aria-describedby="modal-description"
+            >
+                <Card
+                    sx={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        width: "80%",
+                        maxWidth: 400,
+                        bgcolor: "#F0F2F5",
+                        p: 2,
+                        borderRadius: "8px",
+                    }}
+                >
+                    <CardHeader
+                        title="Update Address Details"
+                        sx={{ bgcolor: "#2C3E50", color: "#fff", textAlign: "center" }}
+                    />
+                    <Divider />
+                    <AddressForm handleClose={handleLocationClose}   />
+                </Card>
+            </Modal>
+        </>
+    );
 };
 
 export default AddressSection;
-

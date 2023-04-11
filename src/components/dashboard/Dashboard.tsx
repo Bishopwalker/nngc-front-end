@@ -10,18 +10,6 @@ import React from "react";
 import {useAppSelector} from "../../redux/hooks";
 
 
-class AddressSectionProps {
-	userInfo: {
-
-			line1: string,
-			line2: string,
-			city: string,
-			state: string,
-			zipCode: number
-
-	}
-
-}
 
 const Dashboard = () => {
 	const userInfo = useAppSelector(state => state.userInfo)
@@ -44,7 +32,7 @@ const Dashboard = () => {
 						<UserProfileSection userInfo={userInfo}/>
 					</Grid>
 					<Grid item xs={12} sm={6} sx={{margin: '2'}}>
-						<AddressSection userInfo={userInfo.address as AddressSectionProps['userInfo']}/>
+						<AddressSection userInfo={userInfo.address}/>
 					</Grid>
 				</Grid>
 				<Grid container spacing={2}>
@@ -52,7 +40,7 @@ const Dashboard = () => {
 						<LoginSection userInfo={userInfo}/>
 					</Grid>
 					<Grid item xs={12} sm={6} sx={{margin: '2'}}>
-						<PaymentSection userInfo={userInfo} />
+						<PaymentSection userInfo={userInfo.transactionHistory} />
 					</Grid>
 				</Grid>
 				<Grid container spacing={2}>

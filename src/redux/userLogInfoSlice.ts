@@ -16,6 +16,8 @@ export const userLogInfoSlice = createSlice({
                 city: '',
                 state: '',
             zipCode: 0,
+            latitude: 0,
+            longitude: 0,
         },
         geoLocation: '',
                        enabled: false,
