@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Avatar, Card, CardHeader, Divider, Typography } from "@mui/material";
+import { UserInfo } from "../../interfaces/UserInfo"
 
-const LoginSection = ({ userInfo }) => {
+
+interface LoginSectionProps {
+    userInfo: UserInfo;
+}
+
+const LoginSection:React.FC<LoginSectionProps> = ({ userInfo }) => {
   const [responseData, setResponseData] = useState("");
 
   return (
