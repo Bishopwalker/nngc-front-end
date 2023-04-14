@@ -1,14 +1,13 @@
-import { Box, Grid, Typography } from "@mui/material";
-import { transactions } from './transactions';
-import UserProfileSection  from "./UserProfileSection";
-import AddressSection  from "./AddressSection";
-import PaymentSection  from "./PaymentSection";
-import LoginSection  from "./LoginSection";
-import TransactionsTable  from "./TransactionsTable";
-import EmailPasswordSection  from "./EmailPasswordSection";
+import {Box, Grid, Typography} from "@mui/material";
+import {transactions} from './transactions';
+import UserProfileSection from "./UserProfileSection";
+import AddressSection from "./AddressSection";
+import PaymentSection from "./PaymentSection";
+import LoginSection from "./LoginSection";
+import TransactionsTable from "./TransactionsTable";
+import EmailPasswordSection from "./EmailPasswordSection";
 import React from "react";
 import {useAppSelector} from "../../redux/hooks";
-
 
 
 const Dashboard = () => {

@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from 'react'
+import React, {useCallback, useContext} from 'react'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
@@ -6,7 +6,7 @@ import Button from '@mui/material/Button'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import FormHelperText from '@mui/material/FormHelperText'
 import Checkbox from '@mui/material/Checkbox'
-import { AppContext } from './Context'
+import {AppContext} from './Context'
 
 export default function SecondStep() {
   const { formValues, handleChange, handleBack, handleNext, variant, margin } = useContext(AppContext)

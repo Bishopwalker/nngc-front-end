@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, {useContext} from 'react'
 import Box from '@mui/material/Box'
 import Stepper from '@mui/material/Stepper'
 import Step from '@mui/material/Step'
@@ -8,7 +8,7 @@ import FirstStep from './FirstStep'
 import SecondStep from './SecondStep'
 import Confirm from './Confirm'
 import Success from './Success'
-import { AppContext } from './Context'
+import {AppContext} from './Context'
 
 // Step titles
 const labels = ['Personal Information', 'Contact Information', 'Confirmation']

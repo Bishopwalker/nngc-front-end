@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import { Avatar, Card, Modal, TextField, Button, CardHeader, Divider, IconButton, Typography } from "@mui/material";
-import { Edit } from "@mui/icons-material";
-import { UserProfile_Interface} from "./interface";
+import React, {useState} from "react";
+import {Button, Card, CardHeader, Divider, IconButton, Modal, TextField, Typography} from "@mui/material";
+import {Edit} from "@mui/icons-material";
+import {UserProfile_Interface} from "./interface";
+
 const UserProfileSection = ({ userInfo }:  UserProfile_Interface) => {
   const [edit, setEdit] = useState(false);
   const [name, setName] = useState(userInfo.fullName);

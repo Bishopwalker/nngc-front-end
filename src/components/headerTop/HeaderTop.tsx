@@ -1,5 +1,5 @@
-import { Box, Grid, Typography, IconButton } from "@mui/material";
-import { Email, Phone } from '@mui/icons-material';
+import {Box, Grid, Typography} from "@mui/material";
+import {Email, Phone} from '@mui/icons-material';
 import React from "react";
 
 const HeaderTop = () => {

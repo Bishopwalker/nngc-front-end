@@ -1,6 +1,4 @@
 import {createSlice} from "@reduxjs/toolkit";
-import axios from "axios";
-import {useAppDispatch} from "./hooks";
 
 export const transactionSlice = createSlice({
     name: 'transaction',

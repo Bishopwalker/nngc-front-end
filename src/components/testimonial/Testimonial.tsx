@@ -1,4 +1,4 @@
-import { Box, Grid, Card, CardContent, Avatar, Typography } from '@mui/material';
+import {Avatar, Box, Card, CardContent, Grid, Typography} from '@mui/material';
 
 const testimonials = [
   {

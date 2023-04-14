@@ -1,16 +1,16 @@
-import React, { useContext, useState } from 'react'
+import React, {useContext, useState} from 'react'
 import Box from '@mui/material/Box'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText'
 import Divider from '@mui/material/Divider'
 import Button from '@mui/material/Button'
-import { AppContext } from './Context'
+import {AppContext} from './Context'
 
 import axios from "axios";
 import {useAppDispatch} from "../../redux/hooks";
-import {changeUserLogInfo,addToken} from "../../redux/userLogInfoSlice";
-import { Navigate } from "react-router-dom";
+import {addToken, changeUserLogInfo} from "../../redux/userLogInfoSlice";
+import {Navigate} from "react-router-dom";
 
 export default function Confirm() {
   const { formValues, handleBack, handleNext } = useContext(AppContext)

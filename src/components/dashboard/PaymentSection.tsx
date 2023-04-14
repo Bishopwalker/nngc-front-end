@@ -1,6 +1,7 @@
 import React from "react";
-import { Card, CardHeader, Divider, Grid, Typography } from "@mui/material";
-import { UserProfile_Interface} from "./interface"
+import {Card, CardHeader, Divider, Typography} from "@mui/material";
+import {UserProfile_Interface} from "./interface"
+
 const PaymentSection =  ({ userInfo }:  UserProfile_Interface) => {
   return (
     <Card sx={{ mb: 2 }}>

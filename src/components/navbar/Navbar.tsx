@@ -1,21 +1,6 @@
-import React, { useState } from "react";
-import {
-  AppBar,
-  Box,
-  InputBase,
-  Menu,
-  MenuItem,
-  styled,
-  Toolbar,
-  Typography,
-  ListItemButton, ListItemIcon, ListItemText, List, Link
-} from "@mui/material";
-import {
-  Facebook,
-  Instagram,
-  Menu as MenuIcon,
-  Twitter,
-} from "@mui/icons-material/";
+import React, {useState} from "react";
+import {AppBar, Box, InputBase, Link, List, Menu, MenuItem, styled, Toolbar, Typography} from "@mui/material";
+import {Facebook, Instagram, Menu as MenuIcon, Twitter,} from "@mui/icons-material/";
 import {useAppSelector} from "../../redux/hooks";
 
 

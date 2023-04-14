@@ -1,16 +1,13 @@
-import React, { useState } from "react";
-import {
-  Button,
-  Card,
-  CardHeader,
-  Divider,
-  Grid,
-  Modal,
-  TextField,
-  Typography,
-} from "@mui/material";
+import React, {useState} from "react";
+import {Button, Card, CardHeader, Divider, Grid, Modal, TextField, Typography,} from "@mui/material";
+import {UserInfo} from "../../interfaces/UserInfo";
+import axios from "axios";
 
-const EmailPasswordSection = ({ userInfo }) => {
+interface LoginSectionProps {
+    userInfo: UserInfo;
+}
+
+const EmailPasswordSection:React.FC<LoginSectionProps> = ({ userInfo }) => {
   const [open, setOpen] = useState(false);
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -23,20 +20,45 @@ const EmailPasswordSection = ({ userInfo }) => {
     setOpen(false);
   };
 
-  const handleNewPasswordChange = (event) => {
+  const handleNewPasswordChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
     setNewPassword(event.target.value);
   };
 
-  const handleConfirmPasswordChange = (event) => {
+  const handleConfirmPasswordChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
     setConfirmPassword(event.target.value);
   };
 
-  const handleSubmit = () => {
-    if (newPassword === confirmPassword) {
-      onPasswordChange(newPassword);
-      handleClose();
-    }
-  };
+    const handleSubmit = async () => {
+        if (newPassword === confirmPassword) {
+            try {
+                const response = await axios.put(
+                    `http://localhost:5000/api/nngc/customers/${userInfo.id}`,
+                    { password: newPassword },
+                    {
+                        headers: {
+                            Authorization: `Bearer ${userInfo.token}`,
+                        },
+                    }
+                );
+
+                if (response.data.success) {
+                    // Perform necessary actions after a successful password update
+                    // For example, you can show a success message to the user
+                    alert("Password updated successfully!");
+                    handleClose();
+                } else {
+                    // Handle the error message from the API response
+                    console.error(response.data.message);
+                }
+            } catch (error: unknown) {
+                if (error instanceof Error) {
+                    console.error(error.message);
+                } else {
+                    console.error('An error occurred:', error);
+                }
+            }
+        }
+    };
 
   return (
     <Grid container spacing={2}>

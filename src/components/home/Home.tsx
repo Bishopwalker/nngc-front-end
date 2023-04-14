@@ -1,4 +1,4 @@
-import { Box, Container, Stack } from "@mui/material";
+import {Box, Container, Stack} from "@mui/material";
 import React from "react";
 import ImageSlider from "../slider/Slider";
 import Service from "../service/Service";

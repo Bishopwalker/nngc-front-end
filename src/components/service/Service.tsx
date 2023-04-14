@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 //@ts-ignore
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './style.css';
-import { services } from './services';
-import {Navigate} from "react-router-dom";
-import Dumpster from "../products/Dumpster";
+import {services} from './services';
 
 function Service() {
   const [defaultImage, setDefaultImage] = useState({

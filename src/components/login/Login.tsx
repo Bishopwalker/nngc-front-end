@@ -2,12 +2,11 @@ import * as React from "react";
 //@ts-ignore
 import Wizard from "../../components/forms/Wizard";
 // @ts-ignore
-
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {changeTitle} from "../../redux/pageTitleSlice";
-import {Box, Button, Typography, Grid} from "@mui/material";
-import {Link, Navigate, useNavigate} from "react-router-dom";
-import {Field, Form} from "react-final-form";
+import {Box, Grid, Typography} from "@mui/material";
+import {Navigate} from "react-router-dom";
+import {Field} from "react-final-form";
 
 import {validateLogin} from "../../components/forms/validate";
 
@@ -15,7 +14,7 @@ import {validateLogin} from "../../components/forms/validate";
 import WizardSignup from "../../components/forms/WizardSignup.jsx";
 import axios from "axios";
 import Error from "../../components/forms/Error";
-import {changeUserLogInfo,addToken} from "../../redux/userLogInfoSlice";
+import {addToken, changeUserLogInfo} from "../../redux/userLogInfoSlice";
 
 
 const Login = () => {

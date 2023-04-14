@@ -1,10 +1,10 @@
 import React from 'react'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
+import {createTheme, ThemeProvider} from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 import Container from '@mui/material/Container'
 import Paper from '@mui/material/Paper'
 import StepForm from './StepForm'
-import { StepsProvider } from './Context'
+import {StepsProvider} from './Context'
 
 const theme = createTheme({
   typography: {

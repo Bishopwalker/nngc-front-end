@@ -29,4 +29,5 @@ export interface UserInfo {
     loginAttemptCount: number;
     token: string;
     accountPage: string;
+    password?: string;
 }

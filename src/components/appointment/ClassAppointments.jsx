@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 
-import { AppointmentPicker } from "react-appointment-picker";
+import {AppointmentPicker} from "react-appointment-picker";
 import {Typography} from "@mui/material";
 import {Link} from "react-router-dom";
 

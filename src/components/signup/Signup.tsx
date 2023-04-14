@@ -1,9 +1,9 @@
 import * as React from "react";
 import {useAppDispatch} from "../../redux/hooks";
 import {changeTitle} from "../../redux/pageTitleSlice";
-import {Box, Button, Grid, Typography} from "@mui/material";
-import {  Link} from "react-router-dom";
-import { Field, Form, FormSpy} from 'react-final-form';
+import {Button, Typography} from "@mui/material";
+import {Link} from "react-router-dom";
+import {Field, FormSpy} from 'react-final-form';
 
 import {
     validateAddress,
@@ -13,10 +13,6 @@ import {
     validateService,
     validateSignUp
 } from "../../components/forms/validate";
-
-{/* @ts-ignore*/}
-
-import ErrorWithDelay from "./ErrorWithDelay";
 //@ts-ignore
 import Wizard from "../../components/forms/Wizard";
 // @ts-ignore
@@ -25,6 +21,7 @@ import axios from "axios";
 
 import Error from "../../components/forms/Error";
 
+{/* @ts-ignore*/}
 
 
 const Signup = () => {

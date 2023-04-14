@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 //@ts-ignore
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './style.css';
-import { sliders } from './sliders';
+import {sliders} from './sliders';
 
 function ImageSlider() {
   const [defaultImage, setDefaultImage] = useState({

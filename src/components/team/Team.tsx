@@ -1,4 +1,4 @@
-import { Box, Grid, Typography, Card, CardContent, Avatar } from "@mui/material";
+import {Avatar, Box, Card, CardContent, Grid, Typography} from "@mui/material";
 import React from "react";
 
 const teamMembers = [

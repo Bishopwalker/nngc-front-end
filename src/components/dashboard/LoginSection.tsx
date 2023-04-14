@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { Avatar, Card, CardHeader, Divider, Typography } from "@mui/material";
-import { UserInfo } from "../../interfaces/UserInfo"
+import React, {useState} from "react";
+import {Card, CardHeader, Divider, Typography} from "@mui/material";
+import {UserInfo} from "../../interfaces/UserInfo"
 
 
 interface LoginSectionProps {
@@ -9,7 +8,7 @@ interface LoginSectionProps {
 }
 
 const LoginSection:React.FC<LoginSectionProps> = ({ userInfo }) => {
-  const [responseData, setResponseData] = useState("");
+
 
   return (
     <Card sx={{ mb: 2 }}>
