@@ -31,7 +31,7 @@ const Dashboard = () => {
 						<UserProfileSection userInfo={userInfo}/>
 					</Grid>
 					<Grid item xs={12} sm={6} sx={{margin: '2'}}>
-						<AddressSection userInfo={userInfo.address}/>
+						<AddressSection />
 					</Grid>
 				</Grid>
 				<Grid container spacing={2}>
@@ -39,7 +39,7 @@ const Dashboard = () => {
 						<LoginSection userInfo={userInfo}/>
 					</Grid>
 					<Grid item xs={12} sm={6} sx={{margin: '2'}}>
-						<PaymentSection userInfo={userInfo.transactionHistory} />
+						<PaymentSection  />
 					</Grid>
 				</Grid>
 				<Grid container spacing={2}>
@@ -53,7 +53,7 @@ const Dashboard = () => {
 				</Grid>
 				<Grid container spacing={2}>
 					<Grid item xs={12} sm={12} sx={{margin: '2'}}>
-						<TransactionsTable transactions={transactions} />
+						<TransactionsTable  />
 					</Grid>
 				</Grid>
 			</Box>

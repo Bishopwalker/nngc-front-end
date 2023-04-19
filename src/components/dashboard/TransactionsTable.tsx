@@ -6,7 +6,7 @@ type Transaction = {
  page: number;
     rowsPerPage: number;
 }
-const TransactionsTable = ({}:Transaction) => {
+const TransactionsTable = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(3);
 
