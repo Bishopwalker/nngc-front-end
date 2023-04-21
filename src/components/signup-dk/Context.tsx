@@ -24,7 +24,7 @@ export declare type ValidationSchema = Record<
     value?: any
     error?: string
     required?: boolean
-    validate?: 'text' | 'number' | 'email' | 'phone' | 'zip' | 'checkbox' | 'select' | 'password'
+    validate?: 'text' | 'number' | 'email' | 'phone' | 'zip' | 'checkbox' | 'select' | 'password'| 'state'
     minLength?: number
     maxLength?: number
     helperText?: string
@@ -119,15 +119,17 @@ export function StepsProvider({ children }: ProviderProps) {
   const handleBack = useCallback(() => dispatch({ type: 'decrease' }), [])
 
   // Handle form change
-  const handleChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, checked?: boolean) => {
-      const { type, name, value } = event.target
+    const handleChange = useCallback(
+        (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, checked?: boolean) => {
+            const { type, name, value } = event.target
 
-      const fieldValue = type === 'checkbox' ? checked : value
+            // Provide a fallback value (false) if checked is undefined
+            const fieldValue = type === 'checkbox' ? checked || false : value
 
-      dispatch({ type: 'form-value', name, fieldValue })
+            dispatch({ type: 'form-value', name, fieldValue })
 
-      const fieldName = initialValues[name]
+
+            const fieldName = initialValues[name]
       if (!fieldName) return
 
       const { required, validate, minLength, maxLength, helperText } = fieldName
@@ -160,7 +162,7 @@ export function StepsProvider({ children }: ProviderProps) {
               error = helperText || 'Please enter a valid phone number. i.e: xxx-xxx-xxxx'
             break
 
-          case 'zipCode':
+          case 'zip':
             if (value && !isValidZip.test(value)) error = helperText || 'Please enter a valid zip code (i.e. xxxxx).'
             break
 
@@ -183,7 +185,9 @@ export function StepsProvider({ children }: ProviderProps) {
 
 	// Check if country field and fieldValue is not "northumberland"
     if (name === 'country' && fieldValue !== 'northumberland') {
-	 error = `We haven't got services in ${fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1)} yet, please email info@northernneckgarbage.com to find out when we will be in your area.`;
+        if (typeof fieldValue !== "boolean") {
+            error = `We haven't got services in ${fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1)} yet, please email info@northernneckgarbage.com to find out when we will be in your area.`;
+        }
     }
 
       dispatch({ type: 'form-error', name, error })

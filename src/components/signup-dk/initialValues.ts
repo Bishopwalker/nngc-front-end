@@ -82,7 +82,7 @@ export const initialValues: ValidationSchema = {
   zipCode: {
     value: '',
     error: '',
-    validate: 'zipCode',
+    validate: 'zip',
     required: true,
     maxLength: 5
   }
