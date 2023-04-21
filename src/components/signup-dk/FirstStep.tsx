@@ -7,15 +7,15 @@ import {AppContext} from './Context'
 
 export default function FirstStep() {
   const { formValues, handleChange, handleNext, variant, margin } = useContext(AppContext)
-  const { firstName, lastName, email, country, password } = formValues
+  const { firstName, lastName, email, county, password } = formValues
 
   // Check if all values are not empty and if there are some errors
   const isError = useCallback(
     () =>
-      Object.keys({ firstName, lastName, email, country, password }).some(
+      Object.keys({ firstName, lastName, email, county, password }).some(
         (name) => (formValues[name].required && !formValues[name].value) || formValues[name].error
       ),
-    [formValues, firstName, lastName, email, country, password]
+    [formValues, firstName, lastName, email, county, password]
   )
 
   return (
@@ -30,13 +30,13 @@ export default function FirstStep() {
             SelectProps={{
               native: true
             }}
-            label='Country'
-            name='country'
-            value={country.value}
+            label='county'
+            name='county'
+            value={county.value}
             onChange={handleChange}
-            error={!!country.error}
-            helperText={country.error}
-            required={country.required}
+            error={!!county.error}
+            helperText={county.error}
+            required={county.required}
           >
             <option value=''> </option>
             <option value='northumberland'>Northumberland County</option>

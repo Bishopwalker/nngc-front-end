@@ -9,7 +9,7 @@ export interface AddressResult {
     city: string;
     state?: string;
     postal_code: string;
-    country: string;
+    county: string;
 }
 
 interface AddressFormProps {
@@ -27,7 +27,7 @@ const AddressForm: React.FC<AddressFormProps> = ({
         city: "",
         state: "",
         postal_code: "",
-        country: "",
+        county: "",
     });
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {

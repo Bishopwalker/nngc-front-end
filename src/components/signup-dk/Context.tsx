@@ -183,8 +183,8 @@ export function StepsProvider({ children }: ProviderProps) {
         }
       }
 
-	// Check if country field and fieldValue is not "northumberland"
-    if (name === 'country' && fieldValue !== 'northumberland') {
+	// Check if county field and fieldValue is not "northumberland"
+    if (name === 'county' && fieldValue !== 'northumberland') {
         if (typeof fieldValue !== "boolean") {
             error = `We haven't got services in ${fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1)} yet, please email info@northernneckgarbage.com to find out when we will be in your area.`;
         }

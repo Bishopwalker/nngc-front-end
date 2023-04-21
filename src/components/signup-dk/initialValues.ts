@@ -30,7 +30,7 @@ export const initialValues: ValidationSchema = {
     required: true,
     validate: 'password'
   },
-  country: {
+  county: {
     value: '',
     error: '',
     required: true,

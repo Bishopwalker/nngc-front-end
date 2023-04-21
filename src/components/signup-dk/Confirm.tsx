@@ -14,7 +14,7 @@ import {Navigate} from "react-router-dom";
 
 export default function Confirm() {
   const { formValues, handleBack, handleNext } = useContext(AppContext)
-  const { firstName, lastName, email, gender, date, city, phone, houseNumber, streetName, state, zipCode } = formValues
+  const { firstName, lastName, email,  city, phone, houseNumber, streetName, state, zipCode } = formValues
 
   const dispatch = useAppDispatch()
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -50,20 +50,45 @@ export default function Confirm() {
     // Show last component or success message
    // handleNext()
 	const values = JSON.stringify(jsonObj, null, 2);
-	console.log(values);
-	axios.post('https://api.mocki.io/v2/b6699541/auth/nngc/registration', values)
-		.then((response) => {
-		console.log('response',response)
-		dispatch(changeUserLogInfo(response.data.customerDTO))
-		dispatch(addToken({token: response.data.token}))
-		if(response.data.token) {
-			console.log(response.data.token);
-		}
-		setIsLoggedIn(true);
-	})
-	.catch((error) => {
-		console.log(error)
-	})
+	     console.log(values)
+      const jsonObject = JSON.parse(values);
+      jsonObject.houseNumber = parseInt(jsonObject.houseNumber, 10); // or Number(jsonObject.houseNumber);
+      jsonObject.zipCode = parseInt(jsonObject.zipCode, 10); // or Number(jsonObject.zipCode);
+      const updatedJsonString = JSON.stringify(jsonObject);
+console.log(updatedJsonString)
+
+      axios.post('http://localhost:5000/auth/nngc/registration', updatedJsonString, {
+          headers: {
+              'Content-Type': 'application/json',
+          },
+      })
+          .then((response) => {
+              console.log('response',response)
+              dispatch(changeUserLogInfo(response.data.customerDTO))
+              dispatch(addToken({token: response.data.token}))
+              if(response.data.token) {
+                  console.log(response.data.token);
+              }
+              setIsLoggedIn(true);
+          })
+          .catch((error) => {
+              console.log(error)
+          })
+
+    //
+    //   axios.post('http://localhost:5000/auth/nngc/registration', updatedJsonString)
+	// 	.then((response) => {
+	// 	console.log('response',response)
+	// 	dispatch(changeUserLogInfo(response.data.customerDTO))
+	// 	dispatch(addToken({token: response.data.token}))
+	// 	if(response.data.token) {
+	// 		console.log(response.data.token);
+	// 	}
+	// 	setIsLoggedIn(true);
+	// })
+	// .catch((error) => {
+	// 	console.log(error)
+	// })
 
   }
 
