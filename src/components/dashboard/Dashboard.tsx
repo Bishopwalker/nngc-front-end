@@ -28,7 +28,7 @@ const Dashboard = () => {
 						</Typography>
 					</Grid>
 					<Grid item xs={12} sm={6} sx={{margin: '2'}}>
-						<UserProfileSection userInfo={userInfo}/>
+						<UserProfileSection />
 					</Grid>
 					<Grid item xs={12} sm={6} sx={{margin: '2'}}>
 						<AddressSection />

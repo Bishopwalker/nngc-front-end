@@ -1,10 +1,13 @@
 import React, {useState} from "react";
 import {Button, Card, CardHeader, Divider, IconButton, Modal, TextField, Typography} from "@mui/material";
 import {Edit} from "@mui/icons-material";
-import {UserProfile_Interface} from "./interface";
+import {useAppSelector} from "../../redux/hooks";
 
-const UserProfileSection = ({ userInfo }:  UserProfile_Interface) => {
-  const [edit, setEdit] = useState(false);
+
+const UserProfileSection = ( ) => {
+    const userInfo = useAppSelector(state => state.userInfo)
+
+    const [edit, setEdit] = useState(false);
   const [name, setName] = useState(userInfo.fullName);
   const [email, setEmail] = useState(userInfo.email);
   const [phone, setPhone] = useState(userInfo.phoneNumber);
