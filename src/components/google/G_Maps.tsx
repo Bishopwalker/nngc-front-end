@@ -1,5 +1,5 @@
 // @ts-ignore
-import {GOOGLE_MAPS_API_KEY} from "process.env";
+
 
 import React from 'react'
 import {GoogleMap, useJsApiLoader} from '@react-google-maps/api';
@@ -17,7 +17,7 @@ const center = {
 function G_Maps() {
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
-        googleMapsApiKey: GOOGLE_MAPS_API_KEY
+        googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY
     })
 
     const [map, setMap] = React.useState(null)

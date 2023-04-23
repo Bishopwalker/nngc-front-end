@@ -13,6 +13,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import ClassAppointments from "./components/appointment/ClassAppointments.jsx";
 import Dumpster from "./components/products/Dumpster";
 import TrashSubscription from "./components/products/TrashSubscription";
+import G_Maps from "./components/google/G_Maps";
 
 function App() {
 const screenTitle = useAppSelector(state => state.title)
@@ -34,6 +35,7 @@ const screenTitle = useAppSelector(state => state.title)
 				<Route path="/dashboard" element={<Dashboard />} />
 				<Route path="/dumpster" element={<Dumpster />} />
 				<Route path="/res_trash_sub" element={<TrashSubscription/>} />
+				<Route path='/maps' element={<G_Maps/>} />
 			</Routes>
 
 		<Footer />
