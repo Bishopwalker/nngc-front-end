@@ -14,6 +14,10 @@ import { persistor } from '../../redux/store';
 const Dashboard = () => {
 	const userInfo = useAppSelector(state => state.userInfo)
 	const navigate = useNavigate();
+	const handleLogout = async () => {
+		await persistor.purge();
+		navigate('/');
+	};
 
 	React.useEffect(() => {
 		if (userInfo.id === '') {
@@ -36,7 +40,7 @@ const Dashboard = () => {
 							User Dashboard
 						</Typography>
 
-						<Button variant={'contained'} onClick={()=> persistor.purge()}>
+						<Button variant={'contained'} onClick={handleLogout}>
 							<Link to={'/'}>
 							Log Out
 						</Link>
