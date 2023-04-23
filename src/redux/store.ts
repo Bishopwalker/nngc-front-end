@@ -5,7 +5,7 @@ import {userLogInfoSlice} from "./userLogInfoSlice";
 import {persistReducer} from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import thunk from "redux-thunk";
-
+import { persistStore } from 'redux-persist';
 const rootReducer = combineReducers({
    userInfo: userLogInfoSlice.reducer,
     title: pageTitleSlice.reducer,
@@ -30,5 +30,5 @@ const store = configureStore({
 
         )
     })
-
-export default store;
+const persistor = persistStore(store)
+export {store, persistor};

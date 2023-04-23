@@ -20,7 +20,7 @@ export default function Confirm() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   if (isLoggedIn) {
-    return <Navigate to="/dashboard" />;
+    return <Navigate to="/login" />;
   }
 	// Convert object to JSON string
 	let jsonString = JSON.stringify(formValues);
@@ -57,7 +57,7 @@ export default function Confirm() {
       const updatedJsonString = JSON.stringify(jsonObject);
 console.log(updatedJsonString)
 
-      axios.post('http://localhost:5000/auth/nngc/registration', updatedJsonString, {
+      axios.post('http://localhost:5000/auth/nngc/registration',jsonObject, {
           headers: {
               'Content-Type': 'application/json',
           },

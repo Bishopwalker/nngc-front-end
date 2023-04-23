@@ -29,7 +29,11 @@ const Login = () => {
 		};
 		const values = JSON.stringify(myJSON);
 		console.log(values);
-	await axios.post('http://localhost:5000/auth/nngc/authenticate', values)
+	await axios.post('http://localhost:5000/auth/nngc/authenticate', values,{
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		})
 			.then((response) => {
 			console.log('response',response)
 			dispatch(changeUserLogInfo(response.data.customerDTO))
