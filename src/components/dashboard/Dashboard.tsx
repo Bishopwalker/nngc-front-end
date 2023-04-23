@@ -1,4 +1,4 @@
-import {Box, Grid, Typography} from "@mui/material";
+import {Box, Grid, Typography, Button} from "@mui/material";
 import {transactions} from './transactions';
 import UserProfileSection from "./UserProfileSection";
 import AddressSection from "./AddressSection";
@@ -8,10 +8,19 @@ import TransactionsTable from "./TransactionsTable";
 import EmailPasswordSection from "./EmailPasswordSection";
 import React from "react";
 import {useAppSelector} from "../../redux/hooks";
-
+import {Link, useNavigate} from "react-router-dom";
+import { persistor } from '../../redux/store';
 
 const Dashboard = () => {
 	const userInfo = useAppSelector(state => state.userInfo)
+	const navigate = useNavigate();
+
+	React.useEffect(() => {
+		if (userInfo.id === '') {
+			navigate('/login');
+		}
+	}, [userInfo, navigate]);
+
 	return (
 		<Box mb={4} mt={0}>
 			<Box sx={{ }} pb={1} pt={1}>
@@ -26,7 +35,14 @@ const Dashboard = () => {
 						}}>
 							User Dashboard
 						</Typography>
+
+						<Button variant={'contained'} onClick={()=> persistor.purge()}>
+							<Link to={'/'}>
+							Log Out
+						</Link>
+						</Button>
 					</Grid>
+
 					<Grid item xs={12} sm={6} sx={{margin: '2'}}>
 						<UserProfileSection />
 					</Grid>

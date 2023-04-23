@@ -16,7 +16,9 @@ const [geocodeData, setGeocodeData] = useState({})
         console.log(result.data)
     }
 React.useEffect(()=>{
+    if(userInfo.id != null){
     fetchGeoLocationData().then(r => console.log(r));
+    }
 },[ ])
     const [location, setLocation] = useState(false);
 const [address, setAddress] = useState({

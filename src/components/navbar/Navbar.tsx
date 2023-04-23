@@ -2,9 +2,11 @@ import React, {useState} from "react";
 import {AppBar, Box, InputBase, Link, List, Menu, MenuItem, styled, Toolbar, Typography} from "@mui/material";
 import {Facebook, Instagram, Menu as MenuIcon, Twitter,} from "@mui/icons-material/";
 import {useAppSelector} from "../../redux/hooks";
+import { useNavigate } from 'react-router-dom';
 
 
 const Navbar = () => {
+
   const user = useAppSelector(state => state.userInfo);
 
   const StyledToolbar = styled(Toolbar)({

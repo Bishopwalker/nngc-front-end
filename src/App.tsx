@@ -6,7 +6,7 @@ import NavBottom from "./components/navBottom/NavBottom";
 import Home from "./components/home/Home";
 import Footer from "./components/footer/Footer";
 import {useAppSelector} from "./redux/hooks";
-import Login from "./components/login/Login";
+import Login from "./components/login-dk/Login";
 import Signup from "./components/signup-dk/SignUp";
 import Dashboard from "./components/dashboard/Dashboard";
 // @ts-ignore
@@ -25,7 +25,7 @@ const screenTitle = useAppSelector(state => state.title)
 		<HeaderTop />
 		<Navbar />
 		<NavBottom />
-		<BrowserRouter>
+
 			<Routes>
 			  <Route path="/" element={<Home />} />
 				<Route path="/login" element={<Login />} />
@@ -35,7 +35,7 @@ const screenTitle = useAppSelector(state => state.title)
 				<Route path="/dumpster" element={<Dumpster />} />
 				<Route path="/res_trash_sub" element={<TrashSubscription/>} />
 			</Routes>
-	    </BrowserRouter>
+
 		<Footer />
     </div>
   )
