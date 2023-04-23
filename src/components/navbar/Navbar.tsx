@@ -63,16 +63,7 @@ const Navbar = () => {
           ))}
 
         </MenuBox>
-        <SearchBox>
-          <InputBase placeholder="AI Search ..." sx={{ color: "white" }} />
-          <MenuIcon
-            sx={{
-              color: "white",
-              display: { xs: "block", sm: "block", md: "none" },
-            }}
-            onClick={() => SetOpen(!open)}
-          />
-        </SearchBox>
+
       </StyledToolbar>
       <Menu
         id="demo-positioned-menu"
