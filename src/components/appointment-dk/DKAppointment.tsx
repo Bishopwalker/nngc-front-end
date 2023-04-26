@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import Fullcalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -6,17 +6,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import "./DKAppointment.css";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
-import {
-    Button,
-    Card,
-    CardHeader,
-    Divider,
-    MenuItem,
-    Select,
-    SelectChangeEvent,
-    TextField,
-    TextFieldProps
-} from "@mui/material";
+import {Button, Card, CardHeader, Divider, MenuItem, Select, SelectChangeEvent, TextField} from "@mui/material";
 
 const DKAppointment = () => {
     const [selectedDate, setSelectedDate] = useState('');
@@ -251,7 +241,7 @@ const DKAppointment = () => {
                             Residential Trash Pickup
                         </MenuItem>
                         <MenuItem value="commercial-trash-pickup">
-                            Commercial Trash Pickup
+                            Commercial and Farm Trash Pickup
                         </MenuItem>
                         <MenuItem value="recycling-pickup">Recycling Pickup</MenuItem>
                         <MenuItem value="yard-waste-pickup">Yard Waste Pickup</MenuItem>
