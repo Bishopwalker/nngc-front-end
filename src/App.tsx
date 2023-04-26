@@ -11,6 +11,7 @@ import Signup from "./components/signup-dk/SignUp";
 import Dashboard from "./components/dashboard/Dashboard";
 // @ts-ignore
 import ClassAppointments from "./components/appointment/ClassAppointments.jsx";
+import DKAppointment from "./components/appointment-dk/DKAppointment";
 import Dumpster from "./components/products/Dumpster";
 import TrashSubscription from "./components/products/TrashSubscription";
 import G_Maps from "./components/google/G_Maps";
@@ -31,7 +32,7 @@ const screenTitle = useAppSelector(state => state.title)
 			  <Route path="/" element={<Home />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/signup" element={<Signup />} />
-				<Route path="/appointment" element={<ClassAppointments/>} />
+				<Route path="/appointment" element={<DKAppointment/>} />
 				<Route path="/dashboard" element={<Dashboard />} />
 				<Route path="/dumpster" element={<Dumpster />} />
 				<Route path="/res_trash_sub" element={<TrashSubscription/>} />
