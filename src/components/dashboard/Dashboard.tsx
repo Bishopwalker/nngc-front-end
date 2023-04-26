@@ -1,5 +1,4 @@
-import {Box, Grid, Typography, Button} from "@mui/material";
-import {transactions} from './transactions';
+import {Box, Button, Grid, Typography} from "@mui/material";
 import UserProfileSection from "./UserProfileSection";
 import AddressSection from "./AddressSection";
 import PaymentSection from "./PaymentSection";
@@ -9,7 +8,7 @@ import EmailPasswordSection from "./EmailPasswordSection";
 import React from "react";
 import {useAppSelector} from "../../redux/hooks";
 import {Link, useNavigate} from "react-router-dom";
-import { persistor } from '../../redux/store';
+import {persistor} from '../../redux/store';
 
 const Dashboard = () => {
 	const userInfo = useAppSelector(state => state.userInfo)

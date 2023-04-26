@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {Card, CardHeader, Divider, Typography} from "@mui/material";
 import {UserInfo} from "../../interfaces/UserInfo"
 

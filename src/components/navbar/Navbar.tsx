@@ -1,8 +1,7 @@
 import React, {useState} from "react";
-import {AppBar, Box, InputBase, Link, List, Menu, MenuItem, styled, Toolbar, Typography} from "@mui/material";
-import {Facebook, Instagram, Menu as MenuIcon, Twitter,} from "@mui/icons-material/";
+import {AppBar, Box, Link, List, Menu, MenuItem, styled, Toolbar, Typography} from "@mui/material";
+import {Facebook, Instagram, Twitter,} from "@mui/icons-material/";
 import {useAppSelector} from "../../redux/hooks";
-import { useNavigate } from 'react-router-dom';
 
 
 const Navbar = () => {
@@ -21,10 +20,7 @@ const Navbar = () => {
     display: "flex",
     gap: 30,
   });
-  const SearchBox = styled(Box)({
-    display: "flex",
-    gap: 5,
-  });
+
   const MenuItems = [
     { Name: "For Home", Link: "/" },
     { Name: "For Business", Link: "#" },
