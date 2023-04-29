@@ -20,6 +20,7 @@ import WizardSignup from "../../components/forms/WizardSignup";
 import axios from "axios";
 
 import Error from "../../components/forms/Error";
+import {Kayaking} from "@mui/icons-material";
 
 {/* @ts-ignore*/}
 
@@ -40,13 +41,14 @@ const Signup = () => {
         // @ts-ignore
         window.alert("Northern Neck Garbage Thanks you for signing up, Click Log in" + JSON.stringify(values, 0, 2))
 
-        await axios.post('http://localhost:5000/auth/nngc/registration', values)
+        await axios.post('https://ad5d-209-42-140-216.ngrok-free.app/auth/nngc/registration', values)
                 .then((response) => {
                 console.log(response)
                 setSent(true)
             })
                 .catch((error) => {
                 console.log(error)
+
             })
     }
 
