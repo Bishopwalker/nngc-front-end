@@ -12,6 +12,9 @@ import Dashboard from "./components/dashboard/Dashboard";
 // @ts-ignore
 import ClassAppointments from "./components/appointment/ClassAppointments.jsx";
 import Dumpster from "./components/products/Dumpster";
+import NotFound from "./components/notFound/NotFound";
+import VerifyEmail from "./components/verifyEmail/VerifyEmail";
+import DumpsterDK from "./components/products/DumpsterDK";
 import TrashSubscription from "./components/products/TrashSubscription";
 import G_Maps from "./components/google/G_Maps";
 import Encoded_GMaps from "./components/google/EncodedG_Maps";
@@ -34,11 +37,12 @@ const screenTitle = useAppSelector(state => state.title)
 				<Route path="/signup" element={<Signup />} />
 				<Route path="/appointment" element={<ClassAppointments/>} />
 				<Route path="/dashboard" element={<Dashboard />} />
-				<Route path="/dumpster/:productId" element={<Dumpster/>} />
+				<Route path="/dumpster/:productId" element={<DumpsterDK/>} />
 				<Route path="/res_trash_sub" element={<TrashSubscription/>} />
 				<Route path='/maps' element={<G_Maps/>} />
 				<Route path='/emaps' element={<Encoded_GMaps/>} />
-				<Route path="*" element={<h1>Not Found</h1>} />
+				<Route path="*" element={<NotFound />} />
+				<Route path="/verify" element={<VerifyEmail />} />
 
 			</Routes>
 
