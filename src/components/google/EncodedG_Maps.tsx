@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { GoogleMap, Polyline, useJsApiLoader, LoadScriptProps } from '@react-google-maps/api';
+import axios from "axios";
 
 const libraries: LoadScriptProps['libraries'] = ['geometry'];
 
@@ -22,25 +23,36 @@ const Encoded_GMaps: React.FC = () => {
     });
 
     const [path, setPath] = useState<google.maps.LatLng[]>([]);
-
+    const [instructions, setInstructions] = useState<string[]>([]);
     useEffect(() => {
-        if (isLoaded) {
-            const encodedPolyline = 'ogufFhb`rMzLpno@vqb@n_bArqWxd{@gl@f`e@_vc@dkgAol`@~gpAsyBdnuAciK~u^p}L...'; // Replace with your encoded polyline.
-            const decodedPath = window.google.maps.geometry.encoding.decodePath(encodedPolyline);
-            setPath(decodedPath);
-        }
+        // Fetch route data from your back-end service
+     const result= axios.get('http://localhost:5000/nngc/google/create-route-4-driver')  // Replace with the actual URL of your service
+            .then(response => response.data)
+            .then(data => {
+                const decodedPath = window.google.maps.geometry.encoding.decodePath(data.polyline);
+                setPath(decodedPath);
+                setInstructions(data.instructions);
+            });
+     result.then(r => console.log(r))
     }, [isLoaded]);
 
     if (!isLoaded) return <div>Loading maps</div>;
 
     return (
-        <GoogleMap
-            mapContainerStyle={mapContainerStyle}
-            zoom={10}
-            center={path[0]}
-        >
-            <Polyline path={path} options={options} />
-        </GoogleMap>
+        <div>
+            <GoogleMap
+                mapContainerStyle={mapContainerStyle}
+                zoom={10}
+                center={path[0]}
+            >
+                <Polyline path={path} options={options} />
+            </GoogleMap>
+            <div>
+                {instructions.map((instruction, index) => (
+                    <p key={index} dangerouslySetInnerHTML={{__html: instruction}} />
+                ))}
+            </div>
+        </div>
     );
 };
 
