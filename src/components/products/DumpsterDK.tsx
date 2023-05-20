@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Box, Typography, Card, CardMedia, CardContent, Button } from '@mui/material';
+import axios from "axios";
 
 type Product = {
   message: string;
@@ -10,16 +11,28 @@ type Product = {
 };
 
 const DumpsterDK = () => {
-  const product: Product = {
-    message: 'Product Message',
-    name: 'Construction/Commercial Dumpster Rental',
-    price: '100',
-    description: 'We offer construction/commercial dumpster rental for your home or business. We have a variety of trash cans to choose from.',
-    imageUrl: ['https://res.cloudinary.com/dfjg2mgcp/image/upload/v1679913219/nngc-low-res/services/ufsjyouqn9o3xuwxroio.png'],
+  const [product, setProduct] = useState<Product>();
+
+  const fetchProduct = async () => {
+    try {
+      const response = await axios.get(
+          `http://localhost:5000/auth/stripe/products/prod_NTzwClciqi6zCh`
+      );
+      setProduct(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
+  useEffect(() => {
+    fetchProduct().then(r => console.log(r));
+  }, []);
+
   return (
+
     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      {product && (
+          <>
       <Card sx={{ maxWidth: 500, boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2)', pt: '2rem', mt: '-8rem' }}>
         <CardMedia
           component="img"
@@ -44,6 +57,8 @@ const DumpsterDK = () => {
           </Box>
         </CardContent>
       </Card>
+        </>
+        )}
     </Box>
   );
 };

@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './style.css';
 import {sliders} from './sliders';
+import {Link} from "react-router-dom";
 
 function ImageSlider() {
   const [defaultImage, setDefaultImage] = useState({
@@ -53,6 +54,7 @@ function ImageSlider() {
         {sliders.map((item,index) => (
           <div className="sliderCard"
           key={index}
+
           >
 
               <img
