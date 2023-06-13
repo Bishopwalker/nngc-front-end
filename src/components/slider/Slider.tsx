@@ -49,28 +49,29 @@ function ImageSlider() {
   };
 
   return (
-    <div className="sliders">
-      <Slider {...settings}>
-        {sliders.map((item,index) => (
-          <div className="sliderCard"
-          key={index}
-
-          >
-
-              <img
-                src={
-                //@ts-ignore
-                  defaultImage[item.title] === item.title
-                    ? defaultImage.linkDefault
-                    : item.linkImg
-                }
-              />
-          </div>
-        ))}
-      </Slider>
-    </div>
+      <div className="sliders">
+        <Slider {...settings}>
+          {sliders.map((item,index) => (
+              <div className="sliderCard" key={index}>
+                <Link to={`/dumpster/${item.productId}`}>
+                  <img
+                      src={
+                        //@ts-ignore
+                        defaultImage[item.title] === item.title
+                            ? defaultImage.linkDefault
+                            : item.linkImg
+                      }
+                  />
+                </Link>
+              </div>
+          ))}
+        </Slider>
+      </div>
   );
 }
+
+
+
 
 export default ImageSlider;
 

@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import { Box, Typography, Card, CardMedia, CardContent, Button } from '@mui/material';
 import axios from "axios";
 
+import {useAppSelector} from "../../redux/hooks";
+
 type Product = {
   message: string;
   name: string;
@@ -13,6 +15,9 @@ type Product = {
 const DumpsterDK = () => {
   const [product, setProduct] = useState<Product>();
 
+  const userInfo = useAppSelector(state => state.userInfo);
+  console.log(userInfo);
+  console.log(product)
   const fetchProduct = async () => {
     try {
       const response = await axios.get(
@@ -27,6 +32,32 @@ const DumpsterDK = () => {
   useEffect(() => {
     fetchProduct().then(r => console.log(r));
   }, []);
+
+  const handleCheckout = async () => {
+    if(!product || !userInfo) {
+      console.error("No product or user info found");
+      return;
+    }
+console.log('checking out')
+    try {
+      const response = await axios.get(
+          `http://localhost:5000/auth/stripe/create-checkout-session_wid/dumpster/${userInfo.id}`, {
+            headers: {
+              'Authorization': `Bearer ${userInfo.token}`, // if user token is stored in userInfo object
+            }
+          }
+      );
+
+        const cleanUrl = response.data.replace('redirect:','');
+      if(response.data) {
+        window.location.href = cleanUrl; // redirects the user to the URL from the response
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
 
   return (
 
@@ -51,7 +82,11 @@ const DumpsterDK = () => {
             Price: {product.price} USD
           </Typography>
           <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '2rem' }}>
-            <Button variant="contained" color="primary" sx={{ bgcolor: '#2C3E50', '&:hover': { bgcolor: '#2C3E50' } }}>
+            <Button
+                variant="contained"
+                color="primary"
+                onClick={handleCheckout}
+                sx={{ bgcolor: '#2C3E50', '&:hover': { bgcolor: '#2C3E50' } }}>
               Get Service
             </Button>
           </Box>
