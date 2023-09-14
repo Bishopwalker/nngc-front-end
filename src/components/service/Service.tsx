@@ -3,15 +3,17 @@ import React, {useState} from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import './style.css';
+import {Link, useNavigate} from "react-router-dom";
 import {services} from './services';
+import {useAppSelector} from "../../redux/hooks";
 
 function Service() {
   const [defaultImage, setDefaultImage] = useState({
     linkDefault:"",
-
-
   });
+  const userInfo = useAppSelector(state => state.userInfo)
+  const navigate = useNavigate();
+
   const settings = {
     dots: true,
     infinite: true,
@@ -49,15 +51,19 @@ function Service() {
     ],
   };
 
-
+console.log(userInfo)
   return (
     <div className="services">
       <Slider {...settings}>
         {services.map((item,index) => (
+
           <div
               key={index}
-              className="card">
+              className="card"
+              onClick={() => navigate(`/dumpster/${item.productId}`)}
+          >
             <div className="card-top">
+              
               <img
 
                 src={

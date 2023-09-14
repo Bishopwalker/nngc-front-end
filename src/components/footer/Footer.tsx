@@ -14,10 +14,10 @@ const Footer = () => {
 					CONTACT US
 				</Typography>
 				<Typography variant="body1" textAlign="center" pb={1}>
-					Email: info@northernneckgarbage.com
+					Email: bishop@northernneckgarbage.com
 				</Typography>
 				<Typography variant="body1" textAlign="center" pb={1}>
-					Phone: 804-435-1234
+					Phone: 804-220-0029
 				</Typography>
 				<Typography variant="body1" textAlign="center">
 					Address: 164 Cellar Haven Ln, Lottsburg, VA 22511

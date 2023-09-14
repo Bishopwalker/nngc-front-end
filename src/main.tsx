@@ -6,6 +6,7 @@ import {PersistGate} from 'redux-persist/integration/react';
 import {persistor, store} from './redux/store';
 import {BrowserRouter} from "react-router-dom";
 
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <Provider store={store}>
       <BrowserRouter>

@@ -6,43 +6,103 @@ import interactionPlugin from "@fullcalendar/interaction";
 import "./DKAppointment.css";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
-import {Button, Card, CardHeader, Divider, MenuItem, Select, SelectChangeEvent, TextField} from "@mui/material";
+import {Button, Card, CardHeader, Divider, MenuItem, Select, TextField,} from "@mui/material";
+import {useAppSelector} from "../../redux/hooks";
+import axios from "axios";
+import moment from 'moment';
+import {Link} from "react-router-dom";
 
 const DKAppointment = () => {
-    const [selectedDate, setSelectedDate] = useState('');
+    const userInfo = useAppSelector(state => state.userInfo)
+
+    const [selectedDate, setSelectedDate] = useState<Date | null>(null);
     const [modalOpen, setModalOpen] = useState(false);
     const [modalOpenDisabledDates, setModalOpenDisabledDates] = useState(false);
 
     const [service, setService] = useState("");
     const [time, setTime] = useState("");
 
-    const handleServiceChange = (event:SelectChangeEvent<string>) => {
-        setService(event.target.value );
-    };
+    const handleServiceChange =  (event: { target: { value: any; }; }) => {
+        setService(event.target.value);
+    }
 
-    const handleTimeChange = (event:SelectChangeEvent<string>) => {
-        setTime(event.target.value  );
-    };
+    const handleTimeChange =  (event: { target: { value: any; }; }) => {
+        setTime(event.target.value);
+    }
 
     const [disabledDates] = useState(["2023-04-12", "2023-04-13"]);
 
-    const dateClickHandler = (info: { dateStr: React.SetStateAction<string>; }) => {
-        if (disabledDates.includes(info.dateStr as string)) {
-            setSelectedDate(info.dateStr);
-            setModalOpenDisabledDates(true);
+    const dateClickHandler = (info: { dateStr: string | React.SetStateAction<Date | null>; }) => {
+        // Step 1: Check if user is logged in
+        if (userInfo && userInfo.id) {
+            // User is logged in, proceed as usual
+            if (disabledDates.includes(info.dateStr as string)) {
+                setSelectedDate(info.dateStr as any);
+                setModalOpenDisabledDates(true);
+            } else {
+                setSelectedDate(info.dateStr as any);
+                setModalOpen(true);
+            }
         } else {
-            setSelectedDate(info.dateStr);
-            setModalOpen(true);
+            // User is not logged in, prompt them to go to login page
+            alert("Please log in to book an appointment. Redirecting to login page...");
+            window.location.href = "/login"; // Redirect to login page
         }
     };
+
+
+    const submitAppointment = async () => {
+        try {
+            // Step 1: Verify the API Endpoint
+            const apiEndpoint = "http://localhost:5000/api/appointments/create-appointment"; // Make sure this matches with your Postman endpoint
+
+            // Step 2: Format the date and time to match the backend's expected format
+            const formattedDate = moment(selectedDate).format("DD-MM-YYYY");
+            const formattedTime = moment(time, ["h:mm A"]).format("HH:mm:ss");
+
+            // Step 3: Update the JSON payload
+            const myJSON = {
+                customer: userInfo.id,  // Assuming userInfo.id is the customer ID
+                id:userInfo.id,
+                appointmentDate: formattedDate,
+                appointmentTime: formattedTime,
+                appointmentType: service
+            };
+
+            // Log the payload to the console to ensure it's correctly formatted
+            console.log("Sending payload:", myJSON);
+
+            // Step 4: Convert the JavaScript object to a JSON string
+            const values = JSON.stringify(myJSON);
+
+            // Step 5: Send the updated JSON payload to the backend
+            const response = await axios.post(apiEndpoint, values, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            // Log the response
+            console.log("Backend response:", response);
+        } catch (error) {
+            // Log the error
+            console.error("An error occurred:", error);
+        }
+    };
+
+// Run the function to test
+
+
+
 
     const handleBookSubmit = () => {
         console.log("Selected Date: " + selectedDate);
         console.log("Service: " + service);
         console.log("Time: " + time);
-
+        submitAppointment()
         handleModalClose();
-    };
+    }
+
 
     const handleModalClose = () => {
         setModalOpen(false);
@@ -59,10 +119,20 @@ const DKAppointment = () => {
             backgroundColor: "#ccc",
         };
     });
+    console.log(userInfo)
+
 
     return (
         <div style={{ maxWidth: "800px", margin: "30px auto 50px" }}>
-            <h1 style={{textAlign: 'center', paddingLeft: "100px", paddingBottom: "25px"}}> Book our Service </h1>
+            {userInfo && userInfo.id ? (  // Check if userInfo.id exists
+                <h1 style={{ textAlign: 'center', paddingLeft: "100px", paddingBottom: "25px" }}>
+                    Book our Service
+                </h1>
+            ) : (
+                <h1 style={{ textAlign: 'center', paddingLeft: "100px", paddingBottom: "25px" }}>
+                    <Link to="/login">Click here to Login or Create an account</Link>
+                </h1>
+            )}
             <Fullcalendar
                 plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
                 initialView={"dayGridMonth"}
@@ -118,9 +188,7 @@ const DKAppointment = () => {
                         value={selectedDate}
                         type="text"
                         fullWidth
-                        InputProps={{
-                            readOnly: true,
-                        }}
+
                     />
                     <Select
                         sx={{
@@ -141,10 +209,10 @@ const DKAppointment = () => {
                         <MenuItem value="recycling-pickup">Recycling Pickup</MenuItem>
                         <MenuItem value="yard-waste-pickup">Yard Waste Pickup</MenuItem>
                         <MenuItem value="roll-off-dumpster-rental">
-                            Roll Off Dumpster Rental
+                            Residential Junk Removal
                         </MenuItem>
                         <MenuItem value="construction-commercial-dumpster-rental">
-                            Construction/Commercial Dumpster Rental
+                            Business/Commercial Junk Removal
                         </MenuItem>
                     </Select>
                     <Select
@@ -157,13 +225,17 @@ const DKAppointment = () => {
                         <MenuItem value="time" disabled>
                             Select Time
                         </MenuItem>
-                        <MenuItem value="6am">6 AM</MenuItem>
-                        <MenuItem value="7am">7 AM</MenuItem>
                         <MenuItem value="8am">8 AM</MenuItem>
                         <MenuItem value="9am">9 AM</MenuItem>
                         <MenuItem value="10am">10 AM</MenuItem>
                         <MenuItem value="11am">11 AM</MenuItem>
-                        <MenuItem value="12pm">12 PM</MenuItem>
+                        <MenuItem value="12am">12 PM</MenuItem>
+                        <MenuItem value="1pm">1 PM</MenuItem>
+                        <MenuItem value="2pm">2 PM</MenuItem>
+                        <MenuItem value="3pm">3 PM</MenuItem>
+                        <MenuItem value="4pm">4 PM</MenuItem>
+                        <MenuItem value="5pm">5 PM</MenuItem>
+                        <MenuItem value="6pm">6 PM</MenuItem>
                     </Select>
                     <Typography
                         id="modal-title"
@@ -222,9 +294,7 @@ const DKAppointment = () => {
                         value={selectedDate}
                         type="text"
                         fullWidth
-                        InputProps={{
-                            readOnly: true,
-                        }}
+
                     />
                     <Select
                         sx={{
@@ -241,15 +311,15 @@ const DKAppointment = () => {
                             Residential Trash Pickup
                         </MenuItem>
                         <MenuItem value="commercial-trash-pickup">
-                            Commercial and Farm Trash Pickup
+                            Commercial Trash Pickup
                         </MenuItem>
                         <MenuItem value="recycling-pickup">Recycling Pickup</MenuItem>
                         <MenuItem value="yard-waste-pickup">Yard Waste Pickup</MenuItem>
                         <MenuItem value="roll-off-dumpster-rental">
-                            Roll Off Dumpster Rental
+                            Residential Junk Removal
                         </MenuItem>
                         <MenuItem value="construction-commercial-dumpster-rental">
-                            Construction/Commercial Dumpster Rental
+                            Business/Commercial Junk Removal
                         </MenuItem>
                     </Select>
                     <Select

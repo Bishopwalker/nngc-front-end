@@ -70,7 +70,7 @@ const [address, setAddress] = useState({
                         color: "black",
                     }}
                 >
-                    {userInfo.address.line1}
+                    {userInfo.address.line1.toUpperCase()}
                 </Typography>
                 <Typography
                     variant="h6"
@@ -97,19 +97,9 @@ const [address, setAddress] = useState({
                         color: "black",
                     }}
                 >
-                    {userInfo.address.city} {userInfo.address.state}{" "}
+                    {userInfo.address.city.toUpperCase()} {userInfo.address.state.toUpperCase()}{" "}
                     {userInfo.address.zipCode}
                 </Typography>
-                <Typography
-                    variant="h6"
-                    sx={{
-                        pt: 1,
-                        pb: 2,
-                        textAlign: "center",
-                        fontWeight: "normal",
-                        fontSize: 24,
-                        color: "black",
-                    }}>Geolocation: {userInfo.geoLocation}</Typography>
 
             </Card>
             <Modal

@@ -18,6 +18,7 @@ export interface UserInfo {
     id: string;
     fullName: string;
     email: string;
+    password?: string;
     phoneNumber: string;
     address: Address;
     geoLocation: string;
@@ -29,5 +30,8 @@ export interface UserInfo {
     loginAttemptCount: number;
     token: string;
     accountPage: string;
+<<<<<<< HEAD
     password?: string;
+=======
+>>>>>>> Google-Maps-Action
 }

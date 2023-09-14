@@ -17,7 +17,10 @@ const center = {
 
 function G_Maps() {
     const user = useAppSelector(state => state.userInfo);
+
 const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string;
+
+
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
         googleMapsApiKey: apiKey

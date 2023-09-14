@@ -1,9 +1,10 @@
 import {Avatar, Box, Card, CardContent, Grid, Typography} from "@mui/material";
 import React from "react";
+import Bishop from '/Bishop-e3dcf521.jpg';
 
 const teamMembers = [
-  { name: 'Bishop Walker', designation: 'Owner/CEO', image: 'https://res.cloudinary.com/dfjg2mgcp/image/upload/v1679913995/nngc-low-res/team-members/dtyxqlljbdpfqms1ybsc.png' },
-  { name: 'Chase Honaker', designation: 'Chief Operations Officer', image: 'https://res.cloudinary.com/dfjg2mgcp/image/upload/v1679913995/nngc-low-res/team-members/z8h1vbmnqmlodbk5p6dh.png' },
+  { name: 'Bishop Walker', designation: 'Owner/CEO', image: Bishop },
+
 ];
 
 const Team = () => {
@@ -15,7 +16,7 @@ const Team = () => {
 		  letterSpacing: '1px',
 		  textTransform: 'uppercase'
 		}}>
-		  Team Members
+		  Founder
 		</Typography>
 <Grid container spacing={2} alignItems="center" justifyContent="center" mt={2} mb={4}>
   {teamMembers.map((member) => (

@@ -1,5 +1,5 @@
 import * as React from "react";
-import store from "../redux/store";
+import {store} from "../redux/store";
 import {useAppSelector} from "../redux/hooks";
 import {Navigate, Outlet, useLocation} from "react-router-dom";
 

@@ -15,7 +15,7 @@ function ImageSlider() {
     dots: true,
     infinite: true,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 100000,
     speed: 1000,
     slidesToShow: 1,
     slidesToScroll: 1,

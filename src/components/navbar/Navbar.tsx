@@ -1,97 +1,143 @@
-import React, {useState} from "react";
-import {AppBar, Box, Link, List, Menu, MenuItem, styled, Toolbar, Typography} from "@mui/material";
-import {Facebook, Instagram, Twitter,} from "@mui/icons-material/";
-import {useAppSelector} from "../../redux/hooks";
-
+import React, { useState } from "react";
+import {
+  AppBar,
+  Box,
+  Drawer,
+  IconButton,
+  Link,
+  List,
+  ListItem,
+  ListItemText,
+  Menu,
+  MenuItem,
+  styled,
+  Toolbar,
+  Typography,
+} from "@mui/material";
+import MenuIcon from '@mui/icons-material/Menu';
+import { Facebook, Instagram, Twitter } from "@mui/icons-material/";
+import { useAppSelector } from "../../redux/hooks";
 
 const Navbar = () => {
-
-  const user = useAppSelector(state => state.userInfo);
+  const user = useAppSelector((state) => state.userInfo);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false); // State for mobile drawer
+  const [open, setOpen] = useState(false);
 
   const StyledToolbar = styled(Toolbar)({
     display: "flex",
     justifyContent: "space-between",
   });
+
   const SocialBox = styled(Box)({
     display: "flex",
     gap: 10,
   });
+
   const MenuBox = styled(List)({
     display: "flex",
-    gap: 30,
+    gap: 50,
   });
 
   const MenuItems = [
-    { Name: "For Home", Link: "/" },
-    { Name: "For Business", Link: "#" },
-    { Name: "Services", Link: "#" },
-    { Name: "Our Story", Link: "#" },
-    { Name: "View Schedule", Link: user.id ? "/appointment" : "/login" },
+    { Name: "Services", Link: "/services" },
+    { Name: "Our Story", Link: "/story" },
+    { Name: "View Schedule", Link: "/appointment" },
     { Name: "My Account", Link: user.id ? "/dashboard" : "/login" },
-    { Name: "Support NNK Christian School", Link: "#" },
+    { Name: "Blog/News", Link: '/blog' },
   ];
-  const [open, SetOpen] = useState(false);
+
   return (
-    <AppBar sx={{ background: "#2c3e50" }} position={"static"}>
-      <StyledToolbar>
-        <SocialBox>
-          <Facebook />
-          <Instagram />
-          <Twitter />
-        </SocialBox>
-        <MenuBox sx={{ display: { xs: "none", sm: "none", md: "flex" } }}>
+      <AppBar sx={{ background: "#2c3e50" }} position={"static"}>
+        <StyledToolbar>
+          <SocialBox>
+            <Facebook />
+            <Instagram />
+            <Twitter />
+          </SocialBox>
 
-          {MenuItems.map((item,index) => (
+          {/* IconButton for mobile view */}
+          <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              onClick={() => setMobileMenuOpen(true)}
+              sx={{ display: { md: "none" } }}
+          >
+            <MenuIcon />
+          </IconButton>
 
-            <Typography
-                key={index}
-              sx={{
-                cursor: "pointer",
-                fontSize: "14px",
-              }}
+          {/* Menu for desktop view */}
+          <MenuBox sx={{ display: { xs: "none", sm: "none", md: "flex" } }}>
+            {MenuItems.map((item, index) => (
+                <Typography
+                    key={index}
+                    sx={{
+                      cursor: "pointer",
+                      fontSize: "24px",
+                      padding: "0 15px"
+                    }}
+                >
+                  <Link href={item.Link}>
+                    {item.Name}
+                  </Link>
+                </Typography>
+            ))}
+          </MenuBox>
+        </StyledToolbar>
 
-            >
-              <Link href={item.Link} >
-              {item.Name}
-              </Link>
-            </Typography>
+        {/* Drawer for mobile view */}
+        <Drawer
+            anchor="left"
+            open={mobileMenuOpen}
+            onClose={() => setMobileMenuOpen(false)}
+        >
+          <Box sx={{ width: 250 }}>
+            <List>
+              {MenuItems.map((item, index) => (
+                  <ListItem
+                      key={index}
+                      onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <Link href={item.Link}>
+                    <ListItemText primary={item.Name} />
+                    </Link>
+                  </ListItem>
+              ))}
+            </List>
+          </Box>
+        </Drawer>
 
-          ))}
-
-        </MenuBox>
-
-      </StyledToolbar>
-      <Menu
-        id="demo-positioned-menu"
-        aria-labelledby="demo-positioned-button"
-        open={open}
-        onClose={() => SetOpen(!open)}
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "left",
-        }}
-      >
-        <Box sx={{ width: 350, height: "90vh" }}>
-          {MenuItems.map((item,index) => (
-            <MenuItem
-                key={index}
-              sx={{
-                cursor: "pointer",
-                fontSize: "14px",
-              }}
-            >
-              {item.Name}
-            </MenuItem>
-          ))}
-        </Box>
-      </Menu>
-    </AppBar>
+        {/* Existing Menu component */}
+        <Menu
+            id="demo-positioned-menu"
+            aria-labelledby="demo-positioned-button"
+            open={open}
+            onClose={() => setOpen(!open)}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "left",
+            }}
+        >
+          <Box sx={{ width: 350, height: "90vh" }}>
+            {MenuItems.map((item, index) => (
+                <MenuItem
+                    key={index}
+                    sx={{
+                      cursor: "pointer",
+                      fontSize: "14px",
+                    }}
+                >
+                  {item.Name}
+                </MenuItem>
+            ))}
+          </Box>
+        </Menu>
+      </AppBar>
   );
 };
 
 export default Navbar;
-

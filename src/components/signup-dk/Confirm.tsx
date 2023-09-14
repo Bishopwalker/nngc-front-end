@@ -34,7 +34,7 @@ export default function Confirm() {
 	delete jsonObj.agreenemt;
 	 delete jsonObj.date;
 	//console.log(JSON.stringify(jsonObj, null, 2));
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     // Remove unwanted properties from formValue object
     let form = {}
 
@@ -56,11 +56,11 @@ export default function Confirm() {
       jsonObject.zipCode = parseInt(jsonObject.zipCode, 10); // or Number(jsonObject.zipCode);
       const updatedJsonString = JSON.stringify(jsonObject);
 console.log(updatedJsonString)
-
-      axios.post('http://localhost:5000/auth/nngc/registration',jsonObject, {
-          headers: {
-              'Content-Type': 'application/json',
-          },
+console.log(jsonObject, 'jsonObject')
+    await  axios.post('http://localhost:5000/auth/nngc/registration',updatedJsonString, {
+          // headers: {
+          //     'Content-Type': 'application/json',
+          // },
       })
           .then((response) => {
               console.log('response',response)

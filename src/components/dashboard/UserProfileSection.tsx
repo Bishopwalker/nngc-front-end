@@ -1,11 +1,13 @@
 import React, {useState} from "react";
 import {Button, Card, CardHeader, Divider, IconButton, Modal, TextField, Typography} from "@mui/material";
 import {Edit} from "@mui/icons-material";
-import {useAppSelector} from "../../redux/hooks";
+import {useAppDispatch, useAppSelector} from "../../redux/hooks";
+import {clearUserInfo} from "../../redux/userLogInfoSlice";
 
 
 const UserProfileSection = ( ) => {
-    const userInfo = useAppSelector(state => state.userInfo)
+    const userInfo = useAppSelector((state) => state.userInfo);
+    const dispatch = useAppDispatch(); // Get the dispatch function
 
     const [edit, setEdit] = useState(false);
   const [name, setName] = useState(userInfo.fullName);
@@ -37,7 +39,13 @@ const UserProfileSection = ( ) => {
 	handleEditClose();
   }
 
-  return (
+    const handleLogout = () => {
+        dispatch(clearUserInfo()); // Dispatch the clearUserInfo action to clear user data
+        // Here, you can also perform additional tasks like redirecting the user to the login page
+    };
+
+
+    return (
     <Card sx={{ mb: 2 }}>
       <CardHeader
         title={"Personal Identification"}
@@ -51,9 +59,14 @@ const UserProfileSection = ( ) => {
           borderBottom: "1px solid #ddd",
         }}
         action={
-          <IconButton aria-label="edit" onClick={handleEditClick}>
-            <Edit sx={{ color: "#26C9FF" }} />
-          </IconButton>
+            <>
+                <IconButton aria-label="edit" onClick={handleEditClick}>
+                    <Edit sx={{ color: "#26C9FF" }} />
+                </IconButton>
+                <Button variant="contained" color="secondary" onClick={handleLogout}>
+                    Logout
+                </Button>
+            </>
         }
       />
       <Divider />

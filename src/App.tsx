@@ -2,7 +2,7 @@ import React from 'react'
 import {Route, Routes} from "react-router-dom";
 import HeaderTop from "./components/headerTop/HeaderTop";
 import Navbar from "./components/navbar/Navbar";
-import NavBottom from "./components/navBottom/NavBottom";
+
 import Home from "./components/home/Home";
 import Footer from "./components/footer/Footer";
 import {useAppSelector} from "./redux/hooks";
@@ -19,6 +19,15 @@ import TrashSubscription from "./components/products/TrashSubscription";
 import G_Maps from "./components/google/G_Maps";
 import Encoded_GMaps from "./components/google/EncodedG_Maps";
 
+import NavBottom from "./components/navBottom/NavBottom";
+// @ts-ignore
+import Blog from "./components/blog/Blog";
+import Service from "./components/service/Service";
+import OurStory from "./components/ourStory/OurStory.jsx";
+import { PersistGate } from 'redux-persist/integration/react';
+import SuccessPage from "./components/checkout/SuccessPage";
+
+
 function App() {
 const screenTitle = useAppSelector(state => state.title)
 
@@ -27,6 +36,7 @@ const screenTitle = useAppSelector(state => state.title)
 	}, [screenTitle])
   return (
     <div className="App">
+
 		<HeaderTop />
 		<Navbar />
 		<NavBottom />
@@ -41,8 +51,16 @@ const screenTitle = useAppSelector(state => state.title)
 				<Route path="/res_trash_sub" element={<TrashSubscription/>} />
 				<Route path='/maps' element={<G_Maps/>} />
 				<Route path='/emaps' element={<Encoded_GMaps/>} />
+
 				<Route path="*" element={<NotFound />} />
 				<Route path="/verify" element={<VerifyEmail />} />
+
+				<Route path='/blog' element={<Blog/>} />
+				<Route path='services' element={<Service/>} />
+				<Route path='story' element={<OurStory/>} />
+				<Route path='/success' element={<SuccessPage/>} />
+				<Route path="*" element={<h1>Not Found</h1>} />
+
 
 			</Routes>
 
