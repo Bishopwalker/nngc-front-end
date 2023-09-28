@@ -57,7 +57,7 @@ export default function Confirm() {
       const updatedJsonString = JSON.stringify(jsonObject);
 console.log(updatedJsonString)
 console.log(jsonObject, 'jsonObject')
-    await  axios.post('http://localhost:5000/auth/nngc/registration',updatedJsonString, {
+    await  axios.post('http://3.85.8.238:5000/auth/nngc/registration',updatedJsonString, {
           // headers: {
           //     'Content-Type': 'application/json',
           // },
@@ -76,7 +76,7 @@ console.log(jsonObject, 'jsonObject')
           })
 
     //
-    //   axios.post('http://localhost:5000/auth/nngc/registration', updatedJsonString)
+    //   axios.post('http://3.85.8.238:5000/auth/nngc/registration', updatedJsonString)
 	// 	.then((response) => {
 	// 	console.log('response',response)
 	// 	dispatch(changeUserLogInfo(response.data.customerDTO))

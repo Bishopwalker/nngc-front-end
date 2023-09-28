@@ -20,7 +20,7 @@ const Dumpster  = ( ) => {
     const fetchProduct = async () => {
         try {
             const response = await axios.get(
-                `http://localhost:5000/auth/stripe/products/prod_NTzwClciqi6zCh`
+                `http://3.85.8.238:5000/auth/stripe/products/prod_NTzwClciqi6zCh`
             );
             setProduct(response.data);
         } catch (error) {
@@ -35,9 +35,10 @@ console.log(userInfo)
 
 
     const purchase_Item = async () => {
+    console.log('purchase_Item',userInfo.id)
         try {
             const response = await axios.get(
-                `http://localhost:5000/auth/stripe/create-checkout-session_wid/res_trash_sub/${userInfo.id}`
+                `http://3.85.8.238:5000/auth/stripe/create-checkout-session_wid/res_trash_sub/${userInfo.id}`
             );
 
             // Step 1: Check if response.data starts with "redirect:"

@@ -30,8 +30,6 @@ export interface UserInfo {
     loginAttemptCount: number;
     token: string;
     accountPage: string;
-<<<<<<< HEAD
-    password?: string;
-=======
->>>>>>> Google-Maps-Action
+
+
 }
