@@ -57,11 +57,15 @@ export default function Confirm() {
       const updatedJsonString = JSON.stringify(jsonObject);
 console.log(updatedJsonString)
 console.log(jsonObject, 'jsonObject')
-    await  axios.post('http://3.85.8.238:5000/auth/nngc/registration',updatedJsonString, {
-          // headers: {
-          //     'Content-Type': 'application/json',
-          // },
-      })
+    await axios.post(
+        'http://3.85.8.238:5000/auth/nngc/registration',
+        updatedJsonString,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+    )
           .then((response) => {
               console.log('response',response)
               dispatch(changeUserLogInfo(response.data.customerDTO))
@@ -75,20 +79,6 @@ console.log(jsonObject, 'jsonObject')
               console.log(error)
           })
 
-    //
-    //   axios.post('http://3.85.8.238:5000/auth/nngc/registration', updatedJsonString)
-	// 	.then((response) => {
-	// 	console.log('response',response)
-	// 	dispatch(changeUserLogInfo(response.data.customerDTO))
-	// 	dispatch(addToken({token: response.data.token}))
-	// 	if(response.data.token) {
-	// 		console.log(response.data.token);
-	// 	}
-	// 	setIsLoggedIn(true);
-	// })
-	// .catch((error) => {
-	// 	console.log(error)
-	// })
 
   }
 
@@ -161,3 +151,17 @@ console.log(jsonObject, 'jsonObject')
     </>
   )
 }
+//
+//   axios.post('http://3.85.8.238:5000/auth/nngc/registration', updatedJsonString)
+// 	.then((response) => {
+// 	console.log('response',response)
+// 	dispatch(changeUserLogInfo(response.data.customerDTO))
+// 	dispatch(addToken({token: response.data.token}))
+// 	if(response.data.token) {
+// 		console.log(response.data.token);
+// 	}
+// 	setIsLoggedIn(true);
+// })
+// .catch((error) => {
+// 	console.log(error)
+// })
