@@ -39,7 +39,7 @@ const purchase_Item = async () => {
 
             try {
                 const response = await axios.post(
-                    `http://3.85.8.238:5000/auth/stripe/create-checkout-session_wid/res_trash_sub/{id}`
+                    `http://3.85.8.238:5000/auth/stripe/create-checkout-session_wid/res_sub/{id}`
                 );
             //    console.log(response.data);
             } catch (error) {
