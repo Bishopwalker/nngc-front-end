@@ -45,7 +45,7 @@ function App() {
 				<Route path="/appointment" element={<DKAppointment/>} />
 				<Route path="/dashboard" element={<Dashboard />} />
 				<Route path="/dumpster/:productId" element={<Dumpster/>} />
-				<Route path="/res_trash_sub" element={<TrashSubscription/>} />
+				<Route path="/res_sub" element={<TrashSubscription/>} />
 				<Route path='/maps' element={<G_Maps/>} />
 				<Route path='/emaps' element={<Encoded_GMaps/>} />
 				<Route path='/blog' element={<Blog/>} />

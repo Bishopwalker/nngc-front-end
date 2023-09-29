@@ -38,7 +38,7 @@ const Dumpster  = ( ) => {
     console.log('purchase_Item',userInfo.id)
         try {
             const response = await axios.get(
-                `http://3.85.8.238:5000/auth/stripe/create-checkout-session_wid/res_trash_sub/${userInfo.id}`
+                `http://3.85.8.238:5000/auth/stripe/create-checkout-session_wid/res_sub/${userInfo.id}`
             );
 
             // Step 1: Check if response.data starts with "redirect:"
