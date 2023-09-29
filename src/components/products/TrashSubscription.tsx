@@ -33,7 +33,7 @@ const TrashSubscription  = ( ) => {
         fetchProduct().then(r => console.log(r));
     }, []);
     const userInfo = useAppSelector(state => state.userInfo)
-    console.log(userInfo)
+    //console.log(userInfo)
 
 const purchase_Item = async () => {
 
@@ -41,13 +41,13 @@ const purchase_Item = async () => {
                 const response = await axios.post(
                     `http://3.85.8.238:5000/auth/stripe/create-checkout-session_wid/res_trash_sub/{id}`
                 );
-                console.log(response.data);
+            //    console.log(response.data);
             } catch (error) {
                 console.log(error);
 
         }
 }
-console.log(userInfo)
+//console.log(userInfo)
     return (
         <Box display="flex" flexDirection="column" alignItems="center">
             {userInfo.id &&  <Button onClick={purchase_Item}>Checkout</Button>}

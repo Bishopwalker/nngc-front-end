@@ -31,7 +31,7 @@ const Dumpster  = ( ) => {
     useEffect(() => {
         fetchProduct().then(r => console.log(r));
     }, []);
-console.log(userInfo)
+//console.log(userInfo)
 
 
     const purchase_Item = async () => {
@@ -59,7 +59,7 @@ console.log(userInfo)
     };
 
 
-    console.log(userInfo)
+   // console.log(userInfo)
     return (
         <Box display="flex" flexDirection="column" alignItems="center">
             {userInfo.id &&  <Button onClick={purchase_Item}>Checkout</Button>}

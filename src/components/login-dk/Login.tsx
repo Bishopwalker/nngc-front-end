@@ -28,18 +28,18 @@ const Login = () => {
 		  password
 		};
 		const values = JSON.stringify(myJSON);
-		console.log(values);
+		//console.log(values);
 	await axios.post('http://3.85.8.238:5000/auth/nngc/authenticate', values,{
 		headers: {
 			'Content-Type': 'application/json',
 		},
 		})
 			.then((response) => {
-			console.log('response',response)
+			//console.log('response',response)
 			dispatch(changeUserLogInfo(response.data.customerDTO))
 			dispatch(addToken({token: response.data.token}))
 	 		if(response.data.token) {
-				console.log(response.data.token);
+			//	console.log(response.data.token);
  			}
 			setIsLoggedIn(true);
 		})
@@ -89,7 +89,7 @@ const Login = () => {
 									<Typography variant="body2" color="error" mb={2}>
 										{error}
 									</Typography>
-								)}ya
+								)}
 								<Button
 									type="submit"
 									variant="contained"

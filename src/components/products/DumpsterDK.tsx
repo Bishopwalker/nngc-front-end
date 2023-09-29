@@ -16,7 +16,7 @@ const DumpsterDK = () => {
   const [product, setProduct] = useState<Product>();
 
   const userInfo = useAppSelector(state => state.userInfo);
-  console.log(userInfo);
+  //console.log(userInfo);
   console.log(product)
   const fetchProduct = async () => {
     try {

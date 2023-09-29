@@ -13,7 +13,7 @@ const [geocodeData, setGeocodeData] = useState({})
     const fetchGeoLocationData = async ( ) => {
         const result = await axios.get(`http://3.85.8.238:5000/nngc/geocoding/${userInfo.id}`)
         setGeocodeData(result.data)
-        console.log(result.data)
+        //console.log(result.data)
     }
 React.useEffect(()=>{
     if(userInfo.id != null){

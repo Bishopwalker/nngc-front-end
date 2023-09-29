@@ -6,12 +6,18 @@ import "slick-carousel/slick/slick-theme.css";
 import {Link, useNavigate} from "react-router-dom";
 import {services} from './services';
 import {useAppSelector} from "../../redux/hooks";
+import {Box} from "@mui/material";
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 function Service() {
   const [defaultImage, setDefaultImage] = useState({
     linkDefault:"",
   });
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const userInfo = useAppSelector(state => state.userInfo)
+
   const navigate = useNavigate();
 
   const settings = {
@@ -51,38 +57,41 @@ function Service() {
     ],
   };
 
-console.log(userInfo)
+
   return (
-    <div className="services">
-      <Slider {...settings}>
-        {services.map((item,index) => (
-
-          <div
-              key={index}
-              className="card"
-              onClick={() => navigate(`/dumpster/${item.productId}`)}
-          >
-            <div className="card-top">
-              
-              <img
-
-                src={
-                  // @ts-ignore
-                  defaultImage[item.title] === item.title
-                    ? defaultImage.linkDefault
-                    : item.linkImg
-                }
-                alt={item.title}
-              />
-              <h1>{item.title}</h1>
-            </div>
-            <div className="card-bottom">
-              <span className="category">{item.services}</span>
-            </div>
-          </div>
-        ))}
-      </Slider>
-    </div>
+      <Box className="services">
+        <Slider {...settings}>
+          {services.map((item, index) => (
+              <div
+                  key={index}
+                  className="card"
+                  onClick={() => navigate(`/dumpster/${item.productId}`)}
+              >
+                <div className="card-top">
+                  <Box
+                      width={isMobile ? '100%' : 'auto'}
+                      height={isMobile ? 'auto' : 'auto'}
+                  >
+                    <img
+                        src={
+                          // @ts-ignore
+                          defaultImage[item.title] === item.title
+                              ? defaultImage.linkDefault
+                              : item.linkImg
+                        }
+                        alt={item.title}
+                        style={{ maxWidth: '100%', height: 'auto' }}
+                    />
+                  </Box>
+                  <h1>{item.title}</h1>
+                </div>
+                <div className="card-bottom">
+                  <span className="category">{item.services}</span>
+                </div>
+              </div>
+          ))}
+        </Slider>
+      </Box>
   );
 }
 

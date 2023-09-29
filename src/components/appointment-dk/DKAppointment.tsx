@@ -119,7 +119,7 @@ const DKAppointment = () => {
             backgroundColor: "#ccc",
         };
     });
-    console.log(userInfo)
+    //console.log(userInfo)
 
 
     return (

@@ -60,7 +60,7 @@ export const updateToken = (token: any) => async (dispatch: any) => {
     await axios.post(`http://3.85.8.238:5000/auth/nngc/confirm?${token}`)
         .then((response) => {
             dispatch(updateToken(response.data.customer));
-            console.log(response.data.customer);
+         //   console.log(response.data.customer);
         })
         .catch((error) => {
             console.log(error);

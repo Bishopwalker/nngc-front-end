@@ -23,6 +23,7 @@ import Service from "./components/service/Service";
 import OurStory from "./components/ourStory/OurStory.jsx";
 import { PersistGate } from 'redux-persist/integration/react';
 import SuccessPage from "./components/checkout/SuccessPage";
+import {Box} from "@mui/material";
 
 function App() {
 	const screenTitle = useAppSelector(state => state.title)
@@ -54,7 +55,9 @@ function App() {
 				<Route path="*" element={<h1>Not Found</h1>} />
 
 			</Routes>
-
+			<Box mt={4} pt={4} display={{ xs: 'block', md: 'none' }}>
+				{/* Empty box to add spacing */}
+			</Box>
 			<Footer />
 		</div>
 	)

@@ -55,8 +55,8 @@ export default function Confirm() {
       jsonObject.houseNumber = parseInt(jsonObject.houseNumber, 10); // or Number(jsonObject.houseNumber);
       jsonObject.zipCode = parseInt(jsonObject.zipCode, 10); // or Number(jsonObject.zipCode);
       const updatedJsonString = JSON.stringify(jsonObject);
-console.log(updatedJsonString)
-console.log(jsonObject, 'jsonObject')
+//console.log(updatedJsonString)
+//console.log(jsonObject, 'jsonObject')
     await axios.post(
         'http://3.85.8.238:5000/auth/nngc/registration',
         updatedJsonString,
