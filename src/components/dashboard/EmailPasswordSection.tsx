@@ -32,7 +32,7 @@ const EmailPasswordSection:React.FC<LoginSectionProps> = ({ userInfo }) => {
         if (newPassword === confirmPassword) {
             try {
                 const response = await axios.put(
-                    `http://3.85.8.238:5000/api/nngc/customers/${userInfo.id}`,
+                    `http://localHost:5000/api/nngc/customers/${userInfo.id}`,
                     { password: newPassword },
                     {
                         headers: {

@@ -1,10 +1,9 @@
-
-import { Link, Navigate } from 'react-router-dom'; // Step 1: Import Link
+import {Link, Navigate} from 'react-router-dom'; // Step 1: Import Link
 import axios from "axios";
-import { useAppDispatch } from "../../redux/hooks";
-import { addToken, changeUserLogInfo } from "../../redux/userLogInfoSlice";
-import { Box, Button, Grid, TextField, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import {useAppDispatch} from "../../redux/hooks";
+import {addToken, changeUserLogInfo} from "../../redux/userLogInfoSlice";
+import {Box, Button, Grid, TextField, Typography} from '@mui/material';
+import React, {useState} from 'react';
 
 const Login = () => {
 	const [email, setEmail] = useState('');
@@ -29,7 +28,7 @@ const Login = () => {
 		};
 		const values = JSON.stringify(myJSON);
 		//console.log(values);
-	await axios.post('http://3.85.8.238:5000/auth/nngc/authenticate', values,{
+	await axios.post('http://localHost:5000/auth/nngc/authenticate', values,{
 		headers: {
 			'Content-Type': 'application/json',
 		},

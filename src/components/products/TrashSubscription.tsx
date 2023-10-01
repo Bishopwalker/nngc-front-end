@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {Box, Button, Typography} from "@mui/material";
-import { useParams } from "react-router-dom"
+import {useParams} from "react-router-dom"
 import {useAppSelector} from "../../redux/hooks";
 
 
@@ -21,7 +21,7 @@ const TrashSubscription  = ( ) => {
     const fetchProduct = async () => {
         try {
             const response = await axios.get(
-                `http://3.85.8.238:5000/auth/stripe/products/${productId}`
+                `http://localHost:5000/auth/stripe/products/${productId}`
             );
             setProduct(response.data);
         } catch (error) {
@@ -39,7 +39,7 @@ const purchase_Item = async () => {
 
             try {
                 const response = await axios.post(
-                    `http://3.85.8.238:5000/auth/stripe/create-checkout-session_wid/res_sub/{id}`
+                    `http://localHost:5000/auth/stripe/create-checkout-session_wid/res_sub/{id}`
                 );
             //    console.log(response.data);
             } catch (error) {

@@ -54,7 +54,7 @@ const DKAppointment = () => {
     const submitAppointment = async () => {
         try {
             // Step 1: Verify the API Endpoint
-            const apiEndpoint = "http://3.85.8.238:5000/api/appointments/create-appointment"; // Make sure this matches with your Postman endpoint
+            const apiEndpoint = "http://localHost:5000/api/appointments/create-appointment"; // Make sure this matches with your Postman endpoint
 
             // Step 2: Format the date and time to match the backend's expected format
             const formattedDate = moment(selectedDate).format("DD-MM-YYYY");

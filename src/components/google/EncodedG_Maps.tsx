@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { GoogleMap, Polyline, useJsApiLoader, LoadScriptProps } from '@react-google-maps/api';
+import React, {useEffect, useState} from 'react';
+import {GoogleMap, LoadScriptProps, Polyline, useJsApiLoader} from '@react-google-maps/api';
 import axios from "axios";
 
 const libraries: LoadScriptProps['libraries'] = ['geometry'];
@@ -26,7 +26,7 @@ const Encoded_GMaps: React.FC = () => {
     const [instructions, setInstructions] = useState<string[]>([]);
     useEffect(() => {
         // Fetch route data from your back-end service
-     const result= axios.get('http://3.85.8.238:5000/nngc/google/create-route-4-driver')  // Replace with the actual URL of your service
+     const result= axios.get('http://localHost:5000/nngc/google/create-route-4-driver')  // Replace with the actual URL of your service
             .then(response => response.data)
             .then(data => {
                 const decodedPath = window.google.maps.geometry.encoding.decodePath(data.polyline);
