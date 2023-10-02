@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import {
   AppBar,
   Box,
@@ -15,8 +15,8 @@ import {
   Typography,
 } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
-import { Facebook, Instagram, Twitter } from "@mui/icons-material/";
-import { useAppSelector } from "../../redux/hooks";
+import {Facebook, Instagram, Twitter} from "@mui/icons-material/";
+import {useAppSelector} from "../../redux/hooks";
 
 const Navbar = () => {
   const user = useAppSelector((state) => state.userInfo);
@@ -45,14 +45,34 @@ const Navbar = () => {
     { Name: "My Account", Link: user.id ? "/dashboard" : "/login" },
     { Name: "Blog/News", Link: '/blog' },
   ];
+  const handleIconClick = (url: string | URL | undefined) => {
+    window.open(url, '_blank');
+  };
 
   return (
       <AppBar sx={{ background: "#2c3e50" }} position={"static"}>
         <StyledToolbar>
           <SocialBox>
-            <Facebook />
-            <Instagram />
-            <Twitter />
+            <IconButton
+                onClick={() => handleIconClick('https://www.facebook.com/profile.php?id=61551799658594')}
+                sx={{ '&:hover': { backgroundColor: 'transparent' } }}
+            >
+              <Facebook sx={{ color: 'white' }} />
+            </IconButton>
+            {/* Add similar onClick handlers for other icons */}
+            <IconButton
+                onClick={() => handleIconClick('https://www.instagram.com')}
+                sx={{ '&:hover': { backgroundColor: 'transparent' } }}
+            >
+              <Instagram sx={{ color: 'white' }} />
+            </IconButton>
+            <IconButton
+                onClick={() => handleIconClick('https://www.twitter.com')}
+                sx={{ '&:hover': { backgroundColor: 'transparent' } }}
+            >
+              <Twitter sx={{ color: 'white' }} />
+            </IconButton>
+
           </SocialBox>
 
           {/* IconButton for mobile view */}

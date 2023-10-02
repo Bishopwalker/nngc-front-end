@@ -20,7 +20,7 @@ export default function Confirm() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   if (isLoggedIn) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/verify" />;
   }
 	// Convert object to JSON string
 	let jsonString = JSON.stringify(formValues);

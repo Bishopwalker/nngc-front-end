@@ -22,8 +22,9 @@ import Blog from "./components/blog/Blog";
 import Service from "./components/service/Service";
 import OurStory from "./components/ourStory/OurStory.jsx";
 import SuccessPage from "./components/checkout/SuccessPage";
-import {Box, Typography} from "@mui/material";
-import AccordionItem from "./components/faq/Faq";
+import {Box} from "@mui/material";
+
+import VerifyEmail from "./components/verifyEmail/VerifyEmail";
 
 function App() {
 	const screenTitle = useAppSelector(state => state.title)
@@ -55,53 +56,11 @@ function App() {
 				<Route path='story' element={<OurStory/>} />
 				<Route path='/success' element={<SuccessPage/>} />
 				<Route path="*" element={<h1>Not Found</h1>} />
+				<Route path='/verify' element={<VerifyEmail/>} />
 
 			</Routes>
 			{/* ts-ignore */}
-			<Box mt={4} pt={4} display={{ xs: 'block'}}>
-				<Typography variant="h4" align="center" color="black">Frequently Asked Questions</Typography>
-				<Typography variant="subtitle1" align="center" color="black">If you don't see your question here, give us a call!</Typography>
-				<AccordionItem
-				title="How often should I order once or twice a week pickup for my business?"
 
-				content='Size matters when it comes to garbage...'
-				/>
-				<AccordionItem
-
-				 title="Do you offer Recycling?"
-					content="Of course, just put your recycling can or labeled recycling bag and I'll grab it when I get your trash"
-				/>
-				<AccordionItem
-					 title="Do you offer backdoor service?"
-					content="Of course, our focus is taking care of our county's seniors and making trash pickup simple and easy"
-				/>
-				<AccordionItem
-					title="How is industrial waste managed?"
-					content="We recognize that some of our industrial customers may generate special and sometimes hazardous waste. You can trust that WM handles such material in an environmentally responsible manner. Our capacity, industry experience and trade leadership allow us to identify the type of waste and to customize the removal, allowing for heightened safety measures and specialized disposal processes.
-						We ensure environmental compliance and provide “cradle to grave” compliance tracking."
-				/>
-				<AccordionItem
-				title="Do you have insurance?"
-					content="Of course, Rest assured if I break it, they'll buy it!! So unless your mailbox is made of solid gold we're good!"
-				/>
-				<AccordionItem
-
-				title="Do you pickup old cars, boats, metal or other large items?"
-					content="We remove large bulk items on a case by case basis. Give us a call today!"
-				/>
-				<AccordionItem
-
-			title="Why can't I log into my account after I've signed up?"
-					content="Once you've signup our system sends a confirmation email to the address you provided. You need to open the email and click on the link to confirm you address.
-						You have 3 days before the token is expired and if you gave the wrong email you'll have to give us a call."
-				/>
-				<AccordionItem
-
-				title="Do you provide dumpsters or larger wheeled trashcans?"
-					content="If you need a special request give us a call today!"
-				/>
-
-			</Box>
 			<Box mt={4} pt={4} display={{ xs: 'block'}}>
 				{}
 			</Box>

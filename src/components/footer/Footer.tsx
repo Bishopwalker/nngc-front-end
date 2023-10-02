@@ -5,7 +5,12 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 
 const Footer = () => {
-  return (
+
+	const handleIconClick = (url: string | URL | undefined) => {
+		window.open(url, '_blank');
+	};
+
+	return (
 	<Box>
 		<Box sx={{ backgroundColor: '#2C3E50', color: 'white' }} pb={2}>
 			<Grid container spacing={2}>
@@ -20,7 +25,7 @@ const Footer = () => {
 					Phone: 804-220-0029
 				</Typography>
 				<Typography variant="body1" textAlign="center">
-					Address: 164 Cellar Haven Ln, Lottsburg, VA 22511
+					Address: PO Box 160 Lottsburg, VA 22511
 				</Typography>
 			  </Grid>
 			  <Grid item xs={12} sm={4}>
@@ -33,9 +38,9 @@ const Footer = () => {
 			  </Grid>
 			  <Grid item xs={12} sm={4}>
 				<Typography variant="body1" textAlign="center" fontWeight={500} pb={1}>
-					<FacebookIcon sx={{ color: 'white', marginRight: '0.5rem' }} />
-					<TwitterIcon sx={{ color: 'white', marginRight: '0.5rem' }} />
-					<InstagramIcon sx={{ color: 'white', marginRight: '0.5rem' }} />
+					<FacebookIcon onClick={() => handleIconClick('https://www.facebook.com/profile.php?id=61551799658594')} sx={{ color: 'white', marginRight: '0.5rem' }} />
+					<TwitterIcon   onClick={() => handleIconClick('https://www.twitter.com')} sx={{ color: 'white', marginRight: '0.5rem' }} />
+					<InstagramIcon  onClick={() => handleIconClick('https://www.instagram.com')} sx={{ color: 'white', marginRight: '0.5rem' }} />
 				</Typography>
 			  </Grid>
 			</Grid>

@@ -2,21 +2,23 @@ import {Avatar, Box, Card, CardContent, Grid, Typography} from '@mui/material';
 import dirty from '/dirty_yard-b272813f.jpg';
 import yard_clean from '/yarn_clean-f205d94a.png';
 import yard_clean1 from '/yarnCleanup-de6f1abd.png';
+
 const testimonials = [
   {
-    name: '-- Emily Brown, Building Owner',
+    name: '-- James Franco, Junk Owner',
     image: dirty,
-    testimonial: 'To anyone in need of reliable garbage cleaning services, I highly recommend this company. They are efficient, professional, and always get the job done right.',
-  },
+    testimonial: 'This guy is amazing, he is like Jesus, but with a dump trailer and low prices!'
+    },
   {
-    name: '-- Amanda Taylor, Building Owner',
+    name: '-- Amanda Taylor, Cat Person',
     image: yard_clean,
-    testimonial: 'For reliable and efficient garbage collection, this company is the best choice. Their track record of excellence speaks for itself, and I highly recommend them to anyone in need.',
+    testimonial: 'My son left so much junk in our barn we knew we couldn`t sale the house until it was clean! NNGC came and serviced me'
+
   },
   {
-    name: '-- Scott Harris, Construction Builder',
+    name: '-- Scott Harris, Retired Vet',
     image: yard_clean1,
-    testimonial: 'Northern Neck Garbage Collection has provided me with extremely satisfying services. Their efficient cleaning has kept my neighborhood hygienic and clean.',
+    testimonial: 'This guy is one thing you won`t find often in the Northern Neck...On time!.',
   },
 ];
 

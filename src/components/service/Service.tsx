@@ -3,11 +3,11 @@ import React, {useState} from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {services} from './services';
 import {useAppSelector} from "../../redux/hooks";
 import {Box} from "@mui/material";
-import { useTheme } from '@mui/material/styles';
+import {useTheme} from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 function Service() {
@@ -24,7 +24,7 @@ function Service() {
     dots: true,
     infinite: true,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 10000,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,

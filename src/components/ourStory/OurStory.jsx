@@ -1,6 +1,7 @@
 import Typography from '@mui/material/Typography';
-import { Box } from "@mui/material";
-import { useEffect, useState } from "react";
+import {Box} from "@mui/material";
+import React, {useEffect, useState} from "react";
+import Team from "../team/Team";
 
 const MyStory = () => {
     const [firstLoad, setFirstLoad] = useState(true);
@@ -59,6 +60,7 @@ const MyStory = () => {
                 >
                     My Story
                 </Typography>
+
                 {paragraphs.map((paragraph, index) => (
                     <Typography
                         key={index}
@@ -76,6 +78,7 @@ const MyStory = () => {
                         {paragraph}
                     </Typography>
                 ))}
+                <Team />
             </Box>
         </Box>
     );

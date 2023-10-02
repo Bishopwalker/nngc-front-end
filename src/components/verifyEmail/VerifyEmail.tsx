@@ -1,6 +1,6 @@
 import React from 'react';
-import { Box, Typography, CssBaseline, Button } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {Box, Button, CssBaseline, Typography} from '@mui/material';
+import {createTheme, ThemeProvider} from '@mui/material/styles';
 
 const theme = createTheme();
 
@@ -28,10 +28,11 @@ const VerifyEmail = () => {
         </Typography>
         <Typography variant="body1" align="center" sx={{ mb: '2rem', whiteSpace: 'pre-line' }}>
           We have sent a verification link to your email address.{'\n'}
-          Please check your email and follow the instructions to verify your account.
+          Please check your email and follow the instructions to verify your account.{'\n'}
+            BE SURE TO CHECK YOUR SPAM FOLDER IF YOU DO NOT SEE THE EMAIL IN YOUR INBOX.
         </Typography>
         <Button variant="contained" color="primary" sx={{ bgcolor: '#2C3E50', '&:hover': { bgcolor: '#2C3E50' } }}>
-          Resend Verification Email
+             CHECK YOUR SPAM!
         </Button>
       </Box>
     </ThemeProvider>

@@ -10,19 +10,12 @@ const teamMembers = [
 const Team = () => {
   return (
     <Box mb={4} display="flex" flexDirection="column" alignItems="center">
-		<Typography variant="h4" align="center" sx={{ 
-		  fontWeight: 'bold',
-		  color: '#2C3E50',
-		  letterSpacing: '1px',
-		  textTransform: 'uppercase'
-		}}>
-		  Founder
-		</Typography>
+
 <Grid container spacing={2} alignItems="center" justifyContent="center" mt={2} mb={4}>
   {teamMembers.map((member) => (
     <Grid item key={member.name} xs={12} sm={12} md={3}>
       <Card sx={{ bgcolor: '#2C3E50', color: 'white', maxWidth: 300 }}>
-        <Box padding={2}>
+        <Box >
           <Avatar alt={member.name} src={member.image} sx={{ width: 200, height: 200, margin: 'auto' }} />
         </Box>
         <CardContent sx={{ textAlign: 'center' }}>
