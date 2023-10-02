@@ -5,6 +5,9 @@ import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText'
 import Divider from '@mui/material/Divider'
 import Button from '@mui/material/Button'
+import Snackbar from '@mui/material/Snackbar';
+import Alert, {AlertColor} from '@mui/material/Alert';
+
 import {AppContext} from './Context'
 
 import axios from "axios";
@@ -15,6 +18,11 @@ import {Navigate} from "react-router-dom";
 export default function Confirm() {
   const { formValues, handleBack, handleNext } = useContext(AppContext)
   const { firstName, lastName, email,  city, phone, houseNumber, streetName, state, zipCode } = formValues
+
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarSeverity, setSnackbarSeverity] = useState('success');
+
 
   const dispatch = useAppDispatch()
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -50,7 +58,7 @@ export default function Confirm() {
     // Show last component or success message
    // handleNext()
 	const values = JSON.stringify(jsonObj, null, 2);
-	     console.log(values)
+
       const jsonObject = JSON.parse(values);
       jsonObject.houseNumber = parseInt(jsonObject.houseNumber, 10); // or Number(jsonObject.houseNumber);
       jsonObject.zipCode = parseInt(jsonObject.zipCode, 10); // or Number(jsonObject.zipCode);
@@ -77,65 +85,56 @@ export default function Confirm() {
           })
           .catch((error) => {
               console.log(error)
+              setSnackbarSeverity('error');
+            setSnackbarMessage('An error occurred. Most likely, this email address or' +
+                ' phone number is already in use.');
+            setOpenSnackbar(true);
           })
 
 
   }
 
+
   return (
     <>
+      <Snackbar
+          open={openSnackbar}
+          autoHideDuration={20000}
+          onClose={() => setOpenSnackbar(false)}
+      >
+          <Alert
+              sx={{ fontSize: '1.5rem',width: '100%' }}
+              onClose={() => setOpenSnackbar(false)}
+              severity={snackbarSeverity as AlertColor}>
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
       <List disablePadding>
         <ListItem>
           <ListItemText primary='First Name' secondary={firstName.value || 'Not Provided'} />
+            <ListItemText primary='Last Name' secondary={lastName.value || 'Not Provided'} />
         </ListItem>
 
-        <Divider />
-
-        <ListItem>
-          <ListItemText primary='Last Name' secondary={lastName.value || 'Not Provided'} />
-        </ListItem>
-
-        <Divider />
+          <Divider />
 
         <ListItem>
           <ListItemText primary='Email Address' secondary={email.value || 'Not Provided'} />
+            <ListItemText primary='Phone' secondary={phone.value || 'Not Provided'} />
         </ListItem>
 
         <Divider />
 
         <ListItem>
           <ListItemText primary='House No.' secondary={houseNumber.value || 'Not Provided'} />
+            <ListItemText primary='Street Name' secondary={streetName.value || 'Not Provided'} />
+            <ListItemText primary='City' secondary={city.value || 'Not Provided'} />
+            <ListItemText primary='State' secondary={state.value || 'Not Provided'} />
         </ListItem>
 
-        <Divider />
-
-        <ListItem>
-          <ListItemText primary='Street Name' secondary={streetName.value || 'Not Provided'} />
-        </ListItem>
-
-        <Divider />
-
-        <ListItem>
-          <ListItemText primary='City' secondary={city.value || 'Not Provided'} />
-        </ListItem>
-
-        <Divider />
-
-        <ListItem>
-          <ListItemText primary='State' secondary={state.value || 'Not Provided'} />
-        </ListItem>
-
-        <Divider />
-
-        <ListItem>
-          <ListItemText primary='Phone' secondary={phone.value || 'Not Provided'} />
-        </ListItem>
-
-        <Divider />
-
-        <ListItem>
-          <ListItemText primary='Zip Code' secondary={zipCode.value || 'Not Provided'} />
-        </ListItem>
+          <Divider />
+          <ListItem>
+              <ListItemText primary='Zip Code' secondary={zipCode.value || 'Not Provided'} />
+          </ListItem>
 
         <Divider />
       </List>
@@ -151,17 +150,3 @@ export default function Confirm() {
     </>
   )
 }
-//
-//   axios.post('http://localHost:5000/auth/nngc/registration', updatedJsonString)
-// 	.then((response) => {
-// 	console.log('response',response)
-// 	dispatch(changeUserLogInfo(response.data.customerDTO))
-// 	dispatch(addToken({token: response.data.token}))
-// 	if(response.data.token) {
-// 		console.log(response.data.token);
-// 	}
-// 	setIsLoggedIn(true);
-// })
-// .catch((error) => {
-// 	console.log(error)
-// })

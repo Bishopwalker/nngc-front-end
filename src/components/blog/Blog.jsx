@@ -127,7 +127,7 @@ const Blog = () => {
                     Blogs
                 </Typography>
                 <Typography variant="h6" sx={{ textAlign: 'center', fontWeight: 'bold', margin: '0rem 0 2rem 0', color: '#2d3436', fontFamily: 'Montserrat, sans-serif', }}>
-                    by David Fine
+                    by Bishop Walker (Ceo of NNGC)
                 </Typography>
                 <Grid container spacing={4} justifyContent="center">
                     {blogPosts.map((post, index) => (
