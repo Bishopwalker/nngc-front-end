@@ -17,7 +17,7 @@ const center = {
 };
 
 function G_Maps() {
-    useProtectedRoute(['ADMIN', 'DRIVER']);
+    useProtectedRoute();
     const user = useAppSelector(state => state.userInfo);
 
 const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string;
