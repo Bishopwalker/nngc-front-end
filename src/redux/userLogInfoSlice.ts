@@ -20,9 +20,7 @@ const initialState = {
     enabled: false,
     stripeCustomerId: '',
     transactionHistory: [],
-    authorities: [
-        {authority: ''}
-    ],
+ role:[],
     isLoggedIn: false,
     loginAttemptCount: 0,
     token: '',

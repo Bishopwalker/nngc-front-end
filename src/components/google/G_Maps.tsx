@@ -4,6 +4,7 @@
 import React from 'react'
 import {GoogleMap, useJsApiLoader} from '@react-google-maps/api';
 import {useAppSelector} from "../../redux/hooks";
+import {useProtectedRoute} from "../../auth/useProtectedRoute";
 
 const containerStyle = {
     width: '400px',
@@ -16,6 +17,7 @@ const center = {
 };
 
 function G_Maps() {
+    useProtectedRoute(['ADMIN', 'DRIVER']);
     const user = useAppSelector(state => state.userInfo);
 
 const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string;

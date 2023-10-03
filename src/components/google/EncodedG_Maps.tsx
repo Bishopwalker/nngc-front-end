@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {GoogleMap, LoadScriptProps, Polyline, useJsApiLoader} from '@react-google-maps/api';
 import axios from "axios";
+import {useProtectedRoute} from "../../auth/useProtectedRoute";
 
 const libraries: LoadScriptProps['libraries'] = ['geometry'];
 
@@ -16,6 +17,7 @@ const options = {
 };
 
 const Encoded_GMaps: React.FC = () => {
+    useProtectedRoute(['ADMIN', 'DRIVER']);
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
         googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string, // Replace with your API key.
@@ -26,7 +28,7 @@ const Encoded_GMaps: React.FC = () => {
     const [instructions, setInstructions] = useState<string[]>([]);
     useEffect(() => {
         // Fetch route data from your back-end service
-     const result= axios.get('http://localHost:5000/nngc/google/create-route-4-driver')  // Replace with the actual URL of your service
+     const result= axios.get('https://localHost:5000/nngc/google/create-route-4-driver')  // Replace with the actual URL of your service
             .then(response => response.data)
             .then(data => {
                 const decodedPath = window.google.maps.geometry.encoding.decodePath(data.polyline);
