@@ -2,10 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {GoogleMap, InfoWindow, Marker, Polyline, useJsApiLoader} from '@react-google-maps/api';
 import axios from 'axios';
 import {useProtectedRoute} from '../../auth/useProtectedRoute'; // Import your useProtectedRoute hook
+import {libraries} from './mapsConfig';
 
-
-type LibraryName = "geometry" | "drawing" | "localContext" | "places" | "visualization";
-const libraries: LibraryName[] = ['geometry'];
 
 const mapContainerStyle = {
     width: '100vw',
