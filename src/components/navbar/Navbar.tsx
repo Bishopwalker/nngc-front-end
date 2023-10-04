@@ -39,6 +39,7 @@ const Navbar = () => {
   });
 
   const MenuItems = [
+    { Name: "Home", Link: "/" },
     { Name: "Services", Link: "/services" },
     { Name: "Our Story", Link: "/story" },
     { Name: "View Schedule", Link: "/appointment" },
