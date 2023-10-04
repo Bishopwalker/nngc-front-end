@@ -14,7 +14,6 @@ import ClassAppointments from "./components/appointment/ClassAppointments.jsx";
 import DKAppointment from "./components/appointment-dk/DKAppointment";
 import Dumpster from "./components/products/Dumpster";
 import TrashSubscription from "./components/products/TrashSubscription";
-import G_Maps from "./components/google/G_Maps";
 import Encoded_GMaps from "./components/google/EncodedG_Maps";
 import NavBottom from "./components/navBottom/NavBottom";
 // @ts-ignore
@@ -49,7 +48,6 @@ function App() {
 				<Route path="/dashboard" element={<Dashboard />} />
 				<Route path="/dumpster/:productId" element={<Dumpster/>} />
 				<Route path="/res_sub" element={<TrashSubscription/>} />
-				<Route path='/maps' element={<G_Maps/>} />
 				<Route path='/emaps' element={<Encoded_GMaps/>} />
 				<Route path='/blog' element={<Blog/>} />
 				<Route path='services' element={<Service/>} />

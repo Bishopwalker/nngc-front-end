@@ -59,7 +59,6 @@ const Navbar = () => {
             >
               <Facebook sx={{ color: 'white' }} />
             </IconButton>
-            {/* Add similar onClick handlers for other icons */}
             <IconButton
                 onClick={() => handleIconClick('https://www.instagram.com')}
                 sx={{ '&:hover': { backgroundColor: 'transparent' } }}
