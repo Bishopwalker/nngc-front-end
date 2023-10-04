@@ -3,6 +3,7 @@ import React from "react";
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
+import {Email, Phone} from "@mui/icons-material";
 
 const Footer = () => {
 
@@ -18,10 +19,12 @@ const Footer = () => {
 				<Typography variant="body1" textAlign="center" fontWeight={500} pb={1}>
 					CONTACT US
 				</Typography>
-				<Typography variant="body1" textAlign="center" pb={1}>
+				<Typography variant="body1" textAlign="center" pb={1} onClick={() => window.location.href = 'mailto:bishop@northernneckgarbage.com'}>
+					<Email sx={{ color: '#26C9FF', marginRight: '0.5rem' }} from='bishop@northernneckgarbage.com'  />
 					Email: bishop@northernneckgarbage.com
 				</Typography>
-				<Typography variant="body1" textAlign="center" pb={1}>
+				<Typography variant="body1" textAlign="center" pb={1} onClick={() => window.location.href = 'tel:+18042200029'}>
+					<Phone sx={{ color: '#26C9FF', marginRight: '0.5rem' }}  />
 					Phone: 804-220-0029
 				</Typography>
 				<Typography variant="body1" textAlign="center">
@@ -40,7 +43,7 @@ const Footer = () => {
 				<Typography variant="body1" textAlign="center" fontWeight={500} pb={1}>
 					<FacebookIcon onClick={() => handleIconClick('https://www.facebook.com/profile.php?id=61551799658594')} sx={{ color: 'white', marginRight: '0.5rem' }} />
 					<TwitterIcon   onClick={() => handleIconClick('https://www.twitter.com')} sx={{ color: 'white', marginRight: '0.5rem' }} />
-					<InstagramIcon  onClick={() => handleIconClick('https://www.instagram.com')} sx={{ color: 'white', marginRight: '0.5rem' }} />
+					<InstagramIcon  onClick={() => handleIconClick('https://www.instagram.com/northern_neck_garbage/')} sx={{ color: 'white', marginRight: '0.5rem' }} />
 				</Typography>
 			  </Grid>
 			</Grid>

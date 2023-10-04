@@ -1,12 +1,18 @@
 import React from "react";
 import {Box, Button, Typography} from "@mui/material";
 import NNGCLogo from "../../assets/nngc-logo.png";
-import {Link} from 'react-router-dom';
+import {Link, useLocation,} from 'react-router-dom';
 import {useAppSelector} from "../../redux/hooks";
 
 const NavBottom = () => {
     const role: any = useAppSelector(state => state.userInfo.role);
-    console.log(role)
+    const location = useLocation();
+    const { pathname } = location;
+
+    // Hide the component if the route is /blogs
+    if (pathname === '/blog') {
+        return null;
+    }
   return (
     <Box sx={{ padding: '1rem' }}>
         {role ==='ADMIN' && <Button variant={"contained"} color={"primary"} sx={{mt: '1rem'}} component={Link} to="/emaps">

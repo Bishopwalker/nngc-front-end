@@ -5,7 +5,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import Button from "@mui/material/Button";
 import CAT from "/cartchem3-d0fffe7a.png"
 import CAT1 from "/cat_chem1-24b0ae96.png"
-//import CAT2 from "/catchem2.png"
+import NNCS from '/nncs.jpg'
 import FUR from "/furmonster3d-fd7f35f2.png"
 import BASS from "/kingstripper-a07c0608.png"
 import TRUCK from "/truck_trailer-517eec13.png"
@@ -14,6 +14,24 @@ import UFO from "/ufo_trash-43dbeea5.png"
 
 
 const blogPosts = [
+    {title:'My Speech To Mount Zion Church of Gratitude and Celebration for Northern Neck Christian School...',
+    date:'May 6, 2023',
+        image: NNCS,
+        content: "Good evening, esteemed members of Mount Zion Church, teachers, staff, and fellow parents. I stand before you today, filled with gratitude and admiration for Northern Neck Christian School and its impact on my daughter, Lindsey Walker. Since she began attending in January 2023, we have seen remarkable changes in her life, and it's a pleasure to share some of these with you.\n" +
+            "\n" +
+            "One of the most heartwarming developments is Lindsey's newfound appreciation for prayer. She now eagerly leads our family in prayer before every meal, reminding us of the importance of gratitude and our connection to a higher power. This has created a beautiful environment of love and reverence in our home.\n" +
+            "\n" +
+            "Lindsey's personal relationship with Jesus has blossomed at Northern Neck Christian School. She often comes home, enthusiastically telling my wife Victoria and me about her love for Jesus, and it is a joy to see her faith grow stronger each day.\n" +
+            "\n" +
+            "Her academic progress has been equally impressive. It is clear that someone at the school has dedicated time and effort to helping Lindsey improve her reading skills. We often find her singing \"Go Tell It on the Mountain\" with passion and pride, a testament to the nurturing atmosphere at the school.\n" +
+            "\n" +
+            "Her knowledge of the Bible has grown exponentially, as she shares stories and verses such as Genesis 1:1, Chronicles 15:2, and Joel 2:32 with us. She has even begun teaching my wife new things about Jesus, and her happiness in attending school is palpable.\n" +
+            "\n" +
+            "Initially, I must admit, I was skeptical about the traditional values of Dr. Morrison and had enrolled Lindsey in a public school. However, God reached out and guided me, showing me that Northern Neck ChristianSchool was where Lindsey truly belonged. I am profoundly grateful for this divine intervention, as it has shielded my daughter from the confusing and misguided ideologies prevalent in today's world.\n" +
+            "\n" +
+            "In closing, I would like to express my deepest gratitude to Mount Zion Church for allowing Northern Neck Christian School to use their facilities. Your generosity has made it possible for children like Lindsey to grow in faith, knowledge, and love. May God continue to bless this wonderful partnership. Thank you."
+
+    },
     {
         title: 'How to Choose a Solid Waste Removal Company',
         date: 'August 20, 2023',
@@ -127,7 +145,7 @@ const Blog = () => {
                     Blogs
                 </Typography>
                 <Typography variant="h6" sx={{ textAlign: 'center', fontWeight: 'bold', margin: '0rem 0 2rem 0', color: '#2d3436', fontFamily: 'Montserrat, sans-serif', }}>
-                    by Bishop Walker (Ceo of NNGC)
+                    by Bishop Walker (Owner/CEO)
                 </Typography>
                 <Grid container spacing={4} justifyContent="center">
                     {blogPosts.map((post, index) => (

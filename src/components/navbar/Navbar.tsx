@@ -61,7 +61,7 @@ const Navbar = () => {
               <Facebook sx={{ color: 'white' }} />
             </IconButton>
             <IconButton
-                onClick={() => handleIconClick('https://www.instagram.com')}
+                onClick={() => handleIconClick('https://www.instagram.com/northern_neck_garbage/')}
                 sx={{ '&:hover': { backgroundColor: 'transparent' } }}
             >
               <Instagram sx={{ color: 'white' }} />

@@ -5,6 +5,7 @@ import NNGCLogo from "../../assets/nngc-logo.png";
 import {Link} from 'react-router-dom';
 
 const HeaderTop = () => {
+
 	return (
 		<Box sx={{ backgroundColor: 'white', color: '#777', borderTop: '5px solid #26C9FF', borderBottom: '5px solid #26C9FF', marginTop: 0 }}>
 			<Box>
@@ -20,11 +21,11 @@ const HeaderTop = () => {
 						</Typography>
 					</Grid>
 					<Grid item xs={3} sm={3} sx={{ display: { xs: 'none', sm: 'none', lg: 'flex', xl: 'flex' }, alignItems: 'center', lineHeight: '1rem' }}>
-						<Email sx={{ color: '#26C9FF', marginRight: '0.5rem' }} />
+						<Email sx={{ color: '#26C9FF', marginRight: '0.5rem' }} from='bishop@northernneckgarbage.com'  onClick={() => window.location.href = 'mailto:bishop@northernneckgarbage.com'}/>
 						bishop@northernneckgarbage.com
 					</Grid>
 					<Grid item xs={3} sm={3} sx={{ display: { xs: 'none', sm: 'none', lg: 'flex', xl: 'flex' }, alignItems: 'center', lineHeight: '1rem' }}>
-						<Phone sx={{ color: '#26C9FF', marginRight: '0.5rem' }} />
+						<Phone sx={{ color: '#26C9FF', marginRight: '0.5rem' }} onClick={() => window.location.href = 'tel:+18042200029'} />
 						804-220-0029
 					</Grid>
 					<Grid item xs={9} sm={9} sx={{ display: { xs: 'block', sm: 'block', lg: 'none', xl: 'none' } }}>
