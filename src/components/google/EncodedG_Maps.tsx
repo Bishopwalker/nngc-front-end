@@ -3,7 +3,10 @@ import {GoogleMap, Marker, Polyline, useJsApiLoader} from '@react-google-maps/ap
 import axios from 'axios';
 import {useProtectedRoute} from '../../auth/useProtectedRoute'; // Import your useProtectedRoute hook
 import {libraries} from './mapsConfig';
-
+import {Grid, Typography} from "@mui/material";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import {ThemeProvider, useTheme} from '@mui/material/styles';
+import Container from "@mui/material/Container";
 
 const mapContainerStyle = {
     width: '100vw',
@@ -16,6 +19,21 @@ const options = {
     strokeWeight: 2,
 };
 
+interface CustomerInfo {
+    id: number;
+    fullName: string;
+    phoneNumber: string;
+    address: {
+        latitude: number;
+        longitude: number;
+        line1: string;
+        city: string;
+        state: string;
+        zipCode: string;
+    };
+}
+
+
 const Encoded_GMaps: React.FC = () => {
     useProtectedRoute();
     const { isLoaded } = useJsApiLoader({
@@ -23,6 +41,9 @@ const Encoded_GMaps: React.FC = () => {
         googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string,
         libraries,
     });
+
+    const theme = useTheme();
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
 
     const [path, setPath] = useState<google.maps.LatLng[]>([]);
     const [instructions, setInstructions] = useState<string[]>([]);
@@ -32,6 +53,10 @@ const Encoded_GMaps: React.FC = () => {
     const [totalStops, setTotalStops] = useState<number>(0);
     const [totalMiles, setTotalMiles] = useState<number>(0);
     const [totalTime, setTotalTime] = useState<number>(0);
+    const [selectedCustomerInfo, setSelectedCustomerInfo] = useState<CustomerInfo | null>(null);
+
+    const [selectedLat, setSelectedLat] = useState<number | null>(null);
+    const [selectedLon, setSelectedLon] = useState<number | null>(null);
 
     useEffect(() => {
         axios.get('http://localHost:5000/nngc/google/create-route-4-driver')
@@ -42,8 +67,9 @@ const Encoded_GMaps: React.FC = () => {
                 setInstructions(data.instructions);
                 setCustomerList(data.customerRouteDetails)
                 setTotalStops(data.totalStops);
-                setTotalMiles(data.totalMiles / 10000);
-                setTotalTime(data.totalTime / 60);
+                setTotalMiles(parseFloat(data.routeDistance));
+                setTotalTime(parseFloat(data.totalDuration));
+                console.log(data)
             });
     }, [isLoaded]);
 
@@ -53,9 +79,9 @@ const Encoded_GMaps: React.FC = () => {
     };
 
     if (!isLoaded) return <div>Loading maps</div>;
-    const handleCustomerClick = (index: number) => {
-        setSelectedCustomer(index);
-    };
+    // const handleCustomerClick = (index: number) => {
+    //     setSelectedCustomer(index);
+    // };
 
     const handleSortByName = () => {
         const sortedList = [...customerList].sort((a, b) => a.customerInfo.fullName.localeCompare(b.customerInfo.fullName));
@@ -66,13 +92,87 @@ const Encoded_GMaps: React.FC = () => {
         const sortedList = [...customerList].sort((a, b) => a.customerInfo.id - b.customerInfo.id);
         setCustomerList(sortedList);
     };
+    const handleCustomerClick = (index:number) => {
+        const selectedInfo = customerList[index].customerInfo;
+        setSelectedCustomerInfo(selectedInfo);
+        setSelectedLat(selectedInfo.latitude);
+        setSelectedLon(selectedInfo.longitude);
+    };
+
 
     return (
-        <div>
-            <GoogleMap
+        <ThemeProvider theme={theme}>
+            <Container maxWidth="xl" >
+                <Grid container spacing={2} justifyContent="center">
+                    {/* Row 1: Customer Info and Map */}
+                    <Grid item container xs={12} spacing={2} alignItems="stretch">
+                        <Grid item xs={12} sm={6} md={2}>
+
+                    <div style={{ border: '1px solid black', marginBottom: '1em', width:'300px',overflow:'auto' }}>
+             <Typography variant="h4" align="center" sx={{
+                fontWeight: 'bold',
+                color: '#2C3E50',
+                letterSpacing: '1px',
+                textTransform: 'uppercase',
+                }}>
+             Total Stops: {totalStops}
+             </Typography>
+
+                <Typography variant="h4" align="center" sx={{
+                fontWeight: 'bold',
+                color: '#2C3E50',
+                letterSpacing: '1px',
+                textTransform: 'uppercase',
+                }}>
+Total Miles: {totalMiles}
+                </Typography>
+                <Typography variant="h4" align="center" sx={{
+                fontWeight: 'bold',
+                color: '#2C3E50',
+                letterSpacing: '1px',
+                textTransform: 'uppercase',
+                }}>
+Total Time: {totalTime} minutes
+                </Typography>
+
+                <h3>Customer List</h3>
+                <button onClick={handleSortByName}>Sort by Name</button>
+                <button onClick={handleSortById}>Sort by ID</button>
+                <ul>
+                    {customerList.map((customer, index) => (
+                        <li
+                            key={customer.customerInfo.id}
+                            style={selectedCustomer === index ? { backgroundColor: 'yellow' } : {}}
+                            onClick={() => handleCustomerClick(index)}
+                        >
+                            {customer.customerInfo.fullName} (ID: {customer.customerInfo.id})
+
+                        </li>
+                    ))}
+                </ul>
+            </div>
+            <div id="customer-info">
+                {selectedCustomerInfo && (
+                    <div>
+                        <h3>{selectedCustomerInfo.fullName} (ID: {selectedCustomerInfo.id})</h3>
+                        <p>Phone Number: {selectedCustomerInfo.phoneNumber}</p>
+                        <ul>Address:
+                            {selectedCustomerInfo.address}
+                        </ul>
+                        {/* ...other information */}
+                    </div>
+                )}
+            </div>
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={4}>
+                        <div style={{ border: '1px solid black', width: '100%', height: '400px' }}> {/* Adjust height as needed */}
+
+                            <GoogleMap
                 mapContainerStyle={mapContainerStyle}
                 zoom={10}
-                center={path[0]}
+                center={selectedLat && selectedLon ? { lat: selectedLat, lng: selectedLon } : path[0]}
+                             selectedCustomerInfo={selectedCustomerInfo}
+
             >
                 <Polyline
                     path={path}
@@ -86,38 +186,35 @@ const Encoded_GMaps: React.FC = () => {
                         }
                     }}
                 />
-                {path.map((point, index) => (
+                {path.length > 0 && (
                     <Marker
-                        key={index}
-                        position={point}
-                        onClick={() => handleCustomerClick(index)}
+                        position={path[path.length - 1]}  // Position of the last point in the path array
                     />
-                ))}
+                )}
+                {selectedLat && selectedLon && (
+                    <Marker
+                        position={{ lat: selectedLat, lng: selectedLon }}
+                        icon={{
+                            url: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png', // You can use a custom icon here
+                            scaledSize: new window.google.maps.Size(40, 40),
+                        }}
+                    />
+                )}
             </GoogleMap>
+                        </div>
+                    </Grid>
+                    </Grid>
 
-            <div style={{ padding: '1em', border: '1px solid black', marginBottom: '1em' }}>
-                <h3>Customer List</h3>
-                <button onClick={handleSortByName}>Sort by Name</button>
-                <button onClick={handleSortById}>Sort by ID</button>
-                <ul>
-                    {customerList.map((customer, index) => (
-                        <li
-                            key={customer.customerInfo.id}
-                            style={selectedCustomer === index ? { backgroundColor: 'yellow' } : {}}
-                            onClick={() => handleCustomerClick(index)}
-                        >
-                            {customer.customerInfo.fullName} (ID: {customer.customerInfo.id})
-                        </li>
-                    ))}
-                </ul>
-            </div>
-
-            <div>
+                    <Grid item xs={12} style={{ width: '100%' }}>
+                        <div style={{ width: '100%', border: '1px solid black', padding: '1em' }}>
                 {instructions.map((instruction, index) => (
-                    <p key={index} dangerouslySetInnerHTML={{ __html: instruction }} />
+                    <span key={index} dangerouslySetInnerHTML={{ __html: instruction }} />
                 ))}
             </div>
-        </div>
+                    </Grid>
+                </Grid>
+                </Container>
+        </ThemeProvider>
     );
 };
 
