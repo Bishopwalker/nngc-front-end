@@ -3,7 +3,7 @@ import {GoogleMap, Marker, Polyline, useJsApiLoader} from '@react-google-maps/ap
 import axios from 'axios';
 import {useProtectedRoute} from '../../auth/useProtectedRoute'; // Import your useProtectedRoute hook
 import {libraries} from './mapsConfig';
-import {Grid, Typography} from "@mui/material";
+import {Box, Grid, Typography} from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {ThemeProvider, useTheme} from '@mui/material/styles';
 import Container from "@mui/material/Container";
@@ -67,7 +67,7 @@ const Encoded_GMaps: React.FC = () => {
                 setInstructions(data.instructions);
                 setCustomerList(data.customerRouteDetails)
                 setTotalStops(data.totalStops);
-                setTotalMiles(parseFloat(data.routeDistance));
+                setTotalMiles(parseInt(data.routeDistance));
                 setTotalTime(parseFloat(data.totalDuration));
                 console.log(data)
             });
@@ -102,14 +102,14 @@ const Encoded_GMaps: React.FC = () => {
 
     return (
         <ThemeProvider theme={theme}>
-            <Container maxWidth="xl" >
+            <Container maxWidth="xl">
                 <Grid container spacing={2} justifyContent="center">
                     {/* Row 1: Customer Info and Map */}
                     <Grid item container xs={12} spacing={2} alignItems="stretch">
                         <Grid item xs={12} sm={6} md={2}>
 
                     <div style={{ border: '1px solid black', marginBottom: '1em', width:'300px',overflow:'auto' }}>
-             <Typography variant="h4" align="center" sx={{
+             <Typography variant="h6" align="center" sx={{
                 fontWeight: 'bold',
                 color: '#2C3E50',
                 letterSpacing: '1px',
@@ -118,7 +118,7 @@ const Encoded_GMaps: React.FC = () => {
              Total Stops: {totalStops}
              </Typography>
 
-                <Typography variant="h4" align="center" sx={{
+                <Typography variant="h6" align="left" sx={{
                 fontWeight: 'bold',
                 color: '#2C3E50',
                 letterSpacing: '1px',
@@ -126,13 +126,13 @@ const Encoded_GMaps: React.FC = () => {
                 }}>
 Total Miles: {totalMiles}
                 </Typography>
-                <Typography variant="h4" align="center" sx={{
+                <Typography variant="h6" align="left" sx={{
                 fontWeight: 'bold',
                 color: '#2C3E50',
                 letterSpacing: '1px',
                 textTransform: 'uppercase',
                 }}>
-Total Time: {totalTime} minutes
+Total Time: {totalTime} min
                 </Typography>
 
                 <h3>Customer List</h3>
@@ -165,7 +165,7 @@ Total Time: {totalTime} minutes
             </div>
                     </Grid>
                     <Grid item xs={12} sm={6} md={4}>
-                        <div style={{ border: '1px solid black', width: '100%', height: '400px' }}> {/* Adjust height as needed */}
+                        <div style={{ border: '1px solid black', width: '100%', height: '400px', maxHeight:'400px' }}> {/* Adjust height as needed */}
 
                             <GoogleMap
                 mapContainerStyle={mapContainerStyle}
@@ -206,14 +206,28 @@ Total Time: {totalTime} minutes
                     </Grid>
 
                     <Grid item xs={12} style={{ width: '100%' }}>
-                        <div style={{ width: '100%', border: '1px solid black', padding: '1em' }}>
-                {instructions.map((instruction, index) => (
-                    <span key={index} dangerouslySetInnerHTML={{ __html: instruction }} />
-                ))}
-            </div>
+                        <Typography
+                           >
+                            {!selectedCustomerInfo && <><Box mt={4} pt={4} display={{xs: 'block'}}>
+
+                            </Box><Box mt={4} pt={4} display={{xs: 'block'}}>
+
+                            </Box><Box mt={4} pt={4} display={{xs: 'block'}}>
+
+                            </Box></>
+                         }
+            </Typography>
                     </Grid>
                 </Grid>
                 </Container>
+            <Grid item xs={12} style={{ width: '100%' }}>
+                <Typography  style={{ width: '100%',
+                    border: '1px solid black', padding: '1em' }}>
+                    {instructions.map((instruction, index) => (
+                        <span key={index} dangerouslySetInnerHTML={{ __html: instruction }}  />
+                    ))}
+                </Typography>
+            </Grid>
         </ThemeProvider>
     );
 };
