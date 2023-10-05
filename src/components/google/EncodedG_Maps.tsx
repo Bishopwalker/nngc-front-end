@@ -57,9 +57,10 @@ const Encoded_GMaps: React.FC = () => {
 
     const [selectedLat, setSelectedLat] = useState<number | null>(null);
     const [selectedLon, setSelectedLon] = useState<number | null>(null);
-
+    const queryParams = new URLSearchParams(location.search);
+    const routeNumber = queryParams.get('page');
     useEffect(() => {
-        axios.get('http://localHost:5000/nngc/google/create-route-4-driver')
+        axios.get(`http://localHost:5000/nngc/google/create-route-4-driver/${routeNumber}`)
             .then(response => response.data)
             .then(data => {
                 const decodedPath = window.google.maps.geometry.encoding.decodePath(data.polyline);
@@ -108,8 +109,8 @@ const Encoded_GMaps: React.FC = () => {
                     <Grid item container xs={12} spacing={2} alignItems="stretch">
                         <Grid item xs={12} sm={6} md={2}>
 
-                    <div style={{ border: '1px solid black', marginBottom: '1em', width:'300px',overflow:'auto' }}>
-             <Typography variant="h6" align="center" sx={{
+                    <Box style={{ border: '1px solid black', marginBottom: '1em', width:'300px',overflow:'auto' }}>
+             <Typography variant="h6" align="left" sx={{
                 fontWeight: 'bold',
                 color: '#2C3E50',
                 letterSpacing: '1px',
@@ -132,7 +133,7 @@ Total Miles: {totalMiles}
                 letterSpacing: '1px',
                 textTransform: 'uppercase',
                 }}>
-Total Time: {totalTime} min
+Total Min: {totalTime}
                 </Typography>
 
                 <h3>Customer List</h3>
@@ -150,7 +151,7 @@ Total Time: {totalTime} min
                         </li>
                     ))}
                 </ul>
-            </div>
+            </Box>
             <div id="customer-info">
                 {selectedCustomerInfo && (
                     <div>
