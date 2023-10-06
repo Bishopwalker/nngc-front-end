@@ -18,11 +18,10 @@ import Encoded_GMaps from "./components/google/EncodedG_Maps";
 import NavBottom from "./components/navBottom/NavBottom";
 // @ts-ignore
 import Blog from "./components/blog/Blog";
-import Service from "./components/service/Service";
 import OurStory from "./components/ourStory/OurStory.jsx";
 import SuccessPage from "./components/checkout/SuccessPage";
 import {Box} from "@mui/material";
-
+import StripePricingTable from './components/stripePricingTable/StripePricingTable'
 import VerifyEmail from "./components/verifyEmail/VerifyEmail";
 
 function App() {
@@ -50,11 +49,12 @@ function App() {
 				<Route path="/res_sub" element={<TrashSubscription/>} />
 				<Route path='/emaps' element={<Encoded_GMaps/>} />
 				<Route path='/blog' element={<Blog/>} />
-				<Route path='services' element={<Service/>} />
+				<Route path='services' element={<StripePricingTable/>} />
 				<Route path='story' element={<OurStory/>} />
 				<Route path='/success' element={<SuccessPage/>} />
 				<Route path="*" element={<h1>Not Found</h1>} />
 				<Route path='/verify' element={<VerifyEmail/>} />
+
 
 			</Routes>
 			{/* ts-ignore */}

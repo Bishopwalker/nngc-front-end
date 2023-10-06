@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Box, Button, Card, CardContent, CardMedia, Typography} from '@mui/material';
 import axios from "axios";
-
+import {useParams} from "react-router-dom"
 import {useAppSelector} from "../../redux/hooks";
 
 type Product = {
@@ -14,14 +14,14 @@ type Product = {
 
 const DumpsterDK = () => {
   const [product, setProduct] = useState<Product>();
-
+const { productId } = useParams();
   const userInfo = useAppSelector(state => state.userInfo);
   //console.log(userInfo);
   console.log(product)
   const fetchProduct = async () => {
     try {
       const response = await axios.get(
-          `http://localHost:5000/auth/stripe/products/prod_NTzwClciqi6zCh`
+          `http://localHost:5000/auth/stripe/products/${productId}`
       );
       setProduct(response.data);
     } catch (error) {
@@ -38,24 +38,26 @@ const DumpsterDK = () => {
       console.error("No product or user info found");
       return;
     }
-console.log('checking out')
+    console.log('checking out');
     try {
-      const response = await axios.get(
-          `http://localHost:5000/auth/stripe/create-checkout-session_wid/dumpster/${userInfo.id}`, {
+      // Constructing the URL with the productID query parameter
+      const url = `http://localHost:5000/auth/stripe/create-checkout-session/${userInfo.id}?productID=${productId}`;
+      const response = await axios.get(url, {
             headers: {
               'Authorization': `Bearer ${userInfo.token}`, // if user token is stored in userInfo object
             }
           }
       );
 
-        const cleanUrl = response.data.replace('redirect:','');
-      if(response.data) {
-        window.location.href = cleanUrl; // redirects the user to the URL from the response
+      // No need to clean the URL, just get the message property which should contain the URL
+      if(response.data && response.data.message) {
+        window.location.href = response.data.message; // redirects the user to the URL from the response
       }
     } catch (error) {
       console.log(error);
     }
   };
+
 
 
 

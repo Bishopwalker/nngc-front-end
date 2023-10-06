@@ -11,6 +11,7 @@ import BASS from "/kingstripper-a07c0608.png"
 import TRUCK from "/truck_trailer-517eec13.png"
 import TRUCK1 from "/truck_trailer1-a6af3c75.png"
 import UFO from "/ufo_trash-43dbeea5.png"
+import Service from "../service/Service";
 
 
 const blogPosts = [
@@ -169,6 +170,7 @@ const Blog = () => {
                     ))}
                 </Grid>
             </Container>
+            <Service/>
         </ThemeProvider>
     );
 };

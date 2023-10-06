@@ -11,7 +11,7 @@ export const services = [
   {
     id: 2,
     title: 'Commercial Trash Pickup',
-    productId:'prod_NTexfN4Dfxy2h4',
+    productId:'prod_OlltsNqHsc0FGn',
     name:'commercial_sub',
     services: 'We offer commercial trash pickup for your business. We have a variety of trash cans to choose from.',
     linkImg:
@@ -29,20 +29,21 @@ export const services = [
   {
     id: 4,
     title: 'Yard Waste Pickup',
-    productId:'prod_NTexfN4Dfxy2h4',
+    productId:'prod_Olle6yyFljmCMH',
     name:'yard_waste_once',
     services: 'We offer yard waste pickup for your home or business. We have a variety of trash cans to choose from.',
     linkImg:
       'https://res.cloudinary.com/dfjg2mgcp/image/upload/v1679913158/nngc-low-res/services/u8zf55xaq300hic1gsaj.png',
   },
-  // {
-  //   id: 5,
-  //   title: 'Roll Off Dumpster Rental',
-  //   productId: "prod_NTexfN4Dfxy2h4",
-  //   services: 'We offer roll off dumpster rental for your home or business. We have a variety of trash cans to choose from.',
-  //   linkImg:
-  //     'https://res.cloudinary.com/dfjg2mgcp/image/upload/v1679913189/nngc-low-res/services/qxfamwczeo5ybuos6pbh.png',
-  // },
+  {
+    id: 5,
+    title: '6X10 Dump Trailer Rental',
+    productId: "prod_NTzwClciqi6zCh",
+    services: 'We Offer a Brand New Big Tex 6x10 dump trailer available for daily rental. Extra tall 42 inch walls' +
+        ' and 6 foot ramp. 2 5/16 ball and 7 way plug. 10,000 lb capacity. $300 per day. $300 deposit required.',
+    linkImg:
+      'https://res.cloudinary.com/dfjg2mgcp/image/upload/v1679913189/nngc-low-res/services/qxfamwczeo5ybuos6pbh.png',
+  },
   // {
   //   id: 6,
   //   title: 'Construction/Commercial Dumpster Rental',
