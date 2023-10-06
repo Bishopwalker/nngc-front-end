@@ -17,20 +17,12 @@ export const services = [
     linkImg:
       'https://res.cloudinary.com/dfjg2mgcp/image/upload/v1679913034/nngc-low-res/services/jt6v4fuszl7v5jfsdluk.png',
   },
-  {
-    id: 3,
-    title: 'Recycling Pickup',
-    productId:'prod_NTexfN4Dfxy2h4',
-    name:'rec_sub',
-    services: 'We offer recycling pickup for your home or business. We have a variety of trash cans to choose from.',
-    linkImg:
-      'https://res.cloudinary.com/dfjg2mgcp/image/upload/v1679913080/nngc-low-res/services/hre4eb280yrohmk8ppt4.png',
-  },
+
   {
     id: 4,
-    title: 'Yard Waste Pickup',
+    title: 'Junk Removal',
     productId:'prod_Olle6yyFljmCMH',
-    name:'yard_waste_once',
+    name:'Junk Removal',
     services: 'We offer yard waste pickup for your home or business. We have a variety of trash cans to choose from.',
     linkImg:
       'https://res.cloudinary.com/dfjg2mgcp/image/upload/v1679913158/nngc-low-res/services/u8zf55xaq300hic1gsaj.png',
@@ -44,14 +36,7 @@ export const services = [
     linkImg:
       'https://res.cloudinary.com/dfjg2mgcp/image/upload/v1679913189/nngc-low-res/services/qxfamwczeo5ybuos6pbh.png',
   },
-  // {
-  //   id: 6,
-  //   title: 'Construction/Commercial Dumpster Rental',
-  //   productId:'prod_NTexfN4Dfxy2h4',
-  //   services: 'We offer construction/commercial dumpster rental for your home or business. We have a variety of trash cans to choose from.',
-  //   linkImg:
-  //     'https://res.cloudinary.com/dfjg2mgcp/image/upload/v1679913219/nngc-low-res/services/ufsjyouqn9o3xuwxroio.png',
-  // },
+
 ];
 
 

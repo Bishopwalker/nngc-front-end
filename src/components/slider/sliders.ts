@@ -11,7 +11,7 @@ export const sliders = [
     title: 'slider two',
     linkImg:
       'https://res.cloudinary.com/dfjg2mgcp/image/upload/v1679912875/nngc-low-res/sliders/qvejvczjpny3mfdhzf9h.png',
-    productId: "prod_NTzwClciqi6zCh"
+    productId: "prod_OlltsNqHsc0FGn"
   },
   {
     id: 3,
