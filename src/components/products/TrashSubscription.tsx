@@ -21,7 +21,7 @@ const TrashSubscription  = ( ) => {
     const fetchProduct = async () => {
         try {
             const response = await axios.get(
-                `http://localHost:5000/auth/stripe/products/${productId}`
+                `http://localhost:5000/auth/stripe/products/${productId}`
             );
             setProduct(response.data);
         } catch (error) {
@@ -39,7 +39,7 @@ const purchase_Item = async () => {
 
             try {
                 const response = await axios.post(
-                    `http://localHost:5000/auth/stripe/create-checkout-session/{id}`
+                    `http://localhost:5000/auth/stripe/create-checkout-session/{id}`
                 );
             //    console.log(response.data);
             } catch (error) {

@@ -1,4 +1,4 @@
-import {Box, Button, Grid, Typography} from "@mui/material";
+import {Box, Grid, Typography} from "@mui/material";
 import UserProfileSection from "./UserProfileSection";
 import AddressSection from "./AddressSection";
 import PaymentSection from "./PaymentSection";
@@ -7,8 +7,7 @@ import TransactionsTable from "./TransactionsTable";
 import EmailPasswordSection from "./EmailPasswordSection";
 import React from "react";
 import {useAppSelector} from "../../redux/hooks";
-import {Link, useNavigate} from "react-router-dom";
-import {persistor} from '../../redux/store';
+import {useNavigate} from "react-router-dom";
 
 const Dashboard = () => {
 	const userInfo = useAppSelector(state => state.userInfo)
@@ -47,6 +46,7 @@ const Dashboard = () => {
 				</Grid>
 				<Grid container spacing={2}>
 					<Grid item xs={12} sm={6} sx={{margin: '2'}}>
+						{/*@ts-ignore*/}
 						<LoginSection userInfo={userInfo}/>
 					</Grid>
 					<Grid item xs={12} sm={6} sx={{margin: '2'}}>
@@ -57,6 +57,7 @@ const Dashboard = () => {
 					<Grid item xs={12} sm={3} sx={{}}>
 					</Grid>
 					<Grid item xs={12} sm={6} sx={{margin: '2'}}>
+						{/*@ts-ignore*/}
 						<EmailPasswordSection userInfo={userInfo}/>
 					</Grid>
 					<Grid item xs={12} sm={3} sx={{}}>

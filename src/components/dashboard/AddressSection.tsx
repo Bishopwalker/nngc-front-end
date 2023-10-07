@@ -11,7 +11,7 @@ const AddressSection = () => {
 
 const [geocodeData, setGeocodeData] = useState({})
     const fetchGeoLocationData = async ( ) => {
-        const result = await axios.get(`http://localHost:5000/nngc/geocoding/${userInfo.id}`)
+        const result = await axios.get(`http://localhost:5000/nngc/geocoding/${userInfo.id}`)
         setGeocodeData(result.data)
         //console.log(result.data)
     }

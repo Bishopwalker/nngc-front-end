@@ -1,9 +1,21 @@
 import React from "react";
-import {Card, CardHeader, Divider, Typography} from "@mui/material";
+import {Button, Card, CardHeader, Divider, Typography} from "@mui/material";
 import {useAppSelector} from "../../redux/hooks";
+import axios from "axios";
+
 
 const PaymentSection =  (  ) => {
      const userInfo = useAppSelector((state) => state.userInfo);
+    const handleManageBilling = async () => {
+        console.log(userInfo.stripeCustomerId);
+        try {
+            const response = await axios.get(`http://localhost:5000/auth/stripe/create-customer-portal-session/${userInfo.id}`);
+            console.log(response.data)
+            window.location.href = response.data;
+        } catch (error) {
+            console.log(error);
+        }
+    }
   return (
     <Card sx={{ mb: 2 }}>
       <CardHeader
@@ -17,8 +29,17 @@ const PaymentSection =  (  ) => {
           textTransform: "uppercase",
           borderBottom: "1px solid #ddd",
         }}
-      />
+        action={
+            <>
 
+
+        <Button variant="contained" color="secondary" onClick={handleManageBilling}>
+            Enter Billing Portal
+        </Button>
+
+            </>
+        }
+            />
       <Divider />
       <Typography
         variant="h6"

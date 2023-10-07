@@ -4,7 +4,8 @@ import {UserInfo} from "../../interfaces/UserInfo"
 
 
 interface LoginSectionProps {
-    userInfo: UserInfo;
+    userInfo: UserInfo,
+    authorities: [{ authority: 'some-authority' }]
 }
 
 const LoginSection:React.FC<LoginSectionProps> = ({ userInfo }) => {

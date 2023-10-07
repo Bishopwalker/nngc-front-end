@@ -59,8 +59,9 @@ const Encoded_GMaps: React.FC = () => {
     const [selectedLon, setSelectedLon] = useState<number | null>(null);
     const queryParams = new URLSearchParams(location.search);
     const routeNumber = queryParams.get('page');
+    console.log(selectedInstruction)
     useEffect(() => {
-        axios.get(`http://localHost:5000/nngc/google/create-route-4-driver/${routeNumber}`)
+        axios.get(`http://localhost:5000/nngc/google/create-route-4-driver/${routeNumber}`)
             .then(response => response.data)
             .then(data => {
                 const decodedPath = window.google.maps.geometry.encoding.decodePath(data.polyline);
@@ -72,7 +73,7 @@ const Encoded_GMaps: React.FC = () => {
                 setTotalTime(parseFloat(data.totalDuration));
                 console.log(data)
             });
-    }, [isLoaded]);
+    }, [isLoaded,routeNumber]);
 
     const handlePolylineClick = (index: number) => {
         setSelectedInstruction(instructions[index]);
@@ -101,6 +102,7 @@ const Encoded_GMaps: React.FC = () => {
     };
 
 
+    // @ts-ignore
     return (
         <ThemeProvider theme={theme}>
             <Container maxWidth="xl">
@@ -157,9 +159,12 @@ Total Min: {totalTime}
                     <div>
                         <h3>{selectedCustomerInfo.fullName} (ID: {selectedCustomerInfo.id})</h3>
                         <p>Phone Number: {selectedCustomerInfo.phoneNumber}</p>
-                        <ul>Address:
+                      <ul>
+                          {/* @ts-ignore */}
+                        <li>Address:
                             {selectedCustomerInfo.address}
-                        </ul>
+                        </li>
+                      </ul>
                         {/* ...other information */}
                     </div>
                 )}
@@ -172,6 +177,7 @@ Total Min: {totalTime}
                 mapContainerStyle={mapContainerStyle}
                 zoom={10}
                 center={selectedLat && selectedLon ? { lat: selectedLat, lng: selectedLon } : path[0]}
+                /*@ts-ignore*/
                              selectedCustomerInfo={selectedCustomerInfo}
 
             >

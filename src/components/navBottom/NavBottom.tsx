@@ -10,7 +10,7 @@ const NavBottom = () => {
 
     const location = useLocation();
     const { pathname } = location;
-    const [pageNumber, setPageNumber] = useState('');
+    const [pageNumber, setPageNumber] = useState('1');
 
 
     // Hide the component if the route is /blogs

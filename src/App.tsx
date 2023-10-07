@@ -21,7 +21,7 @@ import Blog from "./components/blog/Blog";
 import OurStory from "./components/ourStory/OurStory.jsx";
 import SuccessPage from "./components/checkout/SuccessPage";
 import {Box} from "@mui/material";
-import StripePricingTable from './components/stripePricingTable/StripePricingTable'
+import StripePricingTable from './components/stripeElements/StripePricingTable'
 import VerifyEmail from "./components/verifyEmail/VerifyEmail";
 
 function App() {
@@ -52,8 +52,9 @@ function App() {
 				<Route path='services' element={<StripePricingTable/>} />
 				<Route path='story' element={<OurStory/>} />
 				<Route path='/success' element={<SuccessPage/>} />
-				<Route path="*" element={<h1>Not Found</h1>} />
 				<Route path='/verify' element={<VerifyEmail/>} />
+
+				<Route path="*" element={<h1>Not Found</h1>} />
 
 
 			</Routes>

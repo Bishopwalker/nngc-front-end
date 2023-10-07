@@ -28,7 +28,7 @@ const Login = () => {
 		};
 		const values = JSON.stringify(myJSON);
 		//console.log(values);
-	await axios.post('http://localHost:5000/auth/nngc/authenticate', values,{
+	await axios.post('http://localhost:5000/auth/nngc/authenticate', values,{
 		headers: {
 			'Content-Type': 'application/json',
 		},

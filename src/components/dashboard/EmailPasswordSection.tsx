@@ -4,7 +4,8 @@ import {UserInfo} from "../../interfaces/UserInfo";
 import axios from "axios";
 
 interface LoginSectionProps {
-    userInfo: UserInfo;
+    userInfo: UserInfo,
+    authorities: [{ authority: 'some-authority' }],
 }
 
 const EmailPasswordSection:React.FC<LoginSectionProps> = ({ userInfo }) => {
@@ -32,7 +33,7 @@ const EmailPasswordSection:React.FC<LoginSectionProps> = ({ userInfo }) => {
         if (newPassword === confirmPassword) {
             try {
                 const response = await axios.put(
-                    `http://localHost:5000/api/nngc/customers/${userInfo.id}`,
+                    `http://localhost:5000/api/nngc/customers/${userInfo.id}`,
                     { password: newPassword },
                     {
                         headers: {
