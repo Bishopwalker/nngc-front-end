@@ -28,6 +28,7 @@ const DKAppointment = () => {
     const [service, setService] = useState("");
     const [time, setTime] = useState("");
     const [selectedValueProductID, setSelectedValueProductID] = useState("");
+    const [paymentIntent,setPaymentIntent] = useState("");
     const handleServiceSelection = (service: string | number) => {
         // @ts-ignore
         const productId = serviceToProductIdMapping[service];
@@ -37,6 +38,36 @@ const DKAppointment = () => {
             console.error(`No product ID found for service: ${service}`);
         }
     };
+    function handleSse() {
+        let eventSource = new EventSource('http://localhost:5000/sse/subscribe');
+
+        function setupEventSource() {
+            eventSource.onmessage = function (event) {
+                console.log('Received event:', event.data);
+                setPaymentIntent(event.data);
+            };
+
+            eventSource.onerror = function (error) {
+                console.error('EventSource failed:', error);
+                // Optionally, close the event source and try to reconnect
+                eventSource.close();
+                // A simple reconnection logic with a delay could look like this:
+                setTimeout(() => {
+                    console.log('Reconnecting...');
+                    eventSource = new EventSource('http://localhost:5000/sse/subscribe');
+                    setupEventSource();  // Re-apply the event handlers to the new EventSource instance
+                }, 5000);  // 5 seconds delay
+            };
+        }
+
+        setupEventSource();  // Initial setup
+    }
+
+// Call this function when your component mounts
+    useEffect(() => {
+        handleSse();
+
+    }, []);
 
     const handleServiceChange = (event: { target: { value: any; }; }) => {
         const newServiceValue = event.target.value;
@@ -132,10 +163,36 @@ const DKAppointment = () => {
             // Log the error
             console.error("An error occurred:", error);
         }
+
     };
 
 // Run the function to test
 
+
+
+const handleCheckout = async () => {
+    const productId = selectedValueProductID;
+
+    console.log('checking out');
+
+    try {
+        // Constructing the URL with the productID query parameter
+        const url = `http://localhost:5000/auth/stripe/create-checkout-session/${userInfo.id}?productID=${productId}`;
+        const response = await axios.get(url, {
+                headers: {
+                    'Authorization': `Bearer ${userInfo.token}`, // if user token is stored in userInfo object
+                }
+            }
+        );
+
+        // No need to clean the URL, just get the message property which should contain the URL
+        if(response.data && response.data.message) {
+            window.location.href = response.data.message; // redirects the user to the URL from the response
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 
 
