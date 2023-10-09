@@ -13,6 +13,12 @@ import moment from 'moment';
 import {Link} from "react-router-dom";
 
 const DKAppointment = () => {
+
+    const serviceToProductIdMapping = {
+        'junk-removal': 'prod_Olle6yyFljmCMH',
+        'trailer-rental': 'prod_NTzwClciqi6zCh'
+    };
+
     const userInfo = useAppSelector(state => state.userInfo)
 
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -21,11 +27,24 @@ const DKAppointment = () => {
     const [events, setEvents] = useState([]);
     const [service, setService] = useState("");
     const [time, setTime] = useState("");
+    const [selectedValueProductID, setSelectedValueProductID] = useState("");
+    const handleServiceSelection = (service: string | number) => {
+        // @ts-ignore
+        const productId = serviceToProductIdMapping[service];
+        if (productId) {
+            setSelectedValueProductID(productId);
+        } else {
+            console.error(`No product ID found for service: ${service}`);
+        }
+    };
 
-    const handleServiceChange =  (event: { target: { value: any; }; }) => {
-        setService(event.target.value);
+    const handleServiceChange = (event: { target: { value: any; }; }) => {
+        const newServiceValue = event.target.value;
+        setService(newServiceValue);
+        handleServiceSelection(newServiceValue);
     }
 
+    console.log(selectedValueProductID)
     const handleTimeChange =  (event: { target: { value: any; }; }) => {
         setTime(event.target.value);
     }
@@ -220,12 +239,11 @@ const DKAppointment = () => {
                         <MenuItem value="service" disabled>
                             Select a Service
                         </MenuItem>
-                        <MenuItem value="yard-waste-pickup">Yard Waste Pickup</MenuItem>
-                        <MenuItem value="roll-off-dumpster-rental">
-                            Residential Junk Removal
+                        <MenuItem value="junk-removal">
+                            Junk Removal
                         </MenuItem>
-                        <MenuItem value="construction-commercial-dumpster-rental">
-                            Business/Commercial Junk Removal
+                        <MenuItem value="trailer-rental">
+                           6 x 10 Trailer Rental
                         </MenuItem>
                     </Select>
                     <Select
@@ -320,12 +338,11 @@ const DKAppointment = () => {
                         <MenuItem value="service" disabled>
                             Select a Service
                         </MenuItem>
-                        <MenuItem value="yard-waste-pickup">Yard Waste Pickup</MenuItem>
-                        <MenuItem value="roll-off-dumpster-rental">
-                            Residential Junk Removal
+                        <MenuItem value="junk-removal">
+                            Junk Removal
                         </MenuItem>
-                        <MenuItem value="construction-commercial-dumpster-rental">
-                            Business/Commercial Junk Removal
+                        <MenuItem value="trailer-rental">
+                            6 x 10 Dump Trailer Rental
                         </MenuItem>
                     </Select>
                     <Select
