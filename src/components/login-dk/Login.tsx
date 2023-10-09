@@ -104,11 +104,11 @@ const Login = () => {
 								>
 									Login
 								</Button>
-								{/* Step 3-6: Add Signup Link */}
+
 								<Box mt={2} textAlign="center">
 									<Link to="/signup" style={{ textDecoration: 'none', color: '#3A4C63' }}>
-										<Typography variant="body2">
-											Don't have an account? Sign Up
+										<Typography variant="body1">
+											Don't have an account? <b>Sign Up</b>
 										</Typography>
 									</Link>
 								</Box>

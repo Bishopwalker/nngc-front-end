@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {Button, Card, CardHeader, Divider, IconButton, Modal, TextField, Typography} from "@mui/material";
 import {Edit} from "@mui/icons-material";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
-import {clearUserInfo} from "../../redux/userLogInfoSlice";
+import axios from "axios";
 
 
 const UserProfileSection = ( ) => {
@@ -21,6 +21,17 @@ const UserProfileSection = ( ) => {
   const handleEditClose = () => {
 	setEdit(false);
   };
+    const handleManageSubscription = async () => {
+        console.log(userInfo.stripeCustomerId);
+
+        try {
+            const response = await axios.get(`http://localhost:5000/auth/stripe/create-customer-portal-session/${userInfo.id}`);
+            console.log(response.data)
+            window.location.href = response.data;
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
   const handleNameChange =  (event: { target: { value: any; }; }) => {
 	setName(event.target.value);
@@ -39,10 +50,6 @@ const UserProfileSection = ( ) => {
 	handleEditClose();
   }
 
-    const handleLogout = () => {
-        dispatch(clearUserInfo()); // Dispatch the clearUserInfo action to clear user data
-        // Here, you can also perform additional tasks like redirecting the user to the login page
-    };
 
 
 
@@ -65,9 +72,7 @@ const UserProfileSection = ( ) => {
                 <IconButton aria-label="edit" onClick={handleEditClick}>
                     <Edit sx={{ color: "#26C9FF" }} />
                 </IconButton>
-                <Button variant="contained" color="secondary" onClick={handleLogout}>
-                    Logout
-                </Button>
+
             </>
         }
       />

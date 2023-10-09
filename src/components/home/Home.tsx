@@ -47,7 +47,9 @@ const Home = () => {
                 <AccordionItem
                     title="How is industrial waste managed?"
                     content="We recognize that some of our industrial customers may generate special and sometimes hazardous waste.
-                    You can trust that NNGC handles such material in an environmentally responsible manner."
+                    You can trust that NNGC handles such material in an environmentally responsible manner, by letting other people
+                     handle it! We are not equiped to handle anything other than things you can put in trailers and truck beds. No dangerous chemicials
+                     dangerous children (or non-dangerous ones) and no dead bodies, period!"
                 />
                 <AccordionItem
                     title="Do you have insurance?"

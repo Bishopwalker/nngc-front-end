@@ -23,6 +23,10 @@ import SuccessPage from "./components/checkout/SuccessPage";
 import {Box} from "@mui/material";
 import StripePricingTable from './components/stripeElements/StripePricingTable'
 import VerifyEmail from "./components/verifyEmail/VerifyEmail";
+import PrivacyPolicy from "./privacy/PrivacyPolicy";
+import AlreadyConfirmed from "./auth/AlreadyConfirmed";
+import TokenExpiredPage from "./auth/TokenExpiredPage";
+import Help from './auth/Help'
 
 function App() {
 	const screenTitle = useAppSelector(state => state.title)
@@ -53,7 +57,10 @@ function App() {
 				<Route path='story' element={<OurStory/>} />
 				<Route path='/success' element={<SuccessPage/>} />
 				<Route path='/verify' element={<VerifyEmail/>} />
-
+				<Route path='/policy' element={<PrivacyPolicy/>}/>
+				<Route path='/confirmed' element={<AlreadyConfirmed/>} />
+				<Route path='/expired' element={<TokenExpiredPage/>}/>
+				<Route path='/help' element={<Help/>} />
 				<Route path="*" element={<h1>Not Found</h1>} />
 
 

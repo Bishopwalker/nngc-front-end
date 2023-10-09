@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Fullcalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -18,7 +18,7 @@ const DKAppointment = () => {
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
     const [modalOpen, setModalOpen] = useState(false);
     const [modalOpenDisabledDates, setModalOpenDisabledDates] = useState(false);
-
+    const [events, setEvents] = useState([]);
     const [service, setService] = useState("");
     const [time, setTime] = useState("");
 
@@ -29,9 +29,34 @@ const DKAppointment = () => {
     const handleTimeChange =  (event: { target: { value: any; }; }) => {
         setTime(event.target.value);
     }
+    const [disabledDates, setDisabledDates] = useState([""]);  // Update to use a setter function
 
-    const [disabledDates] = useState(["2023-04-12", "2023-04-13"]);
 
+    const fetchAppointments = async () => {
+        try {
+            const response = await axios.get("http://localhost:5000/api/appointments/all");
+            const appointments = response.data;
+            const newEvents = appointments.map((appointment: { appointmentDate: any; appointmentTime: any; }) => {
+                const { appointmentDate, appointmentTime } = appointment;
+                const start = moment(`${appointmentDate} ${appointmentTime}`, "YYYY-MM-DD HH:mm:ss");
+                const end = moment(start).add(4, 'hours');  // Add 4 hours to the start time to get the end time
+                return {
+                    title: 'Booked',
+                    start: start.format("YYYY-MM-DDTHH:mm:ss"),
+                    end: end.format("YYYY-MM-DDTHH:mm:ss"),
+                    backgroundColor: '#ccc',
+                    textColor: '#000',
+                };
+            });
+            setEvents(newEvents);  // Update the events state with the new event objects
+        } catch (error) {
+            console.error("Error fetching appointments:", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchAppointments().then(r => console.log(r));
+    }, []);
     const dateClickHandler = (info: { dateStr: string | React.SetStateAction<Date | null>; }) => {
         // Step 1: Check if user is logged in
         if (userInfo && userInfo.id) {
@@ -112,13 +137,7 @@ const DKAppointment = () => {
         setModalOpenDisabledDates(false);
     };
 
-    const events = disabledDates.map((date) => {
-        return {
-            start: date,
-            display: "background",
-            backgroundColor: "#ccc",
-        };
-    });
+
     //console.log(userInfo)
 
 
@@ -143,7 +162,8 @@ const DKAppointment = () => {
                 }}
                 height={"90vh"}
                 dateClick={dateClickHandler}
-                eventSources={[{ events }]}
+                events={events}  // Update this line to use the events state
+
             />
             <Modal
                 open={modalOpenDisabledDates}
@@ -200,13 +220,6 @@ const DKAppointment = () => {
                         <MenuItem value="service" disabled>
                             Select a Service
                         </MenuItem>
-                        <MenuItem value="residential-trash-pickup">
-                            Residential Trash Pickup
-                        </MenuItem>
-                        <MenuItem value="commercial-trash-pickup">
-                            Commercial Trash Pickup
-                        </MenuItem>
-                        <MenuItem value="recycling-pickup">Recycling Pickup</MenuItem>
                         <MenuItem value="yard-waste-pickup">Yard Waste Pickup</MenuItem>
                         <MenuItem value="roll-off-dumpster-rental">
                             Residential Junk Removal
@@ -307,13 +320,6 @@ const DKAppointment = () => {
                         <MenuItem value="service" disabled>
                             Select a Service
                         </MenuItem>
-                        <MenuItem value="residential-trash-pickup">
-                            Residential Trash Pickup
-                        </MenuItem>
-                        <MenuItem value="commercial-trash-pickup">
-                            Commercial Trash Pickup
-                        </MenuItem>
-                        <MenuItem value="recycling-pickup">Recycling Pickup</MenuItem>
                         <MenuItem value="yard-waste-pickup">Yard Waste Pickup</MenuItem>
                         <MenuItem value="roll-off-dumpster-rental">
                             Residential Junk Removal

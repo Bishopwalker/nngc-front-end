@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {Box, Button, Card, CardContent, CardMedia, Typography} from '@mui/material';
 import axios from "axios";
-import {useParams} from "react-router-dom"
+import {Link, useNavigate, useParams} from "react-router-dom"
 import {useAppSelector} from "../../redux/hooks";
+import Alert, {AlertColor} from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
 
 type Product = {
   message: string;
@@ -16,6 +18,11 @@ const DumpsterDK = () => {
   const [product, setProduct] = useState<Product>();
 const { productId } = useParams();
   const userInfo = useAppSelector(state => state.userInfo);
+  const navigate = useNavigate();
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarSeverity, setSnackbarSeverity] = useState('success');
+
   //console.log(userInfo);
   console.log(product)
   const fetchProduct = async () => {
@@ -34,8 +41,12 @@ const { productId } = useParams();
   }, []);
 
   const handleCheckout = async () => {
-    if(!product || !userInfo) {
-      console.error("No product or user info found");
+    if( !userInfo.id) {
+      setSnackbarSeverity('error');
+      setSnackbarMessage('An error occurred. Most likely because you aren`t logged in!. Click Here to login in');
+      setOpenSnackbar(true);
+
+   //   navigate('/login');
       return;
     }
     console.log('checking out');
@@ -63,7 +74,19 @@ const { productId } = useParams();
 
   return (
 
-    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '75vh' }}>
+      <Snackbar
+          open={openSnackbar}
+          autoHideDuration={20000}
+          onClose={() => setOpenSnackbar(false)}
+      >
+        <Alert
+            sx={{ fontSize: '2.5rem',width: '100%' }}
+            onClose={() => setOpenSnackbar(false)}
+            severity={snackbarSeverity as AlertColor}>
+         <Link to='/login'> {snackbarMessage}</Link>
+        </Alert>
+      </Snackbar>
       {product && (
           <>
       <Card sx={{ maxWidth: 500, boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2)', pt: '2rem', mt: '-8rem' }}>
