@@ -7,7 +7,7 @@ import TransactionsTable from "./TransactionsTable";
 import EmailPasswordSection from "./EmailPasswordSection";
 import React from "react";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {clearUserInfo} from "../../redux/userLogInfoSlice";
 
 const Dashboard = () => {
@@ -31,7 +31,12 @@ const Dashboard = () => {
 				<Grid container spacing={2}>
 					<Grid item xs={12} sm={12}>
 						<Box display="flex" justifyContent="space-between" alignItems="center">
-							<Box></Box>  {/* Empty box to keep space on the left */}
+							<Link to="/appointment">
+							<Button variant="contained" color="success" sx={{
+								marginBottom: '15px',
+							}} >
+								View Junk Removal Schedule
+							</Button>  </Link>
 							<Typography variant="h4" sx={{
 								fontWeight: 'bold',
 								color: '#2C3E50',
@@ -42,7 +47,7 @@ const Dashboard = () => {
 								User Dashboard
 							</Typography>
 							<Box>
-								<Button variant="contained" color="secondary" sx={{
+								<Button variant="contained" color="warning" sx={{
 									marginBottom: '15px',
 								}} onClick={handleLogout}>
 									Logout

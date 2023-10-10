@@ -11,6 +11,8 @@ import {useAppSelector} from "../../redux/hooks";
 import axios from "axios";
 import moment from 'moment';
 import {useProtectedRouteUser} from "../../auth/useProtectedRouteUser";
+import Alert, {AlertColor} from "@mui/material/Alert";
+import Snackbar from '@mui/material/Snackbar';
 
 const DKAppointment = () => {
 useProtectedRouteUser()
@@ -29,6 +31,9 @@ useProtectedRouteUser()
     const [time, setTime] = useState("");
     const [selectedValueProductID, setSelectedValueProductID] = useState("");
     const [paymentIntent,setPaymentIntent] = useState("");
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
+    const [snackbarSeverity, setSnackbarSeverity] = useState('success');
     const handleServiceSelection = (service: string | number) => {
         // @ts-ignore
         const productId = serviceToProductIdMapping[service];
@@ -73,7 +78,7 @@ console.log(paymentIntent)
                 // Optionally, close the event source and try to reconnect
                 eventSource.close();
                 // A simple reconnection logic with a delay could look like this:
-                console.log("paymentIntent: " + paymentIntent)
+               // console.log("paymentIntent: " + paymentIntent)
                 if (paymentIntent !== "Payment succeeded") {
                     setTimeout(() => {
                         console.log('Reconnecting...');
@@ -201,8 +206,16 @@ console.log(paymentIntent)
         console.log("Selected Date: " + selectedDate);
         console.log("Service: " + service);
         console.log("Time: " + time);
-        submitAppointment()
-        handleModalClose();
+
+        if(paymentIntent !== null && paymentIntent === "Payment succeeded") {
+
+            submitAppointment().then((r)=>console.log("good to go"));
+            handleModalClose();
+        } else {
+            setSnackbarSeverity('error');
+            setSnackbarMessage('You Need to go checkout and pay for Junk Removal before you can book an appointment');
+            setOpenSnackbar(true);
+        }
     }
 
 
@@ -220,6 +233,18 @@ console.log(paymentIntent)
 
     return (
         <div style={{ maxWidth: "800px", margin: "30px auto 50px" }}>
+            <Snackbar
+                open={openSnackbar}
+                autoHideDuration={20000}
+                onClose={() => setOpenSnackbar(false)}
+            >
+                <Alert
+                    sx={{ fontSize: '2.5rem',width: '100%' }}
+                    onClose={() => setOpenSnackbar(false)}
+                    severity={snackbarSeverity as AlertColor}>
+                    {snackbarMessage}
+                </Alert>
+            </Snackbar>
             {userInfo && userInfo.id && paymentIntent === "Payment succeeded" ? (  // Check if userInfo.id exists
               <Box sx={{
                   backgroundColor: '#41de47',
