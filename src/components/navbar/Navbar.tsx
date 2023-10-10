@@ -40,11 +40,11 @@ const Navbar = () => {
 
   const MenuItems = [
     { Name: "Home", Link: "/" },
-    { Name: "Services", Link: "/services" },
+    { Name: "Our Services", Link: "/services" },
     { Name: "Our Story", Link: "/story" },
-    { Name: "View Schedule", Link: "/appointment" },
     { Name: "My Account", Link: user.id ? "/dashboard" : "/login" },
     { Name: "Blog/News", Link: '/blog' },
+    { Name: "Get Service Now", Link: "/pricing" },
   ];
   const handleIconClick = (url: string | URL | undefined) => {
     window.open(url, '_blank');

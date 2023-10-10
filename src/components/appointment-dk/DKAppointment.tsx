@@ -6,14 +6,14 @@ import interactionPlugin from "@fullcalendar/interaction";
 import "./DKAppointment.css";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
-import {Button, Card, CardHeader, Divider, MenuItem, Select, TextField,} from "@mui/material";
+import {Box, Button, Card, CardHeader, Divider, MenuItem, Select, TextField,} from "@mui/material";
 import {useAppSelector} from "../../redux/hooks";
 import axios from "axios";
 import moment from 'moment';
-import {Link} from "react-router-dom";
+import {useProtectedRouteUser} from "../../auth/useProtectedRouteUser";
 
 const DKAppointment = () => {
-
+useProtectedRouteUser()
     const serviceToProductIdMapping = {
         'junk-removal': 'prod_Olle6yyFljmCMH',
         'trailer-rental': 'prod_NTzwClciqi6zCh'
@@ -38,13 +38,34 @@ const DKAppointment = () => {
             console.error(`No product ID found for service: ${service}`);
         }
     };
+
+console.log(paymentIntent)
+
+
+   // const processedEventTypes = new Set();
     function handleSse() {
+        const processedEvents = new Set();  // Set to keep track of processed event data
         let eventSource = new EventSource('http://localhost:5000/sse/subscribe');
 
         function setupEventSource() {
             eventSource.onmessage = function (event) {
                 console.log('Received event:', event.data);
-                setPaymentIntent(event.data);
+
+                // Check if this event data has already been processed
+                if (!processedEvents.has(event.data)) {
+                    // If not, process the event
+                    setPaymentIntent(event.data);
+                    // And add the event data to the set of processed events
+                    processedEvents.add(event.data);
+                }
+
+                    console.log("paymentIntent: " + paymentIntent)
+                // Check if the paymentIntent equals "Payment Succeeded"
+                if (event.data === "Payment succeeded") {
+                    // If so, close the EventSource connection to stop receiving events
+                    console.log("closing port")
+                    eventSource.close();
+                }
             };
 
             eventSource.onerror = function (error) {
@@ -52,16 +73,20 @@ const DKAppointment = () => {
                 // Optionally, close the event source and try to reconnect
                 eventSource.close();
                 // A simple reconnection logic with a delay could look like this:
-                setTimeout(() => {
-                    console.log('Reconnecting...');
-                    eventSource = new EventSource('http://localhost:5000/sse/subscribe');
-                    setupEventSource();  // Re-apply the event handlers to the new EventSource instance
-                }, 5000);  // 5 seconds delay
+                console.log("paymentIntent: " + paymentIntent)
+                if (paymentIntent !== "Payment succeeded") {
+                    setTimeout(() => {
+                        console.log('Reconnecting...');
+                        eventSource = new EventSource('http://localhost:5000/sse/subscribe');
+                        setupEventSource();  // Re-apply the event handlers to the new EventSource instance
+                    }, 5000);  // 5 seconds delay
+                }
             };
         }
 
         setupEventSource();  // Initial setup
     }
+
 
 // Call this function when your component mounts
     useEffect(() => {
@@ -170,30 +195,6 @@ const DKAppointment = () => {
 
 
 
-const handleCheckout = async () => {
-    const productId = selectedValueProductID;
-
-    console.log('checking out');
-
-    try {
-        // Constructing the URL with the productID query parameter
-        const url = `http://localhost:5000/auth/stripe/create-checkout-session/${userInfo.id}?productID=${productId}`;
-        const response = await axios.get(url, {
-                headers: {
-                    'Authorization': `Bearer ${userInfo.token}`, // if user token is stored in userInfo object
-                }
-            }
-        );
-
-        // No need to clean the URL, just get the message property which should contain the URL
-        if(response.data && response.data.message) {
-            window.location.href = response.data.message; // redirects the user to the URL from the response
-        }
-    } catch (error) {
-        console.log(error);
-    }
-}
-
 
 
     const handleBookSubmit = () => {
@@ -219,13 +220,20 @@ const handleCheckout = async () => {
 
     return (
         <div style={{ maxWidth: "800px", margin: "30px auto 50px" }}>
-            {userInfo && userInfo.id ? (  // Check if userInfo.id exists
-                <h1 style={{ textAlign: 'center', paddingLeft: "100px", paddingBottom: "25px" }}>
-                    Book our Service
-                </h1>
+            {userInfo && userInfo.id && paymentIntent === "Payment succeeded" ? (  // Check if userInfo.id exists
+              <Box sx={{
+                  backgroundColor: '#41de47',
+              }}>
+                <Typography variant={"h4"} sx={{ textAlign: 'center', paddingLeft: "100px", paddingBottom: "25px" }}>
+                    Thank you for your payment!!!
+                </Typography >
+                  <Typography variant={"h4"} sx={{ textAlign: 'center' }}>
+                      Now Select a Date and Time for your Junk Removal
+                  </Typography>
+              </Box>
             ) : (
                 <h1 style={{ textAlign: 'center', paddingLeft: "100px", paddingBottom: "25px" }}>
-                    <Link to="/login">Click here to Login or Create an account</Link>
+                  Waiting for payment to be approved for Junk Removal
                 </h1>
             )}
             <Fullcalendar

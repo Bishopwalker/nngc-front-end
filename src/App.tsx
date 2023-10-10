@@ -27,6 +27,8 @@ import PrivacyPolicy from "./privacy/PrivacyPolicy";
 import AlreadyConfirmed from "./auth/AlreadyConfirmed";
 import TokenExpiredPage from "./auth/TokenExpiredPage";
 import Help from './auth/Help'
+import GotToLogin from "./auth/GotToLogin";
+import Service from './components/service/Service';
 
 function App() {
 	const screenTitle = useAppSelector(state => state.title)
@@ -53,7 +55,7 @@ function App() {
 				<Route path="/res_sub" element={<TrashSubscription/>} />
 				<Route path='/emaps' element={<Encoded_GMaps/>} />
 				<Route path='/blog' element={<Blog/>} />
-				<Route path='services' element={<StripePricingTable/>} />
+				<Route path='services' element={<Service/>} />
 				<Route path='story' element={<OurStory/>} />
 				<Route path='/success' element={<SuccessPage/>} />
 				<Route path='/verify' element={<VerifyEmail/>} />
@@ -61,7 +63,9 @@ function App() {
 				<Route path='/confirmed' element={<AlreadyConfirmed/>} />
 				<Route path='/expired' element={<TokenExpiredPage/>}/>
 				<Route path='/help' element={<Help/>} />
+				<Route path='/gotoLogin' element={<GotToLogin/>} />
 				<Route path="*" element={<h1>Not Found</h1>} />
+				<Route path='/pricing' element={<StripePricingTable/>} />
 
 
 			</Routes>
