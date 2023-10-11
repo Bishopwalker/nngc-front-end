@@ -359,7 +359,7 @@ console.log(paymentIntent)
                         <MenuItem value="3pm">3 PM</MenuItem>
                         <MenuItem value="4pm">4 PM</MenuItem>
                         <MenuItem value="5pm">5 PM</MenuItem>
-                        <MenuItem value="6pm">6 PM</MenuItem>
+
                     </Select>
                     <Typography
                         id="modal-title"
@@ -449,13 +449,17 @@ console.log(paymentIntent)
                         <MenuItem value="time" disabled>
                             Select Time
                         </MenuItem>
-                        <MenuItem value="6am">6 AM</MenuItem>
-                        <MenuItem value="7am">7 AM</MenuItem>
                         <MenuItem value="8am">8 AM</MenuItem>
                         <MenuItem value="9am">9 AM</MenuItem>
                         <MenuItem value="10am">10 AM</MenuItem>
                         <MenuItem value="11am">11 AM</MenuItem>
-                        <MenuItem value="12pm">12 PM</MenuItem>
+                        <MenuItem value="12am">12 AM</MenuItem>
+                        <MenuItem value="1am">1 AM</MenuItem>
+                        <MenuItem value="2pm">2 PM</MenuItem>
+                        <MenuItem value="3">3 PM</MenuItem>
+                        <MenuItem value="4">4 PM</MenuItem>
+                        <MenuItem value="5">5 PM</MenuItem>
+
                     </Select>
                     <Button
                         sx={{

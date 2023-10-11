@@ -1,0 +1,24 @@
+#balloon-container {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.balloon {
+    position: absolute;
+    bottom: 0;
+    width: 50px;
+    height: 70px;
+    background-color: red;
+    border-radius: 50%;
+    animation: float 5s ease-in infinite;
+}
+
+/* Add more colors for balloons */
+.balloon.blue { background-color: blue; }
+.balloon.green { background-color: green; }
+
+@keyframes float {
+    0% { bottom: 0; }
+    100% { bottom: 100vh; }
+}

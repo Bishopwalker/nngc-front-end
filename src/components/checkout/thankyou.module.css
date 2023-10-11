@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Dela Gothic One';
+    src: url('/favicons/DelaGothicOne-Regular.ttf') format('truetype');
+}
+
+.delaGothicText {
+    font-family: 'Dela Gothic One', sans-serif;
+    font-size: 3.5rem;
+}

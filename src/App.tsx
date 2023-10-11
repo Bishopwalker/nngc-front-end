@@ -19,7 +19,7 @@ import NavBottom from "./components/navBottom/NavBottom";
 // @ts-ignore
 import Blog from "./components/blog/Blog";
 import OurStory from "./components/ourStory/OurStory.jsx";
-import SuccessPage from "./components/checkout/SuccessPage";
+import SuccessPage from "./components/verifyEmail/SuccessPage";
 import {Box} from "@mui/material";
 import StripePricingTable from './components/stripeElements/StripePricingTable'
 import VerifyEmail from "./components/verifyEmail/VerifyEmail";
@@ -29,6 +29,7 @@ import TokenExpiredPage from "./auth/TokenExpiredPage";
 import Help from './auth/Help'
 import GotToLogin from "./auth/GotToLogin";
 import Service from './components/service/Service';
+import ThankYouPage from "./components/checkout/ThankYouPage";
 
 function App() {
 	const screenTitle = useAppSelector(state => state.title)
@@ -64,8 +65,10 @@ function App() {
 				<Route path='/expired' element={<TokenExpiredPage/>}/>
 				<Route path='/help' element={<Help/>} />
 				<Route path='/gotoLogin' element={<GotToLogin/>} />
-				<Route path="*" element={<h1>Not Found</h1>} />
 				<Route path='/pricing' element={<StripePricingTable/>} />
+				<Route path='/thanks' element={<ThankYouPage/>}/>
+
+				<Route path="*" element={<h1>Not Found</h1>} />
 
 
 			</Routes>
