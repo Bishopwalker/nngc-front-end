@@ -34,6 +34,8 @@ useProtectedRouteUser()
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
     const [snackbarSeverity, setSnackbarSeverity] = useState('success');
+    const [appointmentsUpdated, setAppointmentsUpdated] = useState(false);
+
     const handleServiceSelection = (service: string | number) => {
         // @ts-ignore
         const productId = serviceToProductIdMapping[service];
@@ -54,7 +56,7 @@ console.log(paymentIntent)
 
         function setupEventSource() {
             eventSource.onmessage = function (event) {
-                console.log('Received event:', event.data);
+            //    console.log('Received event:', event.data);
 
                 // Check if this event data has already been processed
                 if (!processedEvents.has(event.data)) {
@@ -134,9 +136,6 @@ console.log(paymentIntent)
         }
     };
 
-    useEffect(() => {
-        fetchAppointments().then(r => console.log(r));
-    }, []);
     const dateClickHandler = (info: { dateStr: string | React.SetStateAction<Date | null>; }) => {
         // Step 1: Check if user is logged in
         if (userInfo && userInfo.id) {
@@ -189,6 +188,7 @@ console.log(paymentIntent)
 
             // Log the response
             console.log("Backend response:", response);
+            setAppointmentsUpdated(prev => !prev);
         } catch (error) {
             // Log the error
             console.error("An error occurred:", error);
@@ -199,7 +199,10 @@ console.log(paymentIntent)
 // Run the function to test
 
 
-
+    //console.log(events)
+    useEffect(() => {
+        fetchAppointments().then(r => console.log(r));
+    }, [appointmentsUpdated]);
 
 
     const handleBookSubmit = () => {
