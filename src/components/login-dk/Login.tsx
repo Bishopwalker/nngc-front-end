@@ -1,20 +1,38 @@
 import {Link, Navigate} from 'react-router-dom'; // Step 1: Import Link
 import axios from "axios";
-import {useAppDispatch} from "../../redux/hooks";
+import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {addToken, changeUserLogInfo} from "../../redux/userLogInfoSlice";
 import {Box, Button, Grid, TextField, Typography} from '@mui/material';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import Alert, {AlertColor} from "@mui/material/Alert";
+import Snackbar from '@mui/material/Snackbar';
+
 
 const Login = () => {
+
+	const loginAttemptCount = useAppSelector((state)=>state.userInfo.loginAttemptCount);
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState('');
 	const dispatch = useAppDispatch();
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [openSnackbar, setOpenSnackbar] = useState(false);
+	const [snackbarMessage, setSnackbarMessage] = useState('');
+	const [snackbarSeverity, setSnackbarSeverity] = useState('success');
 
 	if (isLoggedIn) {
 		return <Navigate to="/dashboard" />;
 	}
+	useEffect(() => {
+		console.log(loginAttemptCount);
+
+
+		if(loginAttemptCount > 2){
+			setSnackbarSeverity('error');
+			setSnackbarMessage('Invalid Email or Password....Or you Forgot to verify your email...Try Again or Click Help');
+			setOpenSnackbar(true);
+		}
+	},[])
 
 
   // @ts-ignore
@@ -44,6 +62,7 @@ const Login = () => {
 		})
 		.catch((error) => {
 			console.log(error)
+
 		})
 
     } else {
@@ -53,6 +72,18 @@ const Login = () => {
 
 	return (
 		<Box mt={0} mb={4}>
+			<Snackbar
+				open={openSnackbar}
+				autoHideDuration={20000}
+				onClose={() => setOpenSnackbar(false)}
+			>
+				<Alert
+					sx={{ fontSize: '2.5rem',width: '100%' }}
+					onClose={() => setOpenSnackbar(false)}
+					severity={snackbarSeverity as AlertColor}>
+					{snackbarMessage}
+				</Alert>
+			</Snackbar>
 			<Box pb={1} pt={0}>
 				<Grid container>
 					<Grid item xs={12} sm={12}>

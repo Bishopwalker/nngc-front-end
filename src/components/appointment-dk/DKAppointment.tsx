@@ -86,7 +86,7 @@ console.log(paymentIntent)
                         console.log('Reconnecting...');
                         eventSource = new EventSource('http://localhost:8080/sse/subscribe');
                         setupEventSource();  // Re-apply the event handlers to the new EventSource instance
-                    }, 8080);  // 5 seconds delay
+                    }, 2000);  // 5 seconds delay
                 }
             };
         }
