@@ -20,12 +20,9 @@ const Login = () => {
 	const [snackbarMessage, setSnackbarMessage] = useState('');
 	const [snackbarSeverity, setSnackbarSeverity] = useState('success');
 
-	if (isLoggedIn) {
-		return <Navigate to="/dashboard" />;
-	}
+
 	useEffect(() => {
 		console.log(loginAttemptCount);
-
 
 		if(loginAttemptCount > 2){
 			setSnackbarSeverity('error');
@@ -34,7 +31,9 @@ const Login = () => {
 		}
 	},[])
 
-
+	if (isLoggedIn) {
+		return <Navigate to="/dashboard" />;
+	}
   // @ts-ignore
 	const handleSubmit = async(e) => {
     e.preventDefault();
