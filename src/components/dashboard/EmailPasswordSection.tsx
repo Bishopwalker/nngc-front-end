@@ -5,15 +5,17 @@ import axios from "axios";
 
 interface LoginSectionProps {
     userInfo: UserInfo,
-    authorities: [{ authority: 'some-authority' }],
+    authorities: [{ authority: 'STRIPE_CUSTOMER'}],
 }
 
 const EmailPasswordSection:React.FC<LoginSectionProps> = ({ userInfo }) => {
   const [open, setOpen] = useState(false);
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+    const initState = userInfo.password ? "Changed" : "Not Changed";
+    const [status, setStatus] =useState(initState);
 
-  const handleOpen = () => {
+    const handleOpen = () => {
     setOpen(true);
   };
 
@@ -33,19 +35,20 @@ const EmailPasswordSection:React.FC<LoginSectionProps> = ({ userInfo }) => {
         if (newPassword === confirmPassword) {
             try {
                 const response = await axios.put(
-                    `http://localhost:5000/api/nngc/customers/${userInfo.id}`,
+                    `http://localhost:8080/api/nngc/customers/${userInfo.id}`,
                     { password: newPassword },
                     {
                         headers: {
-                            Authorization: `Bearer ${userInfo.token}`,
+                            Authorization: userInfo.token,
                         },
                     }
                 );
 
-                if (response.data.success) {
+                if (response.data) {
                     // Perform necessary actions after a successful password update
                     // For example, you can show a success message to the user
-                    alert("Password updated successfully!");
+                    alert("Password updated successfully!" + response.data.message);
+                    setStatus("Changed");
                     handleClose();
                 } else {
                     // Handle the error message from the API response
@@ -99,7 +102,7 @@ const EmailPasswordSection:React.FC<LoginSectionProps> = ({ userInfo }) => {
               fontWeight: "bold",
             }}
           >
-            Password: {userInfo.password}
+            Password: {status}
           </Typography>
 
           <Button
