@@ -17,6 +17,8 @@ const persistConfig = {
     whitelist: ['userInfo'], // only userInfo will be persisted
 };
 
+console.log('persistConfig', persistConfig)
+
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 // Create a middleware array and add your custom middleware

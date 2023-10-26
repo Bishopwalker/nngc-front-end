@@ -13,16 +13,36 @@ import moment from 'moment';
 import {useProtectedRouteUser} from "../../auth/useProtectedRouteUser";
 import Alert, {AlertColor} from "@mui/material/Alert";
 import Snackbar from '@mui/material/Snackbar';
-
+import {useNavigate}
+    from "react-router-dom";
 const DKAppointment = () => {
 useProtectedRouteUser()
+    const navigate = useNavigate();
+    const userInfo = useAppSelector(state => state.userInfo)
+  const confirmToken = async () => {
+        try {
+            const response = await axios.get(`http://localhost:8080/auth/nngc/token_status?token=${userInfo.token}`, {
+                maxRedirects: 0,  // Prevent automatic redirects
+            });
+            console.log(response.data);
+            if (response.data === "expired") {  // 307 Temporary Redirect
+                navigate('/expired');
+            }
+        } catch (error) {
+
+        }
+    };
+
+    const processedEvents = new Set();
     const serviceToProductIdMapping = {
         'junk-removal': 'prod_Olle6yyFljmCMH',
         'trailer-rental': 'prod_NTzwClciqi6zCh'
     };
 
-    const userInfo = useAppSelector(state => state.userInfo)
-
+    useEffect(() => {
+        confirmToken().then((r)=>console.log(r));
+    },[])
+console.log(userInfo)
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
     const [modalOpen, setModalOpen] = useState(false);
     const [modalOpenDisabledDates, setModalOpenDisabledDates] = useState(false);
@@ -30,7 +50,7 @@ useProtectedRouteUser()
     const [service, setService] = useState("");
     const [time, setTime] = useState("");
     const [selectedValueProductID, setSelectedValueProductID] = useState("");
-    const [paymentIntent,setPaymentIntent] = useState("");
+    const [paymentIntent,setPaymentIntent] = useState({});
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
     const [snackbarSeverity, setSnackbarSeverity] = useState('success');
@@ -46,50 +66,47 @@ useProtectedRouteUser()
         }
     };
 
+
+
 console.log(paymentIntent)
-
-
    // const processedEventTypes = new Set();
-    function handleSse() {
-        const processedEvents = new Set();  // Set to keep track of processed event data
-        let eventSource = new EventSource('http://localhost:8080/sse/subscribe');
 
+    function handleSse() {
+      // Set to keep track of processed event data
+        let eventSource = new EventSource('http://localhost:8080/sse/subscribe');
+//console.log(processedEvents)
         function setupEventSource() {
             eventSource.onmessage = function (event) {
-            //    console.log('Received event:', event.data);
+     //   console.log('Received event:', event.data.receiptUrl);
 
                 // Check if this event data has already been processed
                 if (!processedEvents.has(event.data)) {
                     // If not, process the event
                     setPaymentIntent(event.data);
                     // And add the event data to the set of processed events
+                   // processedEvents.add(event.data);
                     processedEvents.add(event.data);
                 }
 
                     console.log("paymentIntent: " + paymentIntent)
                 // Check if the paymentIntent equals "Payment Succeeded"
-                if (event.data === "Payment succeeded") {
-                    // If so, close the EventSource connection to stop receiving events
-                    console.log("closing port")
-                    eventSource.close();
-                }
+                console.log({...processedEvents})
             };
 
             eventSource.onerror = function (error) {
                 console.error('EventSource failed:', error);
                 // Optionally, close the event source and try to reconnect
                 eventSource.close();
-                // A simple reconnection logic with a delay could look like this:
-               // console.log("paymentIntent: " + paymentIntent)
-                if (paymentIntent !== "Payment succeeded") {
+
+
                     setTimeout(() => {
                         console.log('Reconnecting...');
                         eventSource = new EventSource('http://localhost:8080/sse/subscribe');
                         setupEventSource();  // Re-apply the event handlers to the new EventSource instance
-                    }, 2000);  // 5 seconds delay
+                    }, 5000);  // 5 seconds delay
                 }
             };
-        }
+
 
         setupEventSource();  // Initial setup
     }
