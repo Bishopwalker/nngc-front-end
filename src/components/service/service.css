@@ -1,0 +1,70 @@
+/* Service.css */
+
+.services .toggle-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.services .toggle-buttons button {
+    width: 116px;
+    height: 36px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.services .toggle-buttons button:hover {
+    background-color: rgb(212, 0, 201);
+}
+
+.services .toggle-buttons .monthly {
+  //  background-color: rgb(76, 175, 80); /* success color */
+    background-color: rgb(0, 116, 212);
+}
+
+.services .toggle-buttons .one-time {
+    background-color: rgb(198, 174, 17); /* primary color */
+}
+
+.services .toggle-buttons .active {
+   // background-color: rgb(0, 116, 212); /* highlight color */
+    background-color: rgb(76, 175, 80); /* success color */
+}
+
+.services .card {
+    max-width: 60%; /* 20% smaller */
+    max-height: 80%; /* 20% smaller */
+    margin: auto; /* center the card */
+    /* ... other styles */
+}
+
+.services .slick-track{
+    height: auto !important;
+    max-height: 100vh;
+
+}
+.services .slick-slider{
+margin-left: 125px;
+ width: 100%;
+}
+
+.price-container {
+    display: flex;
+    align-items: flex-start;
+}
+
+.price-container .per-month {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 5px; /* Adjust as necessary */
+}
+
+.price-container .per-month .per {
+    font-size: 50%; /* Adjust as necessary */
+}
+
+.price-container .per-month .month {
+    font-size: 100%; /* Adjust as necessary */
+}
