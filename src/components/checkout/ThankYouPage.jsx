@@ -8,10 +8,12 @@ const theme = createTheme();
 
 const ThankYouPage = () => {
     return (
-        <div>
-        <ThemeProvider theme={theme}>
+        <div >
+
+        <ThemeProvider theme={theme} class>
             <CssBaseline />
             <Box
+
                 sx={{
                     display: 'flex',
                     justifyContent: 'center',
@@ -33,6 +35,7 @@ const ThankYouPage = () => {
 
             </Box>
         </ThemeProvider>
+
 </div>
     );
 };

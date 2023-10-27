@@ -170,7 +170,9 @@ console.log(paymentIntent)
             window.location.href = "/login"; // Redirect to login page
         }
     };
-
+    const handlePushToReceiptUrl = () => {
+        window.location.href = userInfo.receiptUrl as unknown as string;
+    }
 
     const submitAppointment = async () => {
         try {
@@ -227,7 +229,7 @@ console.log(paymentIntent)
         console.log("Service: " + service);
         console.log("Time: " + time);
 
-        if(paymentIntent !== null && paymentIntent === "Payment succeeded") {
+        if( userInfo.receiptUrl !== null || paymentIntent !== null && paymentIntent === "Payment succeeded"  ) {
 
             submitAppointment().then((r)=>console.log("good to go"));
             handleModalClose();
@@ -253,6 +255,7 @@ console.log(paymentIntent)
 
     return (
         <div style={{ maxWidth: "800px", margin: "30px auto 50px" }}>
+            <Button >View Receipt</Button>
             <Snackbar
                 open={openSnackbar}
                 autoHideDuration={20000}
@@ -265,7 +268,7 @@ console.log(paymentIntent)
                     {snackbarMessage}
                 </Alert>
             </Snackbar>
-            {userInfo && userInfo.id && paymentIntent === "Payment succeeded" ? (  // Check if userInfo.id exists
+            {userInfo && userInfo.id && paymentIntent === "Payment succeeded"  || userInfo && userInfo.receiptUrl !== null? (  // Check if userInfo.id exists
               <Box sx={{
                   backgroundColor: '#41de47',
               }}>
