@@ -2,7 +2,10 @@
 import React, {useState} from 'react';
 
 import {Box, Button, Grid, TextField, Typography,} from "@mui/material";
-
+import axios from "axios";
+import {useAppSelector} from "../../redux/hooks";
+import {changeUserLogInfo} from "../../redux/userLogInfoSlice";
+import {useAppDispatch} from "../../redux/hooks";
 export interface AddressResult {
     line1: string;
     line2?: string;
@@ -30,10 +33,74 @@ const AddressForm: React.FC<AddressFormProps> = ({
         county: "",
     });
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    function transformAddress(address: AddressResult) {
+        // Step 2: Split originalAddress.line1 on space character into parts
+        const parts = address.line1.split(' ');
+
+        // Step 3: Take the first part as houseNumber
+        const houseNumber = parts[0];
+
+        // Step 4: Join the remaining parts as streetName
+        const streetName = parts.slice(1).join(' ');
+
+        // Step 5: Create a new object with houseNumber, streetName, and other properties from originalAddress
+        // Step 6: Return the new object
+        return {
+            houseNumber: houseNumber,
+            streetName: streetName,
+            city: address.city,
+            state: address.state,
+            postal_code: address.postal_code,
+            county: address.county,
+        };
+    }
+
+// Usage
+
+const userInfo = useAppSelector((state) => state.userInfo);
+    const handleSubmit  = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-       console.log(address, "Need to send this to my server endpoint");
-        handleClose();
+        const transformedAddress = transformAddress(address);
+     //  console.log(address, "Need to send this to my server endpoint");
+       console.log(transformedAddress, "Need to send this to my server endpoint")
+ const customer = {
+         id: userInfo.id,
+           firstName: userInfo.fullName.split(' ')[0],
+              lastName: userInfo.fullName.split(' ')[1],
+                 email: userInfo.email,
+           houseNumber:transformedAddress.houseNumber,
+              streetName:transformedAddress.streetName,
+                 city: transformedAddress.city,
+                 state: transformedAddress.state,
+     zipCode: transformedAddress.postal_code,
+ }
+        try {
+           console.log(customer)
+            const response = await axios.put(
+                `http://localhost:8080/api/nngc/customers/${userInfo.id}`,
+                customer,
+                {
+                    headers: {
+                        Authorization: userInfo.token,
+                    },
+                }
+            );
+
+            if (response.data) {
+                console.log(response.data);
+                dispatch(changeUserLogInfo(response.data));
+                handleClose();
+            } else {
+                // Handle the error message from the API response
+                console.error(response.data.message);
+            }
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                console.error(error.message);
+            } else {
+                console.error('An error occurred:', error);
+            }
+        }
     };
 
     return (
