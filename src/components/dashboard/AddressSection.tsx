@@ -5,21 +5,27 @@ import {useAppSelector} from "../../redux/hooks";
 import AddressForm from "./AddressForm";
 import axios from "axios";
 
-
-const AddressSection = () => {
+interface AddressResult {
+    token: string;
+}
+const AddressSection = ({token}: AddressResult) => {
     const userInfo = useAppSelector((state) => state.userInfo);
 
-const [geocodeData, setGeocodeData] = useState({})
+const [geocodeData, setGeocodeData] = useState({
+    formattedAddress: undefined, addressComponents: undefined
+
+})
     const fetchGeoLocationData = async ( ) => {
         const result = await axios.get(`http://localhost:8080/nngc/geocoding/${userInfo.id}`)
         setGeocodeData(result.data)
         //console.log(result.data)
     }
+    console.log(geocodeData)
 React.useEffect(()=>{
     if(userInfo.id != null){
     fetchGeoLocationData().then(r => console.log(r));
     }
-},[ ])
+},[ userInfo,])
     const [location, setLocation] = useState(false);
 const [address, setAddress] = useState({
         line1: userInfo.address.line1,
@@ -60,7 +66,7 @@ const [address, setAddress] = useState({
                 />
                 <Divider />
                 <Typography
-                    variant="h6"
+                    variant="h4"
                     sx={{
                         pt: 2,
                         pb: 1,
@@ -70,9 +76,9 @@ const [address, setAddress] = useState({
                         color: "black",
                     }}
                 >
-                    {userInfo.address.line1.toUpperCase()}
+                    {geocodeData.formattedAddress}
                 </Typography>
-                <Typography
+                 <Typography
                     variant="h6"
                     sx={{
                         pt: 1,
@@ -86,7 +92,7 @@ const [address, setAddress] = useState({
                     {userInfo.address.line2}
                 </Typography>
 
-                <Typography
+                {geocodeData.addressComponents && <Typography
                     variant="h6"
                     sx={{
                         pt: 1,
@@ -97,10 +103,8 @@ const [address, setAddress] = useState({
                         color: "black",
                     }}
                 >
-                    {userInfo.address.city.toUpperCase()} {userInfo.address.state.toUpperCase()}{" "}
-                    {userInfo.address.zipCode}
-                </Typography>
-
+                     {} {geocodeData.addressComponents[3].longName}
+                </Typography>}
             </Card>
             <Modal
                 open={location}
@@ -126,7 +130,7 @@ const [address, setAddress] = useState({
                         sx={{ bgcolor: "#2C3E50", color: "#fff", textAlign: "center" }}
                     />
                     <Divider />
-                    <AddressForm handleClose={handleLocationClose}   />
+                    <AddressForm handleClose={handleLocationClose} token={token}   />
                 </Card>
             </Modal>
         </>

@@ -8,12 +8,14 @@ import EmailPasswordSection from "./EmailPasswordSection";
 import React from "react";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {Link, useNavigate} from "react-router-dom";
-import {clearUserInfo} from "../../redux/userLogInfoSlice";
+import {addToken, changeUserLogInfo, clearUserInfo} from "../../redux/userLogInfoSlice";
+import axios from "axios";
 
 const Dashboard = () => {
 	const userInfo = useAppSelector(state => state.userInfo)
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch(); // Get the dispatch function
+	const [token, setToken] = React.useState('');
 	React.useEffect(() => {
 		if (userInfo.id === '') {
 			navigate('/login');
@@ -22,8 +24,45 @@ const Dashboard = () => {
 
 	const handleLogout = () => {
 		dispatch(clearUserInfo()); // Dispatch the clearUserInfo action to clear user data
-		// Here, you can also perform additional tasks like redirecting the user to the login page
+		navigate('/login');
 	};
+	const retrieveTokenFromUser=async (id:any)=> {
+		await axios.get(`http://localhost:8080/auth/nngc/token/${id}`)
+			.then((response) => {
+				//addToken(response.data.token);
+				//  const mergedState = {...initialState, ...response.data};
+				//   initialState.token=response.data.token;
+				console.log(response.data);
+				// console.log(mergedState);
+setToken(response.data.token);
+				}).catch((error) => {
+					console.log(error);
+				});
+				// console.log(state)
+
+	}
+// 	const getUserInfo=async()=>{
+// 		console.log(userInfo)
+// 		const response= await axios.get(`http://localhost:8080/api/nngc/customers/${userInfo.id}`, {
+// 			headers: {
+//
+// 				Authorization: userInfo.token,
+// 			},
+// 			}
+// 		);
+//
+// 		if (response.data){
+// 			console.log(response.data)
+// 			dispatch(changeUserLogInfo(response.data));
+//
+// 		}
+// 		}
+//
+//
+	React.useEffect(() => {
+// getUserInfo().then(r => console.log(r))
+		retrieveTokenFromUser(userInfo.id).then(r => console.log(r))
+	},[userInfo]);
 
 	return (
 		<Box mb={4} mt={0}>
@@ -60,7 +99,7 @@ const Dashboard = () => {
 						<UserProfileSection />
 					</Grid>
 					<Grid item xs={12} sm={6} sx={{margin: '2'}}>
-						<AddressSection />
+						<AddressSection token={token}/>
 					</Grid>
 				</Grid>
 				<Grid container spacing={2}>

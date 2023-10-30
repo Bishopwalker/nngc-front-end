@@ -17,11 +17,12 @@ export interface AddressResult {
 
 interface AddressFormProps {
     handleClose: () => void;
+    token: string;
 
 }
 
 const AddressForm: React.FC<AddressFormProps> = ({
-                                                     handleClose,
+                                                     handleClose,token
 
                                                  }: AddressFormProps) => {
     const [address, setAddress] = useState<AddressResult>({
@@ -32,7 +33,7 @@ const AddressForm: React.FC<AddressFormProps> = ({
         postal_code: "",
         county: "",
     });
-
+const dispatch = useAppDispatch();
     function transformAddress(address: AddressResult) {
         // Step 2: Split originalAddress.line1 on space character into parts
         const parts = address.line1.split(' ');
@@ -81,7 +82,7 @@ const userInfo = useAppSelector((state) => state.userInfo);
                 customer,
                 {
                     headers: {
-                        Authorization: userInfo.token,
+                        Authorization: token,
                     },
                 }
             );
