@@ -9,7 +9,7 @@ import BillingPortal from "./BillingPortal";
 import React from "react";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {Link, useNavigate} from "react-router-dom";
-import {addToken, changeUserLogInfo, clearUserInfo} from "../../redux/userLogInfoSlice";
+import {addToken, changeUserLogInfo, clearUserInfo, updateToken} from "../../redux/userLogInfoSlice";
 import axios from "axios";
 
 const Dashboard = () => {
@@ -36,6 +36,7 @@ const Dashboard = () => {
 				console.log(response.data);
 				// console.log(mergedState);
 setToken(response.data.token);
+
 				}).catch((error) => {
 					console.log(error);
 				});
@@ -43,9 +44,17 @@ setToken(response.data.token);
 
 	}
 
+React.useEffect(() => {
+	//updateToken(token)
+// @ts-ignore
+	dispatch(updateToken(token));
+},[token]);
+
+
 	React.useEffect(() => {
 
 		retrieveTokenFromUser(userInfo.id).then(r => console.log(r))
+
 	},[userInfo]);
 
 	return (

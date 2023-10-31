@@ -45,6 +45,7 @@ export const userLogInfoSlice = createSlice({
         },
 
         addToken: (state, action) => {
+            console.log(action.payload.token);
             const mergedState = {...state, ...action.payload};
             mergedState.isLoggedIn = true;
             return mergedState;
@@ -61,13 +62,15 @@ export const userLogInfoSlice = createSlice({
 });
 
 export const updateToken = (token: any) => async (dispatch: any) => {
-    await axios.post(`http://localhost:8080/auth/nngc/confirm?${token}`)
+    await axios.get(`http://localhost:8080/auth/nngc/token_status?token=${token}`)
         .then((response) => {
             dispatch(updateToken(response.data.customer));
          //   console.log(response.data.customer);
         })
         .catch((error) => {
             console.log(error);
+            if(error.response.status === 401) window.location.href ='/expired';
+         //window.location.href ='/expired';
         });
 };
 

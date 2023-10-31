@@ -255,7 +255,7 @@ console.log(paymentIntent)
 
     return (
         <div style={{ maxWidth: "800px", margin: "30px auto 50px" }}>
-            <Button >View Receipt</Button>
+            <Button onClick={handlePushToReceiptUrl} >View Receipt</Button>
             <Snackbar
                 open={openSnackbar}
                 autoHideDuration={20000}
