@@ -32,11 +32,18 @@ export const userLogInfoSlice = createSlice({
     initialState,
     reducers: {
         changeUserLogInfo: (state, action) => {
-            const mergedState = {...state, ...action.payload};
+            let mergedState;
+            if (action.payload.customerDTO) {
+                const { customerDTO } = action.payload;
+                mergedState = { ...state, ...customerDTO };
+            } else {
+                mergedState = { ...state, ...action.payload };
+            }
             mergedState.isLoggedIn = true;
             mergedState.loginAttemptCount = state.loginAttemptCount + 1;
             return mergedState;
         },
+
         addToken: (state, action) => {
             const mergedState = {...state, ...action.payload};
             mergedState.isLoggedIn = true;

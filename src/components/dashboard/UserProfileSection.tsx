@@ -3,9 +3,11 @@ import {Button, Card, CardHeader, Divider, IconButton, Modal, TextField, Typogra
 import {Edit} from "@mui/icons-material";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import axios from "axios";
+import {changeUserLogInfo} from "../../redux/userLogInfoSlice";
 
 
-const UserProfileSection = ( ) => {
+// @ts-ignore
+const UserProfileSection = ({token} ) => {
     const userInfo = useAppSelector((state) => state.userInfo);
     const dispatch = useAppDispatch(); // Get the dispatch function
 
@@ -21,18 +23,44 @@ const UserProfileSection = ( ) => {
   const handleEditClose = () => {
 	setEdit(false);
   };
-    const handleManageSubscription = async () => {
-        console.log(userInfo.stripeCustomerId);
 
+    const handleEditSubmit = async (e: { preventDefault: () => void; }) => {
+        e.preventDefault();
+        const customer = {
+            id: userInfo.id,
+            firstName: name.split(' ')[0],
+            lastName: name.split(' ')[1],
+            email: email,
+            phone: phone,
+        }
         try {
-            const response = await axios.get(`http://localhost:8080/auth/stripe/create-customer-portal-session/${userInfo.id}`);
-            console.log(response.data)
-            window.location.href = response.data;
-        } catch (error) {
-            console.log(error);
+            console.log(customer)
+            const response = await axios.put(
+                `http://localhost:8080/api/nngc/customers/${userInfo.id}`,
+                customer,
+                {
+                    headers: {
+                        Authorization: token,
+                    },
+                }
+            );
+
+            if (response.data) {
+                console.log(response.data);
+                dispatch(changeUserLogInfo(response.data));
+               handleEditClose();
+            } else {
+                // Handle the error message from the API response
+                console.error(response.data.message);
+            }
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                console.error(error.message);
+            } else {
+                console.error('An error occurred:', error);
+            }
         }
     }
-
   const handleNameChange =  (event: { target: { value: any; }; }) => {
 	setName(event.target.value);
   }
@@ -45,10 +73,6 @@ const UserProfileSection = ( ) => {
 	setPhone(event.target.value);
   }
 
-  const handleEditSubmit = () => {
-	console.log(name, email, phone);
-	handleEditClose();
-  }
 
 
 

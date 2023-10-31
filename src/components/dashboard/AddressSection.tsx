@@ -103,7 +103,8 @@ const [address, setAddress] = useState({
                         color: "black",
                     }}
                 >
-                     {} {geocodeData.addressComponents[3].longName}
+                    { /*@ts-ignore*/}
+                      {geocodeData.addressComponents[3].longName}
                 </Typography>}
             </Card>
             <Modal

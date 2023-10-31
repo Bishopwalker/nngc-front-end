@@ -5,6 +5,7 @@ import PaymentSection from "./PaymentSection";
 import LoginSection from "./LoginSection";
 import TransactionsTable from "./TransactionsTable";
 import EmailPasswordSection from "./EmailPasswordSection";
+import BillingPortal from "./BillingPortal";
 import React from "react";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {Link, useNavigate} from "react-router-dom";
@@ -41,26 +42,9 @@ setToken(response.data.token);
 				// console.log(state)
 
 	}
-// 	const getUserInfo=async()=>{
-// 		console.log(userInfo)
-// 		const response= await axios.get(`http://localhost:8080/api/nngc/customers/${userInfo.id}`, {
-// 			headers: {
-//
-// 				Authorization: userInfo.token,
-// 			},
-// 			}
-// 		);
-//
-// 		if (response.data){
-// 			console.log(response.data)
-// 			dispatch(changeUserLogInfo(response.data));
-//
-// 		}
-// 		}
-//
-//
+
 	React.useEffect(() => {
-// getUserInfo().then(r => console.log(r))
+
 		retrieveTokenFromUser(userInfo.id).then(r => console.log(r))
 	},[userInfo]);
 
@@ -96,7 +80,7 @@ setToken(response.data.token);
 					</Grid>
 
 					<Grid item xs={12} sm={6} sx={{margin: '2'}}>
-						<UserProfileSection />
+						<UserProfileSection token={token} />
 					</Grid>
 					<Grid item xs={12} sm={6} sx={{margin: '2'}}>
 						<AddressSection token={token}/>
@@ -123,7 +107,7 @@ setToken(response.data.token);
 				</Grid>
 				<Grid container spacing={2}>
 					<Grid item xs={12} sm={12} sx={{margin: '2'}}>
-						<TransactionsTable  />
+						<BillingPortal/>
 					</Grid>
 				</Grid>
 			</Box>
