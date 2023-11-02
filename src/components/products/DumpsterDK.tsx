@@ -50,31 +50,32 @@ const { productId } = useParams();
       return;
     }
     console.log('checking out');
-    try {
+
       // Constructing the URL with the productID query parameter
       const url = `http://localhost:8080/auth/stripe/create-checkout-session/${userInfo.id}?productID=${productId}`;
-      const response = await axios.get(url, {
+      await axios.get(url, {
             headers: {
               'Authorization': `Bearer ${userInfo.token}`, // if user token is stored in userInfo object
             }
           }
-      );
-
-      // No need to clean the URL, just get the message property which should contain the URL
-      if(response.data && response.data.message) {
-        window.location.href = response.data.message; // redirects the user to the URL from the response
-      }
-    } catch (error) {
-      console.log(error);
+      ).then((response) => {
+        if (response.data && response.data.message) {
+          window.location.href = response.data.message; // redirects the user to the URL from the response
+        }
+      })
+          .catch((error) => {
+            console.log(error)
+            if(error.response.status === 500) window.location.href ='/expired';
+          })
     }
-  };
+
 
 
 
 
   return (
 
-    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '75vh' }}>
+    <Box sx={{ padding:'20px',display: 'flex', justifyContent: 'center', alignItems: 'center', height: '75vh' }}>
       <Snackbar
           open={openSnackbar}
           autoHideDuration={20000}
@@ -89,7 +90,7 @@ const { productId } = useParams();
       </Snackbar>
       {product && (
           <>
-      <Card sx={{ maxWidth: 500, boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2)', pt: '2rem', mt: '-8rem' }}>
+      <Card sx={{ marginTop:'20px',backgroundColor:'#c880f1', maxWidth: 500, boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2)', pt: '2rem', mt: '-8rem' }}>
         <CardMedia
           component="img"
           src={product.imageUrl[0]}
@@ -111,7 +112,7 @@ const { productId } = useParams();
                 variant="contained"
                 color="primary"
                 onClick={handleCheckout}
-                sx={{ bgcolor: '#2C3E50', '&:hover': { bgcolor: '#2C3E50' } }}>
+                sx={{ bgcolor: '#258c45', '&:hover': { bgcolor: '#be6dec' } }}>
               Get Service
             </Button>
           </Box>

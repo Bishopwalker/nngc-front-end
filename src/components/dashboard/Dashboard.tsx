@@ -9,7 +9,7 @@ import BillingPortal from "./BillingPortal";
 import React from "react";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {Link, useNavigate} from "react-router-dom";
-import {addToken, changeUserLogInfo, clearUserInfo, updateToken} from "../../redux/userLogInfoSlice";
+import {addToken, changeUserLogInfo, clearUserInfo,updateToken} from "../../redux/userLogInfoSlice";
 import axios from "axios";
 
 const Dashboard = () => {
@@ -44,10 +44,25 @@ setToken(response.data.token);
 
 	}
 
+	const updateToken1 = (token: any) => async (dispatch: any) => {
+		console.log(token)
+		await axios.get(`http://localhost:8080/auth/nngc/token_status?token=${token}`)
+			.then((response) => {
+				updateToken(response.data.customer);
+				//   console.log(response.data.customer);
+			})
+			.catch((error) => {
+				console.log(error);
+				if (error.response.status === 500) window.location.href = '/expired';
+
+				//window.location.href ='/expired';
+			});
+	}
 React.useEffect(() => {
 	//updateToken(token)
 // @ts-ignore
-	dispatch(updateToken(token));
+	updateToken1(token);
+	//dispatch(updateToken(token));
 },[token]);
 
 

@@ -61,20 +61,22 @@ export const userLogInfoSlice = createSlice({
     }
 });
 
-export const updateToken = (token: any) => async (dispatch: any) => {
-    await axios.get(`http://localhost:8080/auth/nngc/token_status?token=${token}`)
-        .then((response) => {
-            dispatch(updateToken(response.data.customer));
-         //   console.log(response.data.customer);
-        })
-        .catch((error) => {
-            console.log(error);
-            if(error.response.status === 401) window.location.href ='/expired';
-         //window.location.href ='/expired';
-        });
-};
+// export const updateToken = (token: any) => async (dispatch: any) => {
+//     console.log(token)
+//     await axios.get(`http://localhost:8080/auth/nngc/token_status?token=${token}`)
+//         .then((response) => {
+//             dispatch(updateToken(response.data.customer));
+//          //   console.log(response.data.customer);
+//         })
+//         .catch((error) => {
+//             console.log(error);
+//             if(error.response.status === 501) window.location.href ='/expired';
+//
+//          //window.location.href ='/expired';
+//         });
+// };
 
 
-export const {changeUserLogInfo, addToken, clearUserInfo} = userLogInfoSlice.actions;
+export const {changeUserLogInfo, addToken, clearUserInfo,updateToken} = userLogInfoSlice.actions;
 
 export default userLogInfoSlice.reducer;
