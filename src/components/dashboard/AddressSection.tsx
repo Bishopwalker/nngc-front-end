@@ -16,23 +16,23 @@ const [geocodeData, setGeocodeData] = useState({
 
 })
     const fetchGeoLocationData = async ( ) => {
-        const result = await axios.get(`http://localhost:8080/nngc/geocoding/${userInfo.id}`)
+        const result = await axios.get(`http://localhost:8080/nngc/geocoding/${userInfo.customerDTO.id}`)
         setGeocodeData(result.data)
         //console.log(result.data)
     }
     console.log(geocodeData)
 React.useEffect(()=>{
-    if(userInfo.id != null){
+    if(userInfo.customerDTO.id != null){
     fetchGeoLocationData().then(r => console.log(r));
     }
 },[ userInfo,])
     const [location, setLocation] = useState(false);
 const [address, setAddress] = useState({
-        line1: userInfo.address.line1,
-        line2: userInfo.address.line2,
-        city: userInfo.address.city,
-        state: userInfo.address.state,
-        postal_code: userInfo.address.zipCode,
+        line1: userInfo.customerDTO.address.line1,
+        line2: userInfo.customerDTO.address.line2,
+        city: userInfo.customerDTO.address.city,
+        state: userInfo.customerDTO.address.state,
+        postal_code: userInfo.customerDTO.address.zipCode,
 } as any);
 
     const handleLocationClick = () => {
@@ -89,7 +89,7 @@ const [address, setAddress] = useState({
                         color: "black",
                     }}
                 >
-                    {userInfo.address.line2}
+                    {userInfo.customerDTO.address.line2}
                 </Typography>
 
                 {geocodeData.addressComponents && <Typography

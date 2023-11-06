@@ -1,27 +1,28 @@
 import {createSlice} from "@reduxjs/toolkit";
-import axios from "axios";
 
 
 const initialState = {
-    id: '',
-    fullName: '',
-    email: '',
-    phoneNumber: '',
-    address: {
-        line1: '',
-        line2: '',
-        city: '',
-        state: '',
-        zipCode: 0,
-        latitude: 0,
-        longitude: 0,
+    customerDTO: {
+        id: '',
+        fullName: '',
+        email: '',
+        phoneNumber: '',
+        address: {
+            line1: '',
+            line2: '',
+            city: '',
+            state: '',
+            zipCode: 0,
+            latitude: 0,
+            longitude: 0,
+        },
+        geoLocation: '',
+        enabled: false,
+        stripeCustomerId: '',
+        transactionHistory: [],
+        role: [],
+        isLoggedIn: false,
     },
-    geoLocation: '',
-    enabled: false,
-    stripeCustomerId: '',
-    transactionHistory: [],
- role:[],
-    isLoggedIn: false,
     loginAttemptCount: 0,
     token: '',
     accountPage:'/account', receiptURL: null, invoiceURL: null
@@ -64,7 +65,7 @@ export const userLogInfoSlice = createSlice({
 
 // export const updateToken = (token: any) => async (dispatch: any) => {
 //     console.log(token)
-//     await axios.get(`http://localhost:8080/auth/nngc/token_status?token=${token}`)
+//     await axios.get(`http://3.85.8.238:5000/auth/nngc/token_status?token=${token}`)
 //         .then((response) => {
 //             dispatch(updateToken(response.data.customer));
 //          //   console.log(response.data.customer);

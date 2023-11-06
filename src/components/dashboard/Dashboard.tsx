@@ -3,13 +3,12 @@ import UserProfileSection from "./UserProfileSection";
 import AddressSection from "./AddressSection";
 import PaymentSection from "./PaymentSection";
 import LoginSection from "./LoginSection";
-import TransactionsTable from "./TransactionsTable";
 import EmailPasswordSection from "./EmailPasswordSection";
 import BillingPortal from "./BillingPortal";
 import React from "react";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {Link, useNavigate} from "react-router-dom";
-import {addToken, changeUserLogInfo, clearUserInfo,updateToken} from "../../redux/userLogInfoSlice";
+import {clearUserInfo, updateToken} from "../../redux/userLogInfoSlice";
 import axios from "axios";
 
 const Dashboard = () => {
@@ -18,7 +17,7 @@ const Dashboard = () => {
 	const dispatch = useAppDispatch(); // Get the dispatch function
 	const [token, setToken] = React.useState('');
 	React.useEffect(() => {
-		if (userInfo.id === '') {
+		if (userInfo.customerDTO.id === '') {
 			navigate('/login');
 		}
 	}, [userInfo, navigate]);
@@ -68,7 +67,7 @@ React.useEffect(() => {
 
 	React.useEffect(() => {
 
-		retrieveTokenFromUser(userInfo.id).then(r => console.log(r))
+		retrieveTokenFromUser(userInfo.customerDTO.id).then(r => console.log(r))
 
 	},[userInfo]);
 console.log(userInfo)
@@ -113,7 +112,7 @@ console.log(userInfo)
 				<Grid container spacing={2}>
 					<Grid item xs={12} sm={6} sx={{margin: '2'}}>
 						{/*@ts-ignore*/}
-						<LoginSection userInfo={userInfo} authorities={userInfo.role}/>
+						<LoginSection userInfo={userInfo} authorities={userInfo.customerDTO.role}/>
 					</Grid>
 					<Grid item xs={12} sm={6} sx={{margin: '2'}}>
 						<PaymentSection  />
@@ -124,7 +123,7 @@ console.log(userInfo)
 					</Grid>
 					<Grid item xs={12} sm={6} sx={{margin: '2'}}>
 						{/*@ts-ignore*/}
-						<EmailPasswordSection userInfo={userInfo} authorities={userInfo.role}/>
+						<EmailPasswordSection userInfo={userInfo} authorities={userInfo.customerDTO.role}/>
 					</Grid>
 					<Grid item xs={12} sm={3} sx={{}}>
 					</Grid>

@@ -7,9 +7,9 @@ import axios from "axios";
 const PaymentSection =  (  ) => {
      const userInfo = useAppSelector((state) => state.userInfo);
     const handleManageBilling = async () => {
-        console.log(userInfo.stripeCustomerId);
+        console.log(userInfo.customerDTO.stripeCustomerId);
         try {
-            const response = await axios.get(`http://localhost:8080/auth/stripe/create-customer-portal-session/${userInfo.id}`);
+            const response = await axios.get(`http://localhost:8080/auth/stripe/create-customer-portal-session/${userInfo.customerDTO.id}`);
             console.log(response.data)
             window.location.href = response.data;
         } catch (error) {
@@ -52,7 +52,7 @@ const PaymentSection =  (  ) => {
           color: "black",
         }}
       >
-        Stripe ID: {userInfo.stripeCustomerId}
+        Stripe ID: {userInfo.customerDTO.stripeCustomerId}
       </Typography>
       <Typography
         variant="h6"
@@ -66,11 +66,7 @@ const PaymentSection =  (  ) => {
         }}
       >
         Total Payment: 3
-          {userInfo.transactionHistory.map((transaction: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactFragment | React.ReactPortal | null | undefined) => (
-            <div>
-              <p>{transaction}</p>
-            </div>
-            ))}
+
       </Typography>
 
       <Typography
