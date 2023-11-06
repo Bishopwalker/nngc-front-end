@@ -71,8 +71,8 @@ export const servicesOnce = [ {
     services: 'We offer bulk delivery of mulch, topsoil, gravel, sand, and more. We also offer delivery of landscaping ' +
         'materials such as plants, trees, and shrubs.  If it`s legal and non-hazardous we got a price for it! Call for a quote.',
     price: 125,
-    linkImg:
-        TRAILER3,
+    linkImg:TRAILER3,
+
   }
 
 

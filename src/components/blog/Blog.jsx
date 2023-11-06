@@ -128,7 +128,7 @@ const blogPosts = [
 const Blog = () => {
     console.log(blogPosts)
     const theme = useTheme();
-    const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
     const [expandedPost, setExpandedPost] = useState(null);
 
     const handleViewMore = (index) => {
@@ -151,18 +151,17 @@ const Blog = () => {
                 <Grid container spacing={4} justifyContent="center">
                     {blogPosts.map((post, index) => (
                         <Grid key={index} item xs={12} sm={expandedPost === index ? 12 : 6} md={expandedPost === index ? 12 : 4}>
-                            <Card sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%', borderRadius: '16px', boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)', transition: 'transform 0.3s ease-in-out', '&:hover': { transform: 'scale(1.05)', }, }}>
+                            <Card onClick={() => handleViewMore(index)} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%', borderRadius: '16px', boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)', transition: 'transform 0.3s ease-in-out', '&:hover': { transform: 'scale(1.05)', }, }}>
                                 <CardHeader title={post.title} sx={{ background: '#2d3436', color: '#fff', padding: '12px 16px', borderTopLeftRadius: '16px', borderTopRightRadius: '16px', fontWeight: 'bold', fontSize: '1.2rem', }} />
                                 <CardMedia component="img" height="150" image={post.image} alt="Blog Post Image" sx={{ objectFit: 'cover', borderBottomLeftRadius: '16px', borderBottomRightRadius: '16px', }} />
-                                {!isSmallScreen && (
                                     <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
                                         <Typography variant="subtitle1" color="text.secondary">{post.date}</Typography>
                                         <Typography variant="body2" color="text.secondary" sx={{ paddingTop: '12px', flexGrow: 1 }}>
                                             {expandedPost === index ? post.content : `${post.content.slice(0, 100)}...`}
                                         </Typography>
                                     </CardContent>
-                                )}
-                                <Button variant="contained" color="primary" onClick={() => handleViewMore(index)}>
+
+                                <Button variant="contained" color="primary" >
                                     {expandedPost === index ? 'View Less' : 'View More'}
                                 </Button>
                             </Card>

@@ -51,7 +51,7 @@ const Login = () => {
 		},
 		})
 			.then((response) => {
-			//console.log('response',response)
+		console.log('response',response)
 			dispatch(changeUserLogInfo(response.data.customerDTO))
 			dispatch(addToken({token: response.data.token}))
 	 		if(response.data.token) {

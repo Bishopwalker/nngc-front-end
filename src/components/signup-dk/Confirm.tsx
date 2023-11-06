@@ -76,12 +76,12 @@ export default function Confirm() {
     )
           .then((response) => {
               console.log('response',response)
-              dispatch(changeUserLogInfo(response.data.customerDTO))
+           //   dispatch(changeUserLogInfo(response.data.customerDTO))
               dispatch(addToken({token: response.data.token}))
+              setIsLoggedIn(true);
               if(response.data.token) {
                   console.log(response.data.token);
               }
-              setIsLoggedIn(true);
           })
           .catch((error) => {
               console.log(error)
