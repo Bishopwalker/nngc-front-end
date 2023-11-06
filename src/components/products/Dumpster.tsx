@@ -35,10 +35,10 @@ const Dumpster  = ( ) => {
 
 
     const purchase_Item = async () => {
-    console.log('purchase_Item',userInfo.customerDTO.id)
+    console.log('purchase_Item',userInfo.id)
         try {
             const response = await axios.get(
-                `http://localhost:8080/auth/stripe/create-checkout-session_wid/res_sub/${userInfo.customerDTO.id}`
+                `http://localhost:8080/auth/stripe/create-checkout-session_wid/res_sub/${userInfo.id}`
             );
 
             // Step 1: Check if response.data starts with "redirect:"
@@ -62,7 +62,7 @@ const Dumpster  = ( ) => {
    // console.log(userInfo)
     return (
         <Box display="flex" flexDirection="column" alignItems="center">
-            {userInfo.customerDTO.id &&  <Button onClick={purchase_Item}>Checkout</Button>}
+            {userInfo.id &&  <Button onClick={purchase_Item}>Checkout</Button>}
             {product && (
                 <>
                     <Box mb={2}>

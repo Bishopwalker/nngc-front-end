@@ -41,7 +41,7 @@ const { productId } = useParams();
   }, []);
 
   const handleCheckout = async () => {
-    if( !userInfo.customerDTO.id) {
+    if( !userInfo.id) {
       setSnackbarSeverity('error');
       setSnackbarMessage('An error occurred. Most likely because you aren`t logged in!. Click Here to login in');
       setOpenSnackbar(true);
@@ -52,7 +52,7 @@ const { productId } = useParams();
     console.log('checking out');
 
       // Constructing the URL with the productID query parameter
-      const url = `http://localhost:8080/auth/stripe/create-checkout-session/${userInfo.customerDTO.id}?productID=${productId}`;
+      const url = `http://localhost:8080/auth/stripe/create-checkout-session/${userInfo.id}?productID=${productId}`;
       await axios.get(url, {
             headers: {
               'Authorization': `Bearer ${userInfo.token}`, // if user token is stored in userInfo object

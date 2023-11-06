@@ -12,9 +12,9 @@ const UserProfileSection = ({token} ) => {
     const dispatch = useAppDispatch(); // Get the dispatch function
 
     const [edit, setEdit] = useState(false);
-  const [name, setName] = useState(userInfo.customerDTO.fullName);
-  const [email, setEmail] = useState(userInfo.customerDTO.email);
-  const [phone, setPhone] = useState(userInfo.customerDTO.phoneNumber);
+  const [name, setName] = useState(userInfo.fullName);
+  const [email, setEmail] = useState(userInfo.email);
+  const [phone, setPhone] = useState(userInfo.phoneNumber);
 
   const handleEditClick = () => {
 	setEdit(true);
@@ -27,7 +27,7 @@ const UserProfileSection = ({token} ) => {
     const handleEditSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         const customer = {
-            id: userInfo.customerDTO.id,
+            id: userInfo.id,
             firstName: name.split(' ')[0],
             lastName: name.split(' ')[1],
             email: email,
@@ -36,7 +36,7 @@ const UserProfileSection = ({token} ) => {
         try {
             console.log(customer)
             const response = await axios.put(
-                `http://localhost:8080/api/nngc/customers/${userInfo.customerDTO.id}`,
+                `http://localhost:8080/api/nngc/customers/${userInfo.id}`,
                 customer,
                 {
                     headers: {
@@ -112,7 +112,7 @@ const UserProfileSection = ({token} ) => {
           color: "black",
         }}
       >
-        Name: {userInfo.customerDTO.fullName}
+        Name: {userInfo.fullName}
       </Typography>
       <Typography
         variant="h6"
@@ -125,7 +125,7 @@ const UserProfileSection = ({token} ) => {
           color: "black",
         }}
       >
-        Email: {userInfo.customerDTO.email}
+        Email: {userInfo.email}
       </Typography>
 
       <Typography
@@ -139,7 +139,7 @@ const UserProfileSection = ({token} ) => {
           color: "black",
         }}
       >
-        Phone: {userInfo.customerDTO.phoneNumber}
+        Phone: {userInfo.phoneNumber}
       </Typography>
       <Modal
         open={edit}

@@ -17,7 +17,7 @@ const Dashboard = () => {
 	const dispatch = useAppDispatch(); // Get the dispatch function
 	const [token, setToken] = React.useState('');
 	React.useEffect(() => {
-		if (userInfo.customerDTO.id === '') {
+		if (userInfo.id === '') {
 			navigate('/login');
 		}
 	}, [userInfo, navigate]);
@@ -67,7 +67,7 @@ React.useEffect(() => {
 
 	React.useEffect(() => {
 
-		retrieveTokenFromUser(userInfo.customerDTO.id).then(r => console.log(r))
+		retrieveTokenFromUser(userInfo.id).then(r => console.log(r))
 
 	},[userInfo]);
 console.log(userInfo)
@@ -112,7 +112,7 @@ console.log(userInfo)
 				<Grid container spacing={2}>
 					<Grid item xs={12} sm={6} sx={{margin: '2'}}>
 						{/*@ts-ignore*/}
-						<LoginSection userInfo={userInfo} authorities={userInfo.customerDTO.role}/>
+						<LoginSection userInfo={userInfo} authorities={userInfo.role}/>
 					</Grid>
 					<Grid item xs={12} sm={6} sx={{margin: '2'}}>
 						<PaymentSection  />
@@ -123,7 +123,7 @@ console.log(userInfo)
 					</Grid>
 					<Grid item xs={12} sm={6} sx={{margin: '2'}}>
 						{/*@ts-ignore*/}
-						<EmailPasswordSection userInfo={userInfo} authorities={userInfo.customerDTO.role}/>
+						<EmailPasswordSection userInfo={userInfo} authorities={userInfo.role}/>
 					</Grid>
 					<Grid item xs={12} sm={3} sx={{}}>
 					</Grid>

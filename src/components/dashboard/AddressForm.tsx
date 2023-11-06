@@ -65,10 +65,10 @@ const userInfo = useAppSelector((state) => state.userInfo);
      //  console.log(address, "Need to send this to my server endpoint");
        console.log(transformedAddress, "Need to send this to my server endpoint")
  const customer = {
-         id: userInfo.customerDTO.id,
-           firstName: userInfo.customerDTO.fullName.split(' ')[0],
-              lastName: userInfo.customerDTO.fullName.split(' ')[1],
-                 email: userInfo.customerDTO.email,
+         id: userInfo.id,
+           firstName: userInfo.fullName.split(' ')[0],
+              lastName: userInfo.fullName.split(' ')[1],
+                 email: userInfo.email,
            houseNumber:transformedAddress.houseNumber,
               streetName:transformedAddress.streetName,
                  city: transformedAddress.city,
@@ -78,7 +78,7 @@ const userInfo = useAppSelector((state) => state.userInfo);
         try {
            console.log(customer)
             const response = await axios.put(
-                `http://localhost:8080/api/nngc/customers/${userInfo.customerDTO.id}`,
+                `http://localhost:8080/api/nngc/customers/${userInfo.id}`,
                 customer,
                 {
                     headers: {

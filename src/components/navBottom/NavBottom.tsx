@@ -6,7 +6,7 @@ import {Link, useLocation} from 'react-router-dom';
 import {useAppSelector} from "../../redux/hooks";
 
 const NavBottom = () => {
-    const role: any = useAppSelector(state => state.userInfo.customerDTO?.role);
+    const role: any = useAppSelector(state => state.userInfo?.role);
 
 
     const location = useLocation();

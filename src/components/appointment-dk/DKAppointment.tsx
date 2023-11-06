@@ -155,7 +155,7 @@ console.log(paymentIntent)
 
     const dateClickHandler = (info: { dateStr: string | React.SetStateAction<Date | null>; }) => {
         // Step 1: Check if user is logged in
-        if (userInfo && userInfo.customerDTO.id) {
+        if (userInfo && userInfo.id) {
             // User is logged in, proceed as usual
             if (disabledDates.includes(info.dateStr as string)) {
                 setSelectedDate(info.dateStr as any);
@@ -171,7 +171,7 @@ console.log(paymentIntent)
         }
     };
     const handlePushToReceiptUrl = () => {
-        window.location.href = userInfo.customerDTO.receiptUrl as unknown as string;
+        window.location.href = userInfo.receiptUrl as unknown as string;
     }
 
     const submitAppointment = async () => {
@@ -185,8 +185,8 @@ console.log(paymentIntent)
 
             // Step 3: Update the JSON payload
             const myJSON = {
-                customer: userInfo.customerDTO.id,  // Assuming userInfo.customerDTO.id is the customer ID
-                id:userInfo.customerDTO.id,
+                customer: userInfo.id,  // Assuming userInfo.id is the customer ID
+                id:userInfo.id,
                 appointmentDate: formattedDate,
                 appointmentTime: formattedTime,
                 appointmentType: service
@@ -229,7 +229,7 @@ console.log(paymentIntent)
         console.log("Service: " + service);
         console.log("Time: " + time);
 
-        if( userInfo.customerDTO.receiptUrl !== null || paymentIntent !== null && paymentIntent === "Payment succeeded"  ) {
+        if( userInfo.receiptUrl !== null || paymentIntent !== null && paymentIntent === "Payment succeeded"  ) {
 
             submitAppointment().then((r)=>console.log("good to go"));
             handleModalClose();
@@ -268,7 +268,7 @@ console.log(paymentIntent)
                     {snackbarMessage}
                 </Alert>
             </Snackbar>
-            {userInfo && userInfo.customerDTO.id && paymentIntent === "Payment succeeded"  || userInfo && userInfo.customerDTO.receiptUrl !== null? (  // Check if userInfo.customerDTO.id exists
+            {userInfo && userInfo.id && paymentIntent === "Payment succeeded"  || userInfo && userInfo.receiptUrl !== null? (  // Check if userInfo.id exists
               <Box sx={{
                   backgroundColor: '#41de47',
               }}>

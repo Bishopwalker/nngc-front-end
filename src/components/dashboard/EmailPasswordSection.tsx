@@ -12,7 +12,7 @@ const EmailPasswordSection:React.FC<LoginSectionProps> = ({ userInfo }) => {
   const [open, setOpen] = useState(false);
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-    const initState = userInfo.customerDTO.password ? "Changed" : "Not Changed";
+    const initState = userInfo.password ? "Changed" : "Not Changed";
     const [status, setStatus] =useState(initState);
 
     const handleOpen = () => {
@@ -35,7 +35,7 @@ const EmailPasswordSection:React.FC<LoginSectionProps> = ({ userInfo }) => {
         if (newPassword === confirmPassword) {
             try {
                 const response = await axios.put(
-                    `http://localhost:8080/api/nngc/customers/${userInfo.customerDTO.id}`,
+                    `http://localhost:8080/api/nngc/customers/${userInfo.id}`,
                     { password: newPassword },
                     {
                         headers: {
@@ -91,7 +91,7 @@ const EmailPasswordSection:React.FC<LoginSectionProps> = ({ userInfo }) => {
               fontWeight: "bold",
             }}
           >
-            Email: {userInfo.customerDTO.email}
+            Email: {userInfo.email}
           </Typography>
           <Typography
             variant="h6"
