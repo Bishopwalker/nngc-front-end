@@ -24,7 +24,8 @@ const initialState = {
     isLoggedIn: false,
     loginAttemptCount: 0,
     token: '',
-    accountPage:'/account',
+    accountPage:'/account', receiptURL: null, invoiceURL: null
+
 };
 
 export const userLogInfoSlice = createSlice({

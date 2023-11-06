@@ -28,8 +28,8 @@ export interface UserInfo {
     authorities: Authority[];
     isLoggedIn: boolean;
     loginAttemptCount: number;
-    receiptUrl?: string;
-    invoiceUrl?: string;
+    receiptURL?: string;
+    invoiceURL?: string;
     token: string;
     accountPage: string;
 

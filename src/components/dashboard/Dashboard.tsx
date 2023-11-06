@@ -71,19 +71,19 @@ React.useEffect(() => {
 		retrieveTokenFromUser(userInfo.id).then(r => console.log(r))
 
 	},[userInfo]);
-
+console.log(userInfo)
 	return (
 		<Box mb={4} mt={0}>
 			<Box sx={{ }} pb={1} pt={1}>
 				<Grid container spacing={2}>
 					<Grid item xs={12} sm={12}>
 						<Box display="flex" justifyContent="space-between" alignItems="center">
-							<Link to="/appointment">
-							<Button variant="contained" color="success" sx={{
+							{userInfo.receiptURL? 	<Link to="/appointment">
+								<Button variant="contained" color="success" sx={{
 								marginBottom: '15px',
 							}} >
 								View Junk Removal Schedule
-							</Button>  </Link>
+							</Button>  </Link>:null}
 							<Typography variant="h4" sx={{
 								fontWeight: 'bold',
 								color: '#2C3E50',
