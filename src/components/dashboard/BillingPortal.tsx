@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Button, Typography } from '@mui/material';
+import {Box, Button, Typography} from '@mui/material';
 import {useAppSelector} from "../../redux/hooks";
 import axios from "axios";
 
@@ -7,9 +7,9 @@ const BillingPortal = () => {
 
     const userInfo = useAppSelector((state) => state.userInfo);
     const handleManageBilling = async () => {
-        console.log(userInfo.stripeCustomerId);
+        console.log(userInfo.customerDTO.stripeCustomerId);
         try {
-            const response = await axios.get(`http://localhost:8080/auth/stripe/create-customer-portal-session/${userInfo.id}`);
+            const response = await axios.get(`http://localhost:8080/auth/stripe/create-customer-portal-session/${userInfo.customerDTO.id}`);
             console.log(response.data)
             window.location.href = response.data;
         } catch (error) {

@@ -8,7 +8,7 @@ export const useProtectedRouteUser = () => {
     const navigate = useNavigate();
 
     // Get the role from Redux state and explicitly specify its type
-    const role: any = useAppSelector((state) => state.userInfo.role);
+    const role: any = useAppSelector((state) => state.userInfo.customerDTO.role);
 console.log(role)
     // Use useEffect to check the role
     useEffect(() => {

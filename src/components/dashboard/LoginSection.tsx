@@ -37,7 +37,7 @@ const LoginSection:React.FC<LoginSectionProps> = ({ userInfo }) => {
           color: "black",
         }}
       >
-        Logged In: {userInfo.isLoggedIn ? "Yes" : "No"}
+        Logged In: {userInfo.customerDTO.isLoggedIn ? "Yes" : "No"}
       </Typography>
       <Typography
         variant="h6"

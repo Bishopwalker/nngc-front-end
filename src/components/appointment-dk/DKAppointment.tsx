@@ -13,8 +13,8 @@ import moment from 'moment';
 import {useProtectedRouteUser} from "../../auth/useProtectedRouteUser";
 import Alert, {AlertColor} from "@mui/material/Alert";
 import Snackbar from '@mui/material/Snackbar';
-import {useNavigate}
-    from "react-router-dom";
+import {useNavigate} from "react-router-dom";
+
 const DKAppointment = () => {
 useProtectedRouteUser()
     const navigate = useNavigate();
@@ -155,7 +155,7 @@ console.log(paymentIntent)
 
     const dateClickHandler = (info: { dateStr: string | React.SetStateAction<Date | null>; }) => {
         // Step 1: Check if user is logged in
-        if (userInfo && userInfo.id) {
+        if (userInfo && userInfo.customerDTO.id) {
             // User is logged in, proceed as usual
             if (disabledDates.includes(info.dateStr as string)) {
                 setSelectedDate(info.dateStr as any);
@@ -171,7 +171,7 @@ console.log(paymentIntent)
         }
     };
     const handlePushToReceiptUrl = () => {
-        window.location.href = userInfo.receiptUrl as unknown as string;
+        window.location.href = userInfo.customerDTO.receiptUrl as unknown as string;
     }
 
     const submitAppointment = async () => {
@@ -185,8 +185,8 @@ console.log(paymentIntent)
 
             // Step 3: Update the JSON payload
             const myJSON = {
-                customer: userInfo.id,  // Assuming userInfo.id is the customer ID
-                id:userInfo.id,
+                customer: userInfo.customerDTO.id,  // Assuming userInfo.customerDTO.id is the customer ID
+                id:userInfo.customerDTO.id,
                 appointmentDate: formattedDate,
                 appointmentTime: formattedTime,
                 appointmentType: service
@@ -229,7 +229,7 @@ console.log(paymentIntent)
         console.log("Service: " + service);
         console.log("Time: " + time);
 
-        if( userInfo.receiptUrl !== null || paymentIntent !== null && paymentIntent === "Payment succeeded"  ) {
+        if( userInfo.customerDTO.receiptUrl !== null || paymentIntent !== null && paymentIntent === "Payment succeeded"  ) {
 
             submitAppointment().then((r)=>console.log("good to go"));
             handleModalClose();
@@ -268,7 +268,7 @@ console.log(paymentIntent)
                     {snackbarMessage}
                 </Alert>
             </Snackbar>
-            {userInfo && userInfo.id && paymentIntent === "Payment succeeded"  || userInfo && userInfo.receiptUrl !== null? (  // Check if userInfo.id exists
+            {userInfo && userInfo.customerDTO.id && paymentIntent === "Payment succeeded"  || userInfo && userInfo.customerDTO.receiptUrl !== null? (  // Check if userInfo.customerDTO.id exists
               <Box sx={{
                   backgroundColor: '#41de47',
               }}>

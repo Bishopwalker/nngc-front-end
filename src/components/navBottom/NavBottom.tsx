@@ -6,7 +6,8 @@ import {Link, useLocation} from 'react-router-dom';
 import {useAppSelector} from "../../redux/hooks";
 
 const NavBottom = () => {
-    const role: any = useAppSelector(state => state.userInfo.role);
+    const role: any = useAppSelector(state => state.userInfo.customerDTO?.role);
+
 
     const location = useLocation();
     const { pathname } = location;
@@ -19,7 +20,7 @@ const NavBottom = () => {
     }
   return (
     <Box sx={{ padding: '1rem' }}>
-           {role ==='ADMIN' && (
+           {role && role ==='ADMIN' && (
             <>
                 <Button variant={"contained"} color={"primary"} sx={{mt: '1rem'}} component={Link}  to={`/emaps?page=${pageNumber}`}>
                     View Routes
