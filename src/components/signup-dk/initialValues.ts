@@ -28,6 +28,7 @@ export const initialValues: ValidationSchema = {
     value: '',
     error: '',
     required: true,
+    minLength:5,
     validate: 'password'
   },
   county: {

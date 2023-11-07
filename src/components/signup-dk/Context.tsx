@@ -35,7 +35,7 @@ type ContextProps = {
   activeStep: number
   formValues: ValidationSchema
   // eslint-disable-next-line no-unused-vars
-  handleChange(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, checked?: boolean): void
+    handleChange(event: { target: { name: string; value: string } }, checked?: boolean): void
   handleNext(): void
   handleBack(): void
   variant: Variant

@@ -1,4 +1,4 @@
-import React, {useCallback, useContext} from 'react'
+import React, {useCallback, useContext, useEffect, useRef, useState} from 'react'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
@@ -7,6 +7,8 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import FormHelperText from '@mui/material/FormHelperText'
 import Checkbox from '@mui/material/Checkbox'
 import {AppContext} from './Context'
+import {useJsApiLoader} from "@react-google-maps/api";
+import {libraries} from '../google/mapsConfig';
 
 export default function SecondStep() {
   const { formValues, handleChange, handleBack, handleNext, variant, margin } = useContext(AppContext)
@@ -19,6 +21,50 @@ export default function SecondStep() {
       ),
     [formValues, city, date, phone, agreenemt, houseNumber, streetName, state, zipCode]
   )
+
+  const streetNameRef = useRef(null);
+
+  const { isLoaded, loadError } = useJsApiLoader({
+    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY, // Your API Key
+    libraries
+  });
+  console.log(import.meta.env.VITE_GOOGLE_MAPS_API_KEY);
+
+  useEffect(() => {
+    if (isLoaded && streetNameRef.current && window.google?.maps?.places) {
+      const autocomplete = new window.google.maps.places.Autocomplete(streetNameRef.current, {
+        types: ['address'],
+        componentRestrictions: { country: 'us'    },
+      });
+
+      autocomplete.addListener('place_changed', () => {
+        const place = autocomplete.getPlace();
+        // Assuming you want to update the streetName when a place is selected
+        console.log(place)
+        if (place.formatted_address) {
+
+          // Create an event-like object with the same structure that your handleChange function expects
+          const getAddressComponent = (type: string) => {
+            return place.address_components?.find(component => component.types.includes(type))?.short_name || '';
+          };
+
+          // Extract the street address, city, state, and zip code using the helper function
+          const streetAddress = getAddressComponent('route');
+          const localCity = getAddressComponent('locality');
+          const localState = getAddressComponent('administrative_area_level_1');
+          const postalCode = getAddressComponent('postal_code');
+
+          // Update the form values using handleChange
+          handleChange({ target: { name: 'streetName', value: streetAddress } });
+          handleChange({ target: { name: 'city', value: localCity } });
+          handleChange({ target: { name: 'state', value: localState } });
+          handleChange({ target: { name: 'zipCode', value: postalCode } });
+
+        }
+      });
+    }
+  }, [isLoaded, streetNameRef, handleChange]);
+
 
   return (
     <>
@@ -51,6 +97,7 @@ export default function SecondStep() {
             error={!!streetName.error}
             helperText={streetName.error}
             required={streetName.required}
+            inputRef={streetNameRef}
           />
         </Grid>
         <Grid item xs={6}>
