@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 
 
 const initialState = {
-    customerDTO: {
+
         id: '',
         fullName: '',
         email: '',
@@ -22,7 +22,7 @@ const initialState = {
         transactionHistory: [],
         role: [],
         isLoggedIn: false,
-    },
+
     loginAttemptCount: 0,
     token: '',
     accountPage:'/account', receiptURL: null, invoiceURL: null

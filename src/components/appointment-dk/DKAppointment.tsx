@@ -148,6 +148,7 @@ console.log(paymentIntent)
                 };
             });
             setEvents(newEvents);  // Update the events state with the new event objects
+
         } catch (error) {
             console.error("Error fetching appointments:", error);
         }
@@ -171,7 +172,7 @@ console.log(paymentIntent)
         }
     };
     const handlePushToReceiptUrl = () => {
-        window.location.href = userInfo.receiptUrl as unknown as string;
+        window.location.href = userInfo.receiptURL as unknown as string;
     }
 
     const submitAppointment = async () => {
@@ -208,9 +209,18 @@ console.log(paymentIntent)
             // Log the response
             console.log("Backend response:", response);
             setAppointmentsUpdated(prev => !prev);
+
         } catch (error) {
             // Log the error
-            console.error("An error occurred:", error);
+            console.error("An error occurred:",error);
+                // @ts-ignore
+            if(error.response.status === 500) {
+
+                    setSnackbarSeverity('error');
+                    setSnackbarMessage('Appointment Already scheduled during this time, try again!');
+                    setOpenSnackbar(true);
+
+                }
         }
 
     };
@@ -229,7 +239,7 @@ console.log(paymentIntent)
         console.log("Service: " + service);
         console.log("Time: " + time);
 
-        if( userInfo.receiptUrl !== null || paymentIntent !== null && paymentIntent === "Payment succeeded"  ) {
+        if( userInfo.receiptURL !== null || paymentIntent !== null && paymentIntent === "Payment succeeded"  ) {
 
             submitAppointment().then((r)=>console.log("good to go"));
             handleModalClose();
@@ -268,7 +278,7 @@ console.log(paymentIntent)
                     {snackbarMessage}
                 </Alert>
             </Snackbar>
-            {userInfo && userInfo.id && paymentIntent === "Payment succeeded"  || userInfo && userInfo.receiptUrl !== null? (  // Check if userInfo.id exists
+            {userInfo && userInfo.id && paymentIntent === "Payment succeeded"  || userInfo && userInfo.receiptURL !== null? (  // Check if userInfo.id exists
               <Box sx={{
                   backgroundColor: '#41de47',
               }}>
@@ -373,7 +383,7 @@ console.log(paymentIntent)
                         <MenuItem value="9am">9 AM</MenuItem>
                         <MenuItem value="10am">10 AM</MenuItem>
                         <MenuItem value="11am">11 AM</MenuItem>
-                        <MenuItem value="12am">12 PM</MenuItem>
+                        <MenuItem value="12pm">12 PM</MenuItem>
                         <MenuItem value="1pm">1 PM</MenuItem>
                         <MenuItem value="2pm">2 PM</MenuItem>
                         <MenuItem value="3pm">3 PM</MenuItem>
@@ -473,12 +483,12 @@ console.log(paymentIntent)
                         <MenuItem value="9am">9 AM</MenuItem>
                         <MenuItem value="10am">10 AM</MenuItem>
                         <MenuItem value="11am">11 AM</MenuItem>
-                        <MenuItem value="12am">12 AM</MenuItem>
-                        <MenuItem value="1am">1 AM</MenuItem>
+                        <MenuItem value="12pm">12 PM</MenuItem>
+                        <MenuItem value="1pm">1 PM</MenuItem>
                         <MenuItem value="2pm">2 PM</MenuItem>
-                        <MenuItem value="3">3 PM</MenuItem>
-                        <MenuItem value="4">4 PM</MenuItem>
-                        <MenuItem value="5">5 PM</MenuItem>
+                        <MenuItem value="3pm">3 PM</MenuItem>
+                        <MenuItem value="4pm">4 PM</MenuItem>
+                        <MenuItem value="5pm">5 PM</MenuItem>
 
                     </Select>
                     <Button
