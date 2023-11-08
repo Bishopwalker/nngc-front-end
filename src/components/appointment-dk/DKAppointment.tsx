@@ -7,18 +7,21 @@ import "./DKAppointment.css";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import {Box, Button, Card, CardHeader, Divider, MenuItem, Select, TextField,} from "@mui/material";
-import {useAppSelector} from "../../redux/hooks";
+import {useAppSelector,useAppDispatch} from "../../redux/hooks";
 import axios from "axios";
 import moment from 'moment';
 import {useProtectedRouteUser} from "../../auth/useProtectedRouteUser";
 import Alert, {AlertColor} from "@mui/material/Alert";
 import Snackbar from '@mui/material/Snackbar';
 import {useNavigate} from "react-router-dom";
+import {changeUserLogInfo} from "../../redux/userLogInfoSlice";
 
 const DKAppointment = () => {
 useProtectedRouteUser()
     const navigate = useNavigate();
     const userInfo = useAppSelector(state => state.userInfo)
+    const dispatch = useAppDispatch();
+
   const confirmToken = async () => {
         try {
             const response = await axios.get(`http://localhost:8080/auth/nngc/token_status?token=${userInfo.token}`, {
@@ -29,7 +32,7 @@ useProtectedRouteUser()
                 navigate('/expired');
             }
         } catch (error) {
-
+            navigate('/expired');
         }
     };
 
@@ -38,9 +41,27 @@ useProtectedRouteUser()
         'junk-removal': 'prod_Olle6yyFljmCMH',
         'trailer-rental': 'prod_NTzwClciqi6zCh'
     };
+    const updateUserInfo=async()=>{
+        try{
+            const response = await axios.get(
+                `http://localhost:8080/api/nngc/customers/${userInfo.id}`, {
+                    headers: {
+                        Authorization: userInfo.token,
+                    },
+                }
+            )
+            if(response.data){
+                dispatch(changeUserLogInfo(response.data));
+            }
+        }catch (error){
+            console.error(error)
+        }
+    }
+
 
     useEffect(() => {
-        confirmToken().then((r)=>console.log(r));
+        confirmToken().then((r)=>updateUserInfo());
+
     },[])
 console.log(userInfo)
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -239,7 +260,7 @@ console.log(paymentIntent)
         console.log("Service: " + service);
         console.log("Time: " + time);
 
-        if( userInfo.receiptURL !== null || paymentIntent !== null && paymentIntent === "Payment succeeded"  ) {
+        if( userInfo.receiptURL  || paymentIntent !== null && paymentIntent === "Payment succeeded"  ) {
 
             submitAppointment().then((r)=>console.log("good to go"));
             handleModalClose();
@@ -260,7 +281,7 @@ console.log(paymentIntent)
     };
 
 
-    //console.log(userInfo)
+    console.log(userInfo)
 
 
     return (

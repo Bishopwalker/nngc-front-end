@@ -5,6 +5,9 @@ import {Link, useNavigate, useParams} from "react-router-dom"
 import {useAppSelector} from "../../redux/hooks";
 import Alert, {AlertColor} from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
+import ARROW_BACK from "/arrow_back.svg"
+import {ThemeProvider, useTheme} from '@mui/material/styles';
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 type Product = {
   message: string;
@@ -15,6 +18,9 @@ type Product = {
 };
 
 const DumpsterDK = () => {
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
   const [product, setProduct] = useState<Product>();
 const { productId } = useParams();
   const userInfo = useAppSelector(state => state.userInfo);
@@ -24,7 +30,7 @@ const { productId } = useParams();
   const [snackbarSeverity, setSnackbarSeverity] = useState('success');
 
   //console.log(userInfo);
-  console.log(product)
+  //console.log(product)
   const fetchProduct = async () => {
     try {
       const response = await axios.get(
@@ -75,7 +81,9 @@ const { productId } = useParams();
 
   return (
 
-    <Box sx={{ padding:'20px',display: 'flex', justifyContent: 'center', alignItems: 'center', height: '75vh' }}>
+    <Box sx={{ padding:'20px', paddingTop:isSmallScreen?'75px':0,display: 'flex', justifyContent: 'center', alignItems: 'center', height: '75vh' }}>
+      {!isSmallScreen && <img src={ARROW_BACK}  alt="back" height={'140px'} width={'100px'} onClick={() => navigate('/services')}/>}
+
       <Snackbar
           open={openSnackbar}
           autoHideDuration={20000}
