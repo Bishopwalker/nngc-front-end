@@ -8,7 +8,7 @@ import BillingPortal from "./BillingPortal";
 import React from "react";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {Link, useNavigate} from "react-router-dom";
-import {clearUserInfo, updateToken} from "../../redux/userLogInfoSlice";
+import {changeUserLogInfo, clearUserInfo, updateToken} from "../../redux/userLogInfoSlice";
 import axios from "axios";
 
 const Dashboard = () => {
@@ -26,6 +26,23 @@ const Dashboard = () => {
 		dispatch(clearUserInfo()); // Dispatch the clearUserInfo action to clear user data
 		navigate('/login');
 	};
+
+	const updateUserInfo=async()=>{
+		try{
+			const response = await axios.get(
+				`http://localhost:8080/api/nngc/customers/${userInfo.id}`, {
+					headers: {
+						Authorization: userInfo.token,
+					},
+				}
+			)
+			if(response.data){
+				dispatch(changeUserLogInfo(response.data));
+			}
+		}catch (error){
+			console.error(error)
+		}
+	}
 	const retrieveTokenFromUser=async (id:any)=> {
 		await axios.get(`http://localhost:8080/auth/nngc/token/${id}`)
 			.then((response) => {
@@ -63,7 +80,9 @@ React.useEffect(() => {
 	updateToken1(token);
 	//dispatch(updateToken(token));
 },[token]);
-
+React.useEffect(() => {
+	updateUserInfo().then(r => console.log(r));
+},[])
 
 	React.useEffect(() => {
 
