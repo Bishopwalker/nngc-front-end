@@ -12,7 +12,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 type Product = {
   message: string;
   name: string;
-  price: string;
+  price: number;
   description: string;
   imageUrl: string[];
 };
@@ -30,7 +30,7 @@ const { productId } = useParams();
   const [snackbarSeverity, setSnackbarSeverity] = useState('success');
 
   //console.log(userInfo);
-  //console.log(product)
+  console.log(product)
   const fetchProduct = async () => {
     try {
       const response = await axios.get(
@@ -113,7 +113,8 @@ const { productId } = useParams();
             {product.description}
           </Typography>
           <Typography variant="h6" component="h2" sx={{ textAlign: 'center' }}>
-            Price: {product.price} USD
+
+            Price: ${product.price/100}.00 USD
           </Typography>
           <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '2rem' }}>
             <Button
