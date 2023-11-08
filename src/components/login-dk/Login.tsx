@@ -52,11 +52,20 @@ const Login = () => {
 		})
 			.then((response) => {
 		console.log('response',response)
+				if(!response.data.status){
+					setSnackbarSeverity('error');
+					setSnackbarMessage('Invalid Email or Password.....Try Again or Yell Help!!!');
+					setOpenSnackbar(true);
+				}
+				if(response.data.status === "disabled"){
+					setSnackbarSeverity('info');
+					setSnackbarMessage(`You haven't verified your email yet...Check your email for the verification link...Or click Help`);
+					setOpenSnackbar(true);
+
+				}
 			dispatch(changeUserLogInfo(response.data.customerDTO))
 			dispatch(addToken({token: response.data.token}))
-	 		if(response.data.token) {
-			//	console.log(response.data.token);
- 			}
+
 			setIsLoggedIn(true);
 		})
 		.catch((error) => {
