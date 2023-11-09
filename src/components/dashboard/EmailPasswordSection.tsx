@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {Button, Card, CardHeader, Divider, Grid, Modal, TextField, Typography,} from "@mui/material";
 import {UserInfo} from "../../interfaces/UserInfo";
 import axios from "axios";
+import {Navigate} from "react-router-dom";
 
 interface LoginSectionProps {
     userInfo: UserInfo,

@@ -20,7 +20,7 @@ const Login = () => {
 	const [snackbarMessage, setSnackbarMessage] = useState('');
 	const [snackbarSeverity, setSnackbarSeverity] = useState('success');
 	const [verifyEmail, setVerifyEmail] = useState(false);
-
+	const [resetPassword, setResetPassword] = useState(false);
 	useEffect(() => {
 		console.log(loginAttemptCount);
 
@@ -62,6 +62,7 @@ const Login = () => {
 					setSnackbarSeverity('error');
 					setSnackbarMessage('Invalid Email or Password.....Try Again or Yell Help!!!');
 					setOpenSnackbar(true);
+					setResetPassword(true)
 				}
 				if(response.data.status === "disabled"){
 					setSnackbarSeverity('info');
@@ -104,6 +105,11 @@ const Login = () => {
 				<Button fullWidth={true} variant={'contained'} onClick={handleResendVerificationEmail} >
 					Resend verification email?
 				</Button>
+			</Box>   }
+			{resetPassword && <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+				<Link to='/password'><Button fullWidth={true} variant={'contained'}  >
+					Reset Your Password?
+				</Button> </Link>
 			</Box>   }
 			<Box pb={1} pt={0}>
 				<Grid container>
