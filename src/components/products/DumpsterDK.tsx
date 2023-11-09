@@ -6,7 +6,7 @@ import {useAppSelector} from "../../redux/hooks";
 import Alert, {AlertColor} from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import ARROW_BACK from "/arrow_back.svg"
-import {ThemeProvider, useTheme} from '@mui/material/styles';
+import { useTheme} from '@mui/material/styles';
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 type Product = {

@@ -19,21 +19,27 @@ const Login = () => {
 	const [openSnackbar, setOpenSnackbar] = useState(false);
 	const [snackbarMessage, setSnackbarMessage] = useState('');
 	const [snackbarSeverity, setSnackbarSeverity] = useState('success');
-
+	const [verifyEmail, setVerifyEmail] = useState(false);
 
 	useEffect(() => {
 		console.log(loginAttemptCount);
 
-		if(loginAttemptCount > 2){
-			setSnackbarSeverity('error');
-			setSnackbarMessage('Invalid Email or Password....Or you Forgot to verify your email...Try Again or Click Help');
-			setOpenSnackbar(true);
-		}
 	},[])
 
 	if (isLoggedIn) {
 		return <Navigate to="/dashboard" />;
 	}
+	const handleResendVerificationEmail = async() => {
+		const response  = await axios.get(`http://localhost:8080/auth/nngc/resend-token/${email}`);
+		console.log(response)
+		if(response.data.token){
+			setSnackbarSeverity('success');
+			setSnackbarMessage('Verification Email Sent go to Your Inbox');
+			setOpenSnackbar(true);
+
+		}
+	}
+
   // @ts-ignore
 	const handleSubmit = async(e) => {
     e.preventDefault();
@@ -59,8 +65,9 @@ const Login = () => {
 				}
 				if(response.data.status === "disabled"){
 					setSnackbarSeverity('info');
-					setSnackbarMessage(`You haven't verified your email yet...Check your email for the verification link...Or click Help`);
+					setSnackbarMessage(`You haven't verified your email yet...Check your email for the verification link...Or click Resend Verification Email to enable account`);
 					setOpenSnackbar(true);
+					setVerifyEmail(true);
 
 				}
 			dispatch(changeUserLogInfo(response.data.customerDTO))
@@ -91,7 +98,13 @@ const Login = () => {
 					severity={snackbarSeverity as AlertColor}>
 					{snackbarMessage}
 				</Alert>
+
 			</Snackbar>
+			{verifyEmail && <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+				<Button fullWidth={true} variant={'contained'} onClick={handleResendVerificationEmail} >
+					Resend verification email?
+				</Button>
+			</Box>   }
 			<Box pb={1} pt={0}>
 				<Grid container>
 					<Grid item xs={12} sm={12}>

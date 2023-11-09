@@ -20,7 +20,7 @@ export const services_sub = [
     id: 2,
     title: 'Residential Weekly Trash with Separate Recycling Pickup',
     productId:'prod_OnF580m2f6YIHp',
-    name:'res_sub',
+    name:'res_sub_combo',
     services: 'Introducing "Single-Stream" Recycling. All you got to do is bag your recyclables! We grab it with your trash, ' +
         'separate and recycle for you. This is the most environmentally friendly package!',
     price:65,
