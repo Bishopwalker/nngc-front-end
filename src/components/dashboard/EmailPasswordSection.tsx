@@ -20,6 +20,13 @@ const EmailPasswordSection:React.FC<LoginSectionProps> = ({ userInfo }) => {
     setOpen(true);
   };
 
+
+React.useEffect(() => {
+    if(userInfo.role==="USER" && status==="Not Changed"){
+        setOpen(true)
+    }
+}, [userInfo]);
+
   const handleClose = () => {
     setOpen(false);
   };

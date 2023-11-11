@@ -15,6 +15,7 @@ export interface Authority {
 }
 
 export interface UserInfo {
+    role:string;
     id: string;
     fullName: string;
     email: string;

@@ -4,11 +4,9 @@ import axios from "axios";
 import {Navigate} from "react-router-dom";
 
 
-interface PasswordResetSectionProps {
-    userInfo: { id: string, token: string };
-}
 
-const PasswordResetSection: React.FC<PasswordResetSectionProps> = ({ userInfo }) => {
+
+const PasswordResetSection: React.FC = () => {
 
 
     const [open, setOpen] = useState(false);

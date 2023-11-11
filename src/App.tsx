@@ -31,6 +31,7 @@ import GotToLogin from "./auth/GotToLogin";
 import Service from './components/service/Service';
 import ThankYouPage from "./components/checkout/ThankYouPage";
 import PasswordReset from "./auth/PasswordReset";
+import {Reviews} from "./components/reviews/Reviews";
 
 function App() {
 	const screenTitle = useAppSelector(state => state.title)
@@ -69,6 +70,7 @@ function App() {
 				<Route path='/pricing' element={<StripePricingTable/>} />
 				<Route path='/thanks' element={<ThankYouPage/>}/>
 				<Route path='/password' element={<PasswordReset/>} />
+				<Route path='/reviews' element={<Reviews/>} />
 				<Route path="*" element={<h1>Not Found</h1>} />
 
 

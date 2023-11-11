@@ -4,12 +4,18 @@ import {Edit} from "@mui/icons-material";
 import {useAppSelector} from "../../redux/hooks";
 import AddressForm from "./AddressForm";
 import axios from "axios";
+import Alert, {AlertColor} from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
 
 interface AddressResult {
     token: string;
 }
 const AddressSection = ({token}: AddressResult) => {
     const userInfo = useAppSelector((state) => state.userInfo);
+
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
+    const [snackbarSeverity, setSnackbarSeverity] = useState('');
 
 const [geocodeData, setGeocodeData] = useState({
     formattedAddress: undefined, addressComponents: undefined
@@ -22,18 +28,22 @@ const [geocodeData, setGeocodeData] = useState({
     }
     console.log(geocodeData)
 React.useEffect(()=>{
+    if(userInfo.address.city === null){
+        setLocation(true)
+        setSnackbarSeverity('info');
+        setSnackbarMessage('You Got to add a valid address to use our services, Thank You NNGC!!');
+        setOpenSnackbar(true);
+    }
     if(userInfo.id != null){
     fetchGeoLocationData().then(r => console.log(r));
     }
-},[ userInfo,])
+
+},[ userInfo])
     const [location, setLocation] = useState(false);
-const [address, setAddress] = useState({
-        line1: userInfo.address.line1,
-        line2: userInfo.address.line2,
-        city: userInfo.address.city,
-        state: userInfo.address.state,
-        postal_code: userInfo.address.zipCode,
-} as any);
+
+
+
+
 
     const handleLocationClick = () => {
         setLocation(true);
@@ -47,6 +57,19 @@ const [address, setAddress] = useState({
     return (
         <>
             <Card sx={{ mb: 2 }}>
+                <Snackbar
+                    open={openSnackbar}
+                    autoHideDuration={20000}
+                    onClose={() => setOpenSnackbar(false)}
+                >
+                    <Alert
+                        sx={{ fontSize: '2.5rem',width: '100%' }}
+                        onClose={() => setOpenSnackbar(false)}
+                        severity={snackbarSeverity as AlertColor}>
+                        {snackbarMessage}
+                    </Alert>
+
+                </Snackbar>
                 <CardHeader
                     title={"Location Details"}
                     sx={{
