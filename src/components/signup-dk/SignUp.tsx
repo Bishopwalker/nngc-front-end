@@ -5,7 +5,7 @@ import Container from '@mui/material/Container'
 import Paper from '@mui/material/Paper'
 import StepForm from './StepForm'
 import {StepsProvider} from './Context'
-
+import GoogleSignInButton from '../google/GoogleSignInButton.jsx'
 const theme = createTheme({
   typography: {
     fontFamily: ['Roboto', 'Helvetica', 'Arial', 'sans-serif'].join(','),
@@ -18,10 +18,15 @@ const theme = createTheme({
   },
 });
 
+const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID as string
 export default function SignUp() {
   return (
+      <>
+
     <StepsProvider>
-		<ThemeProvider theme={theme}>
+        <GoogleSignInButton clientId={googleClientId} />
+
+        <ThemeProvider theme={theme}>
 		  <CssBaseline />
 		  <Container component='main' maxWidth='sm' sx={{ mb: 4 }}>
 			<Paper variant='outlined' sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
@@ -30,5 +35,6 @@ export default function SignUp() {
 		  </Container>
 		</ThemeProvider>
     </StepsProvider>
+      </>
   )
 }

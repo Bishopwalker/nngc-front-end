@@ -15,7 +15,7 @@ const AddressSection = ({token}: AddressResult) => {
 
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
-    const [snackbarSeverity, setSnackbarSeverity] = useState('');
+    const [snackbarSeverity, setSnackbarSeverity] = useState('info');
 
 const [geocodeData, setGeocodeData] = useState({
     formattedAddress: undefined, addressComponents: undefined
