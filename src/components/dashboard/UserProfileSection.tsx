@@ -73,6 +73,12 @@ const UserProfileSection = ({token} ) => {
 	setPhone(event.target.value);
   }
 
+React.useEffect(()=>{
+    if(userInfo.phoneNumber === ""){
+        setEdit(true);
+    }
+},[userInfo])
+
 
 
 
