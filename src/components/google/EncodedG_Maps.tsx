@@ -61,7 +61,7 @@ const Encoded_GMaps: React.FC = () => {
     const routeNumber = queryParams.get('page');
     console.log(selectedInstruction)
     useEffect(() => {
-        axios.get(`http://localhost:8080/nngc/google/create-route-4-driver/${routeNumber}`)
+        axios.get(`https://localhost:8080/nngc/google/create-route-4-driver/${routeNumber}`)
             .then(response => response.data)
             .then(data => {
                 const decodedPath = window.google.maps.geometry.encoding.decodePath(data.polyline);

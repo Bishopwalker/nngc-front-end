@@ -9,7 +9,7 @@ const BillingPortal = () => {
     const handleManageBilling = async () => {
         console.log(userInfo.stripeCustomerId);
         try {
-            const response = await axios.get(`http://localhost:8080/auth/stripe/create-customer-portal-session/${userInfo.id}`);
+            const response = await axios.get(`https://localhost:8080/auth/stripe/create-customer-portal-session/${userInfo.id}`);
             console.log(response.data)
             window.location.href = response.data;
         } catch (error) {

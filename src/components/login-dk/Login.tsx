@@ -30,7 +30,7 @@ const Login = () => {
 		return <Navigate to="/dashboard" />;
 	}
 	const handleResendVerificationEmail = async() => {
-		const response  = await axios.get(`http://localhost:8080/auth/nngc/resend-token/${email}`);
+		const response  = await axios.get(`https://localhost:8080/auth/nngc/resend-token/${email}`);
 		console.log(response)
 		if(response.data.token){
 			setSnackbarSeverity('success');
@@ -51,7 +51,7 @@ const Login = () => {
 		};
 		const values = JSON.stringify(myJSON);
 		//console.log(values);
-	await axios.post('http://localhost:8080/auth/nngc/authenticate', values,{
+	await axios.post('https://localhost:8080/auth/nngc/authenticate', values,{
 		headers: {
 			'Content-Type': 'application/json',
 		},

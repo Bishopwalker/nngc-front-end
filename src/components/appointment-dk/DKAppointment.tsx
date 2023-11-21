@@ -24,7 +24,7 @@ useProtectedRouteUser()
 
   const confirmToken = async () => {
         try {
-            const response = await axios.get(`http://localhost:8080/auth/nngc/token_status?token=${userInfo.token}`, {
+            const response = await axios.get(`https://localhost:8080/auth/nngc/token_status?token=${userInfo.token}`, {
                 maxRedirects: 0,  // Prevent automatic redirects
             });
             console.log(response.data);
@@ -44,7 +44,7 @@ useProtectedRouteUser()
     const updateUserInfo=async()=>{
         try{
             const response = await axios.get(
-                `http://localhost:8080/api/nngc/customers/${userInfo.id}`, {
+                `https://localhost:8080/api/nngc/customers/${userInfo.id}`, {
                     headers: {
                         Authorization: userInfo.token,
                     },
@@ -94,7 +94,7 @@ console.log(paymentIntent)
 
     function handleSse() {
       // Set to keep track of processed event data
-        let eventSource = new EventSource('http://localhost:8080/sse/subscribe');
+        let eventSource = new EventSource('https://localhost:8080/sse/subscribe');
 //console.log(processedEvents)
         function setupEventSource() {
             eventSource.onmessage = function (event) {
@@ -122,7 +122,7 @@ console.log(paymentIntent)
 
                     setTimeout(() => {
                         console.log('Reconnecting...');
-                        eventSource = new EventSource('http://localhost:8080/sse/subscribe');
+                        eventSource = new EventSource('https://localhost:8080/sse/subscribe');
                         setupEventSource();  // Re-apply the event handlers to the new EventSource instance
                     }, 5000);  // 5 seconds delay
                 }
@@ -154,7 +154,7 @@ console.log(paymentIntent)
 
     const fetchAppointments = async () => {
         try {
-            const response = await axios.get("http://localhost:8080/api/appointments/all");
+            const response = await axios.get("https://localhost:8080/api/appointments/all");
             const appointments = response.data;
             const newEvents = appointments.map((appointment: { appointmentDate: any; appointmentTime: any; }) => {
                 const { appointmentDate, appointmentTime } = appointment;
@@ -199,7 +199,7 @@ console.log(paymentIntent)
     const submitAppointment = async () => {
         try {
             // Step 1: Verify the API Endpoint
-            const apiEndpoint = "http://localhost:8080/api/appointments/create-appointment"; // Make sure this matches with your Postman endpoint
+            const apiEndpoint = "https://localhost:8080/api/appointments/create-appointment"; // Make sure this matches with your Postman endpoint
 
             // Step 2: Format the date and time to match the backend's expected format
             const formattedDate = moment(selectedDate).format("DD-MM-YYYY");

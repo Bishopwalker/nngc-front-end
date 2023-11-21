@@ -30,7 +30,7 @@ const Dashboard = () => {
 	const updateUserInfo=async()=>{
 		try{
 			const response = await axios.get(
-				`http://localhost:8080/api/nngc/customers/${userInfo.id}`, {
+				`https://localhost:8080/api/nngc/customers/${userInfo.id}`, {
 					headers: {
 						Authorization: userInfo.token,
 					},
@@ -44,7 +44,7 @@ const Dashboard = () => {
 		}
 	}
 	const retrieveTokenFromUser=async (id:any)=> {
-		await axios.get(`http://localhost:8080/auth/nngc/token/${id}`)
+		await axios.get(`https://localhost:8080/auth/nngc/token/${id}`)
 			.then((response) => {
 				//addToken(response.data.token);
 				//  const mergedState = {...initialState, ...response.data};
@@ -62,7 +62,7 @@ setToken(response.data.token);
 
 	const updateToken1 = (token: any) => async (dispatch: any) => {
 		console.log(token)
-		await axios.get(`http://localhost:8080/auth/nngc/token_status?token=${token}`)
+		await axios.get(`https://localhost:8080/auth/nngc/token_status?token=${token}`)
 			.then((response) => {
 				updateToken(response.data.customer);
 				//   console.log(response.data.customer);

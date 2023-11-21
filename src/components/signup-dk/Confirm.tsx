@@ -66,7 +66,7 @@ export default function Confirm() {
 //console.log(updatedJsonString)
 //console.log(jsonObject, 'jsonObject')
     await axios.post(
-        'http://localhost:8080/auth/nngc/registration',
+        'https://localhost:8080/auth/nngc/registration',
         updatedJsonString,
         {
           headers: {

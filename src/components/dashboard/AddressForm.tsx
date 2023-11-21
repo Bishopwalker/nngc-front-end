@@ -78,7 +78,7 @@ const userInfo = useAppSelector((state) => state.userInfo);
         try {
            console.log(customer)
             const response = await axios.put(
-                `http://localhost:8080/api/nngc/customers/${userInfo.id}`,
+                `https://localhost:8080/api/nngc/customers/${userInfo.id}`,
                 customer,
                 {
                     headers: {

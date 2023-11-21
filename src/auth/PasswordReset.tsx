@@ -36,7 +36,7 @@ const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (newPassword === confirmPassword) {
             try {
                 const response = await axios.put(
-                    `http://localhost:8080/api/nngc/customers/email/${email}`,
+                    `https://localhost:8080/api/nngc/customers/email/${email}`,
                     { password: newPassword },
 
                 );

@@ -20,10 +20,11 @@ const theme = createTheme({
 
 const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID as string
 export default function SignUp() {
-  return (
+    // @ts-ignore
+    return (
       <>
-
     <StepsProvider>
+        {/*ts-ignore*/}
         <GoogleSignInButton clientId={googleClientId} />
 
         <ThemeProvider theme={theme}>
