@@ -25,7 +25,7 @@ export default function SignUp() {
       <>
     <StepsProvider>
         {/*ts-ignore*/}
-        <GoogleSignInButton clientId={googleClientId} />
+        {/*<GoogleSignInButton clientId={googleClientId} />*/}
 
         <ThemeProvider theme={theme}>
 		  <CssBaseline />

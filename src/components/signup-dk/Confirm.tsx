@@ -12,7 +12,7 @@ import {AppContext} from './Context'
 
 import axios from "axios";
 import {useAppDispatch} from "../../redux/hooks";
-import {addToken, changeUserLogInfo} from "../../redux/userLogInfoSlice";
+import {addToken} from "../../redux/userLogInfoSlice";
 import {Navigate} from "react-router-dom";
 
 export default function Confirm() {

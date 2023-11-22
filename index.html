@@ -1,19 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
+  <!-- In your public/index.html or similar file -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
 
-    <link rel="icon" type="image/png" sizes="16x16"  href="favicons/favicon-16x16.png">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="theme-color" content="#ffffff">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
-    <!-- In your public/index.html or similar file -->
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <title>Northern Neck Garbage Collection | NNGC  </title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="src/main.tsx"></script>
-  </body>
+  <title>Northern Neck Garbage Collection | NNGC</title>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.northernneckgarbage.com",
+      "logo": "https://www.northernneckgarbage.com/nngc-logo-b34b4d79.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+1-804-220-0029",
+        "contactType": "customer service",
+        "areaServed": "US",
+        "availableLanguage": "en"
+      },
+      "name": "Northern Neck Garbage Collection, LLC"
+    }
+  </script>
+</head>
+<body>
+
+<div id="root"></div>
+<script type="module" src="src/main.tsx"></script>
+</body>
 </html>

@@ -5,14 +5,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import {useNavigate} from "react-router-dom";
 import { services_sub, servicesOnce} from './services';
-import {useAppSelector} from "../../redux/hooks";
 import {Box, Button} from "@mui/material";
 import {useTheme} from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
 import "./service.css"
-import {Money} from "@mui/icons-material";
 
 function Service() {
   const [defaultImage, setDefaultImage] = useState({
@@ -26,7 +22,7 @@ function Service() {
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const userInfo = useAppSelector(state => state.userInfo)
+  //const userInfo = useAppSelector(state => state.userInfo)
 
   const navigate = useNavigate();
 

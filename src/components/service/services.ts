@@ -9,7 +9,7 @@ export const services_sub = [
   {
     id: 1,
     title: 'Residential Trash Pickup',
-    productId:'prod_NTexfN4Dfxy2h4',
+    productId:"prod_OyBN2UIT2mjgSf",
     name:'res_sub',
     services: 'Weekly Trash. Includes backdoor pickup and our new "Can-Less Pickup!" As long as you have your trash in bags we\'ll grab it!.',
     price: 45,
@@ -19,7 +19,7 @@ export const services_sub = [
   {
     id: 2,
     title: 'Residential Weekly Trash with Separate Recycling Pickup',
-    productId:'prod_OnF580m2f6YIHp',
+    productId:"prod_OyCb8xtyS6pZoG",
     name:'res_sub_combo',
     services: 'Introducing "Single-Stream" Recycling. All you got to do is bag your recyclables! We grab it with your trash, ' +
         'separate and recycle for you. This is the most environmentally friendly package!',
@@ -30,7 +30,7 @@ export const services_sub = [
   {
     id: 3,
     title: 'Commercial Trash Pickup',
-    productId:'prod_OlltsNqHsc0FGn',
+    productId:"prod_OyBMi4py0TPBv2",
     name:'commercial_sub',
     services: 'Place all bags or trash cans at one location and we`ll come by and pick it up. Additional services include going room to room emptying out trashcans, ' +
         'recycling, bulk deliveries and more. Additional fees apply - call for special circumstances.',
@@ -46,7 +46,7 @@ export const services_sub = [
 export const servicesOnce = [ {
   id: 4,
   title: 'Junk Removal',
-  productId:'prod_Olle6yyFljmCMH',
+  productId:"prod_OcSdn7aEX7QJMI",
   name:'Junk Removal',
   services: 'Junk Removal, garage cleanup. 6x10 2022 Big Tex 90R trailer. 9999 gvwr 6800 pound load. Raised walls to 48 inches with tarp kit. ' +
       'No un-bottled or dangerous liquids.',
@@ -67,7 +67,7 @@ export const servicesOnce = [ {
   {
     id: 6,
     title: 'Bulk/Landscaping Delivery',
-    productId:'prod_OtIlXvQ1CF7tFR',
+    productId: "prod_OtIlXvQ1CF7tFR",
     services: 'We offer bulk delivery of mulch, topsoil, gravel, sand, and more. We also offer delivery of landscaping ' +
         'materials such as plants, trees, and shrubs.  If it`s legal and non-hazardous we got a price for it! Call for a quote.',
     price: 125,
