@@ -54,16 +54,16 @@ export const servicesOnce = [ {
   linkImg:
         TRAILER2,
 },
-  {
-    id: 5,
-    title: '6X10 Dump Trailer Rental',
-    productId: "prod_NTzwClciqi6zCh",
-    services: 'We Offer a Brand New Big Tex 6x10 dump trailer available for daily rental. Extra tall 42 inch walls' +
-        ' and 6 foot ramp. 2 5/16 ball and 7 way plug. 10,000 lb capacity. $300 per day. $300 deposit required.',
-    price:125,
-    linkImg:
-        TRAILER,
-  },
+  // {
+  //   id: 5,
+  //   title: '6X10 Dump Trailer Rental',
+  //   productId: "prod_NTzwClciqi6zCh",
+  //   services: 'We Offer a Brand New Big Tex 6x10 dump trailer available for daily rental. Extra tall 42 inch walls' +
+  //       ' and 6 foot ramp. 2 5/16 ball and 7 way plug. 10,000 lb capacity. $300 per day. $300 deposit required.',
+  //   price:125,
+  //   linkImg:
+  //       TRAILER,
+  // },
   {
     id: 6,
     title: 'Bulk/Landscaping Delivery',

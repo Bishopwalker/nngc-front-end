@@ -20,9 +20,7 @@ function Service() {
   });
   const [activeServiceType, setActiveServiceType] = useState('Monthly');
 
-  const handleServiceTypeChange = (type: React.SetStateAction<string>) => {
-    setActiveServiceType(type);
-  };
+
 
   const services = activeServiceType === 'Monthly' ? services_sub : servicesOnce;
 
@@ -32,47 +30,59 @@ function Service() {
 
   const navigate = useNavigate();
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    autoplay: true,
-    autoplaySpeed: 10000,
-    speed: 500,
-    arrows: false,
-    centerMode: true,
-    centerPadding: '100px',
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    initialSlide: 0,
-    vertical: isMobile,
-    verticalSwiping: isMobile,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-          infinite: true,
-          dots: true,
+  const getSliderSettings = (itemsLength: number) => {
+    const defaultSlidesToShow = 3;
+    let slidesToShow = Math.min(itemsLength, defaultSlidesToShow);
+
+    return {
+      dots: true,
+      infinite: itemsLength > defaultSlidesToShow,
+      autoplay: true,
+      autoplaySpeed: 10000,
+      speed: 500,
+      arrows: false,
+      centerMode: true,
+      centerPadding: '100px',
+      slidesToShow: slidesToShow,
+      slidesToScroll: 1,
+      initialSlide: 0,
+      vertical: isMobile,
+      verticalSwiping: isMobile,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            infinite: true,
+            dots: true,
+          },
         },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-          initialSlide: 0,
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            initialSlide: 0,
+          },
         },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-          initialSlide: 0,
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            initialSlide: 0,
+          },
         },
-      },
-    ],
+      ],
+    };
+  }
+
+  // Use the function to get current slider settings
+  const sliderSettings = getSliderSettings(services.length);
+
+  const handleServiceTypeChange = (type: React.SetStateAction<string>) => {
+    setActiveServiceType(type);
   };
 
 
@@ -97,13 +107,13 @@ function Service() {
             One-Time
           </Button>
         </Box>
-        <Slider {...settings}>
+
+        <Slider {...sliderSettings}>
           {services.map((item, index) => (
               <div
                   key={index}
                   className="card"
                   onClick={() => navigate(`/dumpster/${item.productId}`)}
-
               >
                 <div className="card-top">
                   <Box
