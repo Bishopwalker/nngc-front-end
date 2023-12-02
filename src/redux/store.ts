@@ -6,9 +6,11 @@ import { consoleLogStateMiddleware } from './middleware'; // Import your custom 
 import { pageTitleSlice } from './pageTitleSlice';
 import { userLogInfoSlice } from './userLogInfoSlice';
 
+
 const rootReducer = combineReducers({
     userInfo: userLogInfoSlice.reducer,
     title: pageTitleSlice.reducer,
+
 });
 
 const persistConfig = {

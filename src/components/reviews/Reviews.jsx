@@ -1,43 +1,85 @@
 // src/components/Reviews.jsx
 
-import React, { useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchYelpReviews } from '../../redux/reviewsSlice';
 
-export const Reviews = () => {
-    const dispatch = useDispatch();
-    const reviews = useSelector((state) => state.reviews?.reviews);
-    const reviewStatus = useSelector((state) => state.reviews?.status);
-    const error = useSelector((state) => state.reviews?.error);
+import {Avatar, Box, Card, CardContent, CardHeader, Typography,CardMedia} from "@mui/material";
+import axios from "axios";
 
-    useEffect(() => {
-        console.log(reviewStatus)
-        if (reviewStatus === 'idle') {
-            dispatch(fetchYelpReviews());
-        }
-    }, [reviewStatus, dispatch]);
+import {useAppDispatch} from "../../redux/hooks"
 
-    let content;
-dispatch(fetchYelpReviews());
-    if (reviewStatus === 'loading') {
-        content = <div>Loading...</div>
-    } else if (reviewStatus === 'succeeded') {
-        content = reviews.map((review) => (
-            <article key={review.url}>
-                <h3>{review.user.name}</h3>
-                <p>{review.text}</p>
-                <p>Rating: {review.rating}</p>
-                {/* Optionally include other details like response or user image */}
-            </article>
-        ));
-    } else if (reviewStatus === 'failed') {
-        content = <div>{error}</div>;
-    }
+
+const googleColors = ['#4285F4', '#DB4437', '#F4B400', '#0F9D58']; // Google's brand colors
+
+const GoogleReviewsTitle = () => {
+    const title = "Latest Google Reviews";
+    const googleColors = ['#4285F4', '#DB4437', '#F4B400', '#0F9D58'];
 
     return (
-        <section>
-            <h2>Yelp Reviews</h2>
-            {content}
-        </section>
+        <div style={{ fontSize: '2rem', fontWeight: 'bold', fontFamily: 'Roboto, sans-serif' }}>
+            {title.split("").map((char, index) => (
+                <span key={index} style={{ color: googleColors[index % googleColors.length] }}>
+                    {char}
+                </span>
+            ))}
+        </div>
     );
 };
+ const Reviews = () => {
+
+
+     const [review, setReview] = useState([]);
+     const fetchReviews = async () => {
+         const response = await axios('http://localhost:8080/nngc/googleReviews/getReviews')
+         const data = response.data.result.reviews;
+         console.log(data);
+
+         setReview(data);
+     }
+
+
+     useEffect(() => {
+
+         fetchReviews().then(r => console.log('worked'));
+
+
+         console.log(review)
+     }, []);
+
+
+         const renderStars = (rating) => {
+             return [...Array(rating)].map((_, index) => (
+                 <span key={index}>⭐</span>
+             ));
+         };
+const first = review.map((reviews, index) => (
+    <Card key={index} sx={{marginBottom: 2}}>
+
+        <h1>{renderStars(reviews.rating)}</h1>
+
+        <CardHeader
+            avatar={<Avatar src={reviews.profile_photo_url} alt={reviews.author_name}/>}
+            title={reviews.author_name}
+            subheader={reviews.relative_time_description}
+
+        />
+        <CardContent>
+            <Typography variant="body1">{reviews.text}</Typography>
+            <div>{renderStars(reviews.rating)}</div>
+        </CardContent>
+    </Card>
+        ))
+
+     return (
+         <Box minHeight={'200px'}>
+                <GoogleReviewsTitle/>
+             {first}
+
+         </Box>
+     )
+ }
+
+export default Reviews;
+
+
+

@@ -6,7 +6,7 @@ import GoogleIcon from '@mui/icons-material/Google';
 
 const GoogleSignInButton = () => {
     const handleSignInClick = () => {
-        window.location.href = 'https://localhost:8080/auth/nngc/google/login';
+        window.location.href = 'https://api.northernneckgarbage.com/auth/nngc/google/login';
     };
 
     return (

@@ -1,5 +1,5 @@
-import React from 'react'
-import {Route, Routes} from "react-router-dom";
+import React, {useEffect} from 'react'
+import {Route, Routes, useLocation} from "react-router-dom";
 import HeaderTop from "./components/headerTop/HeaderTop";
 import Navbar from "./components/navbar/Navbar";
 
@@ -31,7 +31,9 @@ import GotToLogin from "./auth/GotToLogin";
 import Service from './components/service/Service';
 import ThankYouPage from "./components/checkout/ThankYouPage";
 import PasswordReset from "./auth/PasswordReset";
-import {Reviews} from "./components/reviews/Reviews";
+import Reviews from "./components/reviews/Reviews";
+import ReactPixel from "react-facebook-pixel";
+import MessageSales from "./components/MessageSales";
 
 function App() {
 	const screenTitle = useAppSelector(state => state.title)
@@ -39,7 +41,20 @@ function App() {
 	React.useEffect(() => {
 		document.title = screenTitle.title? screenTitle.title : 'NNGC'
 	}, [screenTitle])
-	// @ts-ignore
+
+	const location = useLocation();
+
+	useEffect(() => {
+		// Initialize Facebook Pixel
+		ReactPixel.init(import.meta.env.VITE_FACEBOOK_PIXEL_ID as string);
+
+		// Track page view without passing arguments
+		ReactPixel.pageView();
+
+		// Additional tracking for route changes (if using React Router)
+
+	}, [location.pathname]);
+
 	// @ts-ignore
 	return (
 		<div className="App">
@@ -78,6 +93,10 @@ function App() {
 			</Routes>
 			{/* ts-ignore */}
 
+			<Box mt={4} pt={4} display={{ xs: 'block'}}>
+				{}
+			</Box>
+			<MessageSales/>
 			<Box mt={4} pt={4} display={{ xs: 'block'}}>
 				{}
 			</Box>

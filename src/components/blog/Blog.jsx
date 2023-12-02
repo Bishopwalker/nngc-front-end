@@ -3,14 +3,14 @@ import {ThemeProvider, useTheme} from '@mui/material/styles';
 import {Card, CardContent, CardHeader, CardMedia, Container, Grid, Typography} from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Button from "@mui/material/Button";
-import CAT from "/cartchem3-d0fffe7a.png"
-import CAT1 from "/cat_chem1-24b0ae96.png"
-import NNCS from '/nncs.jpg'
-import FUR from "/furmonster3d-fd7f35f2.png"
-import BASS from "/kingstripper-a07c0608.png"
-import TRUCK from "/truck_trailer-517eec13.png"
-import TRUCK1 from "/truck_trailer1-a6af3c75.png"
-import UFO from "/ufo_trash-43dbeea5.png"
+import CAT from "../../assets/cartchem3-d0fffe7a.png"
+import CAT1 from "../../assets/cat_chem1-24b0ae96.png"
+import NNCS from '../../assets/nncs.jpg'
+import FUR from "../../assets/furmonster3d-fd7f35f2.png"
+import BASS from "../../assets/kingstripper-a07c0608.png"
+import TRUCK from "../../assets/truck_trailer-517eec13.png"
+import TRUCK1 from "../../assets/truck_trailer1-a6af3c75.png"
+import UFO from "../../assets/ufo_trash-43dbeea5.png"
 import Service from "../service/Service";
 
 

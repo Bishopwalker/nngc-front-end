@@ -36,7 +36,7 @@ const UserProfileSection = ({token} ) => {
         try {
             console.log(customer)
             const response = await axios.put(
-                `https://localhost:8080/api/nngc/customers/${userInfo.id}`,
+                `https://api.northernneckgarbage.com/api/nngc/customers/${userInfo.id}`,
                 customer,
                 {
                     headers: {

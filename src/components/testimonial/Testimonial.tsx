@@ -1,7 +1,7 @@
 import {Avatar, Box, Card, CardContent, Grid, Typography} from '@mui/material';
-import dirty from '/dirty_yard-b272813f.jpg';
-import yard_clean from '/yarn_clean-f205d94a.png';
-import yard_clean1 from '/yarnCleanup-de6f1abd.png';
+import dirty from '../../assets/dirty_yard-b272813f.jpg';
+import yard_clean from '../../assets/yarn_clean-f205d94a.png';
+import yard_clean1 from '../../assets/yarnCleanup-de6f1abd.png';
 
 const testimonials = [
   {
@@ -16,9 +16,9 @@ const testimonials = [
 
   },
   {
-    name: '-- Scott Harris, Retired Vet',
+    name: '-- Internet Guy, Retired Gryffindor',
     image: yard_clean1,
-    testimonial: 'This guy is one thing you won`t find often in the Northern Neck...On time!.',
+    testimonial: "Either You're born with it, or you're not! Who is this?"
   },
 ];
 

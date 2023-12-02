@@ -5,7 +5,7 @@ import {Link, useNavigate, useParams} from "react-router-dom"
 import {useAppSelector} from "../../redux/hooks";
 import Alert, {AlertColor} from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
-import ARROW_BACK from "/arrow_back.svg"
+import ARROW_BACK from "../../assets/arrow_back.svg"
 import { useTheme} from '@mui/material/styles';
 import useMediaQuery from "@mui/material/useMediaQuery";
 
@@ -34,7 +34,7 @@ const { productId } = useParams();
   const fetchProduct = async () => {
     try {
       const response = await axios.get(
-          `https://localhost:8080/auth/stripe/products/${productId}`
+          `https://api.northernneckgarbage.com/auth/stripe/products/${productId}`
       );
       setProduct(response.data);
     } catch (error) {
@@ -58,7 +58,7 @@ const { productId } = useParams();
     console.log('checking out');
 
       // Constructing the URL with the productID query parameter
-      const url = `https://localhost:8080/auth/stripe/create-checkout-session/${userInfo.id}?productID=${productId}`;
+      const url = `https://api.northernneckgarbage.com/auth/stripe/create-checkout-session/${userInfo.id}?productID=${productId}`;
       await axios.get(url, {
             headers: {
               'Authorization': `Bearer ${userInfo.token}`, // if user token is stored in userInfo object

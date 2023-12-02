@@ -21,7 +21,7 @@ const TrashSubscription  = ( ) => {
     const fetchProduct = async () => {
         try {
             const response = await axios.get(
-                `https://localhost:8080/auth/stripe/products/${productId}`
+                `https://api.northernneckgarbage.com/auth/stripe/products/${productId}`
             );
             setProduct(response.data);
         } catch (error) {
@@ -39,7 +39,7 @@ const purchase_Item = async () => {
 
             try {
                 const response = await axios.post(
-                    `https://localhost:8080/auth/stripe/create-checkout-session/{id}`
+                    `https://api.northernneckgarbage.com/auth/stripe/create-checkout-session/{id}`
                 );
             //    console.log(response.data);
             } catch (error) {

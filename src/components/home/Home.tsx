@@ -7,6 +7,7 @@ import Testimonial from "../testimonial/Testimonial";
 import {useAppDispatch} from "../../redux/hooks";
 import {changeTitle} from "../../redux/pageTitleSlice";
 import AccordionItem from "../faq/Faq";
+import Reviews from "../reviews/Reviews";
 
 const Home = () => {
     const dispatch = useAppDispatch()
@@ -24,8 +25,9 @@ const Home = () => {
             mt={8}
           >
           </Stack>
-
+<Reviews />
 		  <Testimonial />
+
             <Box mt={4} pt={4} display={{ xs: 'block'}}>
                 <Typography variant="h4" align="center" color="black">Frequently Asked Questions</Typography>
                 <Typography variant="subtitle1" align="center" color="black">If you don't see your question here, give us a call!</Typography>

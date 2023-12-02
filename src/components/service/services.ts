@@ -1,9 +1,9 @@
 import TRAILER from '/trailer.png'
-import PURPLE from '/purpleHouseMonster.png'
-import OLD from '/olelady.png'
-import MONSTER from'/furMonter3d.png'
-import TRAILER3 from '/YarnCleanup1.png'
-import TRAILER2 from '/NNGC-Plate.png'
+import PURPLE from '../../assets/purpleHouseMonster.png'
+import OLD from '../../assets/olelady.png'
+import MONSTER from'../../assets/furMonter3d.png'
+import TRAILER3 from '../../assets/YarnCleanup1.png'
+import TRAILER2 from '../../assets/NNGC-Plate.png'
 
 export const services_sub = [
   {
