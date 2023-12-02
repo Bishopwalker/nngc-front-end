@@ -96,10 +96,7 @@ function App() {
 			<Box mt={4} pt={4} display={{ xs: 'block'}}>
 				{}
 			</Box>
-			<MessageSales/>
-			<Box mt={4} pt={4} display={{ xs: 'block'}}>
-				{}
-			</Box>
+
 			<Footer />
 		</div>
 	)

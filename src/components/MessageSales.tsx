@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import {Button, TextField, Box, Typography} from '@mui/material';
-import {Label} from "@mui/icons-material";
 import Alert from "@mui/material/Alert";
 
 type FormData = {

@@ -1,7 +1,7 @@
 // src/components/Reviews.jsx
 
 import React, {useEffect, useState} from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+
 
 import {Avatar, Box, Card, CardContent, CardHeader, Typography,CardMedia} from "@mui/material";
 import axios from "axios";
@@ -30,7 +30,7 @@ const GoogleReviewsTitle = () => {
 
      const [review, setReview] = useState([]);
      const fetchReviews = async () => {
-         const response = await axios('http://localhost:8080/nngc/googleReviews/getReviews')
+         const response = await axios('https://api.northernneckgarbage.com/nngc/googleReviews/getReviews')
          const data = response.data.result.reviews;
          console.log(data);
 

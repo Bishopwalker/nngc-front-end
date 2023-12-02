@@ -5,18 +5,20 @@ import yard_clean1 from '../../assets/yarnCleanup-de6f1abd.png';
 
 const testimonials = [
   {
-    name: '-- James Franco, Junk Owner',
+    name: '-- Nurturing Neighborhoods:',
     image: dirty,
-    testimonial: 'This guy is amazing, he is like Jesus, but with a dump trailer and low prices!'
+    testimonial: "Northern Neck Garbage Collection (NNGC) isn’t just about waste removal" +
+    "we're about community care, especially for our seniors. We strive to make every neighborhood we serve a better, safer place."
     },
   {
-    name: '-- Amanda Taylor, Cat Person',
+    name: '-- Guaranteeing Cleanliness',
     image: yard_clean,
-    testimonial: 'My son left so much junk in our barn we knew we couldn`t sale the house until it was clean! NNGC came and serviced me'
+    testimonial: 'At NNGC, cleanliness is our promise. Count on us for dependable and top-quality ' +
+        'garbage collection, keeping your surroundings pristine and pleasant.'
 
   },
   {
-    name: '-- Internet Guy, Retired Gryffindor',
+    name: '-- Ev',
     image: yard_clean1,
     testimonial: "Either You're born with it, or you're not! Who is this?"
   },
@@ -31,7 +33,7 @@ const Testimonials = () => {
 		  letterSpacing: '1px',
 		  textTransform: 'uppercase',
 		}}>
-		  The Testimonials
+		  The NNGC Promise
 		</Typography>
       <Grid container spacing={2} mt={4}>
         {testimonials.map((testimonial) => (
@@ -39,8 +41,8 @@ const Testimonials = () => {
 			<Card sx={{ bgcolor: '#2C3E50' }}>
 			  <Avatar alt={testimonial.name} src={testimonial.image} sx={{ width: 100, height: 100, margin: 'auto', mt: 2 }} />
 			  <CardContent sx={{ textAlign: 'center', color: 'white' }}>
-				<Typography variant="body1" gutterBottom>"{testimonial.testimonial}"</Typography>
-				<Typography variant="subtitle1">{testimonial.name}</Typography>
+                  <Typography variant="subtitle1">{testimonial.name}</Typography>
+                  <Typography variant="body1" gutterBottom>"{testimonial.testimonial}"</Typography>
 			  </CardContent>
 			</Card>
           </Grid>

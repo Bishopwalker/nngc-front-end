@@ -8,6 +8,7 @@ import {useAppDispatch} from "../../redux/hooks";
 import {changeTitle} from "../../redux/pageTitleSlice";
 import AccordionItem from "../faq/Faq";
 import Reviews from "../reviews/Reviews";
+import MessageSales from "../MessageSales";
 
 const Home = () => {
     const dispatch = useAppDispatch()
@@ -82,6 +83,11 @@ const Home = () => {
                 />
             </Box>
       </Container>
+        <Box mt={4} pt={4} display={{ xs: 'block'}}>
+            {}
+        </Box>
+
+
     </Box>
   );
 };

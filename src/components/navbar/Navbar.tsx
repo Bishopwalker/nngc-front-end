@@ -4,7 +4,7 @@ import {
   Box,
   Drawer,
   IconButton,
-  Link,
+
   List,
   ListItem,
   ListItemText,
@@ -17,6 +17,7 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import {Facebook, Instagram, Twitter} from "@mui/icons-material/";
 import {useAppSelector} from "../../redux/hooks";
+import {Link} from "react-router-dom";
 
 const Navbar = () => {
   const user = useAppSelector((state) => state.userInfo);
@@ -97,7 +98,7 @@ const Navbar = () => {
                       padding: "0 15px"
                     }}
                 >
-                  <Link href={item.Link}>
+                  <Link to={item.Link}>
                     {item.Name}
                   </Link>
                 </Typography>
@@ -118,13 +119,19 @@ const Navbar = () => {
                       key={index}
                       onClick={() => setMobileMenuOpen(false)}
                   >
-                    <Link href={item.Link}>
+                    <Link to={item.Link}>
                     <ListItemText primary={item.Name} />
                     </Link>
                   </ListItem>
               ))}
             </List>
           </Box>
+          <Typography variant='h4' sx={{
+            padding: '50px'
+          }}>
+           <Link to='/help' >  Get Help   </Link>
+          </Typography>
+          <Link to='/help' >  <span>Or Message Us</span> </Link>
         </Drawer>
 
         {/* Existing Menu component */}
