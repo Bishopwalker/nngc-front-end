@@ -43,7 +43,7 @@ const NavBottom = () => {
 
 	  </Box>
       <Typography align="center" variant="body1" sx={{ fontWeight: 300 }}>
-          NNGC: Nurturing Neighborhoods, Guaranteeing Cleanliness
+          Nurturing Neighborhoods, Guaranteeing Cleanliness
       </Typography>
 
     </Box>
