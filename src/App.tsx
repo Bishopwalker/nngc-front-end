@@ -35,6 +35,7 @@ import Reviews from "./components/reviews/Reviews";
 import ReactPixel from "react-facebook-pixel";
 import MessageSales from "./components/MessageSales";
 import { Helmet } from 'react-helmet';
+import SurroundingArea from "./auth/SurroundingArea";
 
 function App() {
 	const screenTitle = useAppSelector(state => state.title)
@@ -93,6 +94,7 @@ function App() {
 				<Route path='/password' element={<PasswordReset/>} />
 				<Route path='/reviews' element={<Reviews/>} />
 				<Route path="*" element={<h1>Not Found</h1>} />
+				<Route path ='/surrounding' element={<SurroundingArea/>}/>
 
 
 			</Routes>

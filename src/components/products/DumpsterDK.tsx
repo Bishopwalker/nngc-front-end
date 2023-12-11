@@ -34,17 +34,18 @@ const { productId } = useParams();
 
   const [isAddressVerified, setIsAddressVerified] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false); // State to control the modal's visibility
+  const [verificationResult, setVerificationResult] = useState(false);
+
 
   const handleOpenAddressModal = () => {
     setIsModalOpen(true); // Open the modal
   };
 
-  const handleCloseAddressModal = () => {
-    setIsModalOpen(false); // Close the modal
-  };
 
+console.log(isAddressVerified)
   //console.log(userInfo);
   console.log(product)
+
   const fetchProduct = async () => {
     try {
       const response = await axios.get(
@@ -60,44 +61,51 @@ const { productId } = useParams();
     fetchProduct().then(r => console.log(r));
   }, []);
 
+  async function checkoutBuy() {
+    const url = `https://api.northernneckgarbage.com/auth/stripe/create-checkout-session/${userInfo.id}?productID=${productId}`;
+    await axios.get(url, {
+          headers: {
+            'Authorization': `Bearer ${userInfo.token}`, // if user token is stored in userInfo object
+          }
+        }
+    ).then((response) => {
+      if (response.data && response.data.message) {
+        window.location.href = response.data.message; // redirects the user to the URL from the response
+      }
+    })
+        .catch((error) => {
+          console.log(error)
+          if (error.response.status === 500) window.location.href = '/expired';
+        })
+  }
+
+  if(verificationResult){
+     checkoutBuy().then(r => setVerificationResult(false));
+  }
+
+  const handleCloseAddressModal = async() => {
+
+    setIsModalOpen(false); // Close the modal
+  };
   const handleCheckout = async () => {
-    if( !userInfo.id) {
-      // setSnackbarSeverity('error');
-      // setSnackbarMessage('An error occurred. Most likely because you aren`t logged in!. Click Here to login in');
-      // setOpenSnackbar(true);
-handleOpenAddressModal();
-   //   navigate('/login');
+    if (!userInfo.id) {
+
+      handleOpenAddressModal();
       return;
     }
-    console.log('checking out');
+      //   navigate('/login');
 
-      // Constructing the URL with the productID query parameter
-      const url = `https://api.northernneckgarbage.com/auth/stripe/create-checkout-session/${userInfo.id}?productID=${productId}`;
-      await axios.get(url, {
-            headers: {
-              'Authorization': `Bearer ${userInfo.token}`, // if user token is stored in userInfo object
-            }
-          }
-      ).then((response) => {
-        if (response.data && response.data.message) {
-          window.location.href = response.data.message; // redirects the user to the URL from the response
-        }
-      })
-          .catch((error) => {
-            console.log(error)
-            if(error.response.status === 500) window.location.href ='/expired';
-          })
+        console.log('checking out');
+
+        // Constructing the URL with the productID query parameter
+      await checkoutBuy();
+
+
     }
 
 
-  const handleAddressVerificationResult = (result: string) => {
-    if (result === "INSIDE") {
-      setIsAddressVerified(true);
-    } else {
-      setIsAddressVerified(false);
-    }
-  };
 
+console.log(verificationResult)
   return (
 
     <Box sx={{ padding:'20px', paddingTop:isSmallScreen?'75px':0,display: 'flex', justifyContent: 'center', alignItems: 'center', height: '75vh' }}>
@@ -109,7 +117,7 @@ handleOpenAddressModal();
       <AddressVerificationModal
           open={isModalOpen}
           onClose={handleCloseAddressModal}
-          onVerificationResult={handleAddressVerificationResult}
+          onVerificationResult={setVerificationResult}
       />
 
       {!isSmallScreen && <img src={ARROW_BACK}  alt="back" height={'140px'} width={'100px'} onClick={() => navigate('/services')}/>}
