@@ -5,9 +5,11 @@ import {Link, useNavigate, useParams} from "react-router-dom"
 import {useAppSelector} from "../../redux/hooks";
 import Alert, {AlertColor} from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
-import ARROW_BACK from "../../assets/arrow_back.svg"
+import ARROW_BACK from "../../../public/assets/arrow_back.svg"
 import { useTheme} from '@mui/material/styles';
 import useMediaQuery from "@mui/material/useMediaQuery";
+import {Helmet} from "react-helmet";
+import AddressVerificationModal from "./AddressVerificationModal";
 
 type Product = {
   message: string;
@@ -21,6 +23,7 @@ const DumpsterDK = () => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
+
   const [product, setProduct] = useState<Product>();
 const { productId } = useParams();
   const userInfo = useAppSelector(state => state.userInfo);
@@ -28,6 +31,17 @@ const { productId } = useParams();
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const [snackbarSeverity, setSnackbarSeverity] = useState('success');
+
+  const [isAddressVerified, setIsAddressVerified] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false); // State to control the modal's visibility
+
+  const handleOpenAddressModal = () => {
+    setIsModalOpen(true); // Open the modal
+  };
+
+  const handleCloseAddressModal = () => {
+    setIsModalOpen(false); // Close the modal
+  };
 
   //console.log(userInfo);
   console.log(product)
@@ -48,10 +62,10 @@ const { productId } = useParams();
 
   const handleCheckout = async () => {
     if( !userInfo.id) {
-      setSnackbarSeverity('error');
-      setSnackbarMessage('An error occurred. Most likely because you aren`t logged in!. Click Here to login in');
-      setOpenSnackbar(true);
-
+      // setSnackbarSeverity('error');
+      // setSnackbarMessage('An error occurred. Most likely because you aren`t logged in!. Click Here to login in');
+      // setOpenSnackbar(true);
+handleOpenAddressModal();
    //   navigate('/login');
       return;
     }
@@ -76,12 +90,28 @@ const { productId } = useParams();
     }
 
 
-
-
+  const handleAddressVerificationResult = (result: string) => {
+    if (result === "INSIDE") {
+      setIsAddressVerified(true);
+    } else {
+      setIsAddressVerified(false);
+    }
+  };
 
   return (
 
     <Box sx={{ padding:'20px', paddingTop:isSmallScreen?'75px':0,display: 'flex', justifyContent: 'center', alignItems: 'center', height: '75vh' }}>
+      <Helmet>
+        <title>Dumpster Rental Services - Northern Neck Garbage Collection</title>
+        <meta name="description" content="Explore our range of Waste Management Services. Find the perfect solution for your waste management needs with Northern Neck Garbage Collection." />
+        <meta name="keywords" content="dumpster rental, waste management, garbage collection, Northern Neck, recycling, environmental solutions, Virginia dumpster services" />
+      </Helmet>
+      <AddressVerificationModal
+          open={isModalOpen}
+          onClose={handleCloseAddressModal}
+          onVerificationResult={handleAddressVerificationResult}
+      />
+
       {!isSmallScreen && <img src={ARROW_BACK}  alt="back" height={'140px'} width={'100px'} onClick={() => navigate('/services')}/>}
 
       <Snackbar
@@ -128,7 +158,10 @@ const { productId } = useParams();
         </CardContent>
       </Card>
         </>
+
         )}
+
+
     </Box>
   );
 };

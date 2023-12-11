@@ -10,6 +10,7 @@ import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {Link, useNavigate} from "react-router-dom";
 import {changeUserLogInfo, clearUserInfo, updateToken} from "../../redux/userLogInfoSlice";
 import axios from "axios";
+import {Helmet} from "react-helmet";
 
 const Dashboard = () => {
 	const userInfo = useAppSelector(state => state.userInfo)
@@ -49,7 +50,7 @@ const Dashboard = () => {
 				//addToken(response.data.token);
 				//  const mergedState = {...initialState, ...response.data};
 				//   initialState.token=response.data.token;
-				console.log(response.data);
+			//	console.log(response.data);
 				// console.log(mergedState);
 setToken(response.data.token);
 
@@ -89,9 +90,14 @@ React.useEffect(() => {
 		retrieveTokenFromUser(userInfo.id).then(r => console.log(r))
 
 	},[userInfo]);
-console.log(userInfo)
+//console.log(userInfo)
 	return (
 		<Box mb={4} mt={0}>
+			<Helmet>
+				<title>User Dashboard - Northern Neck Garbage Collection</title>
+				<meta name="description" content="Access your personal dashboard to manage appointments, view schedules, and update your profile at Northern Neck Garbage Collection." />
+				<meta name="keywords" content="user dashboard, garbage collection schedule, profile management, waste management account, recycling services, Northern Neck" />
+			</Helmet>
 			<Box sx={{ }} pb={1} pt={1}>
 				<Grid container spacing={2}>
 					<Grid item xs={12} sm={12}>

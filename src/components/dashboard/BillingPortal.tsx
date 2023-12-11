@@ -10,7 +10,7 @@ const BillingPortal = () => {
         console.log(userInfo.stripeCustomerId);
         try {
             const response = await axios.get(`https://api.northernneckgarbage.com/auth/stripe/create-customer-portal-session/${userInfo.id}`);
-            console.log(response.data)
+            //console.log(response.data)
             window.location.href = response.data;
         } catch (error) {
             console.log(error);

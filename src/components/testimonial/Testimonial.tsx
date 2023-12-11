@@ -1,13 +1,13 @@
 import {Avatar, Box, Card, CardContent, Grid, Typography} from '@mui/material';
-import dirty from '../../assets/dirty_yard-b272813f.jpg';
-import yard_clean from '../../assets/yarn_clean-f205d94a.png';
-import yard_clean1 from '../../assets/yarnCleanup-de6f1abd.png';
+import dirty from '../../../public/assets/dirty_yard-b272813f.jpg';
+import yard_clean from '../../../public/assets/yarn_clean-f205d94a.png';
+import yard_clean1 from '../../../public/assets/yarnCleanup-de6f1abd.png';
 
 const testimonials = [
   {
     name: '-- Nurturing Neighborhoods:',
     image: dirty,
-    testimonial: "Northern Neck Garbage Collection (NNGC) isn’t just about waste removal" +
+    testimonial: "Northern Neck Garbage Collection (NNGC) isn’t just about waste removal " +
     "we're about community care, especially for our seniors. We strive to make every neighborhood we serve a better, safer place."
     },
   {
@@ -18,9 +18,10 @@ const testimonials = [
 
   },
   {
-    name: '-- Ev',
+    name: '-- Customer Service',
     image: yard_clean1,
-    testimonial: "Either You're born with it, or you're not! Who is this?"
+    testimonial: "We've often heard complaints about other garbage companies: 'Nobody ever answers the phone!' At NNGC, we take pride in our availability to our customers. " +
+        "Whether you have a question or a concern, we're just a phone call away and always ready to assist."
   },
 ];
 

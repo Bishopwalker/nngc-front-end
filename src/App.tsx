@@ -34,6 +34,7 @@ import PasswordReset from "./auth/PasswordReset";
 import Reviews from "./components/reviews/Reviews";
 import ReactPixel from "react-facebook-pixel";
 import MessageSales from "./components/MessageSales";
+import { Helmet } from 'react-helmet';
 
 function App() {
 	const screenTitle = useAppSelector(state => state.title)
@@ -58,7 +59,11 @@ function App() {
 	// @ts-ignore
 	return (
 		<div className="App">
-
+			<Helmet>
+				<title>{screenTitle.title ? screenTitle.title : 'Northern Neck Garbage Collection'}</title>
+				<meta name="description" content="Northern Neck Garbage Collection offers reliable waste management and recycling services in Virginia. Discover our eco-friendly solutions and community initiatives." />
+				<meta name="keywords" content="waste management, garbage collection, recycling, Virginia, eco-friendly disposal, Northern Neck Garbage Collection" />
+			</Helmet>
 			<HeaderTop />
 			<Navbar />
 			<NavBottom />

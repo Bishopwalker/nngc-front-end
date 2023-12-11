@@ -6,7 +6,7 @@ import {Box, Button, Grid, TextField, Typography} from '@mui/material';
 import React, {useEffect, useState} from 'react';
 import Alert, {AlertColor} from "@mui/material/Alert";
 import Snackbar from '@mui/material/Snackbar';
-
+import GoogleSignInButton from "../google/GoogleSignInButton";
 
 const Login = () => {
 
@@ -58,7 +58,7 @@ const Login = () => {
 		})
 			.then((response) => {
 		console.log('response',response)
-				if(!response.data.status){
+				if(response.data.status=== 403){
 					setSnackbarSeverity('error');
 					setSnackbarMessage('Invalid Email or Password.....Try Again or Yell Help!!!');
 					setOpenSnackbar(true);
@@ -78,6 +78,12 @@ const Login = () => {
 		})
 		.catch((error) => {
 			console.log(error)
+			if(error.response.status=== 403){
+				setSnackbarSeverity('error');
+				setSnackbarMessage('Invalid Email or Password.....Try Again or Yell Help!!!');
+				setOpenSnackbar(true);
+				setResetPassword(true)
+			}
 
 		})
 
@@ -169,6 +175,7 @@ const Login = () => {
 											Don't have an account? <b>Sign Up</b>
 										</Typography>
 									</Link>
+
 								</Box>
 							</form>
 						</Box>

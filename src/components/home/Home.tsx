@@ -41,7 +41,8 @@ const Home = () => {
                 <AccordionItem
 
                     title="Do you offer Recycling?"
-                    content="Of course, just put your recycling can or labeled recycling bag and I'll grab it when I get your trash"
+                    content="Of course if you purchase the weekly trash with recyling for only $65 per month,
+                     then you just put your recycling can or labeled recycling bag and I'll grab it when I get your trash"
                 />
                 <AccordionItem
                     title="Do you offer backdoor service?"
@@ -56,29 +57,30 @@ const Home = () => {
                 />
                 <AccordionItem
                     title="Do you have insurance?"
-                    content="Rest assured if I break it, they'll buy it!! So unless your mailbox is made of solid gold we're good!"
+                    content="Yes, I have one 1 million in liability insurance."
                 />
                 <AccordionItem
 
                     title="Do you pickup old cars, boats, metal or other large items?"
-                    content="We remove large bulk items on a case by case basis. But in most situations if you're we can make it work!
+                    content="We remove large bulk items on a case by case basis. But in most situations we can make it work!
                     Give us a call today!"
                 />
                 <AccordionItem
 
                     title="Why can't I log into my account after I've signed up?"
-                    content="Once you've signup our system sends a confirmation email to the address you provided.
-                    You need to open the email and click on the link to confirm you address.
+                    content="Once you've signup, our system sends a confirmation email to the address you provided.
+                    You need to open the email and click on the link to confirm your address.
 						You have 3 days before the token is expired and if you gave the wrong email you'll have to give us a call."
                 />
                 <AccordionItem
 
-                    title="Do you provide dumpsters or larger wheeled trashcans?"
-                    content="If you need a special request give us a call today!"
+                    title="Can you Drop the Trailer off for the day?"
+                    content="Yes you can schedule with us to have us drop a 6x10 Dump Trailer with 42 inch walls off
+                    and come back at the end of the day take and dump it for you! Call for a price."
                 />
                 <AccordionItem
-                    title="I'm trying to get an accont but nothing is happening"
-                    content="We are working on making the app give more error messages, but in most cases its because you created an account alreadt and never confirmed you email.
+                    title="I'm trying to get an account but nothing is happening"
+                    content="We are working on making the app give more error messages, but in most cases its because you created an account already and never confirmed your email.
                     If you're having trouble signing up give us a call and we'll get you squared away!"
                 />
             </Box>

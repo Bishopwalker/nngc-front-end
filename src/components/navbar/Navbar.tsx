@@ -39,6 +39,25 @@ const Navbar = () => {
     gap: 50,
   });
 
+  // Styles for desktop links
+  const desktopLinkStyle = {
+    color: 'white', // Normal link color
+    textDecoration: 'none',
+    '&:visited': {
+      color: 'yellow', // Visited link color
+    },
+  };
+
+  // Styles for mobile links
+  const mobileLinkStyle = {
+    color: 'blue', // Normal link color for mobile
+    textDecoration: 'none',
+    '&:visited': {
+      color: 'purple', // Visited link color for mobile
+    },
+  };
+
+
   const MenuItems = [
     { Name: "Home", Link: "/" },
     // { Name: "Our Services", Link: "/services" },
@@ -90,18 +109,20 @@ const Navbar = () => {
           {/* Menu for desktop view */}
           <MenuBox sx={{ display: { xs: "none", sm: "none", md: "flex" } }}>
             {MenuItems.map((item, index) => (
+                <Link to={item.Link} style={desktopLinkStyle} key={index}>
+
                 <Typography
                     key={index}
                     sx={{
                       cursor: "pointer",
                       fontSize: "24px",
-                      padding: "0 15px"
+                      padding: "0 15px",
+                      color: "white",
                     }}
                 >
-                  <Link to={item.Link}>
                     {item.Name}
-                  </Link>
                 </Typography>
+                </Link>
             ))}
           </MenuBox>
         </StyledToolbar>
@@ -115,23 +136,28 @@ const Navbar = () => {
           <Box sx={{ width: 250 }}>
             <List>
               {MenuItems.map((item, index) => (
+                  <Link to={item.Link} style={mobileLinkStyle} key={index} onClick={() => setMobileMenuOpen(false)}>
                   <ListItem
                       key={index}
                       onClick={() => setMobileMenuOpen(false)}
                   >
-                    <Link to={item.Link}>
+
                     <ListItemText primary={item.Name} />
-                    </Link>
                   </ListItem>
+                  </Link>
               ))}
             </List>
           </Box>
-          <Typography variant='h4' sx={{
+          <Link to='/help' >
+          <Typography      onClick={() => setMobileMenuOpen(false)}
+                                            variant='h4' sx={{
             padding: '50px'
+
           }}>
-           <Link to='/help' >  Get Help   </Link>
+           Get Help
           </Typography>
-          <Link to='/help' >  <span>Or Message Us</span> </Link>
+           <span><h3>Or Message Us </h3> </span>
+          </Link>
         </Drawer>
 
         {/* Existing Menu component */}

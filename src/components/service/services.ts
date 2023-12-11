@@ -1,9 +1,9 @@
 import TRAILER from '/trailer.png'
-import PURPLE from '../../assets/purpleHouseMonster.png'
-import OLD from '../../assets/olelady.png'
-import MONSTER from'../../assets/furMonter3d.png'
-import TRAILER3 from '../../assets/YarnCleanup1.png'
-import TRAILER2 from '../../assets/NNGC-Plate.png'
+import PURPLE from '../../../public/assets/purpleHouseMonster.png'
+import OLD from '../../../public/assets/olelady.png'
+import MONSTER from '../../../public/assets/furMonter3d.png'
+import TRAILER3 from '../../../public/assets/YarnCleanup1.png'
+import TRAILER2 from '../../../public/assets/NNGC-Plate.png'
 
 export const services_sub = [
   {
@@ -13,6 +13,7 @@ export const services_sub = [
     name:'res_sub',
     services: 'Weekly Trash. Includes backdoor pickup and our new "Can-Less Pickup!" As long as you have your trash in bags we\'ll grab it!.',
     price: 45,
+    alt: 'Residential Trash Pickup',
     linkImg:
       PURPLE,
   },
@@ -24,6 +25,7 @@ export const services_sub = [
     services: 'Introducing "Single-Stream" Recycling. All you got to do is bag your recyclables! We grab it with your trash, ' +
         'separate and recycle for you. This is the most environmentally friendly package!',
     price:65,
+    alt: 'Residential Weekly Trash with Separate Recycling Pickup',
     linkImg:
         OLD,
   },
@@ -35,6 +37,7 @@ export const services_sub = [
     services: 'Place all bags or trash cans at one location and we`ll come by and pick it up. Additional services include going room to room emptying out trashcans, ' +
         'recycling, bulk deliveries and more. Additional fees apply - call for special circumstances.',
     price:100,
+    alt: 'Commercial Trash Pickup',
     linkImg:
         MONSTER,
   },
@@ -51,6 +54,7 @@ export const servicesOnce = [ {
   services: 'Junk Removal, garage cleanup. 6x10 2022 Big Tex 90R trailer. 9999 gvwr 6800 pound load. Raised walls to 48 inches with tarp kit. ' +
       'No un-bottled or dangerous liquids.',
   price:125,
+    alt: 'Junk Removal',
   linkImg:
         TRAILER2,
 },
@@ -71,6 +75,7 @@ export const servicesOnce = [ {
     services: 'We offer bulk delivery of mulch, topsoil, gravel, sand, and more. We also offer delivery of landscaping ' +
         'materials such as plants, trees, and shrubs.  If it`s legal and non-hazardous we got a price for it! Call for a quote.',
     price: 125,
+    alt: 'Bulk/Landscaping Delivery',
     linkImg:TRAILER3,
 
   }

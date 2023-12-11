@@ -61,7 +61,7 @@ function ImageSlider() {
                             ? defaultImage.linkDefault
                             : item.linkImg
                       }
-                  />
+                   alt={item.alt}/>
                 </Link>
               </div>
           ))}

@@ -9,6 +9,7 @@ import {Box, Button} from "@mui/material";
 import {useTheme} from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import "./service.css"
+import {Helmet} from "react-helmet";
 
 function Service() {
   const [defaultImage, setDefaultImage] = useState({
@@ -85,6 +86,12 @@ function Service() {
 
   return (
       <Box className="services">
+        <Helmet>
+          <title>Waste Management Services - Northern Neck Garbage Collection</title>
+          <meta name="description" content="Explore our waste management and garbage collection services. Choose from monthly or one-time service options to suit your needs." />
+          <meta name="keywords" content="waste management services, garbage collection, monthly service, one-time service, recycling, Northern Neck Garbage Collection, environmental solutions" />
+        </Helmet>
+
         <Box className="toggle-buttons">
           <Button
               className={`monthly ${activeServiceType === 'Monthly' ? 'active' : ''}`}

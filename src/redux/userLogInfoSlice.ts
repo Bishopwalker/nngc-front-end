@@ -47,7 +47,7 @@ export const userLogInfoSlice = createSlice({
         },
 
         addToken: (state, action) => {
-            console.log(action.payload.token);
+         //   console.log(action.payload.token);
             const mergedState = {...state, ...action.payload};
             mergedState.isLoggedIn = true;
             return mergedState;

@@ -26,7 +26,7 @@ const [geocodeData, setGeocodeData] = useState({
         setGeocodeData(result.data)
         //console.log(result.data)
     }
-    console.log(geocodeData)
+   // console.log(geocodeData)
 React.useEffect(()=>{
     if(userInfo.address.city === null){
         setLocation(true)

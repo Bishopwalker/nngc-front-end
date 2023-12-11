@@ -9,6 +9,7 @@ import SecondStep from './SecondStep'
 import Confirm from './Confirm'
 import Success from './Success'
 import {AppContext} from './Context'
+import {Helmet} from "react-helmet";
 
 // Step titles
 const labels = ['Personal Information', 'Contact Information', 'Confirmation']
@@ -30,6 +31,11 @@ export default function StepForm() {
 
   return (
     <>
+      <Helmet>
+        <title>Sign Up - Northern Neck Garbage Collection</title>
+        <meta name="description" content="Join Northern Neck Garbage Collection community. Sign up to manage your waste management services effectively." />
+        <meta name="keywords" content="sign up, registration, waste management services, Northern Neck Garbage, community membership, account creation" />
+      </Helmet>
       {activeStep === labels.length ? (
         <Success />
       ) : (

@@ -15,6 +15,7 @@ import Alert, {AlertColor} from "@mui/material/Alert";
 import Snackbar from '@mui/material/Snackbar';
 import {useNavigate} from "react-router-dom";
 import {changeUserLogInfo} from "../../redux/userLogInfoSlice";
+ import {Helmet} from "react-helmet";
 
 const DKAppointment = () => {
 useProtectedRouteUser()
@@ -27,7 +28,7 @@ useProtectedRouteUser()
             const response = await axios.get(`https://api.northernneckgarbage.com/auth/nngc/token_status?token=${userInfo.token}`, {
                 maxRedirects: 0,  // Prevent automatic redirects
             });
-            console.log(response.data);
+            //console.log(response.data);
             if (response.data === "expired") {  // 307 Temporary Redirect
                 navigate('/expired');
             }
@@ -63,7 +64,7 @@ useProtectedRouteUser()
         confirmToken().then((r)=>updateUserInfo());
 
     },[])
-console.log(userInfo)
+//console.log(userInfo)
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
     const [modalOpen, setModalOpen] = useState(false);
     const [modalOpenDisabledDates, setModalOpenDisabledDates] = useState(false);
@@ -286,6 +287,11 @@ console.log(paymentIntent)
 
     return (
         <div style={{ maxWidth: "800px", margin: "30px auto 50px" }}>
+            <Helmet>
+                <title>Book Your Garbage Collection Appointment | Northern Neck Garbage Collection</title>
+                <meta name="description" content="Schedule your junk removal or trailer rental with Northern Neck Garbage Collection. Fast, reliable, and efficient service in Lottsburg, VA." />
+                <meta name="keywords" content="junk removal, garbage collection, trailer rental, waste management, Lottsburg, Northern Neck" />
+            </Helmet>
             <Button onClick={handlePushToReceiptUrl} >View Receipt</Button>
             <Snackbar
                 open={openSnackbar}
