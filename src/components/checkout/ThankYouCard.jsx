@@ -2,12 +2,13 @@ import React from 'react';
 import {Card, Typography} from '@mui/material';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import styles from './thankyou.module.css';
-
+import "./ballons.css"
 const theme = createTheme();
 
 const ThankYouCard = () => {
     return (
-        <ThemeProvider theme={theme}>
+
+        <ThemeProvider   theme={theme}>
 
                 <Card sx={{
                     width: '75%',

@@ -1,24 +1,28 @@
-#balloon-container {
-    position: relative;
-    height: 100vh;
-    overflow: hidden;
-}
-
+/* General balloon styles */
 .balloon {
     position: absolute;
-    bottom: 0;
+    bottom: -100px; /* Start below the screen */
     width: 50px;
     height: 70px;
-    background-color: red;
     border-radius: 50%;
-    animation: float 5s ease-in infinite;
+    animation: float 10s ease-in infinite;
 }
 
-/* Add more colors for balloons */
+/* Randomize balloon colors */
+.balloon.red { background-color: red; }
 .balloon.blue { background-color: blue; }
 .balloon.green { background-color: green; }
+.balloon.yellow { background-color: yellow; }
 
+/* Floating animation */
 @keyframes float {
-    0% { bottom: 0; }
-    100% { bottom: 100vh; }
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-100vh); }
+}
+
+#green{
+    animation-delay: 3s;
+    color: green;
+    font-weight: bold;
+    font-size: 1.5rem;
 }
