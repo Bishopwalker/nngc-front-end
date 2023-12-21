@@ -36,10 +36,12 @@ import ReactPixel from "react-facebook-pixel";
 import MessageSales from "./components/MessageSales";
 import { Helmet } from 'react-helmet';
 import SurroundingArea from "./auth/SurroundingArea";
+import {Button} from "@mui/material";
+import {useNavigate} from "react-router-dom";
 
 function App() {
 	const screenTitle = useAppSelector(state => state.title)
-
+const navigate = useNavigate()
 	React.useEffect(() => {
 		document.title = screenTitle.title? screenTitle.title : 'NNGC'
 	}, [screenTitle])
@@ -103,7 +105,22 @@ function App() {
 			<Box mt={4} pt={4} display={{ xs: 'block'}}>
 				{}
 			</Box>
-
+{location.pathname!=='/services' &&
+	<>
+	<Button variant='contained' sx={{
+			bgcolor: '#258c45',
+			'&:hover': {bgcolor: '#be6dec'},
+			color: 'white',
+			fontSize: '1.5rem',
+			fontWeight: 'bold',
+			padding: '1rem 0'
+		}}
+		  fullWidth onClick={() => navigate('/services')}>Purchase Weekly Subscription!</Button>
+			<Box mt={4} pt={4} display={{xs: 'block'}}>
+			{}
+		</Box>
+	</>
+}
 			<Footer />
 		</div>
 	)
