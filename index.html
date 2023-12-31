@@ -1,47 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+  </style>
   <meta charset="UTF-8" />
+  <link rel="stylesheet" href="styles.css">
   <link rel="icon" type="image/png" sizes="16x16" href="public/favicons/favicon-16x16.png">
   <meta name="msapplication-TileColor" content="#ffffff">
   <meta name="theme-color" content="#ffffff">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="canonical" href="https://www.northernneckgarbage.com">
+
+
+  <!-- SEO Optimized Title -->
+  <title>Comprehensive & Eco-Friendly Rural Waste Management Services | Northern Neck Garbage Collection</title>
+
+  <!-- Enhanced Meta Description for SEO -->
+  <meta name="description" content="Northern Neck Garbage Collection offers expert rural waste management and recycling services in Virginia. We provide dependable garbage pickup, junk removal, and eco-friendly solutions tailored for rural communities.">
+
+  <!-- Relevant SEO Keywords -->
+  <meta name="keywords" content="rural waste management, eco-friendly garbage disposal, recycling services, junk removal, Northumberland County, Virginia, sustainable waste solutions, rural recycling">
+
+  <!-- External Scripts for Functionality and Analytics -->
   <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
-  <!-- In your public/index.html or similar file -->
   <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11354094876"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'AW-11354094876');
   </script>
-  <title>Northern Neck Garbage Collection | NNGC</title>
+
+  <!-- Structured Data for Enhanced SEO -->
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Organization",
+      "name": "Northern Neck Garbage Collection, LLC",
       "url": "https://www.northernneckgarbage.com",
       "logo": "https://www.northernneckgarbage.com/assets/nngc-logo.png",
       "contactPoint": {
         "@type": "ContactPoint",
-        "telephone": "+1-804-220-0029",
+        "telephone": "804-220-0029",
         "contactType": "customer service",
-        "areaServed": ["Northumberland County", "Lottsburg", "Callao", "Reedville", "Heathsville",
-          "Kilmarnock", "Warsaw", "Tappahannock", "Lancaster County", "Richmond County", "Westmoreland County", "Essex County",
-          "Montross",  "Colonial Beach",  "Warsaw", "Tappahannock"],
+        "areaServed": ["Northumberland County", "Lottsburg", "Callao", "Reedville", "Heathsville", "Kilmarnock", "Warsaw", "Tappahannock", "Lancaster County", "Richmond County", "Westmoreland County", "Essex County", "Montross"],
         "availableLanguage": "en"
-      },
-      "name": "Northern Neck Garbage Collection, LLC"
+      }
     }
   </script>
-
 </head>
 <body>
+<header>
+  <div><h1><span class="sr-only">Northern Neck Garbage Collection</span></h1></div>
+</header>
 
 <div id="root"></div>
+
 <script type="module" src="src/main.tsx"></script>
+
+<!-- React component will render the footer -->
 </body>
 </html>

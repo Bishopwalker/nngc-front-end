@@ -83,7 +83,7 @@ const navigate = useNavigate()
 				<Route path='/emaps' element={<Encoded_GMaps/>} />
 				<Route path='/blog' element={<Blog/>} />
 				<Route path='services' element={<Service/>} />
-				<Route path='story' element={<OurStory/>} />
+				<Route path='/story' element={<OurStory/>} />
 				<Route path='/success' element={<SuccessPage/>} />
 				<Route path='/verify' element={<VerifyEmail/>} />
 				<Route path='/policy' element={<PrivacyPolicy/>}/>

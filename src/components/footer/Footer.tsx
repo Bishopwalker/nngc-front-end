@@ -4,6 +4,7 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import {Email, Phone} from "@mui/icons-material";
+import {Helmet} from "react-helmet";
 
 const Footer = () => {
 
@@ -13,6 +14,11 @@ const Footer = () => {
 
 	return (
 	<Box>
+		<Helmet>
+			<title>Contact Us - Northern Neck Garbage Collection</title>
+			<meta name="description" content="Contact Northern Neck Garbage Collection for eco-friendly waste management services. Reach out to us via email or phone." />
+			<meta name="keywords" content="contact, Northern Neck Garbage Collection, waste management, eco-friendly, recycling services, Virginia" />
+		</Helmet>
 		<Box sx={{ backgroundColor: '#2C3E50', color: 'white' }} pb={2}>
 			<Grid container spacing={2}>
 			  <Grid item xs={12} sm={4}>

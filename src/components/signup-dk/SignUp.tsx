@@ -6,6 +6,7 @@ import Paper from '@mui/material/Paper'
 import StepForm from './StepForm'
 import {StepsProvider} from './Context'
 import GoogleSignInButton from '../google/GoogleSignInButton.jsx'
+import { Helmet } from 'react-helmet'
 const theme = createTheme({
   typography: {
     fontFamily: ['Roboto', 'Helvetica', 'Arial', 'sans-serif'].join(','),
@@ -23,6 +24,11 @@ export default function SignUp() {
     // @ts-ignore
     return (
       <>
+          <Helmet>
+              <title>Sign Up - Northern Neck Garbage Collection</title>
+              <meta name="description" content="Join Northern Neck Garbage Collection for reliable and eco-friendly waste management services." />
+              <meta name="keywords" content="sign up, waste management, garbage collection, eco-friendly, Northern Neck" />
+          </Helmet>
     <StepsProvider>
         {/*ts-ignore*/}
         {/*<GoogleSignInButton clientId={googleClientId} />*/}

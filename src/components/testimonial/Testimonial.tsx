@@ -2,6 +2,8 @@ import {Avatar, Box, Card, CardContent, Grid, Typography} from '@mui/material';
 import dirty from '../../../public/assets/dirty_yard-b272813f.jpg';
 import yard_clean from '../../../public/assets/yarn_clean-f205d94a.png';
 import yard_clean1 from '../../../public/assets/yarnCleanup-de6f1abd.png';
+import React from "react";
+import {Helmet} from "react-helmet";
 
 const testimonials = [
   {
@@ -28,6 +30,11 @@ const testimonials = [
 const Testimonials = () => {
   return (
     <Box sx={{ mt: 4, mb: 6 }}>
+        <Helmet>
+            <title>Testimonials - Northern Neck Garbage Collection</title>
+            <meta name="description" content="Hear from our satisfied customers about their experiences with Northern Neck Garbage Collection's services." />
+            <meta name="keywords" content="testimonials, customer feedback, waste management, Northern Neck Garbage Collection" />
+        </Helmet>
 		<Typography variant="h4" align="center" sx={{ 
 		  fontWeight: 'bold',
 		  color: '#2C3E50',

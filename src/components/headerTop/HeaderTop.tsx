@@ -3,11 +3,17 @@ import {Email, Phone} from '@mui/icons-material';
 import React from "react";
 import NNGCLogo from "../../../public/assets/nngc-logo.png";
 import {Link} from 'react-router-dom';
+import {Helmet} from "react-helmet";
 
 const HeaderTop = () => {
 
 	return (
 		<Box sx={{ backgroundColor: 'white', color: '#777', borderTop: '5px solid #26C9FF', borderBottom: '5px solid #26C9FF', marginTop: 0 }}>
+			<Helmet>
+				<title>Navigation - Northern Neck Garbage Collection</title>
+				<meta name="description" content="Navigate through Northern Neck Garbage Collection's website for waste management services." />
+				<meta name="keywords" content="navigation, garbage collection, waste management, eco-friendly services" />
+			</Helmet>
 			<Box>
 				<Grid container spacing={1} sx={{ padding: '8px', border: '1px solid grey' }}>
 					<Grid item xs={3} sm={3} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>

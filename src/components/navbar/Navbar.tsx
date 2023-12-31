@@ -18,6 +18,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import {Facebook, Instagram, Twitter} from "@mui/icons-material/";
 import {useAppSelector} from "../../redux/hooks";
 import {Link} from "react-router-dom";
+import {Helmet} from "react-helmet";
 
 const Navbar = () => {
   const user = useAppSelector((state) => state.userInfo);
@@ -72,6 +73,11 @@ const Navbar = () => {
 
   return (
       <AppBar sx={{ background: "#2c3e50" }} position={"static"}>
+        <Helmet>
+          <title>Navigation - Northern Neck Garbage Collection</title>
+          <meta name="description" content="Navigate through Northern Neck Garbage Collection's website for waste management services." />
+          <meta name="keywords" content="navigation, garbage collection, waste management, eco-friendly services" />
+        </Helmet>
         <StyledToolbar>
           <SocialBox>
             <IconButton

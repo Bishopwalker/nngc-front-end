@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import './style.css';
 import {sliders} from './sliders';
 import {Link} from "react-router-dom";
+import {Helmet} from "react-helmet";
 
 function ImageSlider() {
   const [defaultImage, setDefaultImage] = useState({
@@ -50,6 +51,11 @@ function ImageSlider() {
 
   return (
       <div className="sliders">
+        <Helmet>
+          <title>Gallery - Northern Neck Garbage Collection</title>
+          <meta name="description" content="Explore our gallery showcasing Northern Neck Garbage Collection's services and community involvement." />
+          <meta name="keywords" content="gallery, images, waste management, Northern Neck Garbage Collection" />
+        </Helmet>
         <Slider {...settings}>
           {sliders.map((item,index) => (
               <div className="sliderCard" key={index}>
