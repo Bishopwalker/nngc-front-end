@@ -9,18 +9,25 @@ import Checkbox from '@mui/material/Checkbox'
 import {AppContext} from './Context'
 import {useJsApiLoader} from "@react-google-maps/api";
 import {libraries} from '../google/mapsConfig';
+import {useAppSelector} from "../../redux/hooks";
 
 export default function SecondStep() {
   const { formValues, handleChange, handleBack, handleNext, variant, margin } = useContext(AppContext)
   const { city, date, phone, agreenemt, houseNumber, streetName, state, zipCode } = formValues
 
+  const ROLE: any[0] = useAppSelector(state => state.userInfo.role)
+
+
+
   const isError = useCallback(
-    () =>
-      Object.keys({ city, date, phone, agreenemt }).some(
-        (name) => (formValues[name].required && !formValues[name].value) || formValues[name].error
-      ),
-    [formValues, city, date, phone, agreenemt, houseNumber, streetName, state, zipCode]
-  )
+      () =>
+          Object.keys({ city, date, phone, houseNumber, streetName, state, zipCode })
+              .filter(name => !(name === 'agreenemt' && ROLE === 'ADMIN'))
+              .some(
+                  (name) => (formValues[name].required && !formValues[name].value) || formValues[name].error
+              ),
+      [formValues, ROLE]
+  );
 
   const streetNameRef = useRef(null);
 
@@ -65,7 +72,7 @@ export default function SecondStep() {
     }
   }, [isLoaded, streetNameRef, handleChange]);
 
-
+console.log(ROLE,'f')
   return (
     <>
       <Grid container spacing={2}>
@@ -160,7 +167,7 @@ export default function SecondStep() {
             required={zipCode.required}
           />
         </Grid>
-        <Grid item xs={12}>
+        {ROLE as any !=='ADMIN' && <Grid item xs={12}>
           <FormControlLabel
             control={
               <Checkbox
@@ -174,7 +181,7 @@ export default function SecondStep() {
             label='Agree to terms and conditions'
           />
           <FormHelperText error={!!agreenemt.error}>{agreenemt.error}</FormHelperText>
-        </Grid>
+        </Grid>}
       </Grid>
 
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 3 }}>

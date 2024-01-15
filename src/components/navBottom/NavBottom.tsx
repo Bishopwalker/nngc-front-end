@@ -21,7 +21,10 @@ const NavBottom = () => {
   return (
     <Box sx={{ padding: '1rem' }}>
            {role && role ==='ADMIN' && (
-            <>
+            <Box sx={{
+                display:'flex', justifyContent:'space-around'
+            }}>
+
                 <Button variant={"contained"} color={"primary"} sx={{mt: '1rem'}} component={Link}  to={`/emaps?page=${pageNumber}`}>
                     View Routes
                 </Button>
@@ -33,7 +36,11 @@ const NavBottom = () => {
                     onChange={(e) => setPageNumber(e.target.value)}
                     sx={{ mt: '1rem' }}
                 />
-            </>
+
+                <Button variant={"contained"} color={"primary"} sx={{mt: '1rem'}} component={Link}  to={`/admin`}>
+                    Signup New Customer
+                </Button>
+            </Box>
         )}
 
 	  <Box sx={{ maxWidth: '150px', mx: 'auto' }}>

@@ -16,8 +16,8 @@ const HeaderTop = () => {
 						</Link>
 					</Grid>
 					<Grid item xs={3} sm={3} sx={{ display: { xs: 'none', sm: 'none', lg: 'block', xl: 'block' } }}>
-						<Typography variant="body1" textAlign="center" sx={{ lineHeight: '1rem' }}>
-							We are Northumberland's #1 choice for trash removal!
+						<Typography variant="body1" textAlign="center" sx={{ lineHeight: '1rem',fontWeight:'bold',fontSize:'1.25rem', marginLeft:-40}}>
+							Northern Neck Garbage Collection
 						</Typography>
 					</Grid>
 					<Grid item xs={3} sm={3} sx={{ display: { xs: 'none', sm: 'none', lg: 'flex', xl: 'flex' }, alignItems: 'center', lineHeight: '1rem' }}>
@@ -29,8 +29,8 @@ const HeaderTop = () => {
 						804-220-0029
 					</Grid>
 					<Grid item xs={9} sm={9} sx={{ display: { xs: 'block', sm: 'block', lg: 'none', xl: 'none' } }}>
-						<Typography variant="body1" textAlign="center" sx={{ lineHeight: '1rem' }}>
-							We are Northumberland's #1 choice for trash removal!
+						<Typography variant="body1" textAlign="center" sx={{ lineHeight: '1rem', fontWeight:'bold',fontSize:'1.25rem' }}>
+							Northern Neck Garbage Collection
 						</Typography>
 					</Grid>
 				</Grid>
