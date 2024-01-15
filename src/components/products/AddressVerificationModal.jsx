@@ -18,7 +18,7 @@ const AddressVerificationModal = ({ open, onClose, onVerificationResult }) => {
 
     const handleVerifyAddress = async () => {
         try {
-            const response = await axios.get(`http://localhost:8080/nngc/google/verify-address?address=${encodeURIComponent(address)}`);
+            const response = await axios.get(`https://api.northernneckgarbage.com/nngc/google/verify-address?address=${encodeURIComponent(address)}`);
             const result = response.data; // Assuming the response will be a string like "INSIDE", "SURROUNDING", or "OUTSIDE"
             setVerificationResult(result);
 
@@ -30,7 +30,7 @@ const AddressVerificationModal = ({ open, onClose, onVerificationResult }) => {
             } else if (result === "SURROUNDING") {
                 // push user to help page
                 alert("Address is in the surrounding area. Please give us a call for special pricing. ");
-                navigate("/help");
+                navigate("/surrounding");
                         onClose();
             } else if (result === "OUTSIDE") {
                 // Alert for outside service area

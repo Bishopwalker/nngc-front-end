@@ -62,7 +62,8 @@ console.log(isAddressVerified)
   }, []);
 
   async function checkoutBuy() {
-    const url = `https://api.northernneckgarbage.com/auth/stripe/create-checkout-session/${userInfo.id}?productID=${productId}`;
+
+    const url = !verificationResult? `https://api.northernneckgarbage.com/auth/stripe/create-checkout-session/${userInfo.id}?productID=${productId}`:`https://api.northernneckgarbage.com/auth/stripe/create-checkout-session?productID=${productId}`;
     await axios.get(url, {
           headers: {
             'Authorization': `Bearer ${userInfo.token}`, // if user token is stored in userInfo object
@@ -112,7 +113,7 @@ console.log(verificationResult)
       <Helmet>
         <title>Dumpster Rental Services - Northern Neck Garbage Collection</title>
         <meta name="description" content="Explore our range of Waste Management Services. Find the perfect solution for your waste management needs with Northern Neck Garbage Collection." />
-        <meta name="keywords" content="dumpster rental, waste management, garbage collection, Northern Neck, recycling, environmental solutions, Virginia dumpster services" />
+        <meta name="keywords" content="dumpster rental, waste management, garbage collection, Northern Neck, recycling, environmental solutions, Northumberland County" />
       </Helmet>
       <AddressVerificationModal
           open={isModalOpen}
