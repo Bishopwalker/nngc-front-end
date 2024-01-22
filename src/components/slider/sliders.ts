@@ -1,8 +1,11 @@
+import PIC from "../../../public/assets/AnyThingbutTrash.png"
+import PIC2 from "../../../public/assets/LoveKidsNNGC.png"
+
 export const sliders = [
   {
     id: 1,
     title: 'slider one',
-    linkImg:"/public/assets/AnyThingbutTrash.png",
+    linkImg:PIC,
     productId:"prod_OyBN2UIT2mjgSf",
     alt:"Trash Compactor"
   },
@@ -17,8 +20,7 @@ export const sliders = [
   {
     id: 3,
     title: 'slider three',
-    linkImg:
-      'public/assets/LoveKidsNNGC.png',
+    linkImg:PIC2,
     productId:"prod_OyCb8xtyS6pZoG",
     alt:"Roll Off Dumpster"
   },
