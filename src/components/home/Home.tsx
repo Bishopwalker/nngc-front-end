@@ -17,7 +17,9 @@ const Home = () => {
     },[])
   return (
     <Box>
-		<ImageSlider />
+        <h1 className="sr-only">Northern Neck Garbage Collection Home Page</h1>
+
+        <ImageSlider />
         <Container>
       	  <Service />
           <Stack

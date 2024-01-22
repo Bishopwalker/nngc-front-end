@@ -2,8 +2,7 @@ export const sliders = [
   {
     id: 1,
     title: 'slider one',
-    linkImg:
-      'https://res.cloudinary.com/dfjg2mgcp/image/upload/v1679912876/nngc-low-res/sliders/kfmxbvjogpkzykhpzzbz.png',
+    linkImg:"/public/assets/AnyThingbutTrash.png",
     productId:"prod_OyBN2UIT2mjgSf",
     alt:"Trash Compactor"
   },
@@ -19,7 +18,7 @@ export const sliders = [
     id: 3,
     title: 'slider three',
     linkImg:
-      'https://res.cloudinary.com/dfjg2mgcp/image/upload/v1679912873/nngc-low-res/sliders/aszu2hynheispwd7qer5.png',
+      'public/assets/LoveKidsNNGC.png',
     productId:"prod_OyCb8xtyS6pZoG",
     alt:"Roll Off Dumpster"
   },

@@ -5,7 +5,7 @@ import Navbar from "./components/navbar/Navbar";
 
 import Home from "./components/home/Home";
 import Footer from "./components/footer/Footer";
-import {useAppSelector} from "./redux/hooks";
+import {useAppDispatch, useAppSelector} from "./redux/hooks";
 import Login from "./components/login-dk/Login";
 import Signup from "./components/signup-dk/SignUp";
 import Dashboard from "./components/dashboard/Dashboard";
@@ -38,16 +38,22 @@ import { Helmet } from 'react-helmet';
 import SurroundingArea from "./auth/SurroundingArea";
 import {Button} from "@mui/material";
 import {useNavigate} from "react-router-dom";
+import {changeTitle} from "./redux/pageTitleSlice";
 
 function App() {
 	const screenTitle = useAppSelector(state => state.title)
 const navigate = useNavigate()
-	React.useEffect(() => {
-		document.title = screenTitle.title? screenTitle.title : 'NNGC'
-	}, [screenTitle])
-
 	const location = useLocation();
+	const dispatch = useAppDispatch()
+	React.useEffect(() => {
+		//location.pathname = screenTitle.title? screenTitle.title : 'NNGC'
+		dispatch(changeTitle(location.pathname))
+	}, [location.pathname])
 
+
+
+console.log(screenTitle, 'screenTitle')
+	console.log(location.pathname)
 	useEffect(() => {
 		// Initialize Facebook Pixel
 		ReactPixel.init(import.meta.env.VITE_FACEBOOK_PIXEL_ID as string);
@@ -62,8 +68,13 @@ const navigate = useNavigate()
 	// @ts-ignore
 	return (
 		<div className="App">
+			<h1 className="sr-only">{screenTitle.title || 'Northern Neck Garbage Collection'}</h1>
+
 			<Helmet>
-				<title>{screenTitle.title ? screenTitle.title : 'Northern Neck Garbage Collection'}</title>
+				<title>
+					{screenTitle.title ? screenTitle.title : 'Northern Neck Garbage Collection'}
+
+				</title>
 				<meta name="description" content="Northern Neck Garbage Collection offers reliable waste management and recycling services in Virginia. Discover our eco-friendly solutions and community initiatives." />
 				<meta name="keywords" content="waste management, garbage collection, recycling, Virginia, eco-friendly disposal, Northern Neck Garbage Collection" />
 			</Helmet>
