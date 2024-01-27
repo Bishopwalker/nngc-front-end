@@ -24,7 +24,7 @@ export declare type ValidationSchema = Record<
     value?: any
     error?: string
     required?: boolean
-    validate?: 'text' | 'number' | 'email' | 'phone' | 'zip' | 'checkbox' | 'select' | 'password'| 'state'
+    validate?: 'text' | 'number' | 'email' | 'phone' | 'zip' | 'checkbox' | 'select' | 'password'| 'state'| 'service'
     minLength?: number
     maxLength?: number
     helperText?: string
@@ -178,12 +178,17 @@ export function StepsProvider({ children }: ProviderProps) {
             if (!value) error = helperText || 'Please select a value.'
             break
 
-          default:
-            break
         }
       }
+          if (name === 'service') {
+            const validServices = ['junk_removal', 'weekly_trash', 'weekly_trash_recycling'];
+            if (!validServices.includes(fieldValue as string)) {
+              error = 'Please select a valid service option.';
+            }
+          }
 
-	// Check if county field and fieldValue is not "northumberland"
+
+          // Check if county field and fieldValue is not "northumberland"
     if (name === 'county' && fieldValue !== 'northumberland') {
         if (typeof fieldValue !== "boolean") {
             error = `We haven't got services in ${fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1)} yet, please email info@northernneckgarbage.com to find out when we will be in your area.`;
