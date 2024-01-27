@@ -47,7 +47,7 @@ export default function ExampleDialog() {
             <img
                 width="250"
                 alt="https://www.northernneckchristian.org/"
-                src="/assets/nncs.jpg"
+                src="/src/assets/nncs.jpg"
                 onClick={handleClickOpen}
             />
             <Dialog open={open} onClose={handleClose}>

@@ -20,7 +20,7 @@ const PrivacyPolicy = () => {
                 We vow never to share, sell, or rent your personal data to third parties. It’s a pact sealed tighter than a landfill compacted by our top-notch waste management trucks.
             </Typography>
             <Typography variant="body1" paragraph>
-                If you have any questions or just want to chat about recycling (or cookies), feel free to contact us at privacy@[yourcompany].com. We’re here to help, whether it’s managing your data or managing your recyclables.
+                If you have any questions or just want to chat about recycling (or cookies), feel free to contact us at sales@northernneckgarbage.com. We’re here to help, whether it’s managing your data or managing your recyclables.
             </Typography>
         </Container>
     );

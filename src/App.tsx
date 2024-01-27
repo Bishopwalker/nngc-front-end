@@ -23,7 +23,7 @@ import SuccessPage from "./components/verifyEmail/SuccessPage";
 import {Box} from "@mui/material";
 import StripePricingTable from './components/stripeElements/StripePricingTable'
 import VerifyEmail from "./components/verifyEmail/VerifyEmail";
-import PrivacyPolicy from "./privacy/PrivacyPolicy";
+import PrivacyPolicy from "./privacy/PrivacyPolicy.jsx";
 import AlreadyConfirmed from "./auth/AlreadyConfirmed";
 import TokenExpiredPage from "./auth/TokenExpiredPage";
 import Help from './auth/Help'

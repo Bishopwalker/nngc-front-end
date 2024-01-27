@@ -3,14 +3,14 @@ import {ThemeProvider, useTheme} from '@mui/material/styles';
 import {Box, Card, CardContent, CardHeader, CardMedia, Container, Grid, Typography} from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Button from "@mui/material/Button";
-import CAT from "../../../public/assets/cartchem3-d0fffe7a.png"
-import CAT1 from "../../../public/assets/cat_chem1-24b0ae96.png"
-import NNCS from '../../../public/assets/nncs.jpg'
-import FUR from "../../../public/assets/furmonster3d-fd7f35f2.png"
-import BASS from "../../../public/assets/kingstripper-a07c0608.png"
-import TRUCK from "../../../public/assets/truck_trailer-517eec13.png"
-import TRUCK1 from "../../../public/assets/truck_trailer1-a6af3c75.png"
-import UFO from "../../../public/assets/ufo_trash-43dbeea5.png"
+import CAT from "/src/assets/cartchem3-d0fffe7a.png"
+import CAT1 from "/src/assets/cat_chem1-24b0ae96.png"
+import NNCS from '/src/assets/nncs.jpg'
+import FUR from "/src/assets/furmonster3d-fd7f35f2.png"
+import BASS from "/src/assets/kingstripper-a07c0608.png"
+import TRUCK from "/src/assets/truck_trailer-517eec13.png"
+import TRUCK1 from "/src/assets/truck_trailer1-a6af3c75.png"
+import UFO from "/src/assets/ufo_trash-43dbeea5.png"
 import Service from "../service/Service";
 import {Helmet} from "react-helmet";
 import {Image} from "@mui/icons-material";
@@ -201,7 +201,7 @@ const Blog = () => {
                     <img
                         width='250'
                         alt='https://www.northernneckchristian.org/'
-                        src="/assets/nncs.jpg"
+                        src="/src/assets/nncs.jpg"
                         onClick={handleClickOpen}
                     />
                     <Dialog open={open} onClose={handleClose}>

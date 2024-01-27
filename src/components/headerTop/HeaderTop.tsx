@@ -1,7 +1,7 @@
 import {Box, Grid, Typography} from "@mui/material";
 import {Email, Phone} from '@mui/icons-material';
 import React from "react";
-import NNGCLogo from "../../../public/assets/nngc-logo.png";
+import NNGCLogo from "/src/assets/nngc-logo.png";
 import {Link} from 'react-router-dom';
 import {Helmet} from "react-helmet";
 

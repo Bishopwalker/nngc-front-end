@@ -42,7 +42,7 @@ const Reviews = () => {
     };
 
     useEffect(() => {
-        fetchReviews();
+      //  fetchReviews().then((c)=>console.log(c));
     }, []);
 
     const renderStars = (rating) => {

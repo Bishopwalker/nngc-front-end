@@ -5,7 +5,7 @@ import {Link, useNavigate, useParams} from "react-router-dom"
 import {useAppSelector} from "../../redux/hooks";
 import Alert, {AlertColor} from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
-import ARROW_BACK from "../../../public/assets/arrow_back.svg"
+import ARROW_BACK from "/src/assets/arrow_back.svg"
 import { useTheme} from '@mui/material/styles';
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {Helmet} from "react-helmet";

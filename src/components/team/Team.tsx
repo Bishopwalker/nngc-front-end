@@ -1,7 +1,7 @@
 import {Avatar, Box, Card, CardContent, Grid, Typography} from "@mui/material";
 import React from "react";
-import Bishop from '../../../public/assets/Bishop-e3dcf521.jpg';
-import Rauf from '../../../public/assets/Rauf.png';
+import Bishop from '/src/assets/Bishop-e3dcf521.jpg';
+import Rauf from '/src/assets/Rauf.png';
 import {useTheme} from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {Helmet} from "react-helmet";
