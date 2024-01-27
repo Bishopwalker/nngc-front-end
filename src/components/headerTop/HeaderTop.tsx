@@ -1,7 +1,7 @@
 import {Box, Grid, Typography} from "@mui/material";
 import {Email, Phone} from '@mui/icons-material';
 import React from "react";
-import NNGCLogo from "../../../public/assets/nngc-logo.png";
+import NNGCLogo from "/src/assets/nngc-logo.png";
 import {Link} from 'react-router-dom';
 import {Helmet} from "react-helmet";
 
@@ -22,8 +22,8 @@ const HeaderTop = () => {
 						</Link>
 					</Grid>
 					<Grid item xs={3} sm={3} sx={{ display: { xs: 'none', sm: 'none', lg: 'block', xl: 'block' } }}>
-						<Typography variant="body1" textAlign="center" sx={{ lineHeight: '1rem' }}>
-							We are Northumberland's #1 choice for trash removal!
+						<Typography variant="body1" textAlign="center" sx={{ lineHeight: '1rem',fontWeight:'bold',fontSize:'1.25rem', marginLeft:-40}}>
+							Northern Neck Garbage Collection
 						</Typography>
 					</Grid>
 					<Grid item xs={3} sm={3} sx={{ display: { xs: 'none', sm: 'none', lg: 'flex', xl: 'flex' }, alignItems: 'center', lineHeight: '1rem' }}>
@@ -35,8 +35,8 @@ const HeaderTop = () => {
 						804-220-0029
 					</Grid>
 					<Grid item xs={9} sm={9} sx={{ display: { xs: 'block', sm: 'block', lg: 'none', xl: 'none' } }}>
-						<Typography variant="body1" textAlign="center" sx={{ lineHeight: '1rem' }}>
-							We are Northumberland's #1 choice for trash removal!
+						<Typography variant="body1" textAlign="center" sx={{ lineHeight: '1rem', fontWeight:'bold',fontSize:'1.25rem' }}>
+							Northern Neck Garbage Collection
 						</Typography>
 					</Grid>
 				</Grid>

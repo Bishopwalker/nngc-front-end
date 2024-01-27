@@ -14,10 +14,11 @@ import axios from "axios";
 import {useAppDispatch} from "../../redux/hooks";
 import {addToken} from "../../redux/userLogInfoSlice";
 import {Navigate} from "react-router-dom";
+import {Typography} from "@mui/material";
 
 export default function Confirm() {
   const { formValues, handleBack, handleNext } = useContext(AppContext)
-  const { firstName, lastName, email,  city, phone, houseNumber, streetName, state, zipCode } = formValues
+  const { firstName, lastName, email,  city, phone, houseNumber, streetName, state, zipCode,service } = formValues
 
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
@@ -32,7 +33,6 @@ export default function Confirm() {
   }
 	// Convert object to JSON string
 	let jsonString = JSON.stringify(formValues);
-
 	const jsonObj = JSON.parse(jsonString);
 	for (const key in jsonObj) {
 	  if (Object.hasOwnProperty.call(jsonObj, key)) {
@@ -63,7 +63,7 @@ export default function Confirm() {
       jsonObject.houseNumber = parseInt(jsonObject.houseNumber, 10); // or Number(jsonObject.houseNumber);
       jsonObject.zipCode = parseInt(jsonObject.zipCode, 10); // or Number(jsonObject.zipCode);
       const updatedJsonString = JSON.stringify(jsonObject);
-//console.log(updatedJsonString)
+
 //console.log(jsonObject, 'jsonObject')
     await axios.post(
         'https://api.northernneckgarbage.com/auth/nngc/registration',
@@ -109,6 +109,14 @@ export default function Confirm() {
           {snackbarMessage}
         </Alert>
       </Snackbar>
+        <Typography variant='h4'  sx={{
+            fontSize: '2rem',
+            fontWeight: 'bold',
+            mb: 2,
+            textAlign: 'center'
+        }}>
+            Confirm Your Selections
+        </Typography>
       <List disablePadding>
         <ListItem>
           <ListItemText primary='First Name' secondary={firstName.value || 'Not Provided'} />
@@ -134,9 +142,12 @@ export default function Confirm() {
           <Divider />
           <ListItem>
               <ListItemText primary='Zip Code' secondary={zipCode.value || 'Not Provided'} />
+
+              <ListItemText primary='Service' secondary={service.value || 'Not Provided'} />
           </ListItem>
 
-        <Divider />
+          <Divider />
+
       </List>
 
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 3 }}>

@@ -5,7 +5,7 @@ import Navbar from "./components/navbar/Navbar";
 
 import Home from "./components/home/Home";
 import Footer from "./components/footer/Footer";
-import {useAppDispatch, useAppSelector} from "./redux/hooks";
+import {useAppSelector} from "./redux/hooks";
 import Login from "./components/login-dk/Login";
 import Signup from "./components/signup-dk/SignUp";
 import Dashboard from "./components/dashboard/Dashboard";
@@ -23,7 +23,7 @@ import SuccessPage from "./components/verifyEmail/SuccessPage";
 import {Box} from "@mui/material";
 import StripePricingTable from './components/stripeElements/StripePricingTable'
 import VerifyEmail from "./components/verifyEmail/VerifyEmail";
-import PrivacyPolicy from "./privacy/PrivacyPolicy";
+import PrivacyPolicy from "./privacy/PrivacyPolicy.jsx";
 import AlreadyConfirmed from "./auth/AlreadyConfirmed";
 import TokenExpiredPage from "./auth/TokenExpiredPage";
 import Help from './auth/Help'
@@ -36,24 +36,17 @@ import ReactPixel from "react-facebook-pixel";
 import MessageSales from "./components/MessageSales";
 import { Helmet } from 'react-helmet';
 import SurroundingArea from "./auth/SurroundingArea";
-import {Button} from "@mui/material";
-import {useNavigate} from "react-router-dom";
-import {changeTitle} from "./redux/pageTitleSlice";
+import AdminSignUp from "./components/signup-dk/AdminSignUp";
 
 function App() {
 	const screenTitle = useAppSelector(state => state.title)
-const navigate = useNavigate()
-	const location = useLocation();
-	const dispatch = useAppDispatch()
+
 	React.useEffect(() => {
-		//location.pathname = screenTitle.title? screenTitle.title : 'NNGC'
-		dispatch(changeTitle(location.pathname))
-	}, [location.pathname])
+		document.title = screenTitle.title? screenTitle.title : 'NNGC'
+	}, [screenTitle])
 
+	const location = useLocation();
 
-
-console.log(screenTitle, 'screenTitle')
-	console.log(location.pathname)
 	useEffect(() => {
 		// Initialize Facebook Pixel
 		ReactPixel.init(import.meta.env.VITE_FACEBOOK_PIXEL_ID as string);
@@ -68,13 +61,8 @@ console.log(screenTitle, 'screenTitle')
 	// @ts-ignore
 	return (
 		<div className="App">
-			<h1 className="sr-only">{screenTitle.title || 'Northern Neck Garbage Collection'}</h1>
-
 			<Helmet>
-				<title>
-					{screenTitle.title ? screenTitle.title : 'Northern Neck Garbage Collection'}
-
-				</title>
+				<title>{screenTitle.title ? screenTitle.title : 'Northern Neck Garbage Collection'}</title>
 				<meta name="description" content="Northern Neck Garbage Collection offers reliable waste management and recycling services in Virginia. Discover our eco-friendly solutions and community initiatives." />
 				<meta name="keywords" content="waste management, garbage collection, recycling, Virginia, eco-friendly disposal, Northern Neck Garbage Collection" />
 			</Helmet>
@@ -94,7 +82,7 @@ console.log(screenTitle, 'screenTitle')
 				<Route path='/emaps' element={<Encoded_GMaps/>} />
 				<Route path='/blog' element={<Blog/>} />
 				<Route path='services' element={<Service/>} />
-				<Route path='/story' element={<OurStory/>} />
+				<Route path='story' element={<OurStory/>} />
 				<Route path='/success' element={<SuccessPage/>} />
 				<Route path='/verify' element={<VerifyEmail/>} />
 				<Route path='/policy' element={<PrivacyPolicy/>}/>
@@ -108,6 +96,7 @@ console.log(screenTitle, 'screenTitle')
 				<Route path='/reviews' element={<Reviews/>} />
 				<Route path="*" element={<h1>Not Found</h1>} />
 				<Route path ='/surrounding' element={<SurroundingArea/>}/>
+				<Route path='/admin' element={<AdminSignUp/>} />
 
 
 			</Routes>
@@ -116,22 +105,7 @@ console.log(screenTitle, 'screenTitle')
 			<Box mt={4} pt={4} display={{ xs: 'block'}}>
 				{}
 			</Box>
-{location.pathname!=='/services' &&
-	<>
-	<Button variant='contained' sx={{
-			bgcolor: '#258c45',
-			'&:hover': {bgcolor: '#be6dec'},
-			color: 'white',
-			fontSize: '1.5rem',
-			fontWeight: 'bold',
-			padding: '1rem 0'
-		}}
-		  fullWidth onClick={() => navigate('/services')}>Purchase Weekly Subscription!</Button>
-			<Box mt={4} pt={4} display={{xs: 'block'}}>
-			{}
-		</Box>
-	</>
-}
+
 			<Footer />
 		</div>
 	)

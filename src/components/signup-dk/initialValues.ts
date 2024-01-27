@@ -73,6 +73,13 @@ export const initialValues: ValidationSchema = {
     validate: 'checkbox',
     helperText: 'Please accept our terms and conditions'
   },
+  isBusiness:{
+    value:false,
+    error:'',
+    required:true,
+    validate:'checkbox',
+    helperText:'Check here if You are a business'
+  },
   phone: {
     value: '',
     error: '',
@@ -86,5 +93,11 @@ export const initialValues: ValidationSchema = {
     validate: 'zip',
     required: true,
     maxLength: 5
-  }
+  },
+  service: {
+    value: '',
+    error: '',
+    required: true
+  },
+
 }

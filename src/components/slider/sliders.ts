@@ -1,5 +1,5 @@
-import PIC from "../../../public/assets/AnyThingbutTrash.png"
-import PIC2 from "../../../public/assets/LoveKidsNNGC.png"
+import PIC from "/src/assets/AnyThingbutTrash.png"
+import PIC2 from "/src/assets/LoveKidsNNGC.png"
 
 export const sliders = [
   {

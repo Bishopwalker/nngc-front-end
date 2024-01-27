@@ -1,18 +1,24 @@
 import React, {useState} from 'react';
 import {ThemeProvider, useTheme} from '@mui/material/styles';
-import {Card, CardContent, CardHeader, CardMedia, Container, Grid, Typography} from '@mui/material';
+import {Box, Card, CardContent, CardHeader, CardMedia, Container, Grid, Typography} from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Button from "@mui/material/Button";
-import CAT from "../../../public/assets/cartchem3-d0fffe7a.png"
-import CAT1 from "../../../public/assets/cat_chem1-24b0ae96.png"
-import NNCS from '../../../public/assets/nncs.jpg'
-import FUR from "../../../public/assets/furmonster3d-fd7f35f2.png"
-import BASS from "../../../public/assets/kingstripper-a07c0608.png"
-import TRUCK from "../../../public/assets/truck_trailer-517eec13.png"
-import TRUCK1 from "../../../public/assets/truck_trailer1-a6af3c75.png"
-import UFO from "../../../public/assets/ufo_trash-43dbeea5.png"
+import CAT from "/src/assets/cartchem3-d0fffe7a.png"
+import CAT1 from "/src/assets/cat_chem1-24b0ae96.png"
+import NNCS from '/src/assets/nncs.jpg'
+import FUR from "/src/assets/furmonster3d-fd7f35f2.png"
+import BASS from "/src/assets/kingstripper-a07c0608.png"
+import TRUCK from "/src/assets/truck_trailer-517eec13.png"
+import TRUCK1 from "/src/assets/truck_trailer1-a6af3c75.png"
+import UFO from "/src/assets/ufo_trash-43dbeea5.png"
 import Service from "../service/Service";
 import {Helmet} from "react-helmet";
+import {Image} from "@mui/icons-material";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogActions from "@mui/material/DialogActions";
 
 
 const blogPosts = [
@@ -139,6 +145,7 @@ const Blog = () => {
     const theme = useTheme();
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
     const [expandedPost, setExpandedPost] = useState(null);
+    const [open, setOpen] = useState(false);
 
     const handleViewMore = (index) => {
         if (expandedPost === index) {
@@ -148,6 +155,18 @@ const Blog = () => {
         }
     };
 
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleVisitSite = () => {
+        window.location.href = 'https://www.northernneckchristian.org/';
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     return (
         <ThemeProvider theme={theme}>
             <Helmet>
@@ -155,27 +174,90 @@ const Blog = () => {
                 <meta name="description" content="Explore insightful blogs by Bishop Walker on waste management topics and industry insights. Stay informed with Northern Neck Garbage Collection." />
                 <meta name="keywords" content="Northern Neck Garbage blogs, waste management insights, Bishop Walker articles, environmental care, recycling tips" />
             </Helmet>
-            <Container maxWidth="lg" sx={{ padding: '40px 0' }}>
-                <Typography variant="h3" sx={{ textAlign: 'center', fontWeight: 'bold', margin: '0rem 0 2rem 0', color: '#2d3436', fontFamily: 'Montserrat, sans-serif', }}>
+            <Container maxWidth="lg" sx={{padding: '40px 0'}}>
+                <Typography variant="h2" sx={{
+                    textAlign: 'center',
+                    fontWeight: 'bold',
+                    margin: '0rem 0 2rem 0',
+                    color: '#089dc7',
+                    fontFamily: 'Montserrat, sans-serif',
+                }}>
                     Blogs
                 </Typography>
-                <Typography variant="h6" sx={{ textAlign: 'center', fontWeight: 'bold', margin: '0rem 0 2rem 0', color: '#2d3436', fontFamily: 'Montserrat, sans-serif', }}>
-                    by Bishop Walker (Owner/CEO)
-                </Typography>
+                <Box sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    marginBottom: '2rem'
+                }}>
+                    <Typography variant="h6" sx={{
+                        textAlign: 'center',
+                        fontWeight: 'bold',
+                        margin: '0rem 0 2rem 0',
+                        color: '#2d3436',
+                        fontFamily: 'Montserrat, sans-serif',
+                    }}>
+                        Sponsored by,
+                    </Typography>
+                    <img
+                        width='250'
+                        alt='https://www.northernneckchristian.org/'
+                        src="/src/assets/nncs.jpg"
+                        onClick={handleClickOpen}
+                    />
+                    <Dialog open={open} onClose={handleClose}>
+                        <DialogTitle>Northern Neck Christian School</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                Northern Neck Christian School follows traditional Christian values, and teaches the children self-confidence while walking hand in hand with Christ.
+                            </DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={handleClose}>
+                                Cancel
+                            </Button>
+                            <Button onClick={handleVisitSite}>
+                                Visit Site
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
+                </Box>
                 <Grid container spacing={4} justifyContent="center">
                     {blogPosts.map((post, index) => (
-                        <Grid key={index} item xs={12} sm={expandedPost === index ? 12 : 6} md={expandedPost === index ? 12 : 4}>
-                            <Card onClick={() => handleViewMore(index)} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%', borderRadius: '16px', boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)', transition: 'transform 0.3s ease-in-out', '&:hover': { transform: 'scale(1.05)', }, }}>
-                                <CardHeader title={post.title} sx={{ background: '#2d3436', color: '#fff', padding: '12px 16px', borderTopLeftRadius: '16px', borderTopRightRadius: '16px', fontWeight: 'bold', fontSize: '1.2rem', }} />
-                                <CardMedia component="img" height="150" image={post.image} alt={post.alt} sx={{ objectFit: 'cover', borderBottomLeftRadius: '16px', borderBottomRightRadius: '16px', }} />
-                                    <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-                                        <Typography variant="subtitle1" color="text.secondary">{post.date}</Typography>
-                                        <Typography variant="body2" color="text.secondary" sx={{ paddingTop: '12px', flexGrow: 1 }}>
-                                            {expandedPost === index ? post.content : `${post.content.slice(0, 100)}...`}
-                                        </Typography>
-                                    </CardContent>
+                        <Grid key={index} item xs={12} sm={expandedPost === index ? 12 : 6}
+                              md={expandedPost === index ? 12 : 4}>
+                            <Card onClick={() => handleViewMore(index)} sx={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                justifyContent: 'space-between',
+                                height: '100%',
+                                borderRadius: '16px',
+                                boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
+                                transition: 'transform 0.3s ease-in-out',
+                                '&:hover': {transform: 'scale(1.05)',},
+                            }}>
+                                <CardHeader title={post.title} sx={{
+                                    background: '#2d3436',
+                                    color: '#fff',
+                                    padding: '12px 16px',
+                                    borderTopLeftRadius: '16px',
+                                    borderTopRightRadius: '16px',
+                                    fontWeight: 'bold',
+                                    fontSize: '1.2rem',
+                                }}/>
+                                <CardMedia component="img" height="150" image={post.image} alt={post.alt} sx={{
+                                    objectFit: 'cover',
+                                    borderBottomLeftRadius: '16px',
+                                    borderBottomRightRadius: '16px',
+                                }}/>
+                                <CardContent sx={{flexGrow: 1, display: 'flex', flexDirection: 'column'}}>
+                                    <Typography variant="subtitle1" color="text.secondary">{post.date}</Typography>
+                                    <Typography variant="body2" color="text.secondary"
+                                                sx={{paddingTop: '12px', flexGrow: 1}}>
+                                        {expandedPost === index ? post.content : `${post.content.slice(0, 100)}...`}
+                                    </Typography>
+                                </CardContent>
 
-                                <Button variant="contained" color="primary" >
+                                <Button variant="contained" color="primary">
                                     {expandedPost === index ? 'View Less' : 'View More'}
                                 </Button>
                             </Card>

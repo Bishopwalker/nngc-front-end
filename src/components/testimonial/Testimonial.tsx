@@ -1,7 +1,7 @@
 import {Avatar, Box, Card, CardContent, Grid, Typography} from '@mui/material';
-import dirty from '../../../public/assets/dirty_yard-b272813f.jpg';
-import yard_clean from '../../../public/assets/yarn_clean-f205d94a.png';
-import yard_clean1 from '../../../public/assets/yarnCleanup-de6f1abd.png';
+import dirty from '/src/assets/dirty_yard-b272813f.jpg';
+import yard_clean from '/src/assets/yarn_clean-f205d94a.png';
+import yard_clean1 from '/src/assets/yarnCleanup-de6f1abd.png';
 import React from "react";
 import {Helmet} from "react-helmet";
 
