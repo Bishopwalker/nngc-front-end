@@ -5,11 +5,13 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import Button from "@mui/material/Button";
 import CAT from "/src/assets/cartchem3-d0fffe7a.png"
 import CAT1 from "/src/assets/cat_chem1-24b0ae96.png"
-import NNCS from '/src/assets/nncs.jpg'
+
+import NNCS from '/src/assets/nncs.png'
 import FUR from "/src/assets/furmonster3d-fd7f35f2.png"
 import BASS from "/src/assets/kingstripper-a07c0608.png"
 import TRUCK from "/src/assets/truck_trailer-517eec13.png"
 import TRUCK1 from "/src/assets/truck_trailer1-a6af3c75.png"
+
 import UFO from "/src/assets/ufo_trash-43dbeea5.png"
 import Service from "../service/Service";
 import {Helmet} from "react-helmet";
@@ -19,7 +21,6 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
-
 
 const blogPosts = [
     {
@@ -199,9 +200,10 @@ const Blog = () => {
                         Sponsored by,
                     </Typography>
                     <img
-                        width='250'
+                        width='175'
+                        height='75'
                         alt='https://www.northernneckchristian.org/'
-                        src="/src/assets/nncs.jpg"
+                        src={NNCS}
                         onClick={handleClickOpen}
                     />
                     <Dialog open={open} onClose={handleClose}>
