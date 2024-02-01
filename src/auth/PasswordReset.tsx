@@ -14,6 +14,8 @@ const PasswordResetSection: React.FC = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [status, setStatus] = useState("Not Changed");
     const [email, setEmail] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
@@ -32,12 +34,16 @@ const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value);
 
 }
+    const handlePhoneNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setPhoneNumber(event.target.value);
+    };
+
     const handleSubmit = async () => {
         if (newPassword === confirmPassword) {
             try {
                 const response = await axios.put(
                     `https://api.northernneckgarbage.com/api/nngc/customers/email/${email}`,
-                    { password: newPassword },
+                    { password: newPassword, phone: phoneNumber },
 
                 );
 
@@ -75,6 +81,15 @@ const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
                         type="test"
                         value={email}
                         onChange={handleEmailChange}
+                        fullWidth
+                    />
+                    <Divider />
+                    <TextField
+                        sx={{ ...styles.textField }}
+                        label="Phone Number"
+                        type="text"
+                        value={phoneNumber}
+                        onChange={handlePhoneNumberChange}
                         fullWidth
                     />
                     <Divider />
