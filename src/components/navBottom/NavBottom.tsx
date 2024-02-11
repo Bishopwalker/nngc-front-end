@@ -49,7 +49,7 @@ const NavBottom = () => {
           </Link>
 
 	  </Box>
-      <Typography align="center" variant="body1" sx={{ fontWeight: 300 }}>
+      <Typography align="center" variant="body1" sx={{ fontWeight: 900 }}>
           Nurturing Neighborhoods, Guaranteeing Cleanliness
       </Typography>
 

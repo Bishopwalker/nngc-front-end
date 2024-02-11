@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import {Route, Routes, useLocation} from "react-router-dom";
 import HeaderTop from "./components/headerTop/HeaderTop";
 import Navbar from "./components/navbar/Navbar";
-
+import {Container} from "@mui/material";
 import Home from "./components/home/Home";
 import Footer from "./components/footer/Footer";
 import {useAppSelector} from "./redux/hooks";
@@ -10,12 +10,12 @@ import Login from "./components/login-dk/Login";
 import Signup from "./components/signup-dk/SignUp";
 import Dashboard from "./components/dashboard/Dashboard";
 // @ts-ignore
-import ClassAppointments from "./components/appointment/ClassAppointments.jsx";
-import DKAppointment from "./components/appointment-dk/DKAppointment";
+ import DKAppointment from "./components/appointment-dk/DKAppointment";
 import DumpsterDK from "./components/products/DumpsterDK";
 import TrashSubscription from "./components/products/TrashSubscription";
 import Encoded_GMaps from "./components/google/EncodedG_Maps";
 import NavBottom from "./components/navBottom/NavBottom";
+import JunkRemoval from "./components/products/JunkRemoval";
 // @ts-ignore
 import Blog from "./components/blog/Blog";
 import OurStory from "./components/ourStory/OurStory.jsx";
@@ -60,7 +60,7 @@ function App() {
 
 	// @ts-ignore
 	return (
-		<div className="App">
+		<Container className="App" >
 			<Helmet>
 				<title>{screenTitle.title ? screenTitle.title : 'Northern Neck Garbage Collection'}</title>
 				<meta name="description" content="Northern Neck Garbage Collection offers reliable waste management and recycling services in Virginia. Discover our eco-friendly solutions and community initiatives." />
@@ -71,6 +71,9 @@ function App() {
 			<NavBottom />
 
 
+				<Box sx={{
+					backgroundColor:screenTitle.title === "Junk"? 'yellow' : 'white'
+				}} >
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/login" element={<Login />} />
@@ -94,12 +97,13 @@ function App() {
 				<Route path='/thanks' element={<ThankYouPage/>}/>
 				<Route path='/password' element={<PasswordReset/>} />
 				<Route path='/reviews' element={<Reviews/>} />
-				<Route path="*" element={<h1>Not Found</h1>} />
 				<Route path ='/surrounding' element={<SurroundingArea/>}/>
 				<Route path='/admin' element={<AdminSignUp/>} />
-
+				<Route path='/junk' element={<JunkRemoval/>} />
+				<Route path="*" element={<h1>Not Found</h1>} />
 
 			</Routes>
+				</Box>
 			{/* ts-ignore */}
 
 			<Box mt={4} pt={4} display={{ xs: 'block'}}>
@@ -107,7 +111,7 @@ function App() {
 			</Box>
 
 			<Footer />
-		</div>
+		</Container>
 	)
 }
 
