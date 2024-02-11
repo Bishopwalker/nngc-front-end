@@ -19,8 +19,8 @@ const products = [{name: 'Mattress Removal', description: `We will Come Pickup Y
     {name: 'Appliance Removal', description: `We will Come Pickup Your Single Item Appliance > greater than 50 lbs`, price: '$100.00', image: STOVE},
     {name: 'Couch Removal', description: `We will Come Pickup Your Single Item Furniture < less than 50 lbs`, price: '$75.00', image: COUCH},
     {name: 'Electronics Removal', description: `We will Come Pickup Your Single Item Electronics`, price: '$50.00', image: LCD},
-    {name: 'Yard Waste Removal', description: `We will Come Pickup Your Single Item Yard Waste`, price: '$50.00', image: YARDDEBRIS},
-    {name: 'Construction Debris Removal', description: `We will Come Pickup Your Single Item Construction Debris`, price: '$50.00', image: CONSTRUCTION},
+    {name: 'Yard Waste Removal', description: `We will Come Pickup Your Yard Waste Arrival is $125, dumping the trailer is $150 each time, labor is $125 every half an hour. Min Cost is $225`, price: '$225.00 plus labor', image: YARDDEBRIS},
+    {name: 'Construction Debris Removal', description: `We will Come Get Your Construction Debris. Arrival is $125, dumping trailer is $150, labor is $125 every half an hour. Min Cost is $225`, price: '$225 plus labor', image: CONSTRUCTION},
     {name: 'Hot Tub Removal', description: `We will Come Pickup Your Single Item Hot Tub`, price: '$50.00'},
     {name: 'Single Item Furniture Removal', description: `We will Come Pickup Your Single Item > greater than 50 lbs`, price: '$100.00', image: TRED},
     {name: 'Single Item Furniture Removal', description: `We will Come Pickup Your Single Item < less than 50 lbs`, price: '$50.00', image: TABLE},
@@ -37,7 +37,7 @@ function JunkRemoval() {
                 <Grid container spacing={4}>
                     {products.map((product, index) => (
                         <Grid item xs={12} sm={6} md={3} key={index}>
-                            <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', elevation: 12, border: '1px solid #000' }}>
+                            <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', elevation: 30, border: '1px solid #000' }}>
                                 <CardActionArea>
                                     {product.image && (
                                         <CardMedia
