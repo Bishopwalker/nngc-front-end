@@ -11,7 +11,8 @@ import {
     CardMedia,
     CardActionArea,
     Modal,
-    Button
+    Button,
+    TextField, MenuItem
 } from "@mui/material";
 import {Helmet} from "react-helmet";
 import {useNavigate}from "react-router-dom";
@@ -24,7 +25,7 @@ import STOVE from "../../assets/stove.webp";
 import TRED from "../../assets/tredMill.webp";
 import YARDDEBRIS from "../../assets/yardDebris.webp";
 import CONSTRUCTION from "../../assets/construction.webp";
-//import HOTUB from "../../assets/hotTub.webp";
+ import HOTUB from "../../assets/hottub.webp";
 import WASHNDRY from "../../assets/washerNdryer.webp";
 import {useAppDispatch} from "../../redux/hooks";
 import {changeTitle} from "../../redux/pageTitleSlice";
@@ -37,7 +38,7 @@ const products = [{name: 'Mattress Removal', description: `We will Come Pickup Y
     {name: 'Electronics Removal', description: `We will Come Pickup Your Single Item Electronics`, price: '$50.00', image: LCD},
     {name: 'Yard Waste Removal', description: `We will Come Pickup Your Yard Waste Arrival is $125, dumping the trailer is $150 each time, labor is $125 every half an hour. Min Cost is $225`, price: '$225.00 plus labor', image: YARDDEBRIS},
     {name: 'Construction Debris Removal', description: `We will Come Get Your Construction Debris. Arrival is $125, dumping trailer is $150, labor is $125 every half an hour. Min Cost is $225`, price: '$225 plus labor', image: CONSTRUCTION},
-    {name: 'Hot Tub Removal', description: `We will Come Pickup Your Single Item Hot Tub`, price: '$50.00'},
+    {name: 'Hot Tub Removal', description: `We will Come Pickup Your Single Item Hot Tub`, price: '$50.00', image: HOTUB},
     {name: 'Single Item Furniture Removal', description: `We will Come Pickup Your Single Item > greater than 50 lbs`, price: '$100.00', image: TRED},
     {name: 'Single Item Furniture Removal', description: `We will Come Pickup Your Single Item < less than 50 lbs`, price: '$50.00', image: TABLE},
     {name: 'Washer and Dryer Removal', description: `We will Come Pickup Your Washer and Dryer`, price: '100.00', image: WASHNDRY},
@@ -54,6 +55,7 @@ interface Product {
 function JunkRemoval() {
     const [open, setOpen] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+    const [quantity, setQuantity] = useState(1); // Default quantity
 
     const dispatch = useAppDispatch()
 
@@ -146,6 +148,22 @@ function JunkRemoval() {
                         </Typography>
                         <CardActions>
                             <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+                                <TextField
+                                    select
+                                    label="Quantity"
+                                    value={quantity}
+                                    onChange={(event) => setQuantity(event.target.value)}
+                                    helperText="Please select the quantity"
+                                    variant="outlined"
+                                    sx={{ mt: 2, minWidth: 120 }}
+                                >
+                                    {[...Array(10).keys()].map((option) => (
+                                        <MenuItem key={option + 1} value={option + 1}>
+                                            {option + 1}
+                                        </MenuItem>
+                                    ))}
+                                </TextField>
+
                                 <Button
                                     sx={{
                                         mt: 2,
