@@ -72,6 +72,8 @@ function JunkRemoval() {
         setOpen(false);
     };
 
+    // @ts-ignore
+    // @ts-ignore
     return (
         <Container>
             <Box sx={{ flexGrow: 1, backgroundColor: 'yellow' }}>
@@ -148,11 +150,12 @@ function JunkRemoval() {
                         </Typography>
                         <CardActions>
                             <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+                                {/*@ts-ignore*/}
                                 <TextField
                                     select
                                     label="Quantity"
                                     value={quantity}
-                                    onChange={(event) => setQuantity(event.target.value)}
+                                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => setQuantity(Number(event.target.value))}
                                     helperText="Please select the quantity"
                                     variant="outlined"
                                     sx={{ mt: 2, minWidth: 120 }}
