@@ -1,8 +1,14 @@
 import React from 'react';
 import {Button, Container, Typography} from '@mui/material';
 import {Link} from 'react-router-dom';
+import {useAppDispatch} from "../redux/hooks.ts";
+import {changeTitle} from "../redux/pageTitleSlice.ts";
 
 const TokenExpiredPage = () => {
+    const dispatch = useAppDispatch()
+    React.useEffect(()=>{
+        dispatch( changeTitle('Token Expired'))
+    },[ ])
     return (
         <Container>
             <Typography variant="h4" gutterBottom align="center">

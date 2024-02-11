@@ -11,6 +11,7 @@ import {Link, useNavigate} from "react-router-dom";
 import {changeUserLogInfo, clearUserInfo, updateToken} from "../../redux/userLogInfoSlice";
 import axios from "axios";
 import {Helmet} from "react-helmet";
+import {changeTitle} from "../../redux/pageTitleSlice";
 
 const Dashboard = () => {
 	const userInfo = useAppSelector(state => state.userInfo)
@@ -27,6 +28,10 @@ const Dashboard = () => {
 		dispatch(clearUserInfo()); // Dispatch the clearUserInfo action to clear user data
 		navigate('/login');
 	};
+
+	React.useEffect(()=>{
+		dispatch( changeTitle('Our Story'))
+	},[ ])
 
 	const updateUserInfo=async()=>{
 		try{

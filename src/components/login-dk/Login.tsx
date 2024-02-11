@@ -7,14 +7,20 @@ import React, {useEffect, useState} from 'react';
 import Alert, {AlertColor} from "@mui/material/Alert";
 import Snackbar from '@mui/material/Snackbar';
 import GoogleSignInButton from "../google/GoogleSignInButton";
+import {changeTitle} from "../../redux/pageTitleSlice";
 
 const Login = () => {
+
+	const dispatch = useAppDispatch()
+	React.useEffect(()=>{
+		dispatch( changeTitle('Login'))
+	},[ ])
 
 	const loginAttemptCount = useAppSelector((state)=>state.userInfo.loginAttemptCount);
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState('');
-	const dispatch = useAppDispatch();
+
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [openSnackbar, setOpenSnackbar] = useState(false);
 	const [snackbarMessage, setSnackbarMessage] = useState('');

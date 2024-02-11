@@ -16,6 +16,7 @@ import Snackbar from '@mui/material/Snackbar';
 import {useNavigate} from "react-router-dom";
 import {changeUserLogInfo} from "../../redux/userLogInfoSlice";
  import {Helmet} from "react-helmet";
+import {changeTitle} from "../../redux/pageTitleSlice";
 
 const DKAppointment = () => {
 useProtectedRouteUser()
@@ -23,6 +24,9 @@ useProtectedRouteUser()
     const userInfo = useAppSelector(state => state.userInfo)
     const dispatch = useAppDispatch();
 
+    React.useEffect(()=>{
+        dispatch( changeTitle('Book Appointment'))
+    },[ ])
   const confirmToken = async () => {
         try {
             const response = await axios.get(`https://api.northernneckgarbage.com/auth/nngc/token_status?token=${userInfo.token}`, {

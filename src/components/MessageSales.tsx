@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import {Button, TextField, Box, Typography} from '@mui/material';
 import Alert from "@mui/material/Alert";
+import {useAppDispatch} from "../redux/hooks";
+import {changeTitle} from "../redux/pageTitleSlice";
 
 type FormData = {
     userName: string;
@@ -11,6 +13,10 @@ type FormData = {
 };
 
 const MessageSales: React.FC = () => {
+    const dispatch = useAppDispatch()
+    React.useEffect(()=>{
+        dispatch( changeTitle('Message Sales'))
+    },[ ])
     const [formData, setFormData] = useState<FormData>({
         userName: '',
         userPhone: '',

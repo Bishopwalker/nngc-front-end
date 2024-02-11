@@ -1,10 +1,16 @@
 import React from 'react';
 import {Box, Button, CssBaseline, Typography} from '@mui/material';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
+import {useAppDispatch} from "../../redux/hooks";
+import {changeTitle} from "../../redux/pageTitleSlice";
 
 const theme = createTheme();
 
 const VerifyEmail = () => {
+    const dispatch = useAppDispatch()
+    React.useEffect(()=>{
+        dispatch( changeTitle('Verify Email Message'))
+    },[ ])
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />

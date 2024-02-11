@@ -37,6 +37,7 @@ import MessageSales from "./components/MessageSales";
 import { Helmet } from 'react-helmet';
 import SurroundingArea from "./auth/SurroundingArea";
 import AdminSignUp from "./components/signup-dk/AdminSignUp";
+import NotFound from './components/notFound/NotFound';
 
 function App() {
 	const screenTitle = useAppSelector(state => state.title)
@@ -100,7 +101,7 @@ function App() {
 				<Route path ='/surrounding' element={<SurroundingArea/>}/>
 				<Route path='/admin' element={<AdminSignUp/>} />
 				<Route path='/junk' element={<JunkRemoval/>} />
-				<Route path="*" element={<h1>Not Found</h1>} />
+				<Route path="*" element={<NotFound/>} />
 
 			</Routes>
 				</Box>

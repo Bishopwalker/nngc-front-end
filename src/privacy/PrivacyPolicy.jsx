@@ -1,7 +1,13 @@
 import React from 'react';
 import {Container, Typography} from '@mui/material';
+import {useAppDispatch} from "../redux/hooks.ts";
+import {changeTitle} from "../redux/pageTitleSlice.ts";
 
 const PrivacyPolicy = () => {
+    const dispatch = useAppDispatch()
+    React.useEffect(()=>{
+        dispatch( changeTitle('Privacy Policy'))
+    },[ ])
     return (
         <Container>
             <Typography variant="h4" gutterBottom>

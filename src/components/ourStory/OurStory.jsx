@@ -2,6 +2,8 @@ import Typography from '@mui/material/Typography';
 import {Box} from "@mui/material";
 import React, {useEffect, useState} from "react";
 import Team from "../team/Team";
+import {useAppDispatch} from "../../redux/hooks.ts";
+import {changeTitle} from "../../redux/pageTitleSlice.ts";
 
 const MyStory = () => {
     const [firstLoad, setFirstLoad] = useState(true);
@@ -12,6 +14,11 @@ const MyStory = () => {
             setFirstLoad(false);
         }
     }, [firstLoad]);
+
+    const dispatch = useAppDispatch()
+    React.useEffect(()=>{
+        dispatch( changeTitle('Our Story'))
+    },[ ])
 
     const paragraphs = [
         "Hello, I'm Bishop Walker, the founder of Northern Neck Garbage Collection, LLC, or NNGC for short. My journey into this business began on a day that many would prefer to stay indoors—cold, wet, and downright miserable. I was at the city trash compactor, unloading bags of wet trash, when I noticed an elderly lady struggling with her own. Without a second thought, I stepped in to help. It was a simple act, but the gratitude in her eyes spoke volumes. That was the moment I realized there was a gaping need in Northumberland County, Virginia—a need for a dedicated trash and yard cleanup service that not only serves but cares.",

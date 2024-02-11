@@ -1,8 +1,14 @@
 import React from 'react';
 import {Button, Container, Typography} from '@mui/material';
 import {Link} from 'react-router-dom';
+import {useAppDispatch} from "../../redux/hooks";
+import {changeTitle} from "../../redux/pageTitleSlice";
 
 const SuccessPage = () => {
+    const dispatch = useAppDispatch()
+    React.useEffect(()=>{
+        dispatch( changeTitle('New Account Success'))
+    },[ ])
     return (
         <Container>
             <Typography variant="h4" gutterBottom align="center">

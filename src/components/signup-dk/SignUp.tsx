@@ -7,6 +7,8 @@ import StepForm from './StepForm'
 import {StepsProvider} from './Context'
 import GoogleSignInButton from '../google/GoogleSignInButton.jsx'
 import { Helmet } from 'react-helmet'
+import {useAppDispatch} from "../../redux/hooks";
+import {changeTitle} from "../../redux/pageTitleSlice";
 const theme = createTheme({
   typography: {
     fontFamily: ['Roboto', 'Helvetica', 'Arial', 'sans-serif'].join(','),
@@ -21,6 +23,10 @@ const theme = createTheme({
 
 const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID as string
 export default function SignUp() {
+    const dispatch = useAppDispatch()
+    React.useEffect(()=>{
+        dispatch( changeTitle('Sign Up'))
+    },[ ])
     // @ts-ignore
     return (
       <>

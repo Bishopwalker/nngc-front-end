@@ -2,7 +2,14 @@ import React from 'react';
 import {Box, Container, Typography} from '@mui/material';
 import {Email, Phone} from '@mui/icons-material';
 import MessageSales from '../components/MessageSales';
+import {useAppDispatch} from "../redux/hooks.ts";
+import {changeTitle} from "../redux/pageTitleSlice.ts";
 const Help = () => {
+
+    const dispatch = useAppDispatch()
+    React.useEffect(()=>{
+        dispatch( changeTitle('Help'))
+    },[ ])
     return (
         <Container>
             <Box
