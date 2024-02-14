@@ -16,33 +16,11 @@ import {
 } from "@mui/material";
 import {Helmet} from "react-helmet";
 import {useNavigate}from "react-router-dom";
-import MATTRESS from "../../assets/mattress.webp";
-import LCD from "../../assets/brokenLCD.webp";
-import TABLE from "../../assets/kitchenTable.webp";
-import MICROWAVE from "../../assets/microwave.webp";
-import COUCH from "../../assets/smallCouch.webp";
-import STOVE from "../../assets/stove.webp";
-import TRED from "../../assets/tredMill.webp";
-import YARDDEBRIS from "../../assets/yardDebris.webp";
-import CONSTRUCTION from "../../assets/construction.webp";
- import HOTUB from "../../assets/hottub.webp";
-import WASHNDRY from "../../assets/washerNdryer.webp";
+
 import {useAppDispatch} from "../../redux/hooks";
 import {changeTitle} from "../../redux/pageTitleSlice";
+import {products} from "./products";
 
-
-const products = [{name: 'Mattress Removal', description: `We will Come Pickup Your Single Item Mattress`, price: '$50.00', image: MATTRESS},
-    {name: 'Appliance Removal', description: `We will Come Pickup Your Single Item Appliance < less than 50 lbs`, price: '$50.00', image: MICROWAVE},
-    {name: 'Appliance Removal', description: `We will Come Pickup Your Single Item Appliance > greater than 50 lbs`, price: '$100.00', image: STOVE},
-    {name: 'Couch Removal', description: `We will Come Pickup Your Single Item Furniture < less than 50 lbs`, price: '$75.00', image: COUCH},
-    {name: 'Electronics Removal', description: `We will Come Pickup Your Single Item Electronics`, price: '$50.00', image: LCD},
-    {name: 'Yard Waste Removal', description: `We will Come Pickup Your Yard Waste Arrival is $125, dumping the trailer is $150 each time, labor is $125 every half an hour. Min Cost is $225`, price: '$225.00 plus labor', image: YARDDEBRIS},
-    {name: 'Construction Debris Removal', description: `We will Come Get Your Construction Debris. Arrival is $125, dumping trailer is $150, labor is $125 every half an hour. Min Cost is $225`, price: '$225 plus labor', image: CONSTRUCTION},
-    {name: 'Hot Tub Removal', description: `We will Come Pickup Your Single Item Hot Tub`, price: '$50.00', image: HOTUB},
-    {name: 'Single Item Furniture Removal', description: `We will Come Pickup Your Single Item > greater than 50 lbs`, price: '$100.00', image: TRED},
-    {name: 'Single Item Furniture Removal', description: `We will Come Pickup Your Single Item < less than 50 lbs`, price: '$50.00', image: TABLE},
-    {name: 'Washer and Dryer Removal', description: `We will Come Pickup Your Washer and Dryer`, price: '100.00', image: WASHNDRY},
-];
 
 //create a product type
 interface Product {
