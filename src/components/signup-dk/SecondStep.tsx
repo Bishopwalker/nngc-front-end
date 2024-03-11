@@ -33,6 +33,7 @@ export default function SecondStep() {
 
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY, // Your API Key
+    //@ts-ignore
     libraries
   });
   console.log(import.meta.env.VITE_GOOGLE_MAPS_API_KEY);
