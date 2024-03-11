@@ -19,7 +19,7 @@ const contentStyle = css`
 const AccordionItem = ({ title, content }) => {
     // State to manage accordion open/close
     const [isOpen, setIsOpen] = useState(false);
-
+console.log('AccordionItem');
     // Toggle accordion open/close
     const toggleAccordion = () => {
         setIsOpen(!isOpen);
