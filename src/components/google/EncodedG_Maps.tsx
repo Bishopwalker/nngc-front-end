@@ -105,7 +105,9 @@ const Encoded_GMaps: React.FC = () => {
     // @ts-ignore
     return (
         <ThemeProvider theme={theme}>
-            <Container maxWidth="xl">
+            <Box sx={{
+                width: '100vw'
+            }}>
                 <Grid container spacing={2} justifyContent="center">
                     {/* Row 1: Customer Info and Map */}
                     <Grid item container xs={12} spacing={2} alignItems="stretch">
@@ -171,7 +173,7 @@ Total Min: {totalTime}
             </div>
                     </Grid>
                     <Grid item xs={12} sm={6} md={4}>
-                        <div style={{ border: '1px solid black', width: '100%', height: '400px', maxHeight:'400px' }}> {/* Adjust height as needed */}
+                        <div style={{ border: '1px solid black', width: '100%', height: 'auto' }}> {/* Adjust height as needed */}
 
                             <GoogleMap
                 mapContainerStyle={mapContainerStyle}
@@ -226,7 +228,7 @@ Total Min: {totalTime}
             </Typography>
                     </Grid>
                 </Grid>
-                </Container>
+                </Box>
             <Grid item xs={12} style={{ width: '100%' }}>
                 <Typography  style={{ width: '100%',
                     border: '1px solid black', padding: '1em' }}>
