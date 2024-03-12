@@ -58,9 +58,11 @@ const Encoded_GMaps: React.FC = () => {
 
     const [selectedLat, setSelectedLat] = useState<number | null>(null);
     const [selectedLon, setSelectedLon] = useState<number | null>(null);
+
     const queryParams = new URLSearchParams(location.search);
     const routeNumber = queryParams.get('page');
-    console.log(selectedInstruction)
+    const county = queryParams.get('county');
+    console.log(county)
     useEffect(() => {
         axios.get(`https://api.northernneckgarbage.com/nngc/google/create-route-4-driver/${routeNumber}`)
             .then(response => response.data)
