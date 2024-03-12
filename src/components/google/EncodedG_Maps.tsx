@@ -63,8 +63,13 @@ const Encoded_GMaps: React.FC = () => {
     const routeNumber = queryParams.get('page');
     const county = queryParams.get('county');
     console.log(county)
+    const url =county===null?
+        `https://api.northernneckgarbage.com/nngc/google/create-route-4-driver/${routeNumber}`:
+        `https://api.northernneckgarbage.com/nngc/google/create-route-4-driver/${routeNumber}?county=${county}`;
+
+    console.log(url)
     useEffect(() => {
-        axios.get(`https://api.northernneckgarbage.com/nngc/google/create-route-4-driver/${routeNumber}`)
+        axios.get(url)
             .then(response => response.data)
             .then(data => {
                 const decodedPath = window.google.maps.geometry.encoding.decodePath(data.polyline);

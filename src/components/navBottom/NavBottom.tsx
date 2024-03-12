@@ -39,7 +39,8 @@ const NavBottom = () => {
                 display:'flex', justifyContent:'space-around',flexDirection:isMobile ? 'column' : 'row', alignItems:'center', mt: '1rem'
             }}>
 
-                <Button variant={"contained"} color={"primary"} sx={{mt: '1rem'}} component={Link}  to={`/emaps?page=${pageNumber}&county=${county}`}>
+                <Button variant={"contained"} color={"primary"} sx={{mt: '1rem'}} component={Link}
+                        to={county==null || county ===""?`/emaps?page=${pageNumber}`:`/emaps?page=${pageNumber}&county=${county}`}>
                     View Routes
                 </Button>
                 <TextField
