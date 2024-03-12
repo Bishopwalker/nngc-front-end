@@ -44,7 +44,7 @@ const Encoded_GMaps: React.FC = () => {
     });
 
     const theme = useTheme();
-    const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down('lg'));
 
     const [path, setPath] = useState<google.maps.LatLng[]>([]);
     const [instructions, setInstructions] = useState<string[]>([]);
@@ -102,17 +102,18 @@ const Encoded_GMaps: React.FC = () => {
         setSelectedLon(selectedInfo.longitude);
     };
 
-
+console.log(isSmallScreen)
     // @ts-ignore
     return (
         <ThemeProvider theme={theme}>
             <Box sx={{
-                width: '100vw'
+                width:'100vw',
+
             }}>
                 <Grid container spacing={2} justifyContent="center">
                     {/* Row 1: Customer Info and Map */}
-                    <Grid item container xs={12} spacing={2} alignItems="stretch">
-                        <Grid item xs={12} sm={6} md={2}>
+                    <Grid item container sm={12} spacing={2} alignItems="stretch">
+                        <Grid item xs={12} sm={12} md={10} lg={2}>
 
                     <Box style={{ border: '1px solid black', marginBottom: '1em', width:'300px',overflow:'auto' }}>
              <Typography variant="h6" align="left" sx={{
@@ -177,6 +178,7 @@ Total Min: {totalTime}
                         <div style={{ border: '1px solid black', width: '100%', height: 'auto' }}> {/* Adjust height as needed */}
 
                             <GoogleMap
+
                 mapContainerStyle={mapContainerStyle}
                 zoom={10}
                 center={selectedLat && selectedLon ? { lat: selectedLat, lng: selectedLon } : path[0]}
