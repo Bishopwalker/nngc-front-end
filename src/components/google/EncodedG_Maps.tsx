@@ -154,7 +154,7 @@ const Encoded_GMaps: React.FC = () => {
                 letterSpacing: '1px',
                 textTransform: 'uppercase',
                 }}>
-Total Miles: {totalMiles}
+Total Miles: {totalMiles/10}
                 </Typography>
                 <Typography variant="h6" align="left" sx={{
                 fontWeight: 'bold',
@@ -162,7 +162,7 @@ Total Miles: {totalMiles}
                 letterSpacing: '1px',
                 textTransform: 'uppercase',
                 }}>
-Total Min: {totalTime}
+Total Min: {totalTime/10}
                 </Typography>
 
                 <h3>Customer List</h3>
@@ -256,7 +256,7 @@ Total Min: {totalTime}
                 </Grid>
                 </Box>
             <Grid item xs={12} style={{ width: '100%' }}>
-                <Typography  style={{ width: '100%',
+                <Typography component='div' style={{ width: '100%',
                     border: '1px solid black', padding: '1em' }}>
                     {selectedInstruction && (
                         <div>

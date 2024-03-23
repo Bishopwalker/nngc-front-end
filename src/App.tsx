@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useRef} from 'react'
 import {Route, Routes, useLocation} from "react-router-dom";
 import HeaderTop from "./components/headerTop/HeaderTop";
 import Navbar from "./components/navbar/Navbar";
@@ -41,6 +41,7 @@ import NotFound from './components/notFound/NotFound';
 
 function App() {
 	const screenTitle = useAppSelector(state => state.title)
+const rerender = useRef(0)
 
 	React.useEffect(() => {
 		document.title = screenTitle.title? screenTitle.title : 'NNGC'
@@ -83,7 +84,7 @@ function App() {
 				<Route path="/dashboard" element={<Dashboard />} />
 				<Route path="/dumpster/:productId" element={<DumpsterDK/>} />
 				<Route path="/res_sub" element={<TrashSubscription/>} />
-				<Route path='/emaps' element={<Encoded_GMaps/>} />
+				<Route path='/emaps' element={<Encoded_GMaps key={rerender.current}/>} />
 				<Route path='/blog' element={<Blog/>} />
 				<Route path='services' element={<Service/>} />
 				<Route path='story' element={<OurStory/>} />

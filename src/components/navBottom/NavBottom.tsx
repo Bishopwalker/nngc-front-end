@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {Box, Button, TextField, Typography} from "@mui/material";
 import NNGCLogo from "/src/assets/nngc-logo.png";
-import {Link, useLocation} from 'react-router-dom';
+import {Link, useLocation, useNavigate} from 'react-router-dom';
 import {useTheme} from "@mui/material/styles";
 
 import {useAppSelector} from "../../redux/hooks";
@@ -13,6 +13,7 @@ const NavBottom = () => {
 
     const role: any = useAppSelector(state => state.userInfo?.role);
 
+    const rerender = useRef(0)
 
     const location = useLocation();
     const { pathname } = location;
@@ -23,15 +24,18 @@ const NavBottom = () => {
     if (pathname === '/blog') {
         return null;
     }
+const navigate = useNavigate();
     const changeTrigger = () => {
         setTrigger(!trigger);
+        const url= county==null || county ===""?`/emaps?page=${pageNumber}&trigger=${trigger}`:
+            `/emaps?page=${pageNumber}&county=${county}&trigger=${trigger}`;
 
+        rerender.current+=1;
+       navigate(url);
 
     }
-    useEffect(() => {
-      changeTrigger();
 
-    }, [trigger]);
+
   return (
     <Box sx={{ padding: '1rem' }}>
         {role && role !== 'ADMIN' || !role && <> <Box sx={{ maxWidth: '150px', mx: 'auto' }}>
@@ -50,7 +54,8 @@ const NavBottom = () => {
 
                 <Button variant={"contained"} color={"primary"} sx={{mt: '1rem'}}  component={Link}
                         to={county==null || county ===""?`/emaps?page=${pageNumber}&trigger=${trigger}`:
-                            `/emaps?page=${pageNumber}&county=${county}&trigger=${trigger}`}>
+                            `/emaps?page=${pageNumber}&county=${county}&trigger=${trigger}`}
+                        onClick={changeTrigger}>
                     View Routes
                 </Button>
                 <TextField
