@@ -6,18 +6,17 @@ import {libraries} from './mapsConfig';
 import {Box, Grid, Typography} from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {ThemeProvider, useTheme} from '@mui/material/styles';
-import Container from "@mui/material/Container";
 
 const mapContainerStyle = {
     width: '100vw',
     height: '100vh',
 };
 
-const options = {
-    strokeColor: '#FF0000',
-    strokeOpacity: 1.0,
-    strokeWeight: 2,
-};
+// const options = {
+//     strokeColor: '#FF0000',
+//     strokeOpacity: 1.0,
+//     strokeWeight: 2,
+// };
 
 interface CustomerInfo {
     id: number;
@@ -33,6 +32,11 @@ interface CustomerInfo {
     };
 }
 
+interface Instructions {
+    map(arg0: (instruction: { instruction: any; }, index: React.Key | null | undefined) => JSX.Element): React.ReactNode;
+    instruction: string;
+    customerInfo: CustomerInfo;
+}
 
 const Encoded_GMaps: React.FC = () => {
     useProtectedRoute();
@@ -48,7 +52,7 @@ const Encoded_GMaps: React.FC = () => {
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('lg'));
 
     const [path, setPath] = useState<google.maps.LatLng[]>([]);
-    const [instructions, setInstructions] = useState<string[]>([]);
+    const [instructions, setInstructions] = useState<Instructions[]>([]);
     const [selectedInstruction, setSelectedInstruction] = useState<string | null>(null);
     const [customerList, setCustomerList] = useState<any[]>([]);
     const [selectedCustomer, setSelectedCustomer] = useState<number | null>(null);
@@ -65,8 +69,8 @@ const Encoded_GMaps: React.FC = () => {
     const trigger = queryParams.get('trigger');
     console.log(trigger)
     const url =county===null?
-        `https://api.northernneckgarbage.com/nngc/google/create-route-4-driver/${routeNumber}`:
-        `https://api.northernneckgarbage.com/nngc/google/create-route-4-driver/${routeNumber}?county=${county}`;
+        `http://localhost:8080/nngc/google/create-route-4-driver/${routeNumber}`:
+        `http://localhost:8080/nngc/google/create-route-4-driver/${routeNumber}?county=${county}`;
 
     useEffect(() => {
        if(trigger==='true') {
@@ -86,14 +90,16 @@ const Encoded_GMaps: React.FC = () => {
     }, [isLoaded,routeNumber,trigger]);
 
     const handlePolylineClick = (index: number) => {
-      const selectedInfo = instructions[index].customerInfo;
+      // @ts-ignore
+        const selectedInfo = instructions[index].customerInfo;
         setSelectedCustomerInfo(selectedInfo);
-        setSelectedLat(selectedInfo.latitude);
-        setSelectedLon(selectedInfo.longitude);
+        setSelectedLat(selectedInfo.address.latitude);
+        setSelectedLon(selectedInfo.address.longitude);
+        // @ts-ignore
         setSelectedCustomer(selectedInfo);
 
-        const customerInstructions = instructions.filter(instruction => instruction.customerInfo.id === selectedInfo.id)
-            .map(instruction => instruction.instruction);
+        const customerInstructions = instructions.filter((instruction: { customerInfo: { id: any; }; }) => instruction.customerInfo.id === selectedInfo.id)
+            .map((instruction: { instruction: any; }) => instruction.instruction);
         setSelectedInstruction(customerInstructions[0]);
         // setInstructions(customerInstructions);
     };
@@ -120,7 +126,7 @@ const Encoded_GMaps: React.FC = () => {
     };
 
 //console.log("selected customer",instructions)
-    // @ts-ignore
+
     return (
         <ThemeProvider theme={theme}>
             <Box sx={{
@@ -261,10 +267,10 @@ Total Min: {totalTime}
                             <span dangerouslySetInnerHTML={{ __html: selectedInstruction }} />
                         </div>
                     )}
-                    {instructions.map((instruction, index) => (
+                    {instructions.map((instruction: { instruction: any; }, index: React.Key | null | undefined) => (
                       <div key={index}>
 
-                          <h3>Step {index + 1}</h3>
+                          <h3>Step { (index as number)  + 1}</h3>
 
                         <span  dangerouslySetInnerHTML={{ __html: instruction.instruction }}  />
                        </div>
