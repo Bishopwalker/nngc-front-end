@@ -18,11 +18,20 @@ const NavBottom = () => {
     const { pathname } = location;
     const [pageNumber, setPageNumber] = useState('1');
     const [county, setCounty] = useState('');
-
+    const [trigger, setTrigger] = useState(false);
     // Hide the component if the route is /blogs
     if (pathname === '/blog') {
         return null;
     }
+    const changeTrigger = () => {
+        setTrigger(!trigger);
+
+
+    }
+    useEffect(() => {
+      changeTrigger();
+
+    }, [trigger]);
   return (
     <Box sx={{ padding: '1rem' }}>
         {role && role !== 'ADMIN' || !role && <> <Box sx={{ maxWidth: '150px', mx: 'auto' }}>
@@ -35,12 +44,13 @@ const NavBottom = () => {
             Nurturing Neighborhoods, Guaranteeing Cleanliness
         </Typography> </>  }
            {role && role ==='ADMIN' && (
-            <Box sx={{
+            <Box  onClick={changeTrigger} sx={{
                 display:'flex', justifyContent:'space-around',flexDirection:isMobile ? 'column' : 'row', alignItems:'center', mt: '1rem'
             }}>
 
-                <Button variant={"contained"} color={"primary"} sx={{mt: '1rem'}} component={Link}
-                        to={county==null || county ===""?`/emaps?page=${pageNumber}`:`/emaps?page=${pageNumber}&county=${county}`}>
+                <Button variant={"contained"} color={"primary"} sx={{mt: '1rem'}}  component={Link}
+                        to={county==null || county ===""?`/emaps?page=${pageNumber}&trigger=${trigger}`:
+                            `/emaps?page=${pageNumber}&county=${county}&trigger=${trigger}`}>
                     View Routes
                 </Button>
                 <TextField
