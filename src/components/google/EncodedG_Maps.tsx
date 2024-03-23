@@ -69,8 +69,8 @@ const Encoded_GMaps: React.FC = () => {
     const trigger = queryParams.get('trigger');
     console.log(trigger)
     const url =county===null?
-        `http://localhost:8080/nngc/google/create-route-4-driver/${routeNumber}`:
-        `http://localhost:8080/nngc/google/create-route-4-driver/${routeNumber}?county=${county}`;
+        `https://api.northernneckgarbage.com/nngc/google/create-route-4-driver/${routeNumber}`:
+        `https://api.northernneckgarbage.com/nngc/google/create-route-4-driver/${routeNumber}?county=${county}`;
 
     useEffect(() => {
        if(trigger==='true') {
