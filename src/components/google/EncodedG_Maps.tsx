@@ -51,6 +51,11 @@ const Encoded_GMaps: React.FC = () => {
 
     const theme = useTheme();
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('lg'));
+    const [visibleRoutes, setVisibleRoutes] = useState<number>(10); // Initially show 10 routes
+
+    const loadMoreRoutes = () => {
+        setVisibleRoutes(visibleRoutes + 10); // Show 10 more routes when the button is clicked
+    };
 
     const [path, setPath] = useState<google.maps.LatLng[]>([]);
     const [instructions, setInstructions] = useState<Instructions[]>([]);
@@ -269,21 +274,24 @@ Total Min: {totalTime/10}
                             <span dangerouslySetInnerHTML={{ __html: selectedInstruction }} />
                         </div>
                     )}
-                   {instructions.map((instruction: {
-                       customerInfo: CustomerInfo;
-                       instruction: any; }, index: React.Key | null | undefined) => (
-    <div key={index}>
-        <h3>Step { (index as number)  + 1}</h3>
-        <span dangerouslySetInnerHTML={{ __html: instruction.instruction }}  />
-        {instruction.instruction.includes('Destination') && (
-            <>
-                <h6>{instruction.customerInfo?.fullName}</h6>
 
-                <span>{instruction.customerInfo?.address as any}</span>
-            </>
-        )}
-    </div>
-))}
+
+
+                        {instructions.slice(0, visibleRoutes).map((instruction: { customerInfo: CustomerInfo; instruction: any; }, index: React.Key | null | undefined) => (
+                            <div key={index}>
+                                <h3>Step { (index as number)  + 1}</h3>
+                                <span dangerouslySetInnerHTML={{ __html: instruction.instruction }}  />
+                                {instruction.instruction.includes('Destination') && (
+                                    <>
+                                        <h6>{instruction.customerInfo?.fullName}</h6>
+                                        <span>{instruction.customerInfo?.address as any}</span>
+                                    </>
+                                )}
+                            </div>
+                        ))}
+                        <button onClick={loadMoreRoutes}>Load More</button>
+
+                    );
                 </Typography>
             </Grid>
         </ThemeProvider>
