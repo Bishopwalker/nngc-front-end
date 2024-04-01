@@ -30,6 +30,7 @@ interface CustomerInfo {
         state: string;
         zipCode: string;
     };
+
 }
 
 interface Instructions {
@@ -125,8 +126,9 @@ const Encoded_GMaps: React.FC = () => {
 
     };
 
-//console.log("selected customer",instructions)
+console.log("selected customer",instructions)
 
+    // @ts-ignore
     return (
         <ThemeProvider theme={theme}>
             <Box sx={{
@@ -241,7 +243,7 @@ Total Min: {totalTime/10}
                     </Grid>
 
                     <Grid item xs={12} style={{ width: '100%' }}>
-                        <Typography
+                        <Typography component='div' style={{ width: '100%'}}
                            >
                             {!selectedCustomerInfo && <><Box mt={4} pt={4} display={{xs: 'block'}}>
 
@@ -267,14 +269,21 @@ Total Min: {totalTime/10}
                             <span dangerouslySetInnerHTML={{ __html: selectedInstruction }} />
                         </div>
                     )}
-                    {instructions.map((instruction: { instruction: any; }, index: React.Key | null | undefined) => (
-                      <div key={index}>
+                   {instructions.map((instruction: {
+                       customerInfo: CustomerInfo;
+                       instruction: any; }, index: React.Key | null | undefined) => (
+    <div key={index}>
+        <h3>Step { (index as number)  + 1}</h3>
+        <span dangerouslySetInnerHTML={{ __html: instruction.instruction }}  />
+        {instruction.instruction.includes('Destination') && (
+            <>
+                <h6>{instruction.customerInfo?.fullName}</h6>
 
-                          <h3>Step { (index as number)  + 1}</h3>
-
-                        <span  dangerouslySetInnerHTML={{ __html: instruction.instruction }}  />
-                       </div>
-                    ))}
+                <span>{instruction.customerInfo?.address as any}</span>
+            </>
+        )}
+    </div>
+))}
                 </Typography>
             </Grid>
         </ThemeProvider>
