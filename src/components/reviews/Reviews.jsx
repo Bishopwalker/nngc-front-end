@@ -1,16 +1,11 @@
 // src/components/Reviews.jsx
 
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 
 
-import {Avatar, Box, Card, CardContent, CardHeader, Typography,CardMedia} from "@mui/material";
-import axios from "axios";
-
-import {useAppDispatch} from "../../redux/hooks"
-import {Helmet} from "react-helmet";
+import {Avatar, Box, Card, CardContent, CardHeader, Typography} from "@mui/material";
 
 
-const googleColors = ['#4285F4', '#DB4437', '#F4B400', '#0F9D58']; // Google's brand colors
 
 const GoogleReviewsTitle = () => {
     const title = "Latest Google Reviews";
