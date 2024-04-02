@@ -36,32 +36,54 @@ const hardcodedReviews = [
     },
     {
         author_name: "Israel The Voice",
-        relative_time_description: "2 months ago",
+        relative_time_description: "4 months ago",
         rating: 5,
         text: "I recently signed up for their service, and I have been extremely satisfied and happy with the convenience and easy process of them, removing my trash from my home...",
 
     },
     {
         author_name: "Leslye McDade-Morrison",
-        relative_time_description: "a month ago",
+        relative_time_description: "3 month ago",
         rating: 5,
         text: "We cleaned out our garage and had lots to haul away. Mr. Walker did a great job, he loaded up his trailer and the bed of his truck...",
 
     },
     {
         author_name: "Rodney Ream",
-        relative_time_description: "a week ago",
+        relative_time_description: "3 weeks ago",
         rating: 5,
         text: "The crew is very nice and funny, I would highly recommend these guys.",
 
     },
     {
         author_name: "Victoria Johnson-Walker",
-        relative_time_description: "a week ago",
+        relative_time_description: "2 months ago",
         rating: 5,
         text: "Every Thursday he picks up my trash!!"
 
-    }
+    },
+    {
+        author_name: "Karla Thieman",
+        relative_time_description: "1 month ago",
+        rating: 5,
+        text: "Incredibly responsive, showed up on time and got the job done quickly. We had a bunch of stuff that had been sitting in our garage for years and NNGC came and hauled it off for a very affordable price."
+
+    },
+    {
+        author_name: "Otho Campbell",
+        relative_time_description: "a week ago",
+        rating: 5,
+        text: "Great service.  Dependable and competent.  Highly recommend."
+
+    },
+    {
+        author_name: "Frances Walker",
+        relative_time_description: "3 months ago",
+        rating: 5,
+        text: "Every Thursday he picks up my trash!!"
+
+    },
+
 ];
 
 
