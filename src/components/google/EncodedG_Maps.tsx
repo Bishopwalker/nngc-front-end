@@ -78,6 +78,8 @@ const Encoded_GMaps: React.FC = () => {
         `https://api.northernneckgarbage.com/nngc/google/create-route-4-driver/${routeNumber}`:
         `https://api.northernneckgarbage.com/nngc/google/create-route-4-driver/${routeNumber}?county=${county}`;
 
+
+
     useEffect(() => {
        if(trigger==='true') {
            axios.get(url)
@@ -271,7 +273,7 @@ Total Min: {totalTime/10}
                                 <span> {selectedCustomerInfo?.phoneNumber} </span></h3>
                             <span>{selectedCustomerInfo?.address?.line1}</span>
 
-                            <span dangerouslySetInnerHTML={{ __html: selectedInstruction }} />
+
                         </div>
                     )}
 
@@ -279,8 +281,11 @@ Total Min: {totalTime/10}
 
                         {instructions.slice(0, visibleRoutes).map((instruction: { customerInfo: CustomerInfo; instruction: any; }, index: React.Key | null | undefined) => (
                             <div key={index}>
-                                <h3>Step { (index as number)  + 1}</h3>
-                                <span dangerouslySetInnerHTML={{ __html: instruction.instruction }}  />
+                                <h3>Step { (index as number)  + 1} </h3>
+                                <p>
+                                    <span>ID:{instruction.customerInfo.id} {instruction.customerInfo.fullName}</span>
+                                </p>
+                                <span dangerouslySetInnerHTML={{__html: instruction.instruction }}  />
                                 {instruction.instruction.includes('Destination') && (
                                     <>
                                         <h6>{instruction.customerInfo?.fullName}</h6>

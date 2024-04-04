@@ -20,11 +20,12 @@ const NavBottom = () => {
     const [pageNumber, setPageNumber] = useState('1');
     const [county, setCounty] = useState('');
     const [trigger, setTrigger] = useState(false);
+    const navigate = useNavigate();
     // Hide the component if the route is /blogs
     if (pathname === '/blog') {
         return null;
     }
-const navigate = useNavigate();
+
     const changeTrigger = () => {
         setTrigger(!trigger);
         const url= county==null || county ===""?`/emaps?page=${pageNumber}&trigger=${trigger}`:
@@ -37,7 +38,7 @@ const navigate = useNavigate();
 
 
   return (
-    <Box sx={{ padding: '1rem' }}>
+    <div style={{padding:"16px"}} >
         {role && role !== 'ADMIN' || !role && <> <Box sx={{ maxWidth: '150px', mx: 'auto' }}>
             <Link to="/">
                 <img src={NNGCLogo} alt="Northern Neck Garbage logo" style={{ width: '100%', height: 'auto' }} />
@@ -47,8 +48,7 @@ const navigate = useNavigate();
         <Typography align="center" variant="body1" sx={{ fontWeight: 900 }}>
             Nurturing Neighborhoods, Guaranteeing Cleanliness
         </Typography> </>  }
-           {role && role ==='ADMIN' && (
-            <Box  onClick={changeTrigger} sx={{
+           {role && role ==='ADMIN' && <> <Box  sx={{
                 display:'flex', justifyContent:'space-around',flexDirection:isMobile ? 'column' : 'row', alignItems:'center', mt: '1rem'
             }}>
 
@@ -77,12 +77,13 @@ const navigate = useNavigate();
                     Signup New Customer
                 </Button>
             </Box>
-        )}
+        </>
+           }
 
 
 
 
-    </Box>
+    </div>
   );
 };
 
