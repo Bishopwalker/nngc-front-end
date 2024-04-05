@@ -4,9 +4,15 @@ import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import {AppContext} from './Context'
+import Snackbar from '@mui/material/Snackbar'
+import Alert, {AlertColor} from '@mui/material/Alert'
 
 export default function FirstStep() {
-  const { formValues, handleChange, handleNext, variant, margin } = useContext(AppContext)
+
+  const [openSnackbar, setOpenSnackbar] = React.useState(false)
+    const [snackbarMessage, setSnackbarMessage] = React.useState('')
+
+  const { formValues, handleChange, handleNext, variant, margin, warning } = useContext(AppContext)
   const { firstName, lastName, email, county, password } = formValues
 
   // Check if all values are not empty and if there are some errors
@@ -18,8 +24,25 @@ export default function FirstStep() {
     [formValues, firstName, lastName, email, county, password]
   )
 
+  //Show warning message when the county is not northumberland
+  React.useEffect(() => {
+    if(warning){
+setSnackbarMessage(warning)
+        setOpenSnackbar(true)
+    }
+  },[warning])
+
   return (
     <>
+        <Snackbar
+            open={openSnackbar}
+            autoHideDuration={6000}
+            onClose={() => setOpenSnackbar(false)}
+        >
+            <Alert onClose={() => setOpenSnackbar(false)} severity="warning">
+                {snackbarMessage}
+            </Alert>
+        </Snackbar>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12}>
           <TextField

@@ -1,4 +1,4 @@
-import React, {createContext, useCallback, useMemo, useReducer} from 'react'
+import React, {createContext, useCallback, useMemo, useReducer, useState} from 'react'
 import {initialValues} from './initialValues'
 
 const isText = /^[A-Z ]+$/i
@@ -39,7 +39,9 @@ type ContextProps = {
   handleNext(): void
   handleBack(): void
   variant: Variant
-  margin: Margin
+  margin: Margin,
+    warning: string,
+    setWarning: React.Dispatch<React.SetStateAction<string>>
 }
 
 export const AppContext = createContext<ContextProps>({
@@ -49,7 +51,9 @@ export const AppContext = createContext<ContextProps>({
   handleNext() {},
   handleBack() {},
   variant,
-  margin
+  margin,
+  warning:'',
+    setWarning:()=>{}
 })
 
 interface ProviderProps {
@@ -60,7 +64,6 @@ type State = {
   activeStep: number
   formValues: ValidationSchema
 }
-
 type Action =
   | { type: 'increase' }
   | { type: 'decrease' }
@@ -112,7 +115,7 @@ export function StepsProvider({ children }: ProviderProps) {
     activeStep: 0,
     formValues: initialValues
   })
-
+  const [warning, setWarning] = useState('');
   // Proceed to next step
   const handleNext = useCallback(() => dispatch({ type: 'increase' }), [])
   // Go back to prev step
@@ -187,13 +190,21 @@ export function StepsProvider({ children }: ProviderProps) {
             }
           }
 
+          // Check if county field and fieldValue is not "northumberland"
+          if (name === 'county' && fieldValue !== 'northumberland') {
+            if (typeof fieldValue !== "boolean") {
+              setWarning(`We just added services in ${fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1)}  please email info@northernneckgarbage.com or call 804-220-0029 to find out when your pickup date is.`);
+            }
+          } else {
+            setWarning('');
+          }
 
           // Check if county field and fieldValue is not "northumberland"
-    if (name === 'county' && fieldValue !== 'northumberland') {
-        if (typeof fieldValue !== "boolean") {
-            error = `We haven't got services in ${fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1)} yet, please email info@northernneckgarbage.com to find out when we will be in your area.`;
-        }
-    }
+    // if (name === 'county' && fieldValue !== 'northumberland') {
+    //     if (typeof fieldValue !== "boolean") {
+    //         error = `We haven't got services in ${fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1)} yet, please email info@northernneckgarbage.com to find out when we will be in your area.`;
+    //     }
+    // }
 
       dispatch({ type: 'form-error', name, error })
     },
@@ -208,7 +219,9 @@ export function StepsProvider({ children }: ProviderProps) {
       handleNext,
       handleBack,
       variant,
-      margin
+      margin,
+        warning,
+        setWarning
     }),
     [activeStep, formValues, handleChange, handleNext, handleBack]
   )
