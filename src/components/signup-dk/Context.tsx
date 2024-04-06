@@ -193,7 +193,7 @@ export function StepsProvider({ children }: ProviderProps) {
           // Check if county field and fieldValue is not "northumberland"
           if (name === 'county' && fieldValue !== 'northumberland') {
             if (typeof fieldValue !== "boolean") {
-              setWarning(`We just added services in ${fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1)}  please email info@northernneckgarbage.com or call 804-220-0029 to find out when your pickup date is.`);
+              setWarning(`We just added services in ${fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1)}. There may be an additional service fee. please email info@northernneckgarbage.com or call 804-220-0029 to find out when your pickup date is.`);
             }
           } else {
             setWarning('');
