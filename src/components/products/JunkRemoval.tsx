@@ -17,10 +17,11 @@ import {
 import {Helmet} from "react-helmet";
 import {useNavigate}from "react-router-dom";
 
-import {useAppDispatch} from "../../redux/hooks";
+import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {changeTitle} from "../../redux/pageTitleSlice";
 import {products} from "./products";
-
+import AddressVerificationModal from "./AddressVerificationModal";
+import axios from "axios";
 
 //create a product type
 interface Product {
@@ -28,21 +29,31 @@ interface Product {
     description: string;
     price: string;
     image?: string;
+    productId: string;
 }
 
 function JunkRemoval() {
     const [open, setOpen] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
     const [quantity, setQuantity] = useState(1); // Default quantity
+    const [isAddressVerified, setIsAddressVerified] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false); // State to control the modal's visibility
+    const [verificationResult, setVerificationResult] = useState(false);
+
+    const userInfo = useAppSelector(state => state.userInfo);
 
     const dispatch = useAppDispatch()
 
+    const handleOpenAddressModal = () => {
+        setIsModalOpen(true); // Open the modal
+    };
 
     useEffect(()=>{
         dispatch( changeTitle('Junk'))
     },[])
     const handleOpen = (product:Product) => {
         setSelectedProduct(product);
+
         setOpen(true);
     };
 
@@ -50,10 +61,62 @@ function JunkRemoval() {
         setOpen(false);
     };
 
-    // @ts-ignore
-    // @ts-ignore
+    console.log(isAddressVerified)
+
+    async function checkoutBuy() {
+
+        const url = !verificationResult ?
+            `https://api.northernneckgarbage.com/auth/stripe/create-checkout-session/${userInfo.id}?productID=${selectedProduct && selectedProduct.productId}`
+            : `https://api.northernneckgarbage.com/auth/stripe/create-checkout-session?productID=${selectedProduct && selectedProduct.productId}`;
+
+        await axios.get(url, {
+                headers: {
+                    'Authorization': `Bearer ${userInfo.token}`, // if user token is stored in userInfo object
+                }
+            }
+        ).then((response) => {
+            if (response.data && response.data.message) {
+                window.location.href = response.data.message; // redirects the user to the URL from the response
+            }
+        })
+            .catch((error) => {
+                console.log(error)
+                if (error.response.status === 500) window.location.href = '/expired';
+            })
+    }
+
+    if(verificationResult){
+        checkoutBuy().then(() => setVerificationResult(false));
+    }
+
+    const handleCloseAddressModal = async() => {
+
+        setIsModalOpen(false); // Close the modal
+    };
+    const handleCheckout = async () => {
+        if (!userInfo.id) {
+
+            handleOpenAddressModal();
+            return;
+        }
+        //   navigate('/login');
+
+        console.log('checking out');
+
+        // Constructing the URL with the productID query parameter
+        await checkoutBuy();
+
+
+    }
+
+
     return (
         <Container>
+            <AddressVerificationModal
+                open={isModalOpen}
+                onClose={handleCloseAddressModal}
+                onVerificationResult={setVerificationResult}
+            />
             <Box sx={{ flexGrow: 1, backgroundColor: 'yellow' }}>
                 <Grid container spacing={4}>
                     {products.map((product, index) => (
@@ -129,23 +192,24 @@ function JunkRemoval() {
                         <CardActions>
                             <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
                                 {/*@ts-ignore*/}
-                                <TextField
-                                    select
-                                    label="Quantity"
-                                    value={quantity}
-                                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => setQuantity(Number(event.target.value))}
-                                    helperText="Please select the quantity"
-                                    variant="outlined"
-                                    sx={{ mt: 2, minWidth: 120 }}
-                                >
-                                    {[...Array(10).keys()].map((option) => (
-                                        <MenuItem key={option + 1} value={option + 1}>
-                                            {option + 1}
-                                        </MenuItem>
-                                    ))}
-                                </TextField>
+                                {/*<TextField*/}
+                                {/*    select*/}
+                                {/*    label="Quantity"*/}
+                                {/*    value={quantity}*/}
+                                {/*    onChange={(event: React.ChangeEvent<HTMLInputElement>) => setQuantity(Number(event.target.value))}*/}
+                                {/*    helperText="Please select the quantity"*/}
+                                {/*    variant="outlined"*/}
+                                {/*    sx={{ mt: 2, minWidth: 120 }}*/}
+                                {/*>*/}
+                                {/*    {[...Array(10).keys()].map((option) => (*/}
+                                {/*        <MenuItem key={option + 1} value={option + 1}>*/}
+                                {/*            {option + 1}*/}
+                                {/*        </MenuItem>*/}
+                                {/*    ))}*/}
+                                {/*</TextField>*/}
 
                                 <Button
+                                    onClick={handleCheckout}
                                     sx={{
                                         mt: 2,
                                         bgcolor: "#2C3E50",

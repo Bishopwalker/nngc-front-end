@@ -24,6 +24,7 @@ function Service() {
 const [open, setOpen] = useState(false);
 
 const location = useLocation();
+const navigate = useNavigate();
 const handleOpen = () => {
     setOpen(true);
 }
@@ -33,14 +34,13 @@ const handleClose = () => {
 }
 
 const buttonStyles= isMobile
-  ?{position:'relative', bottom:'auto',left:'auto'}
-    :{position:'relative', bottom: 'auto', left: 50}
+  ?{position:'relative', bottom:'auto',left:'auto', width:'30px'}
+    :{position:'relative', bottom: 575, left: -20,width:'30px'}
 
   const services = activeServiceType === 'Monthly' ? services_sub : servicesOnce;
 
   //const userInfo = useAppSelector(state => state.userInfo)
 
-  const navigate = useNavigate();
 
   const getSliderSettings = (itemsLength: number) => {
     const defaultSlidesToShow = 3;
@@ -95,6 +95,9 @@ const buttonStyles= isMobile
 
   const handleServiceTypeChange = (type: React.SetStateAction<string>) => {
     setActiveServiceType(type);
+    if(type === 'One-Time'){
+      navigate('/junk')
+    }
   };
 
 
@@ -132,6 +135,7 @@ const buttonStyles= isMobile
                   key={index}
                   className="card"
                   onClick={() => navigate(`/dumpster/${item.productId}`)}
+                  style={{ cursor: 'pointer'}}
               >
                 <div className="card-top">
                   <Box
@@ -186,7 +190,7 @@ const buttonStyles= isMobile
           <Button
               variant='contained'
               startIcon={<PdfIcon/>}
-              color='primary'
+              color='secondary'
               onClick={handleOpen}
           >
             Service Definitions

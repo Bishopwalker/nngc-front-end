@@ -1,4 +1,4 @@
-import {Box, Container, Stack, Typography} from "@mui/material";
+import {Box, Button, Container, Stack, Typography} from "@mui/material";
 import React from "react";
 import ImageSlider from "../slider/Slider";
 import Service from "../service/Service";
@@ -9,6 +9,8 @@ import {changeTitle} from "../../redux/pageTitleSlice";
 import AccordionItem from "../faq/Faq";
 import Reviews from "../reviews/Reviews";
 import MessageSales from "../MessageSales";
+import QuickBuyButton  from "../styledComponents/QuickBuyButton";
+import {SmartButton} from "@mui/icons-material";
 
 const Home = () => {
     const dispatch = useAppDispatch()
@@ -90,6 +92,7 @@ const Home = () => {
         <Box mt={4} pt={4} display={{ xs: 'block'}}>
             {}
         </Box>
+<Button variant='contained'>Quick Single Item Pickup</Button>
 
 
     </Box>

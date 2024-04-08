@@ -7,6 +7,7 @@ import './style.css';
 import {sliders} from './sliders';
 import {Link} from "react-router-dom";
 import {Helmet} from "react-helmet";
+import QuickBuyButton from "../styledComponents/QuickBuyButton";
 
 function ImageSlider() {
   const [defaultImage, setDefaultImage] = useState({
@@ -56,9 +57,13 @@ function ImageSlider() {
           <meta name="description" content="Explore our gallery showcasing Northern Neck Garbage Collection's services and community involvement." />
           <meta name="keywords" content="gallery, images, waste management, Northern Neck Garbage Collection" />
         </Helmet>
+        <QuickBuyButton title={"QuiCk Buy BuTtOn"}  />
+
         <Slider {...settings}>
+
           {sliders.map((item,index) => (
               <div className="sliderCard" key={index}>
+
                 <Link to={`/dumpster/${item.productId}`}>
                   <img
                       src={
