@@ -6,18 +6,17 @@ import {libraries} from './mapsConfig';
 import {Box, Grid, Typography} from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {ThemeProvider, useTheme} from '@mui/material/styles';
-import Container from "@mui/material/Container";
 
 const mapContainerStyle = {
     width: '100vw',
     height: '100vh',
 };
 
-const options = {
-    strokeColor: '#FF0000',
-    strokeOpacity: 1.0,
-    strokeWeight: 2,
-};
+// const options = {
+//     strokeColor: '#FF0000',
+//     strokeOpacity: 1.0,
+//     strokeWeight: 2,
+// };
 
 interface CustomerInfo {
     id: number;
@@ -31,8 +30,14 @@ interface CustomerInfo {
         state: string;
         zipCode: string;
     };
+
 }
 
+interface Instructions {
+    map(arg0: (instruction: { instruction: any; }, index: React.Key | null | undefined) => JSX.Element): React.ReactNode;
+    instruction: string;
+    customerInfo: CustomerInfo;
+}
 
 const Encoded_GMaps: React.FC = () => {
     useProtectedRoute();
@@ -43,11 +48,17 @@ const Encoded_GMaps: React.FC = () => {
         libraries,
     });
 
+
     const theme = useTheme();
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('lg'));
+    const [visibleRoutes, setVisibleRoutes] = useState<number>(10); // Initially show 10 routes
+
+    const loadMoreRoutes = () => {
+        setVisibleRoutes(visibleRoutes + 10); // Show 10 more routes when the button is clicked
+    };
 
     const [path, setPath] = useState<google.maps.LatLng[]>([]);
-    const [instructions, setInstructions] = useState<string[]>([]);
+    const [instructions, setInstructions] = useState<Instructions[]>([]);
     const [selectedInstruction, setSelectedInstruction] = useState<string | null>(null);
     const [customerList, setCustomerList] = useState<any[]>([]);
     const [selectedCustomer, setSelectedCustomer] = useState<number | null>(null);
@@ -55,37 +66,55 @@ const Encoded_GMaps: React.FC = () => {
     const [totalMiles, setTotalMiles] = useState<number>(0);
     const [totalTime, setTotalTime] = useState<number>(0);
     const [selectedCustomerInfo, setSelectedCustomerInfo] = useState<CustomerInfo | null>(null);
-
     const [selectedLat, setSelectedLat] = useState<number | null>(null);
     const [selectedLon, setSelectedLon] = useState<number | null>(null);
+
     const queryParams = new URLSearchParams(location.search);
     const routeNumber = queryParams.get('page');
-    console.log(selectedInstruction)
+    const county = queryParams.get('county');
+    const trigger = queryParams.get('trigger');
+    console.log(trigger)
+    const url =county===null?
+        `https://api.northernneckgarbage.com/nngc/google/create-route-4-driver/${routeNumber}`:
+        `https://api.northernneckgarbage.com/nngc/google/create-route-4-driver/${routeNumber}?county=${county}`;
+
+
+
     useEffect(() => {
-        axios.get(`https://api.northernneckgarbage.com/nngc/google/create-route-4-driver/${routeNumber}`)
-            .then(response => response.data)
-            .then(data => {
-                const decodedPath = window.google.maps.geometry.encoding.decodePath(data.polyline);
-                setPath(decodedPath);
-                setInstructions(data.instructions);
-                setCustomerList(data.customerRouteDetails)
-                setTotalStops(data.totalStops);
-                setTotalMiles(parseInt(data.routeDistance));
-                setTotalTime(parseFloat(data.totalDuration));
-                console.log(data)
-            });
-    }, [isLoaded,routeNumber]);
+       if(trigger==='true') {
+           axios.get(url)
+               .then(response => response.data)
+               .then(data => {
+                   const decodedPath = window.google.maps.geometry.encoding.decodePath(data.polyline);
+                   setPath(decodedPath);
+                   setInstructions(data.instructions);
+                   setCustomerList(data.customerRouteDetails)
+                   setTotalStops(data.totalStops);
+                   setTotalMiles(parseInt(data.routeDistance));
+                   setTotalTime(parseFloat(data.totalDuration));
+                //   console.log(data)
+               });
+       }
+    }, [isLoaded,routeNumber,trigger]);
 
     const handlePolylineClick = (index: number) => {
-        setSelectedInstruction(instructions[index]);
-        setSelectedCustomer(index);
+      // @ts-ignore
+        const selectedInfo = instructions[index].customerInfo;
+        setSelectedCustomerInfo(selectedInfo);
+        setSelectedLat(selectedInfo.address.latitude);
+        setSelectedLon(selectedInfo.address.longitude);
+        // @ts-ignore
+        setSelectedCustomer(selectedInfo);
+
+        const customerInstructions = instructions.filter((instruction: { customerInfo: { id: any; }; }) => instruction.customerInfo.id === selectedInfo.id)
+            .map((instruction: { instruction: any; }) => instruction.instruction);
+        setSelectedInstruction(customerInstructions[0]);
+        // setInstructions(customerInstructions);
     };
 
     if (!isLoaded) return <div>Loading maps</div>;
-    // const handleCustomerClick = (index: number) => {
-    //     setSelectedCustomer(index);
-    // };
 
+//console.log(selectedInstruction)
     const handleSortByName = () => {
         const sortedList = [...customerList].sort((a, b) => a.customerInfo.fullName.localeCompare(b.customerInfo.fullName));
         setCustomerList(sortedList);
@@ -100,9 +129,12 @@ const Encoded_GMaps: React.FC = () => {
         setSelectedCustomerInfo(selectedInfo);
         setSelectedLat(selectedInfo.latitude);
         setSelectedLon(selectedInfo.longitude);
+       setSelectedCustomer(index);
+
     };
 
-console.log(isSmallScreen)
+console.log("selected customer",instructions)
+
     // @ts-ignore
     return (
         <ThemeProvider theme={theme}>
@@ -131,7 +163,7 @@ console.log(isSmallScreen)
                 letterSpacing: '1px',
                 textTransform: 'uppercase',
                 }}>
-Total Miles: {totalMiles}
+Total Miles: {totalMiles/10}
                 </Typography>
                 <Typography variant="h6" align="left" sx={{
                 fontWeight: 'bold',
@@ -139,7 +171,7 @@ Total Miles: {totalMiles}
                 letterSpacing: '1px',
                 textTransform: 'uppercase',
                 }}>
-Total Min: {totalTime}
+Total Min: {totalTime/10}
                 </Typography>
 
                 <h3>Customer List</h3>
@@ -218,7 +250,7 @@ Total Min: {totalTime}
                     </Grid>
 
                     <Grid item xs={12} style={{ width: '100%' }}>
-                        <Typography
+                        <Typography component='div' style={{ width: '100%'}}
                            >
                             {!selectedCustomerInfo && <><Box mt={4} pt={4} display={{xs: 'block'}}>
 
@@ -233,11 +265,38 @@ Total Min: {totalTime}
                 </Grid>
                 </Box>
             <Grid item xs={12} style={{ width: '100%' }}>
-                <Typography  style={{ width: '100%',
+                <Typography component='div' style={{ width: '100%',
                     border: '1px solid black', padding: '1em' }}>
-                    {instructions.map((instruction, index) => (
-                        <span key={index} dangerouslySetInnerHTML={{ __html: instruction }}  />
-                    ))}
+                    {selectedInstruction && (
+                        <div>
+                            <h3>ID: {selectedCustomerInfo?.id} {selectedCustomerInfo?.fullName}
+                                <span> {selectedCustomerInfo?.phoneNumber} </span></h3>
+                            <span>{selectedCustomerInfo?.address?.line1}</span>
+
+
+                        </div>
+                    )}
+
+
+
+                        {instructions.slice(0, visibleRoutes).map((instruction: { customerInfo: CustomerInfo; instruction: any; }, index: React.Key | null | undefined) => (
+                            <div key={index}>
+                                <h3>Step { (index as number)  + 1} </h3>
+                                <p>
+                                    <span>ID:{instruction.customerInfo.id} {instruction.customerInfo.fullName}</span>
+                                </p>
+                                <span dangerouslySetInnerHTML={{__html: instruction.instruction }}  />
+                                {instruction.instruction.includes('Destination') && (
+                                    <>
+                                        <h6>{instruction.customerInfo?.fullName}</h6>
+                                        <span>{instruction.customerInfo?.address as any}</span>
+                                    </>
+                                )}
+                            </div>
+                        ))}
+                        <button onClick={loadMoreRoutes}>Load More</button>
+
+                    );
                 </Typography>
             </Grid>
         </ThemeProvider>
