@@ -38,7 +38,7 @@ const MessageSales: React.FC = () => {
         e.preventDefault();
         try {
             const response = await axios.post('https://api.northernneckgarbage.com/api/nngc/email/sendToSales', formData);
-            console.log(response.data);
+            //console.log(response.data);
             setShowSuccessAlert(true);
             // Reset form data and key
             setFormData({

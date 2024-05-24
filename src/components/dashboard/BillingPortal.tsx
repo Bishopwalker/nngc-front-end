@@ -7,7 +7,7 @@ const BillingPortal = () => {
 
     const userInfo = useAppSelector((state) => state.userInfo);
     const handleManageBilling = async () => {
-        console.log(userInfo.stripeCustomerId);
+        //console.log(userInfo.stripeCustomerId);
         try {
             const response = await axios.get(`https://api.northernneckgarbage.com/auth/stripe/create-customer-portal-session/${userInfo.id}`);
             //console.log(response.data)

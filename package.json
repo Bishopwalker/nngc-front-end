@@ -1,7 +1,7 @@
 {
   "name": "nngc-dev",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -54,6 +54,6 @@
     "@types/react-helmet": "^6.1.11",
     "@vitejs/plugin-react": "^3.1.0",
     "typescript": "^4.9.3",
-    "vite": "^4.2.0"
+    "vite": "^5.1.0"
   }
 }

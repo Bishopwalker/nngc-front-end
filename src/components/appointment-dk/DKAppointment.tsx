@@ -94,7 +94,7 @@ useProtectedRouteUser()
 
 
 
-console.log(paymentIntent)
+//console.log(paymentIntent)
    // const processedEventTypes = new Set();
 
     function handleSse() {
@@ -114,7 +114,7 @@ console.log(paymentIntent)
                     processedEvents.add(event.data);
                 }
 
-                    console.log("paymentIntent: " + paymentIntent)
+                    //console.log("paymentIntent: " + paymentIntent)
                 // Check if the paymentIntent equals "Payment Succeeded"
                 console.log({...processedEvents})
             };
