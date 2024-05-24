@@ -57,7 +57,7 @@ function ImageSlider() {
           <meta name="description" content="Explore our gallery showcasing Northern Neck Garbage Collection's services and community involvement." />
           <meta name="keywords" content="gallery, images, waste management, Northern Neck Garbage Collection" />
         </Helmet>
-        <QuickBuyButton title={"QuiCk Buy BuTtOn"}  />
+        <QuickBuyButton title={"Quick Buy Button"}  />
 
         <Slider {...settings}>
 

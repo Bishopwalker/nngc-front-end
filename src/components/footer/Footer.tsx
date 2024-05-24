@@ -58,7 +58,7 @@ const Footer = () => {
 			<Grid container>
 			  <Grid item xs={12} sm={12}>
 				<Typography variant="body1" textAlign="center">
-					© 2023 Northern Neck Garbage Collection, LLC.	
+					© 2024 Northern Neck Garbage Collection, LLC.
 				</Typography>
 			  </Grid>
 			</Grid>
