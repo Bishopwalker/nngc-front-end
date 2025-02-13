@@ -18,7 +18,9 @@ import {
     CalendarMonth as CalendarIcon,
     AccessTime as ClockIcon,
     AttachMoney as MoneyIcon,
-    LocalShipping as TruckIcon
+    LocalShipping as TruckIcon,
+    Wallet as WalletIcon,
+    Delete as DeleteIcon,
 } from '@mui/icons-material';
 import {Link} from "react-router-dom";
 import TOWN from "/src/assets/tomcombutton2.gif"
@@ -149,8 +151,7 @@ let count=0;
                         </Typography>
 
                         <Typography variant="body1" color="text.secondary" sx={{ fontSize: '1.25rem', mb: 3 }}>
-                            Northern Neck Garbage Collection (NNGC) is proud to partner with the Town of Montross to provide reliable waste collection services to our community. If you are a Montross resident, please continue to arrange your weekly pickup service through the town - do not sign up through our platform.
-                        </Typography>
+                            Northern Neck Garbage Collection (NNGC) is proud to partner with the Town of Montross to provide reliable waste collection services to our community. If you are a Montross resident or business, please continue to enroll for weekly pickup service through the town - do not sign up through our platform. For bulk pickup service, whether you are located inside or outside Montross town limits, you can schedule by calling us directly or using our online platform.                        </Typography>
 
                         <Typography variant="h2" component="h2" gutterBottom sx={{ fontSize: '1.75rem', mt: 4 }}>
                             Bulk Item Pickup Services
@@ -161,7 +162,7 @@ let count=0;
                         </Typography>
 
                         <Typography variant="body1" color="text.secondary" sx={{ fontSize: '1.25rem', mt: 2, fontWeight: 'medium' }}>
-                            Simply mention to our operator that you live in Montross to receive a 20% discount off our standard hourly rate.
+                            Simply mention to our operator that you are a customer Montross to receive a 20% discount off our standard dumping rates. Standard hourly rates still apply, call for details.
                         </Typography>
                     </Paper>
 
@@ -192,7 +193,7 @@ let count=0;
                         <Grid item xs={12} md={6}>
                             <InfoCard
                                 title="Special Services"
-                                icon={<TruckIcon fontSize="large" />}
+                                icon={<WalletIcon fontSize="large" />}
                             >
                                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                                     <Box display="flex" alignItems="center">
@@ -208,6 +209,29 @@ let count=0;
                                 </Box>
                             </InfoCard>
                         </Grid>
+                        <Grid item xs={12} md={6}>
+                            <InfoCard
+                                title="What Sizes Do you Offer?"
+                                icon={<TruckIcon fontSize="large" />}
+                            >
+                                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                                    <Box display="flex" alignItems="center">
+                                        <MoneyIcon color="secondary" sx={{ mr: 1 }} />
+                                        <Typography variant="body1">
+                                            2, 4 & 8 Yard Dumpsters
+                                        </Typography>
+                                        <DeleteIcon color="primary" sx={{ ml:1 }} style={{paddingRight: '10px'}} />
+                                        <Typography variant="body1">
+                                            Brightly Colored 96 and 64 Gallon Wheeled Totes
+                                        </Typography>
+                                    </Box>
+                                    <Typography variant="body1">
+                                        We only use the most efficient and durable trash containers. We provide high quality clearly labeled bins, that are available in both 64 and 96 gallon sizes from a brand name you trust.
+                                    </Typography>
+                                </Box>
+                            </InfoCard>
+                        </Grid>
+
                     </Grid>
 
                 </Container>
