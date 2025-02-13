@@ -38,6 +38,7 @@ import { Helmet } from 'react-helmet';
 import SurroundingArea from "./auth/SurroundingArea";
 import AdminSignUp from "./components/signup-dk/AdminSignUp";
 import NotFound from './components/notFound/NotFound';
+import MontrossNNGCPage from "./components/Montross_Town_Info/MontrossNNGCPage";
 
 function App() {
 	const screenTitle = useAppSelector(state => state.title)
@@ -102,6 +103,7 @@ const rerender = useRef(0)
 				<Route path ='/surrounding' element={<SurroundingArea/>}/>
 				<Route path='/admin' element={<AdminSignUp/>} />
 				<Route path='/junk' element={<JunkRemoval/>} />
+				<Route path="/town" element={<MontrossNNGCPage/>} />
 				<Route path="*" element={<NotFound/>} />
 
 			</Routes>

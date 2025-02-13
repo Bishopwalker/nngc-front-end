@@ -8,7 +8,7 @@ import BillingPortal from "./BillingPortal";
 import React from "react";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {Link, useNavigate} from "react-router-dom";
-import {changeUserLogInfo, clearUserInfo, updateToken} from "../../redux/userLogInfoSlice";
+import {addToken, changeUserLogInfo, clearUserInfo, updateToken} from "../../redux/userLogInfoSlice";
 import axios from "axios";
 import {Helmet} from "react-helmet";
 import {changeTitle} from "../../redux/pageTitleSlice";
@@ -52,12 +52,9 @@ const Dashboard = () => {
 	const retrieveTokenFromUser=async (id:any)=> {
 		await axios.get(`https://api.northernneckgarbage.com/auth/nngc/token/${id}`)
 			.then((response) => {
-				//addToken(response.data.token);
-				//  const mergedState = {...initialState, ...response.data};
-				//   initialState.token=response.data.token;
-			//	console.log(response.data);
-				// console.log(mergedState);
-setToken(response.data.token);
+				addToken(response.data.token);
+
+ 				setToken(response.data.token);
 
 				}).catch((error) => {
 					console.log(error);
@@ -71,23 +68,20 @@ setToken(response.data.token);
 		await axios.get(`https://api.northernneckgarbage.com/auth/nngc/token_status?token=${token}`)
 			.then((response) => {
 				updateToken(response.data.customer);
-				//   console.log(response.data.customer);
 			})
 			.catch((error) => {
 				console.log(error);
 				if (error.response.status === 500) window.location.href = '/expired';
 
-				//window.location.href ='/expired';
 			});
 	}
 React.useEffect(() => {
 	//updateToken(token)
 // @ts-ignore
 	updateToken1(token);
-	//dispatch(updateToken(token));
-},[token]);
+ },[token]);
 React.useEffect(() => {
-	updateUserInfo().then(r => console.log(r));
+	if (userInfo.id==null)updateUserInfo().then(r => console.log(r));
 },[])
 
 	React.useEffect(() => {
@@ -95,8 +89,7 @@ React.useEffect(() => {
 		retrieveTokenFromUser(userInfo.id).then(r => console.log(r))
 
 	},[userInfo]);
-//console.log(userInfo)
-	return (
+ 	return (
 		<Box mb={4} mt={0}>
 			<Helmet>
 				<title>User Dashboard - Northern Neck Garbage Collection</title>

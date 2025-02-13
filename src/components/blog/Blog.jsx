@@ -11,11 +11,11 @@ import FUR from "/src/assets/furmonster3d-fd7f35f2.png"
 import BASS from "/src/assets/kingstripper-a07c0608.png"
 import TRUCK from "/src/assets/truck_trailer-517eec13.png"
 import TRUCK1 from "/src/assets/truck_trailer1-a6af3c75.png"
+import TOWN from "/src/assets/tomcombutton2.gif"
 
 import UFO from "/src/assets/ufo_trash-43dbeea5.png"
 import Service from "../service/Service";
 import {Helmet} from "react-helmet";
-import {Image} from "@mui/icons-material";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
@@ -23,6 +23,12 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
 
 const blogPosts = [
+    {
+        title: 'Starting Mid March we will be Serving the great Residents and Businesses in the Town of Montross of Westmoreland County, Virginia!!!',
+        date: "February 12, 2025",
+        image:TOWN,
+        alt: 'town of montross town seal',
+        content: "We are excited to announce our new partnership with the Town of Montross! This marks an important milestone for Northern Neck Garbage Company and brings excellent opportunities for Montross residents. We're expanding our fleet with new trucks and dumpsters to provide the premium service that our customers have enjoyed for the past three years. Stay informed about weather delays, important announcements, and special offers on our new Montross Town Information page. We look forward to serving you!"    },
     {
         title: 'How to Choose a Solid Waste Removal Company',
         date: 'August 20, 2023',
@@ -247,7 +253,7 @@ const Blog = () => {
                                     fontSize: '1.2rem',
                                 }}/>
                                 <CardMedia component="img" height="150" image={post.image} alt={post.alt} sx={{
-                                    objectFit: 'cover',
+                                    objectFit: 'fill',
                                     borderBottomLeftRadius: '16px',
                                     borderBottomRightRadius: '16px',
                                 }}/>

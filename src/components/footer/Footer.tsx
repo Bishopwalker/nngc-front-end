@@ -5,6 +5,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import {Email, Phone} from "@mui/icons-material";
 import {Helmet} from "react-helmet";
+import {Link} from "react-router-dom";
 
 const Footer = () => {
 
@@ -44,6 +45,15 @@ const Footer = () => {
 				<Typography variant="body1" textAlign="center" pb={1}>
 					Monday - Friday: 7:00 AM - 5:00 PM
 				</Typography>
+				  <Typography variant="body1" textAlign="center" pb={1}>
+					  <Link color="white" style={{
+						  textDecoration: 'blue underline solid 2px',
+						  color: 'white',
+						  fontWeight: 500,
+						  fontSize: '1.1rem',
+
+					  }} to="/policy"> Privacy Policy </Link>
+				  </Typography>
 			  </Grid>
 			  <Grid item xs={12} sm={4}>
 				<Typography variant="body1" textAlign="center" fontWeight={500} pb={1}>
@@ -51,6 +61,14 @@ const Footer = () => {
 					<TwitterIcon   onClick={() => handleIconClick('https://www.twitter.com')} sx={{ color: 'white', marginRight: '0.5rem' }} />
 					<InstagramIcon  onClick={() => handleIconClick('https://www.instagram.com/northern_neck_garbage/')} sx={{ color: 'white', marginRight: '0.5rem' }} />
 				</Typography>
+				  <Typography variant="body1" textAlign="center" pb={1}>
+					  <Link color="white" style={{
+						  textDecoration: 'blue underline solid 2px',
+						  color: 'white',
+						  fontWeight: 500,
+						  fontSize: '1.1rem',
+					  }} to="town"> Montross Residents </Link>
+				  </Typography>
 			  </Grid>
 			</Grid>
 		</Box>

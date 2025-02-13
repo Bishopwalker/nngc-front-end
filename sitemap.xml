@@ -1,74 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://www.northernneckgarbage.com/</loc>
+        <loc>https://api.northernneckgarbage.com/</loc>
     </url>
     <url>
-        <loc>https://www.northernneckgarbage.com/login</loc>
+        <loc>https://api.northernneckgarbage.com/login</loc>
     </url>
     <url>
-        <loc>https://www.northernneckgarbage.com/signup</loc>
+        <loc>https://api.northernneckgarbage.com/signup</loc>
     </url>
     <url>
-        <loc>https://www.northernneckgarbage.com/appointment</loc>
+        <loc>https://api.northernneckgarbage.com/appointment</loc>
     </url>
     <url>
-        <loc>https://www.northernneckgarbage.com/dashboard</loc>
+        <loc>https://api.northernneckgarbage.com/dashboard</loc>
     </url>
     <!-- Dynamic URL for Dumpster Services -->
-    <!-- Example: https://www.northernneckgarbage.com/dumpster/123 -->
+    <!-- Example: https://api.northernneckgarbage.com/dumpster/123 -->
     <url>
-        <loc>https://www.northernneckgarbage.com/trash-subscription</loc>
+        <loc>https://api.northernneckgarbage.com/trash-subscription</loc>
     </url>
     <url>
-        <loc>https://www.northernneckgarbage.com/emaps</loc>
+        <loc>https://api.northernneckgarbage.com/emaps</loc>
     </url>
     <url>
-        <loc>https://www.northernneckgarbage.com/blog</loc>
+        <loc>https://api.northernneckgarbage.com/blog</loc>
     </url>
     <url>
-        <loc>https://www.northernneckgarbage.com/services</loc>
+        <loc>https://api.northernneckgarbage.com/services</loc>
     </url>
     <url>
-        <loc>https://www.northernneckgarbage.com/story</loc>
+        <loc>https://api.northernneckgarbage.com/story</loc>
     </url>
     <url>
-        <loc>https://www.northernneckgarbage.com/success</loc>
+        <loc>https://api.northernneckgarbage.com/success</loc>
     </url>
     <url>
-        <loc>https://www.northernneckgarbage.com/verify</loc>
+        <loc>https://api.northernneckgarbage.com/verify</loc>
     </url>
     <url>
-        <loc>https://www.northernneckgarbage.com/policy</loc>
+        <loc>https://api.northernneckgarbage.com/policy</loc>
     </url>
     <url>
-        <loc>https://www.northernneckgarbage.com/confirmed</loc>
+        <loc>https://api.northernneckgarbage.com/confirmed</loc>
     </url>
     <url>
-        <loc>https://www.northernneckgarbage.com/expired</loc>
+        <loc>https://api.northernneckgarbage.com/expired</loc>
     </url>
     <url>
-        <loc>https://www.northernneckgarbage.com/help</loc>
+        <loc>https://api.northernneckgarbage.com/help</loc>
     </url>
     <url>
-        <loc>https://www.northernneckgarbage.com/gotoLogin</loc>
+        <loc>https://api.northernneckgarbage.com/gotoLogin</loc>
     </url>
     <url>
-        <loc>https://www.northernneckgarbage.com/pricing</loc>
+        <loc>https://api.northernneckgarbage.com/pricing</loc>
     </url>
     <url>
-        <loc>https://www.northernneckgarbage.com/thanks</loc>
+        <loc>https://api.northernneckgarbage.com/thanks</loc>
     </url>
     <url>
-        <loc>https://www.northernneckgarbage.com/password</loc>
+        <loc>https://api.northernneckgarbage.com/password</loc>
     </url>
     <url>
-        <loc>https://www.northernneckgarbage.com/reviews</loc>
+        <loc>https://api.northernneckgarbage.com/reviews</loc>
     </url>
     <url>
-        <loc>https://www.northernneckgarbage.com/surrounding</loc>
+        <loc>https://api.northernneckgarbage.com/surrounding</loc>
     </url>
     <url>
-        <loc>https://www.northernneckgarbage.com/*</loc>
+        <loc>https://api.northernneckgarbage.com/*</loc>
     </url>
 </urlset>

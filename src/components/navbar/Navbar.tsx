@@ -65,7 +65,9 @@ const Navbar = () => {
     { Name: "Our Story", Link: "/story" },
     { Name: "My Account", Link: user.id ? "/dashboard" : "/login" },
     { Name: "Blog/News", Link: '/blog' },
+    {Name: "Montross Residents", Link: "/town" },
     { Name: "Get Service", Link: "/services" },
+    {Name: "Help", Link: "/help" },
   ];
   const handleIconClick = (url: string | URL | undefined) => {
     window.open(url, '_blank');

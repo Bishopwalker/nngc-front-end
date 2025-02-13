@@ -89,10 +89,10 @@ const Home = () => {
                 />
             </Box>
       </Container>
-        <Box mt={4} pt={4} display={{ xs: 'block'}}>
-            {}
+        <Box mt={4} pt={4} justifyContent="center" display={{ xs: 'block'}}>
+            <Button variant='contained'>Single Item Pickup</Button>
         </Box>
-<Button variant='contained'>Quick Single Item Pickup</Button>
+
 
 
     </Box>

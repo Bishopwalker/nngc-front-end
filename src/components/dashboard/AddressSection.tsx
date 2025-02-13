@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {Card, CardHeader, Divider, IconButton, Modal, Typography} from "@mui/material";
 import {Edit} from "@mui/icons-material";
 import {useAppSelector} from "../../redux/hooks";
@@ -9,41 +9,53 @@ import Snackbar from "@mui/material/Snackbar";
 
 interface AddressResult {
     token: string;
+    handleClose?: () => void;
 }
-const AddressSection = ({token}: AddressResult) => {
-    const userInfo = useAppSelector((state) => state.userInfo);
 
+interface GeocodeData {
+    formattedAddress?: string;
+    addressComponents?: Array<{
+        longName: string;
+        shortName: string;
+        types: string[];
+    }>;
+}
+
+const AddressSection: React.FC<AddressResult> = ({ token }) => {
+    const userInfo = useAppSelector((state) => state.userInfo);
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
-    const [snackbarSeverity, setSnackbarSeverity] = useState('info');
-
-const [geocodeData, setGeocodeData] = useState({
-    formattedAddress: undefined, addressComponents: undefined
-
-})
-    const fetchGeoLocationData = async ( ) => {
-        const result = await axios.get(`https://api.northernneckgarbage.com/nngc/geocoding/${userInfo.id}`)
-        setGeocodeData(result.data)
-        //console.log(result.data)
-    }
-   // console.log(geocodeData)
-React.useEffect(()=>{
-    if(userInfo.address.city === null){
-        setLocation(true)
-        setSnackbarSeverity('info');
-        setSnackbarMessage('You Got to add a valid address to use our services, Thank You NNGC!!');
-        setOpenSnackbar(true);
-    }
-    if(userInfo.id != null){
-    fetchGeoLocationData().then(r => console.log(r));
-    }
-
-},[ userInfo])
+    const [snackbarSeverity, setSnackbarSeverity] = useState<AlertColor>('info');
     const [location, setLocation] = useState(false);
+    const [geocodeData, setGeocodeData] = useState<GeocodeData>({
+        formattedAddress: undefined,
+        addressComponents: undefined
+    });
 
+    const fetchGeoLocationData = async () => {
+        try {
+            const result = await axios.get(`https://api.northernneckgarbage.com/nngc/geocoding/${userInfo.id}`);
+            setGeocodeData(result.data);
+        } catch (error) {
+            console.error('Error fetching geolocation data:', error);
+            setSnackbarSeverity('error');
+            setSnackbarMessage('Failed to fetch address details');
+            setOpenSnackbar(true);
+        }
+    };
 
+    useEffect(() => {
+        if (userInfo.address?.city === null) {
+            setLocation(true);
+            setSnackbarSeverity('info');
+            setSnackbarMessage('You Got to add a valid address to use our services, Thank You NNGC!!');
+            setOpenSnackbar(true);
+        }
 
-
+        if (userInfo.id != null && !geocodeData.formattedAddress) {
+            fetchGeoLocationData();
+        }
+    }, [userInfo, userInfo.id, userInfo.address?.city, geocodeData.formattedAddress]);
 
     const handleLocationClick = () => {
         setLocation(true);
@@ -51,7 +63,6 @@ React.useEffect(()=>{
 
     const handleLocationClose = () => {
         setLocation(false);
-
     };
 
     return (
@@ -63,15 +74,15 @@ React.useEffect(()=>{
                     onClose={() => setOpenSnackbar(false)}
                 >
                     <Alert
-                        sx={{ fontSize: '2.5rem',width: '100%' }}
+                        sx={{ fontSize: '2.5rem', width: '100%' }}
                         onClose={() => setOpenSnackbar(false)}
-                        severity={snackbarSeverity as AlertColor}>
+                        severity={snackbarSeverity}
+                    >
                         {snackbarMessage}
                     </Alert>
-
                 </Snackbar>
                 <CardHeader
-                    title={"Location Details"}
+                    title="Location Details"
                     sx={{
                         textAlign: "center",
                         backgroundColor: "#2C3E50",
@@ -101,7 +112,7 @@ React.useEffect(()=>{
                 >
                     {geocodeData.formattedAddress}
                 </Typography>
-                 <Typography
+                <Typography
                     variant="h6"
                     sx={{
                         pt: 1,
@@ -112,23 +123,24 @@ React.useEffect(()=>{
                         color: "black",
                     }}
                 >
-                    {userInfo.address.line2}
+                    {userInfo.address?.line2}
                 </Typography>
 
-                {geocodeData.addressComponents && <Typography
-                    variant="h6"
-                    sx={{
-                        pt: 1,
-                        pb: 2,
-                        textAlign: "center",
-                        fontWeight: "normal",
-                        fontSize: 24,
-                        color: "black",
-                    }}
-                >
-                    { /*@ts-ignore*/}
-                      {geocodeData.addressComponents[3].longName}
-                </Typography>}
+                {geocodeData.addressComponents && (
+                    <Typography
+                        variant="h6"
+                        sx={{
+                            pt: 1,
+                            pb: 2,
+                            textAlign: "center",
+                            fontWeight: "normal",
+                            fontSize: 24,
+                            color: "black",
+                        }}
+                    >
+                        {geocodeData.addressComponents[3]?.longName}
+                    </Typography>
+                )}
             </Card>
             <Modal
                 open={location}
@@ -154,7 +166,7 @@ React.useEffect(()=>{
                         sx={{ bgcolor: "#2C3E50", color: "#fff", textAlign: "center" }}
                     />
                     <Divider />
-                    <AddressForm handleClose={handleLocationClose} token={token}   />
+                    <AddressForm handleClose={handleLocationClose} token={token} />
                 </Card>
             </Modal>
         </>
