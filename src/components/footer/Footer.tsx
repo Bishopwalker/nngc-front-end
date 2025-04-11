@@ -35,7 +35,7 @@ const Footer = () => {
 					Phone: 804-220-0029
 				</Typography>
 				<Typography variant="body1" textAlign="center">
-					Address: PO Box 160 Lottsburg, VA 22511
+					Address: PO Box 301 Lottsburg, VA 22511
 				</Typography>
 			  </Grid>
 			  <Grid item xs={12} sm={4}>

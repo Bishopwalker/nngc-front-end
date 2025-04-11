@@ -17,9 +17,7 @@
     </url>
     <!-- Dynamic URL for Dumpster Services -->
     <!-- Example: https://api.northernneckgarbage.com/dumpster/123 -->
-    <url>
-        <loc>https://api.northernneckgarbage.com/trash-subscription</loc>
-    </url>
+
     <url>
         <loc>https://api.northernneckgarbage.com/emaps</loc>
     </url>
@@ -51,7 +49,7 @@
         <loc>https://api.northernneckgarbage.com/help</loc>
     </url>
     <url>
-        <loc>https://api.northernneckgarbage.com/gotoLogin</loc>
+        <loc>https://api.northernneckgarbage.com/login</loc>
     </url>
     <url>
         <loc>https://api.northernneckgarbage.com/pricing</loc>
@@ -59,14 +57,14 @@
     <url>
         <loc>https://api.northernneckgarbage.com/thanks</loc>
     </url>
-    <url>
-        <loc>https://api.northernneckgarbage.com/password</loc>
-    </url>
-    <url>
+     <url>
         <loc>https://api.northernneckgarbage.com/reviews</loc>
     </url>
     <url>
         <loc>https://api.northernneckgarbage.com/surrounding</loc>
+    </url>
+    <url>
+        <loc>https://api.northernneckgarbage.com/town</loc>
     </url>
     <url>
         <loc>https://api.northernneckgarbage.com/*</loc>

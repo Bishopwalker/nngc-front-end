@@ -20,10 +20,13 @@ import {
     AttachMoney as MoneyIcon,
     LocalShipping as TruckIcon,
     Wallet as WalletIcon,
-    Delete as DeleteIcon,
+    Delete as DeleteIcon, Phone,
 } from '@mui/icons-material';
 import {Link} from "react-router-dom";
 import TOWN from "/src/assets/tomcombutton2.gif"
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import {Yard} from "@mui/icons-material";
 
 const theme = createTheme({
     typography: {
@@ -82,6 +85,22 @@ const NNGCLogo: React.FC = () => (
     </svg>
 );
 
+// Schedule data for better organization
+const scheduleData = [
+    {
+        day: 'Monday',
+        services: ['Commercial Dumpsters 1x']
+    },
+    {
+        day: 'Wednesday',
+        services: ['Residential/Business Toter Pickup', 'Commercial Dumpsters 3x']
+    },
+    {
+        day: 'Friday',
+        services: ['Commercial Dumpsters 2x']
+    }
+];
+
 const InfoCard: React.FC<{
     title: string;
     icon: React.ReactNode;
@@ -101,7 +120,50 @@ const InfoCard: React.FC<{
         </CardContent>
     </Card>
 );
+const ScheduleComponent = () => {
+    return (
+        <Paper elevation={2} sx={{ p: 3 }}>
+            {/* Header */}
+            <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                <CalendarMonthIcon color="primary" sx={{ mr: 1 }} />
+                <Typography variant="h6">Weekly Schedule</Typography>
+            </Box>
 
+            {/* Schedule Grid */}
+            <Grid container spacing={2} sx={{ mb: 2 }}>
+                <Grid item xs={12} sm={4}>
+                    <Paper sx={{ p: 2, borderLeft: '3px solid #1976d2' }}>
+                        <Typography variant="subtitle1" fontWeight="bold">Monday</Typography>
+                        <Typography variant="body2">• Commercial Dumpsters Day 1x</Typography>
+                    </Paper>
+                </Grid>
+
+                <Grid item xs={12} sm={4}>
+                    <Paper sx={{ p: 2, borderLeft: '3px solid #1976d2' }}>
+                        <Typography variant="subtitle1" fontWeight="bold">Wednesday</Typography>
+                        <Typography variant="body2">• Residential/Business Toter Pickup</Typography>
+                        <Typography variant="body2">• Commercial Dumpsters Day 3x</Typography>
+                    </Paper>
+                </Grid>
+
+                <Grid item xs={12} sm={4}>
+                    <Paper sx={{ p: 2, borderLeft: '3px solid #1976d2' }}>
+                        <Typography variant="subtitle1" fontWeight="bold">Friday</Typography>
+                        <Typography variant="body2">• Commercial Dumpsters Day 2x + Residents with Special Needs</Typography>
+                    </Paper>
+                </Grid>
+            </Grid>
+
+            {/* Holiday Notice */}
+            <Box sx={{ display: 'flex', alignItems: 'center', bgcolor: '#e3f2fd', p: 1, borderRadius: 1 }}>
+                <AccessTimeIcon color="secondary" sx={{ mr: 1 }} />
+                <Typography variant="body2">Holiday schedules will be posted here</Typography>
+            </Box>
+            <br></br>
+            <code>1x = times per week scheduled</code>
+        </Paper>
+    );
+};
 const MontrossNNGCPage: React.FC = () => {
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 let count=0;
@@ -132,7 +194,7 @@ let count=0;
                                             alt={logo.alt}
                                             style={{ height: '25px' }}
                                         />
-                                        </Link>
+                                         </Link>
                                     ) : (
                                         <>
                                             <Box sx={{ borderLeft: 1, height: 40, borderColor: 'grey.300' }} />
@@ -144,7 +206,7 @@ let count=0;
                         </Box>
                     </Toolbar>
                 </AppBar>
-                <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+                <Container maxWidth="lg" sx={{ mt: 4, m: 4 }}>
                     <Paper elevation={3} sx={{ p: 4, mb: 4 }}>
                         <Typography variant="h1" component="h1" gutterBottom>
                             Welcome to Your New Waste Collection Service
@@ -166,27 +228,34 @@ let count=0;
                         </Typography>
                     </Paper>
 
-
-                    <Grid container spacing={4}>
+                    <ScheduleComponent></ScheduleComponent>
+                    <Grid padding={5} container spacing={4}>
                         <Grid item xs={12} md={6}>
                             <InfoCard
                                 title="Important Updates"
                                 icon={<NotificationsIcon fontSize="large" />}
                             >
-                                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                                    <Box display="flex" alignItems="center">
-                                        <CalendarIcon color="secondary" sx={{ mr: 1 }} />
-                                        <Typography variant="body1">
-                                            Regular pickup schedule coming soon
-                                        </Typography>
-                                    </Box>
-                                    <Box display="flex" alignItems="center">
-                                        <ClockIcon color="secondary" sx={{ mr: 1 }} />
-                                        <Typography variant="body1">
-                                            Holiday schedules will be posted here
-                                        </Typography>
-                                    </Box>
-                                </Box>
+                                <Typography>
+                                    <Typography variant="body1" pb={1} onClick={() => window.location.href = 'tel:+18042200029'}>
+                                        <Phone sx={{ color: '#26C9FF', marginRight: '0.5rem' }}  />
+                                        Call  (804) 220-0029 Phone to schedule a missed pickup for Friday's.
+                                    </Typography>
+
+                                </Typography>
+                            <Typography> <span style={{
+                                fontWeight: 'bold',
+                                fontStyle: 'italic',
+
+                            }}>Did you know?: </span>That you can reschedule a missed pickup easily by calling our office? </Typography>
+                            <div style={{
+                                display: 'flex',
+                                paddingTop: '1rem',
+                                flexDirection: 'row',
+                                justifyContent: 'space-between',
+                                alignItems: 'space-between',
+                              position: 'relative',
+                                bottom:-20
+                            }}>**Missed Pickups are rescheduled for Friday</div>
                             </InfoCard>
                         </Grid>
 
@@ -202,10 +271,13 @@ let count=0;
                                             Special junk removal rates for Montross residents
                                         </Typography>
                                     </Box>
-                                    <Typography variant="body1">
-                                        Stay tuned for more information about our additional services
-                                        and special rates for the Town of Montross community.
-                                    </Typography>
+                                    <Box display="flex" alignItems="center">
+                                   <Yard  sx={{ mr: 1 }}></Yard>
+                                    <Typography variant="body1"> Yard debris and garbage junk removal day coming up soon in May.</Typography>
+                                    </Box>
+                                    <Typography variant="body2">
+                                         Residents will be allowed to bring out up to 4 trash cans worth of bagged yard waste. Ask Fran or Christy for details. We will have a day for old furniture, lawn equipment, and electronics. Stay tuned!                                    </Typography>
+
                                 </Box>
                             </InfoCard>
                         </Grid>
