@@ -75,7 +75,7 @@ const Footer = () => {
 						  color: 'white',
 						  fontWeight: 500,
 						  fontSize: '1.1rem',
-					  }} to="town"> Forbidden Items </Link>
+					  }} to="forbidden"> Forbidden Items </Link>
 				  </Typography>
 			  </Grid>
 			</Grid>
