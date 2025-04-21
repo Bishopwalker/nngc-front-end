@@ -118,6 +118,8 @@ function JunkRemoval() {
                 onVerificationResult={setVerificationResult}
             />
             <Box sx={{ flexGrow: 1, backgroundColor: 'yellow' }}>
+            <Typography variant="subtitle1" textAlign="center" pb={1}>
+                Price does not include $100 arrival fee</Typography>
                 <Grid container spacing={4}>
                     {products.map((product, index) => (
                         <Grid item xs={12} sm={6} md={3} key={index}>

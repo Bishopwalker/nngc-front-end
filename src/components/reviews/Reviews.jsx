@@ -1,9 +1,10 @@
 // src/components/Reviews.jsx
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 
 import {Avatar, Box, Card, CardContent, CardHeader, Typography,Divider} from "@mui/material";
+import axios from "axios";
 
 
 const GoogleReviewsTitle = () => {
@@ -207,13 +208,32 @@ const hardCodedReviews = [
 ];
 
 const Reviews = () => {
+    const [reviews, setReviews] = useState([]);
+console.log(reviews);
+
+
+    useEffect(() => {
+        const getReviews = async () => {
+            try {
+                const response = await axios.get('http://localhost:8080/nngc/googleReviews/getReviews');
+                setReviews(response.data.result.reviews); // Access the data property of the response
+            } catch (error) {
+                console.error("Error fetching reviews:", error);
+            }
+        };
+
+        getReviews();
+    }, []);
     const renderStars = (rating) => {
         return [...Array(rating)].map((_, index) => <span key={index}>⭐</span>);
     };
+
         return (
+
             <Box minHeight={'200px'}>
                 <GoogleReviewsTitle />
-                {hardCodedReviews.map((review, index) => (
+
+                {reviews.map((review, index) => (
                     <Card key={index} sx={{ marginBottom: 2 }}>
                         <CardHeader
                             avatar={<Avatar sx={{ bgcolor: '#' + Math.floor(Math.random()*16777215).toString(16) }}>{review.author_name[0].toUpperCase()}</Avatar>}                            title={review.author_name}
@@ -227,7 +247,11 @@ const Reviews = () => {
                                 <>
                                     <Divider sx={{ my: 2 }} />
                                     <Box sx={{ display: 'flex', gap: 2, pl: 2 }}>
-                                        <Avatar sx={{ bgcolor: "green" }}>{review.author_name[0].toUpperCase()}</Avatar>
+                                        <img width='100px'  src={profile_photo_url} alt='profile things to see' />
+
+                                        <Avatar src={profile_photo_url} sx={{ bgcolor: "green" }}>{review.author_name[0].toUpperCase()}
+
+                                        </Avatar>
                                         <Box>
                                             <Typography variant="subtitle2" sx={{ fontWeight: 'bold' }}>
                                                 Northern Neck Garbage Collection, LLC

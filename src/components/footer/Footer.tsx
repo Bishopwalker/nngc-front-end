@@ -69,6 +69,14 @@ const Footer = () => {
 						  fontSize: '1.1rem',
 					  }} to="town"> Montross Residents </Link>
 				  </Typography>
+				  <Typography variant="body1" textAlign="center" pb={1}>
+					  <Link color="white" style={{
+						  textDecoration: 'blue underline solid 2px',
+						  color: 'white',
+						  fontWeight: 500,
+						  fontSize: '1.1rem',
+					  }} to="town"> Forbidden Items </Link>
+				  </Typography>
 			  </Grid>
 			</Grid>
 		</Box>
@@ -76,7 +84,7 @@ const Footer = () => {
 			<Grid container>
 			  <Grid item xs={12} sm={12}>
 				<Typography variant="body1" textAlign="center">
-					© 2023 Northern Neck Garbage Collection, LLC.	
+					© 2025 Northern Neck Garbage Collection, LLC.
 				</Typography>
 			  </Grid>
 			</Grid>

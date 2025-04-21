@@ -39,6 +39,7 @@ import SurroundingArea from "./auth/SurroundingArea";
 import AdminSignUp from "./components/signup-dk/AdminSignUp";
 import NotFound from './components/notFound/NotFound';
 import MontrossNNGCPage from "./components/Montross_Town_Info/MontrossNNGCPage";
+import ForbiddenTrashList from "./components/forbidden/ForbiddenTrashList";
 
 function App() {
 	const screenTitle = useAppSelector(state => state.title)
@@ -104,6 +105,7 @@ const rerender = useRef(0)
 				<Route path='/admin' element={<AdminSignUp/>} />
 				<Route path='/junk' element={<JunkRemoval/>} />
 				<Route path="/town" element={<MontrossNNGCPage/>} />
+				<Route path="/forbidden" element={<ForbiddenTrashList/>}/>
 				<Route path="*" element={<NotFound/>} />
 
 			</Routes>
