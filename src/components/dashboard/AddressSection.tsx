@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {Card, CardHeader, Divider, IconButton, Modal, Typography} from "@mui/material";
 import {Edit} from "@mui/icons-material";
 import {useAppSelector} from "../../redux/hooks";
@@ -53,7 +53,7 @@ const AddressSection: React.FC<AddressResult> = ({ token }) => {
         }
 
         if (userInfo.id != null && !geocodeData.formattedAddress) {
-            fetchGeoLocationData();
+            fetchGeoLocationData().then(r => console.log("Geocode data", r));
         }
     }, [userInfo, userInfo.id, userInfo.address?.city, geocodeData.formattedAddress]);
 
